@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171615">
+  <meta name="description" content="Meet the Itkan Rangers, FTC Team 28922 from Plano, Texas. Explore our robot, engineering, programming, outreach, and achievements.">
+  <title>Itkan Rangers | FTC Team 28922</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #171615;
+      --ink-soft: #24211f;
+      --paper: #f5f2ec;
+      --paper-2: #ebe6dc;
+      --white: #fffdfa;
+      --muted: #77716a;
+      --line: rgba(36, 31, 27, .12);
+      --red: #b83b2e;
+      --red-dark: #8f2b23;
+      --orange: #e47735;
+      --yellow: #eabf55;
+      --radius: 20px;
+      --shadow: 0 18px 55px rgba(30, 24, 19, .09);
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--red); font-size: .76rem; font-weight: 700;
+      letter-spacing: .16em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: var(--orange); }
+    .section { padding: 105px 0; }
+    .section-head { max-width: 690px; margin-bottom: 42px; }
+    .section-head h2 {
+      font: 800 clamp(2rem, 4vw, 3.25rem)/1.08 "Manrope", sans-serif;
+      letter-spacing: -.055em; margin: 15px 0;
+    }
+    .section-head p { color: var(--muted); font-size: 1.04rem; max-width: 620px; }
+    .accent { color: var(--red); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border: 1px solid transparent; border-radius: 999px; padding: 13px 21px;
+      font-weight: 700; font-size: .92rem; transition: .25s ease; cursor: pointer;
+    }
+    .btn-primary { color: white; background: var(--red); box-shadow: 0 8px 22px rgba(184,59,46,.2); }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .btn-outline { border-color: rgba(255,255,255,.35); color: white; }
+    .btn-outline:hover { background: white; color: var(--ink); }
+    .btn-light { background: var(--white); border-color: var(--line); }
+    .btn-light:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+
+    /* Navigation */
+    .topbar {
+      position: sticky; top: 0; z-index: 1000; background: rgba(245,242,236,.91);
+      backdrop-filter: blur(16px); border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font: 800 1rem "Manrope", sans-serif; letter-spacing: -.03em; }
+    .brand img { width: 43px; height: 43px; object-fit: contain; border-radius: 10px; }
+    .brand small { display: block; color: var(--muted); font: 700 .62rem "DM Sans", sans-serif; letter-spacing: .14em; margin-top: 1px; }
+    .nav-links { display: flex; align-items: center; gap: 25px; }
+    .nav-links a { color: #514b45; font-size: .86rem; font-weight: 700; transition: color .2s; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta { padding: 10px 17px; font-size: .84rem; }
+    .menu-toggle { display: none; border: 0; background: transparent; font-size: 1.7rem; color: var(--ink); cursor: pointer; }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden; background: var(--ink); color: white;
+      min-height: 650px; display: flex; align-items: center;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 78% 42%, rgba(228,119,53,.28), transparent 28%),
+        radial-gradient(circle at 92% 86%, rgba(184,59,46,.24), transparent 31%),
+        linear-gradient(115deg, #171615 12%, #211c19 70%, #30201a);
+    }
+    .hero::after {
+      content: "28922"; position: absolute; right: -20px; bottom: -100px;
+      font: 800 clamp(12rem, 29vw, 27rem)/1 "Manrope", sans-serif;
+      color: rgba(255,255,255,.035); letter-spacing: -.09em; pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 50px; padding: 90px 0; }
+    .hero-copy { max-width: 650px; }
+    .hero .eyebrow { color: #f0bd70; }
+    .hero h1 { font: 800 clamp(3.2rem, 7vw, 6.4rem)/.98 "Manrope", sans-serif; letter-spacing: -.075em; margin: 22px 0; }
+    .hero h1 span { color: #ef9a55; }
+    .hero-copy > p { color: rgba(255,255,255,.69); font-size: clamp(1rem, 1.5vw, 1.14rem); max-width: 540px; margin-bottom: 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-meta { display: flex; gap: 25px; margin-top: 48px; flex-wrap: wrap; }
+    .hero-meta strong { display: block; font: 800 1.25rem "Manrope", sans-serif; color: white; }
+    .hero-meta span { color: rgba(255,255,255,.48); font-size: .76rem; text-transform: uppercase; letter-spacing: .1em; }
+    .hero-visual { position: relative; min-height: 390px; display: grid; place-items: center; }
+    .hero-glow { position: absolute; width: min(410px, 85%); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg, rgba(228,119,53,.23), rgba(184,59,46,.08)); filter: blur(2px); }
+    .hero-robot { position: relative; width: 100%; max-width: 480px; max-height: 420px; object-fit: contain; filter: drop-shadow(0 28px 35px rgba(0,0,0,.42)); animation: float 6s ease-in-out infinite; }
+    .hero-tag {
+      position: absolute; bottom: 30px; left: 0; background: rgba(255,253,250,.95);
+      color: var(--ink); border-radius: 14px; padding: 13px 17px; box-shadow: var(--shadow);
+      font-size: .78rem; font-weight: 700;
+    }
+    .hero-tag b { display: block; font: 800 1.05rem "Manrope", sans-serif; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+    /* Quick intro strip */
+    .intro-strip { background: var(--red); color: white; }
+    .intro-strip .container { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding: 23px 0; }
+    .intro-strip p { font: 700 1rem "Manrope", sans-serif; }
+    .intro-strip span { color: rgba(255,255,255,.75); font-size: .86rem; }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .stat-card { padding: 30px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 28px rgba(30,24,19,.035); transition: .25s; }
+    .stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .stat-number { font: 800 clamp(2.5rem, 5vw, 3.8rem)/1 "Manrope", sans-serif; letter-spacing: -.07em; color: var(--red); }
+    .stat-label { color: var(--muted); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-top: 10px; }
+    .team-facts { margin-top: 28px; display: grid; grid-template-columns: repeat(2,1fr); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--white); }
+    .fact { display: flex; justify-content: space-between; gap: 20px; padding: 17px 22px; border-bottom: 1px solid var(--line); }
+    .fact:nth-child(odd) { border-right: 1px solid var(--line); }
+    .fact:nth-last-child(-n+2) { border-bottom: 0; }
+    .fact span { color: var(--muted); font-size: .9rem; }
+    .fact strong { text-align: right; font-size: .9rem; }
+
+    /* Mission and values */
+    .dark-section { background: var(--ink); color: white; position: relative; overflow: hidden; }
+    .dark-section::before { content: ""; position: absolute; width: 520px; height: 520px; border-radius: 50%; background: rgba(228,119,53,.08); filter: blur(75px); right: -190px; top: -180px; }
+    .dark-section .section-head p { color: rgba(255,255,255,.58); }
+    .mission-layout { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; gap: 55px; align-items: start; }
+    .mission-quote { border-left: 3px solid var(--orange); padding: 8px 0 8px 25px; font: 600 clamp(1.35rem, 2.5vw, 2rem)/1.45 "Manrope", sans-serif; color: rgba(255,255,255,.92); }
+    .mission-quote span { color: #efa05b; }
+    .values-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 13px; }
+    .value-card { padding: 22px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.045); border-radius: 16px; transition: .25s; }
+    .value-card:hover { background: rgba(255,255,255,.08); transform: translateY(-3px); }
+    .value-icon { font-size: 1.35rem; margin-bottom: 12px; }
+    .value-card h3 { font: 800 1rem "Manrope", sans-serif; margin-bottom: 6px; }
+    .value-card p { color: rgba(255,255,255,.55); font-size: .86rem; }
+
+    /* FTC */
+    .ftc-panel { background: var(--paper-2); border-radius: 26px; padding: clamp(28px,5vw,55px); display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: center; }
+    .ftc-panel h3 { font: 800 clamp(1.7rem,3vw,2.4rem)/1.12 "Manrope", sans-serif; letter-spacing: -.04em; margin: 12px 0; }
+    .ftc-panel p { color: #686159; }
+    .ftc-points { display: grid; gap: 12px; }
+    .ftc-point { display: flex; align-items: flex-start; gap: 14px; padding: 15px; border-radius: 14px; background: rgba(255,253,250,.78); }
+    .ftc-point i { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 10px; display: grid; place-items: center; background: #f6dfc9; color: var(--red); font-style: normal; font-weight: 800; }
+    .ftc-point strong { display: block; font-size: .92rem; }
+    .ftc-point span { display: block; color: var(--muted); font-size: .82rem; }
+
+    /* Season */
+    .season-card { background: var(--ink); color: white; border-radius: 26px; padding: clamp(28px,5vw,52px); position: relative; overflow: hidden; }
+    .season-card::after { content: "DECODE"; position: absolute; right: -20px; bottom: -38px; font: 800 clamp(5rem,14vw,11rem)/1 "Manrope",sans-serif; letter-spacing: -.08em; color: rgba(255,255,255,.045); }
+    .season-content { position: relative; z-index: 1; max-width: 760px; }
+    .season-content h3 { font: 800 clamp(2rem,4vw,3.2rem) "Manrope",sans-serif; margin: 12px 0; letter-spacing: -.05em; }
+    .season-content p { color: rgba(255,255,255,.63); }
+    .season-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 30px; }
+    .season-item { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); padding: 20px; border-radius: 15px; }
+    .season-item b { display: block; color: #f1a05d; font: 800 1rem "Manrope",sans-serif; margin-bottom: 8px; }
+    .season-item span { color: rgba(255,255,255,.62); font-size: .86rem; }
+
+    /* Outreach */
+    .outreach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .outreach-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: .25s; }
+    .outreach-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .outreach-card img { width: 100%; height: 270px; object-fit: cover; }
+    .outreach-copy { padding: 25px; }
+    .outreach-copy h3 { font: 800 1.3rem "Manrope",sans-serif; margin-bottom: 8px; }
+    .outreach-copy p { color: var(--muted); font-size: .92rem; }
+
+    /* Engineering */
+    .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; counter-reset: step; }
+    .process-card { background: var(--white); border: 1px solid var(--line); border-radius: 17px; padding: 24px; min-height: 190px; counter-increment: step; }
+    .process-card::before { content: "0" counter(step); display: inline-block; color: var(--orange); font: 800 1.15rem "Manrope",sans-serif; margin-bottom: 20px; }
+    .process-card h3 { font: 800 1.05rem "Manrope",sans-serif; margin-bottom: 8px; }
+    .process-card p { color: var(--muted); font-size: .87rem; }
+
+    /* Robot */
+    .robot-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: center; }
+    .robot-image-wrap { background: var(--paper-2); border-radius: 24px; padding: 25px; min-height: 390px; display: grid; place-items: center; }
+    .robot-image-wrap img { max-height: 430px; width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+    .robot-details { display: grid; gap: 18px; }
+    .robot-detail { border-bottom: 1px solid var(--line); padding-bottom: 17px; }
+    .robot-detail:last-child { border: 0; }
+    .robot-detail h3 { font: 800 1.05rem "Manrope",sans-serif; margin-bottom: 5px; }
+    .robot-detail p { color: var(--muted); font-size: .91rem; }
+
+    /* Programming */
+    .programming { background: #e9e2d7; }
+    .program-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .program-card { padding: 25px; background: rgba(255,253,250,.8); border-radius: 17px; border: 1px solid rgba(36,31,27,.08); }
+    .program-card .mini-icon { color: var(--red); font-size: 1.5rem; margin-bottom: 14px; }
+    .program-card h3 { font: 800 1.05rem "Manrope",sans-serif; margin-bottom: 8px; }
+    .program-card p { color: var(--muted); font-size: .88rem; }
+
+    /* Sponsor */
+    .support-banner { background: linear-gradient(120deg, #9d3027, #c65332 65%, #df843f); color: white; border-radius: 26px; padding: clamp(30px,5vw,55px); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .support-banner h2 { font: 800 clamp(2rem,4vw,3rem)/1.1 "Manrope",sans-serif; letter-spacing: -.05em; margin: 12px 0; }
+    .support-banner p { color: rgba(255,255,255,.78); max-width: 620px; }
+    .support-banner .eyebrow { color: #ffe0a7; }
+    .support-banner .btn { background: white; color: var(--red-dark); white-space: nowrap; }
+    .sponsor-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px; }
+    .sponsor-card { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 25px; }
+    .sponsor-card .tier { color: var(--red); font-size: .76rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .sponsor-card h3 { font: 800 1.6rem "Manrope",sans-serif; margin: 8px 0 2px; }
+    .sponsor-card .price { color: var(--muted); font-weight: 700; font-size: .9rem; margin-bottom: 16px; }
+    .sponsor-card p { color: var(--muted); font-size: .87rem; }
+    .sponsor-card ul { padding-left: 18px; margin-top: 12px; color: #514b45; font-size: .86rem; }
+    .sponsor-card li { margin: 5px 0; }
+
+    /* Footer */
+    footer { background: var(--ink); color: white; padding: 60px 0 25px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 35px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .footer-brand { max-width: 390px; }
+    .footer-brand img { width: 58px; height: 58px; object-fit: contain; background: white; border-radius: 13px; padding: 4px; margin-bottom: 15px; }
+    .footer-brand p { color: rgba(255,255,255,.54); font-size: .9rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 16px 24px; align-content: start; }
+    .footer-links a { color: rgba(255,255,255,.72); font-size: .88rem; }
+    .footer-links a:hover { color: #f0a05e; }
+    .copyright { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; color: rgba(255,255,255,.4); font-size: .78rem; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 900px) {
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: .8rem; }
+      .hero-inner { grid-template-columns: 1fr .8fr; gap: 20px; }
+      .mission-layout, .robot-layout { gap: 30px; }
+      .process-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(100% - 34px, var(--max)); }
+      .menu-toggle { display: block; }
+      .nav { min-height: 70px; }
+      .nav-links {
+        display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 18px 24px 24px;
+        background: var(--paper); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+      .nav-cta { margin-top: 12px; text-align: center; }
+      .hero { min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; padding: 75px 0 50px; }
+      .hero-visual { min-height: 280px; }
+      .hero-robot { max-height: 310px; max-width: 390px; }
+      .hero-tag { left: 2%; bottom: 10px; }
+      .hero-meta { margin-top: 35px; }
+      .intro-strip .container { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .section { padding: 75px 0; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .team-facts { grid-template-columns: 1fr; }
+      .fact, .fact:nth-child(odd) { border-right: 0; }
+      .fact:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+      .mission-layout, .ftc-panel, .robot-layout { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .season-grid, .program-grid, .sponsor-grid { grid-template-columns: 1fr; }
+      .outreach-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+      .support-banner { align-items: flex-start; flex-direction: column; }
+      .footer-top, .copyright { flex-direction: column; }
+    }
+    @media (max-width: 420px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 3.05rem; }
+      .hero-meta { gap: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home">
+        <img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo">
+        <span>ITKAN RANGERS<small>FTC TEAM #28922</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#team">Our Team</a>
+        <a href="#mission">Mission</a>
+        <a href="#season">FTC</a>
+        <a href="#engineering">Engineering</a>
+        <a href="#robot">Our Robot</a>
+        <a href="#outreach">Outreach</a>
+        <a class="btn btn-primary nav-cta" href="#support">Support Us ↗</a>
+      </div>
+    </nav>
+  </div>
+
+  <header class="hero" id="home">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Plano, Texas · FIRST Tech Challenge</span>
+        <h1>Built to think.<br><span>Driven to build.</span></h1>
+        <p>We are the Itkan Rangers, FTC Team 28922. We design, build, and program robots while learning to solve real problems, work as a team, and make an impact beyond the competition field.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#robot">Explore our robot <span>↗</span></a>
+          <a class="btn btn-outline" href="#mission">Meet the team</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>#28922</strong><span>FTC team</span></div>
+          <div><strong>Plano, TX</strong><span>Our home</span></div>
+          <div><strong>Since 2024</strong><span>Rookie year</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-glow"></div>
+        <img class="hero-robot" src="https://ftcrangers.com/robot.png" alt="Itkan Rangers competition robot">
+        <div class="hero-tag"><b>ITKAN RANGERS</b>Engineering with purpose.</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="intro-strip">
+    <div class="container">
+      <p>Curiosity becomes creation. Ideas become engineering.</p>
+      <span>FIRST Tech Challenge · Team 28922</span>
+    </div>
+  </div>
+
+  <main>
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Team snapshot</span>
+          <h2>A team built around <span class="accent">progress.</span></h2>
+          <p>From our first concepts to competition day, we keep learning, testing, and improving. Here's a quick look at the Rangers.</p>
+        </div>
+        <div class="stats-grid reveal">
+          <article class="stat-card"><div class="stat-number">2×</div><div class="stat-label">Itkan Internal Scrimmage Champions</div></article>
+          <article class="stat-card"><div class="stat-number">1st</div><div class="stat-label">FiT-North U-League AM Meet 3 · 2026</div></article>
+          <article class="stat-card"><div class="stat-number">12h</div><div class="stat-label">Weekly in-person collaboration during main season</div></article>
+        </div>
+        <div class="team-facts reveal">
+          <div class="fact"><span>Team name</span><strong>Itkan Rangers</strong></div>
+          <div class="fact"><span>FTC number</span><strong>28922</strong></div>
+          <div class="fact"><span>Location</span><strong>Plano, Texas, USA</strong></div>
+          <div class="fact"><span>Rookie year</span><strong>2024</strong></div>
+          <div class="fact"><span>Competition</span><strong>FiT-North</strong></div>
+          <div class="fact"><span>Sub-teams</span><strong>CAD / Build · Programming · Marketing</strong></div>
+        </div>
+        <p style="margin-top:14px;color:var(--muted);font-size:.78rem;">The match record shown on the previous draft (20–11 overall, 17–9 qualification, 3–2 playoffs) has been left out until it can be confirmed against the correct season and event records.</p>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="mission">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Why we build</span>
+          <h2>Innovation starts with <span style="color:#ef9a55">people.</span></h2>
+          <p>Robotics gives us a place to turn curiosity into practical skills—and to share what we learn with the people around us.</p>
+        </div>
+        <div class="mission-layout reveal">
+          <blockquote class="mission-quote">Our mission is to spark curiosity, develop confident problem-solvers, and help shape future leaders—<span>one robot, one idea, and one breakthrough at a time.</span></blockquote>
+          <div class="values-grid">
+            <article class="value-card"><div class="value-icon">✦</div><h3>Discovery</h3><p>We explore new ideas and learn from every challenge.</p></article>
+            <article class="value-card"><div class="value-icon">✧</div><h3>Innovation</h3><p>We use creativity and persistence to solve problems.</p></article>
+            <article class="value-card"><div class="value-icon">◎</div><h3>Impact</h3><p>We use our skills to contribute to our community.</p></article>
+            <article class="value-card"><div class="value-icon">◌</div><h3>Inclusion</h3><p>We value different perspectives and make room for everyone.</p></article>
+            <article class="value-card"><div class="value-icon">⌘</div><h3>Teamwork</h3><p>We support each other and practice Gracious Professionalism.</p></article>
+            <article class="value-card"><div class="value-icon">✺</div><h3>Fun</h3><p>We enjoy building, programming, competing, and learning together.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="season">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">The competition</span>
+          <h2>What is <span class="accent">FIRST Tech Challenge?</span></h2>
+          <p>FTC brings students together to design, build, and program robots for a new game challenge each season. Teams compete in alliances while developing engineering, communication, and problem-solving skills.</p>
+        </div>
+        <div class="ftc-panel reveal">
+          <div>
+            <span class="eyebrow">More than a robot</span>
+            <h3>Engineering, collaboration, and competition.</h3>
+            <p>Teams work through the full engineering cycle: explore a challenge, design a solution, build and program it, then test and improve. Outreach and teamwork matter just as much as what happens on the field.</p>
+            <a class="btn btn-primary" style="margin-top:22px" href="https://www.firstinspires.org/programs/ftc/" target="_blank" rel="noopener">Explore FIRST Tech Challenge ↗</a>
+          </div>
+          <div class="ftc-points">
+            <div class="ftc-point"><i>01</i><div><strong>Design & build</strong><span>Create a robot using engineering principles and practical problem-solving.</span></div></div>
+            <div class="ftc-point"><i>02</i><div><strong>Program & iterate</strong><span>Develop autonomous routines, driver controls, and vision systems.</span></div></div>
+            <div class="ftc-point"><i>03</i><div><strong>Compete as an alliance</strong><span>Work with another team to take on the season's field challenge.</span></div></div>
+            <div class="ftc-point"><i>04</i><div><strong>Share your impact</strong><span>Learn to communicate, mentor, and connect with your community.</span></div></div>
+          </div>
+        </div>
+
+        <div class="season-card reveal" style="margin-top:25px">
+          <div class="season-content">
+            <span class="eyebrow">Previous season spotlight · 2025–2026</span>
+            <h3>DECODE</h3>
+            <p>DECODE challenged teams to collect and score game artifacts while coordinating autonomous actions, driver-controlled play, and an end-game strategy. This section is an archive of the season described on the team's previous website—not the current 2026–27 challenge.</p>
+          </div>
+          <div class="season-grid">
+            <div class="season-item"><b>The challenge</b><span>Collect artifacts and score them in the designated goal zones, while responding to the randomly selected motif.</span></div>
+            <div class="season-item"><b>Autonomous</b><span>Use pre-programmed robot actions during the opening 30-second period.</span></div>
+            <div class="season-item"><b>End game</b><span>Finish the match by positioning the robot in its base during the final 20 seconds.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="outreach">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Beyond the field</span>
+          <h2>Robotics is better when it's <span class="accent">shared.</span></h2>
+          <p>We want more people to see what engineering can make possible. Outreach gives us the chance to introduce robotics, share our experience, and support our community.</p>
+        </div>
+        <div class="outreach-grid reveal">
+          <article class="outreach-card">
+            <img src="https://ftcrangers.com/bakesale.jpg" alt="Itkan Robotics students at a community outreach and bake sale event" loading="lazy">
+            <div class="outreach-copy"><h3>Community showcase</h3><p>At a showcase at Allen Masjid, our team introduced visitors to robotics and ITKAN. The event welcomed more than 2,500 visitors, and the bake sale raised over $1,000 for the mission.</p></div>
+          </article>
+          <article class="outreach-card">
+            <div style="height:270px;background:linear-gradient(135deg,#29221e,#9b392b);display:grid;place-items:center;color:#fff;text-align:center;padding:30px;">
+              <div><div style="font:800 3.5rem Manrope;letter-spacing:-.08em;">RANGERS</div><div style="color:#f2b66c;letter-spacing:.2em;font-size:.75rem;font-weight:700;">BUILD · LEARN · SHARE</div></div>
+            </div>
+            <div class="outreach-copy"><h3>Build updates & media</h3><p>We share our progress, programming challenges, robot improvements, and team experiences. Follow our journey and see what we're working on.</p><a class="btn btn-light" style="margin-top:15px" href="https://www.youtube.com/" target="_blank" rel="noopener">Visit YouTube ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="engineering" style="background:var(--paper-2)">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">CAD & build</span>
+          <h2>From first sketch to <span class="accent">field-ready.</span></h2>
+          <p>We use Onshape CAD and an iterative engineering process to make design decisions, test ideas, and improve reliability.</p>
+        </div>
+        <div class="process-grid reveal">
+          <article class="process-card"><h3>Find the problem</h3><p>Define the challenge and identify what the robot needs to do consistently.</p></article>
+          <article class="process-card"><h3>Brainstorm</h3><p>Compare possible designs, look for trade-offs, and choose practical concepts.</p></article>
+          <article class="process-card"><h3>Create a plan</h3><p>Break the robot into drivetrain, intake, transfer, and outtake systems.</p></article>
+          <article class="process-card"><h3>Design & build</h3><p>Use CAD and hands-on prototyping to turn the plan into a working robot.</p></article>
+          <article class="process-card"><h3>Test</h3><p>Run match-like tests to find weak points and collect useful feedback.</p></article>
+          <article class="process-card"><h3>Improve</h3><p>Refine mechanisms, strengthen the design, and make performance more repeatable.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="robot">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Inside the machine</span>
+          <h2>Meet the <span class="accent">Rangers robot.</span></h2>
+          <p>Every mechanism has a job. Our robot combines a compact drivetrain, a purpose-built scoring system, and sensors that help it navigate the field.</p>
+        </div>
+        <div class="robot-layout reveal">
+          <div class="robot-image-wrap"><img src="https://ftcrangers.com/cad-robot.png" alt="CAD rendering of the Itkan Rangers robot" loading="lazy"></div>
+          <div class="robot-details">
+            <article class="robot-detail"><h3>Drivetrain · Swyft Drives</h3><p>Our drivetrain uses Swyft Drives, selected for a compact setup, speed, and durability.</p></article>
+            <article class="robot-detail"><h3>Scoring hood</h3><p>A shaped hood helps guide game pieces toward a more consistent scoring trajectory. We refine its angle and geometry through repeated testing.</p></article>
+            <article class="robot-detail"><h3>Limelight vision</h3><p>The Limelight camera helps identify AprilTags for alignment and can also support game-piece color detection.</p></article>
+            <article class="robot-detail"><h3>Odometry & pathing</h3><p>Odometry pods provide movement measurements that support autonomous navigation and Pedro Pathing routines.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section programming" id="programming">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Programming</span>
+          <h2>Code that brings the robot <span class="accent">to life.</span></h2>
+          <p>Our software is built around control, repeatability, and making the most of the robot's hardware.</p>
+        </div>
+        <div class="program-grid reveal">
+          <article class="program-card"><div class="mini-icon">⌘</div><h3>Java & FTC SDK</h3><p>We write robot code in Java using the FTC SDK, building the systems needed for autonomous and driver-controlled operation.</p></article>
+          <article class="program-card"><div class="mini-icon">◎</div><h3>Autonomous routines</h3><p>We combine odometry, vision, and path planning to help the robot move accurately and complete tasks without driver input.</p></article>
+          <article class="program-card"><div class="mini-icon">◉</div><h3>Limelight & sensing</h3><p>Vision-assisted alignment and sensor feedback help reduce guesswork and make robot behavior more consistent.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="container">
+        <div class="support-banner reveal">
+          <div>
+            <span class="eyebrow">Help us build what's next</span>
+            <h2>Support the Itkan Rangers.</h2>
+            <p>Donations and sponsorships help cover robot components, registration, travel, outreach materials, and media equipment. Your support helps students keep learning through hands-on engineering.</p>
+          </div>
+          <a class="btn" href="https://www.launchgood.com/v4/campaign/help_revive_the_ummah_with_itkan_rangers_team?src=6338452" target="_blank" rel="noopener">Support the team ↗</a>
+        </div>
+        <div class="section-head reveal" style="margin:55px 0 25px">
+          <span class="eyebrow">Partner with us</span>
+          <h2 style="font-size:2.2rem">Corporate sponsorship</h2>
+          <p>Our published sponsorship levels outline ways partners can help fund the season and support the team's work.</p>
+        </div>
+        <div class="sponsor-grid reveal">
+          <article class="sponsor-card"><div class="tier">Bronze Ranger</div><h3>$250–$499</h3><div class="price">Entry-level partnership</div><p>Helps cover competition registration or key equipment such as a controller or sensors.</p><ul><li>Website sponsor-page logo</li><li>Appreciation certificate</li></ul></article>
+          <article class="sponsor-card"><div class="tier">Silver Ranger</div><h3>$500–$999</h3><div class="price">Season support</div><p>Helps fund motors, hubs, and outreach materials for the season.</p><ul><li>Small team-shirt logo</li><li>Robot logo placement</li><li>Social media and YouTube promotion</li></ul></article>
+          <article class="sponsor-card"><div class="tier">Gold Ranger</div><h3>$1,000+</h3><div class="price">Major partnership</div><p>Helps provide core robot materials and supports further upgrades.</p><ul><li>Prominent shirt and robot placement</li><li>Potential team presentation</li><li>Recognition at competitions</li></ul></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo" loading="lazy">
+          <h3 style="font:800 1.2rem Manrope;margin-bottom:8px">ITKAN RANGERS · #28922</h3>
+          <p>Engineering the future through creativity, collaboration, and Gracious Professionalism. Based in Plano, Texas.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#team">Our Team</a><a href="#mission">Our Mission</a><a href="#season">FIRST Tech Challenge</a>
+          <a href="#engineering">CAD & Build</a><a href="#robot">Our Robot</a><a href="#programming">Programming</a>
+          <a href="#outreach">Outreach</a><a href="#support">Support Us</a>
+          <a href="https://ftcrangers.com/" target="_blank" rel="noopener">Official team website ↗</a>
+        </div>
+      </div>
+      <div class="copyright"><span>© <span id="year"></span> Itkan Rangers FTC #28922</span><span>Built with curiosity, teamwork, and Gracious Professionalism.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+      menuToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
+  </script>
+</body>
+</html>
