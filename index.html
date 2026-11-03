@@ -2,305 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#171615">
-  <meta name="description" content="Meet the Itkan Rangers, FTC Team 28922 from Plano, Texas. Explore our robot, engineering, programming, outreach, and achievements.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d2b">
+  <meta name="description" content="Itkan Rangers FTC Team 28922 — team highlights, season archives, FTC Java code, and robotics learning.">
   <title>Itkan Rangers | FTC Team 28922</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    :root {
-      --ink: #171615;
-      --ink-soft: #24211f;
-      --paper: #f5f2ec;
-      --paper-2: #ebe6dc;
-      --white: #fffdfa;
-      --muted: #77716a;
-      --line: rgba(36, 31, 27, .12);
-      --red: #b83b2e;
-      --red-dark: #8f2b23;
-      --orange: #e47735;
-      --yellow: #eabf55;
-      --radius: 20px;
-      --shadow: 0 18px 55px rgba(30, 24, 19, .09);
-      --max: 1160px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: "DM Sans", sans-serif;
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    button { font: inherit; }
-    .container { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      color: var(--red); font-size: .76rem; font-weight: 700;
-      letter-spacing: .16em; text-transform: uppercase;
-    }
-    .eyebrow::before { content: ""; width: 25px; height: 2px; background: var(--orange); }
-    .section { padding: 105px 0; }
-    .section-head { max-width: 690px; margin-bottom: 42px; }
-    .section-head h2 {
-      font: 800 clamp(2rem, 4vw, 3.25rem)/1.08 "Manrope", sans-serif;
-      letter-spacing: -.055em; margin: 15px 0;
-    }
-    .section-head p { color: var(--muted); font-size: 1.04rem; max-width: 620px; }
-    .accent { color: var(--red); }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      border: 1px solid transparent; border-radius: 999px; padding: 13px 21px;
-      font-weight: 700; font-size: .92rem; transition: .25s ease; cursor: pointer;
-    }
-    .btn-primary { color: white; background: var(--red); box-shadow: 0 8px 22px rgba(184,59,46,.2); }
-    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
-    .btn-outline { border-color: rgba(255,255,255,.35); color: white; }
-    .btn-outline:hover { background: white; color: var(--ink); }
-    .btn-light { background: var(--white); border-color: var(--line); }
-    .btn-light:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
-
-    /* Navigation */
-    .topbar {
-      position: sticky; top: 0; z-index: 1000; background: rgba(245,242,236,.91);
-      backdrop-filter: blur(16px); border-bottom: 1px solid var(--line);
-    }
-    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: flex; align-items: center; gap: 12px; font: 800 1rem "Manrope", sans-serif; letter-spacing: -.03em; }
-    .brand img { width: 43px; height: 43px; object-fit: contain; border-radius: 10px; }
-    .brand small { display: block; color: var(--muted); font: 700 .62rem "DM Sans", sans-serif; letter-spacing: .14em; margin-top: 1px; }
-    .nav-links { display: flex; align-items: center; gap: 25px; }
-    .nav-links a { color: #514b45; font-size: .86rem; font-weight: 700; transition: color .2s; }
-    .nav-links a:hover { color: var(--red); }
-    .nav-cta { padding: 10px 17px; font-size: .84rem; }
-    .menu-toggle { display: none; border: 0; background: transparent; font-size: 1.7rem; color: var(--ink); cursor: pointer; }
-
-    /* Hero */
-    .hero {
-      position: relative; overflow: hidden; background: var(--ink); color: white;
-      min-height: 650px; display: flex; align-items: center;
-    }
-    .hero::before {
-      content: ""; position: absolute; inset: 0;
-      background:
-        radial-gradient(circle at 78% 42%, rgba(228,119,53,.28), transparent 28%),
-        radial-gradient(circle at 92% 86%, rgba(184,59,46,.24), transparent 31%),
-        linear-gradient(115deg, #171615 12%, #211c19 70%, #30201a);
-    }
-    .hero::after {
-      content: "28922"; position: absolute; right: -20px; bottom: -100px;
-      font: 800 clamp(12rem, 29vw, 27rem)/1 "Manrope", sans-serif;
-      color: rgba(255,255,255,.035); letter-spacing: -.09em; pointer-events: none;
-    }
-    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 50px; padding: 90px 0; }
-    .hero-copy { max-width: 650px; }
-    .hero .eyebrow { color: #f0bd70; }
-    .hero h1 { font: 800 clamp(3.2rem, 7vw, 6.4rem)/.98 "Manrope", sans-serif; letter-spacing: -.075em; margin: 22px 0; }
-    .hero h1 span { color: #ef9a55; }
-    .hero-copy > p { color: rgba(255,255,255,.69); font-size: clamp(1rem, 1.5vw, 1.14rem); max-width: 540px; margin-bottom: 30px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .hero-meta { display: flex; gap: 25px; margin-top: 48px; flex-wrap: wrap; }
-    .hero-meta strong { display: block; font: 800 1.25rem "Manrope", sans-serif; color: white; }
-    .hero-meta span { color: rgba(255,255,255,.48); font-size: .76rem; text-transform: uppercase; letter-spacing: .1em; }
-    .hero-visual { position: relative; min-height: 390px; display: grid; place-items: center; }
-    .hero-glow { position: absolute; width: min(410px, 85%); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg, rgba(228,119,53,.23), rgba(184,59,46,.08)); filter: blur(2px); }
-    .hero-robot { position: relative; width: 100%; max-width: 480px; max-height: 420px; object-fit: contain; filter: drop-shadow(0 28px 35px rgba(0,0,0,.42)); animation: float 6s ease-in-out infinite; }
-    .hero-tag {
-      position: absolute; bottom: 30px; left: 0; background: rgba(255,253,250,.95);
-      color: var(--ink); border-radius: 14px; padding: 13px 17px; box-shadow: var(--shadow);
-      font-size: .78rem; font-weight: 700;
-    }
-    .hero-tag b { display: block; font: 800 1.05rem "Manrope", sans-serif; }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-
-    /* Quick intro strip */
-    .intro-strip { background: var(--red); color: white; }
-    .intro-strip .container { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding: 23px 0; }
-    .intro-strip p { font: 700 1rem "Manrope", sans-serif; }
-    .intro-strip span { color: rgba(255,255,255,.75); font-size: .86rem; }
-
-    /* Stats */
-    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-    .stat-card { padding: 30px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 28px rgba(30,24,19,.035); transition: .25s; }
-    .stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-    .stat-number { font: 800 clamp(2.5rem, 5vw, 3.8rem)/1 "Manrope", sans-serif; letter-spacing: -.07em; color: var(--red); }
-    .stat-label { color: var(--muted); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-top: 10px; }
-    .team-facts { margin-top: 28px; display: grid; grid-template-columns: repeat(2,1fr); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--white); }
-    .fact { display: flex; justify-content: space-between; gap: 20px; padding: 17px 22px; border-bottom: 1px solid var(--line); }
-    .fact:nth-child(odd) { border-right: 1px solid var(--line); }
-    .fact:nth-last-child(-n+2) { border-bottom: 0; }
-    .fact span { color: var(--muted); font-size: .9rem; }
-    .fact strong { text-align: right; font-size: .9rem; }
-
-    /* Mission and values */
-    .dark-section { background: var(--ink); color: white; position: relative; overflow: hidden; }
-    .dark-section::before { content: ""; position: absolute; width: 520px; height: 520px; border-radius: 50%; background: rgba(228,119,53,.08); filter: blur(75px); right: -190px; top: -180px; }
-    .dark-section .section-head p { color: rgba(255,255,255,.58); }
-    .mission-layout { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; gap: 55px; align-items: start; }
-    .mission-quote { border-left: 3px solid var(--orange); padding: 8px 0 8px 25px; font: 600 clamp(1.35rem, 2.5vw, 2rem)/1.45 "Manrope", sans-serif; color: rgba(255,255,255,.92); }
-    .mission-quote span { color: #efa05b; }
-    .values-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 13px; }
-    .value-card { padding: 22px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.045); border-radius: 16px; transition: .25s; }
-    .value-card:hover { background: rgba(255,255,255,.08); transform: translateY(-3px); }
-    .value-icon { font-size: 1.35rem; margin-bottom: 12px; }
-    .value-card h3 { font: 800 1rem "Manrope", sans-serif; margin-bottom: 6px; }
-    .value-card p { color: rgba(255,255,255,.55); font-size: .86rem; }
-
-    /* FTC */
-    .ftc-panel { background: var(--paper-2); border-radius: 26px; padding: clamp(28px,5vw,55px); display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: center; }
-    .ftc-panel h3 { font: 800 clamp(1.7rem,3vw,2.4rem)/1.12 "Manrope", sans-serif; letter-spacing: -.04em; margin: 12px 0; }
-    .ftc-panel p { color: #686159; }
-    .ftc-points { display: grid; gap: 12px; }
-    .ftc-point { display: flex; align-items: flex-start; gap: 14px; padding: 15px; border-radius: 14px; background: rgba(255,253,250,.78); }
-    .ftc-point i { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 10px; display: grid; place-items: center; background: #f6dfc9; color: var(--red); font-style: normal; font-weight: 800; }
-    .ftc-point strong { display: block; font-size: .92rem; }
-    .ftc-point span { display: block; color: var(--muted); font-size: .82rem; }
-
-    /* Season */
-    .season-card { background: var(--ink); color: white; border-radius: 26px; padding: clamp(28px,5vw,52px); position: relative; overflow: hidden; }
-    .season-card::after { content: "DECODE"; position: absolute; right: -20px; bottom: -38px; font: 800 clamp(5rem,14vw,11rem)/1 "Manrope",sans-serif; letter-spacing: -.08em; color: rgba(255,255,255,.045); }
-    .season-content { position: relative; z-index: 1; max-width: 760px; }
-    .season-content h3 { font: 800 clamp(2rem,4vw,3.2rem) "Manrope",sans-serif; margin: 12px 0; letter-spacing: -.05em; }
-    .season-content p { color: rgba(255,255,255,.63); }
-    .season-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 30px; }
-    .season-item { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); padding: 20px; border-radius: 15px; }
-    .season-item b { display: block; color: #f1a05d; font: 800 1rem "Manrope",sans-serif; margin-bottom: 8px; }
-    .season-item span { color: rgba(255,255,255,.62); font-size: .86rem; }
-
-    /* Outreach */
-    .outreach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-    .outreach-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: .25s; }
-    .outreach-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-    .outreach-card img { width: 100%; height: 270px; object-fit: cover; }
-    .outreach-copy { padding: 25px; }
-    .outreach-copy h3 { font: 800 1.3rem "Manrope",sans-serif; margin-bottom: 8px; }
-    .outreach-copy p { color: var(--muted); font-size: .92rem; }
-
-    /* Engineering */
-    .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; counter-reset: step; }
-    .process-card { background: var(--white); border: 1px solid var(--line); border-radius: 17px; padding: 24px; min-height: 190px; counter-increment: step; }
-    .process-card::before { content: "0" counter(step); display: inline-block; color: var(--orange); font: 800 1.15rem "Manrope",sans-serif; margin-bottom: 20px; }
-    .process-card h3 { font: 800 1.05rem "Manrope",sans-serif; margin-bottom: 8px; }
-    .process-card p { color: var(--muted); font-size: .87rem; }
-
-    /* Robot */
-    .robot-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: center; }
-    .robot-image-wrap { background: var(--paper-2); border-radius: 24px; padding: 25px; min-height: 390px; display: grid; place-items: center; }
-    .robot-image-wrap img { max-height: 430px; width: 100%; object-fit: contain; mix-blend-mode: multiply; }
-    .robot-details { display: grid; gap: 18px; }
-    .robot-detail { border-bottom: 1px solid var(--line); padding-bottom: 17px; }
-    .robot-detail:last-child { border: 0; }
-    .robot-detail h3 { font: 800 1.05rem "Manrope",sans-serif; margin-bottom: 5px; }
-    .robot-detail p { color: var(--muted); font-size: .91rem; }
-
-    /* Programming */
-    .programming { background: #e9e2d7; }
-    .program-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .program-card { padding: 25px; background: rgba(255,253,250,.8); border-radius: 17px; border: 1px solid rgba(36,31,27,.08); }
-    .program-card .mini-icon { color: var(--red); font-size: 1.5rem; margin-bottom: 14px; }
-    .program-card h3 { font: 800 1.05rem "Manrope",sans-serif; margin-bottom: 8px; }
-    .program-card p { color: var(--muted); font-size: .88rem; }
-
-    /* Sponsor */
-    .support-banner { background: linear-gradient(120deg, #9d3027, #c65332 65%, #df843f); color: white; border-radius: 26px; padding: clamp(30px,5vw,55px); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
-    .support-banner h2 { font: 800 clamp(2rem,4vw,3rem)/1.1 "Manrope",sans-serif; letter-spacing: -.05em; margin: 12px 0; }
-    .support-banner p { color: rgba(255,255,255,.78); max-width: 620px; }
-    .support-banner .eyebrow { color: #ffe0a7; }
-    .support-banner .btn { background: white; color: var(--red-dark); white-space: nowrap; }
-    .sponsor-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px; }
-    .sponsor-card { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 25px; }
-    .sponsor-card .tier { color: var(--red); font-size: .76rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
-    .sponsor-card h3 { font: 800 1.6rem "Manrope",sans-serif; margin: 8px 0 2px; }
-    .sponsor-card .price { color: var(--muted); font-weight: 700; font-size: .9rem; margin-bottom: 16px; }
-    .sponsor-card p { color: var(--muted); font-size: .87rem; }
-    .sponsor-card ul { padding-left: 18px; margin-top: 12px; color: #514b45; font-size: .86rem; }
-    .sponsor-card li { margin: 5px 0; }
-
-    /* Footer */
-    footer { background: var(--ink); color: white; padding: 60px 0 25px; }
-    .footer-top { display: flex; justify-content: space-between; gap: 35px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.12); }
-    .footer-brand { max-width: 390px; }
-    .footer-brand img { width: 58px; height: 58px; object-fit: contain; background: white; border-radius: 13px; padding: 4px; margin-bottom: 15px; }
-    .footer-brand p { color: rgba(255,255,255,.54); font-size: .9rem; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 16px 24px; align-content: start; }
-    .footer-links a { color: rgba(255,255,255,.72); font-size: .88rem; }
-    .footer-links a:hover { color: #f0a05e; }
-    .copyright { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; color: rgba(255,255,255,.4); font-size: .78rem; }
-
-    /* Scroll reveal */
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
-    }
-    @media (max-width: 900px) {
-      .nav-links { gap: 15px; }
-      .nav-links a { font-size: .8rem; }
-      .hero-inner { grid-template-columns: 1fr .8fr; gap: 20px; }
-      .mission-layout, .robot-layout { gap: 30px; }
-      .process-grid { grid-template-columns: repeat(2,1fr); }
-    }
-    @media (max-width: 720px) {
-      .container { width: min(100% - 34px, var(--max)); }
-      .menu-toggle { display: block; }
-      .nav { min-height: 70px; }
-      .nav-links {
-        display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 18px 24px 24px;
-        background: var(--paper); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
-      .nav-cta { margin-top: 12px; text-align: center; }
-      .hero { min-height: auto; }
-      .hero-inner { grid-template-columns: 1fr; padding: 75px 0 50px; }
-      .hero-visual { min-height: 280px; }
-      .hero-robot { max-height: 310px; max-width: 390px; }
-      .hero-tag { left: 2%; bottom: 10px; }
-      .hero-meta { margin-top: 35px; }
-      .intro-strip .container { align-items: flex-start; flex-direction: column; gap: 4px; }
-      .section { padding: 75px 0; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .team-facts { grid-template-columns: 1fr; }
-      .fact, .fact:nth-child(odd) { border-right: 0; }
-      .fact:nth-last-child(2) { border-bottom: 1px solid var(--line); }
-      .mission-layout, .ftc-panel, .robot-layout { grid-template-columns: 1fr; }
-      .values-grid { grid-template-columns: 1fr 1fr; }
-      .season-grid, .program-grid, .sponsor-grid { grid-template-columns: 1fr; }
-      .outreach-grid { grid-template-columns: 1fr; }
-      .process-grid { grid-template-columns: 1fr; }
-      .support-banner { align-items: flex-start; flex-direction: column; }
-      .footer-top, .copyright { flex-direction: column; }
-    }
-    @media (max-width: 420px) {
-      .values-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 3.05rem; }
-      .hero-meta { gap: 17px; }
-    }
+    :root{--green:#176b43;--green-dark:#103d2b;--green-deep:#0b2c20;--mint:#e9f4ed;--mint2:#d7eadc;--paper:#f7faf7;--white:#fff;--ink:#17231c;--muted:#647269;--line:#dce7de;--gold:#d6aa48;--shadow:0 18px 50px rgba(15,55,35,.09);--radius:20px;--max:1180px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:90px}body{font-family:"DM Sans",sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}img{max-width:100%;display:block}.container{width:min(var(--max),calc(100% - 44px));margin:auto}.section{padding:88px 0}.section-head{max-width:720px;margin-bottom:34px}.eyebrow{font-size:.74rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--green);display:inline-flex;align-items:center;gap:9px}.eyebrow:before{content:"";height:2px;width:22px;background:var(--gold)}h1,h2,h3,.brand{font-family:Manrope,sans-serif;letter-spacing:-.045em}.section-head h2{font-size:clamp(2rem,4vw,3.35rem);line-height:1.08;margin:12px 0}.section-head p{color:var(--muted);max-width:650px}.accent{color:var(--green)}.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;border:1px solid transparent;border-radius:999px;padding:12px 19px;font-size:.9rem;font-weight:800;transition:.2s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--green);color:white;box-shadow:0 8px 20px #176b4325}.btn-primary:hover{background:var(--green-dark)}.btn-outline{border-color:#ffffff70;color:white}.btn-outline:hover{background:white;color:var(--green-dark)}.btn-soft{background:var(--mint);color:var(--green-dark);border-color:var(--line)}.btn-small{padding:8px 13px;font-size:.8rem}.topbar{position:sticky;top:0;z-index:100;background:#f7faf7ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1rem}.brand img{width:43px;height:43px;object-fit:contain;border-radius:12px}.brand small{display:block;font:800 .61rem "DM Sans";letter-spacing:.13em;color:var(--muted)}.nav-links{display:flex;align-items:center;gap:20px}.nav-links a{font-size:.82rem;font-weight:800;color:#405148}.nav-links a:hover{color:var(--green)}.nav-actions{display:flex;align-items:center;gap:9px}.menu-toggle{display:none;background:none;border:0;font-size:1.7rem;color:var(--green-dark)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(118deg,#0c3022,#145c3b 66%,#21784c);color:white}.hero:after{content:"28922";position:absolute;right:-25px;bottom:-110px;font:800 clamp(12rem,29vw,27rem)/1 Manrope;color:#ffffff09;letter-spacing:-.1em}.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:45px;padding:90px 0 82px;min-height:590px}.hero .eyebrow{color:#e8d59e}.hero h1{font-size:clamp(3.2rem,7vw,6.4rem);line-height:.98;margin:20px 0}.hero h1 span{color:#b9e1c5}.hero-copy>p{color:#ffffffbd;max-width:580px;font-size:1.08rem;margin-bottom:27px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero-meta{display:flex;gap:27px;flex-wrap:wrap;margin-top:42px}.hero-meta strong{display:block;font:800 1.2rem Manrope}.hero-meta span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#ffffff80}.hero-visual{min-height:360px;display:grid;place-items:center;position:relative}.hero-glow{position:absolute;width:min(410px,90%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#b7e0c340,transparent 70%)}.hero-robot{position:relative;width:100%;max-width:470px;max-height:410px;object-fit:contain;filter:drop-shadow(0 25px 30px #0005)}.hero-tag{position:absolute;bottom:15px;left:0;background:white;color:var(--green-dark);padding:12px 16px;border-radius:13px;box-shadow:var(--shadow);font-size:.78rem}.hero-tag b{display:block;font:800 1rem Manrope}.intro{background:var(--green);color:white}.intro .container{padding:19px 0;display:flex;justify-content:space-between;gap:20px;align-items:center}.intro strong{font:800 1rem Manrope}.intro span{color:#ffffffb8;font-size:.84rem}
+.highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.highlight{background:white;border:1px solid var(--line);border-radius:17px;padding:23px;box-shadow:0 7px 25px #123d2b08}.highlight .number{font:800 clamp(2rem,4vw,3rem)/1 Manrope;color:var(--green);letter-spacing:-.07em}.highlight p{font-weight:800;margin-top:11px;line-height:1.35}.highlight small{display:block;color:var(--muted);font-size:.76rem;margin-top:7px}.team-facts{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden}.fact{display:flex;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line)}.fact:nth-child(3n+2),.fact:nth-child(3n+3){border-left:1px solid var(--line)}.fact span{color:var(--muted);font-size:.85rem}.fact strong{text-align:right;font-size:.85rem}
+.dark{background:var(--green-deep);color:white}.dark .section-head p{color:#ffffff9c}.mission-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:45px;align-items:start}.quote{border-left:3px solid var(--gold);padding:8px 0 8px 24px;font:700 clamp(1.35rem,2.6vw,2rem)/1.45 Manrope}.quote span{color:#b8dfc4}.values{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.value{border:1px solid #ffffff22;background:#ffffff0b;border-radius:15px;padding:20px}.value b{display:block;font:800 1rem Manrope;margin-bottom:5px}.value p{color:#ffffff91;font-size:.84rem}
+.season-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}.tab{border:1px solid var(--line);background:white;border-radius:999px;padding:10px 16px;font-weight:800;color:#4e6055}.tab.active{background:var(--green);color:white;border-color:var(--green)}.season-panel{display:none;background:white;border:1px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,38px);box-shadow:var(--shadow)}.season-panel.active{display:block}.season-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap}.season-top h3{font-size:clamp(1.8rem,4vw,2.7rem);color:var(--green-dark)}.season-top p{color:var(--muted);max-width:650px;margin-top:6px}.season-tag{background:var(--mint);color:var(--green);padding:7px 11px;border-radius:999px;font-size:.74rem;font-weight:800}.season-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:25px 0}.season-stat{background:var(--paper);border:1px solid var(--line);padding:16px;border-radius:13px}.season-stat strong{display:block;font:800 1.65rem Manrope;color:var(--green)}.season-stat span{font-size:.76rem;color:var(--muted)}.event-list{display:grid;gap:10px}.event{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;padding:15px 17px;border:1px solid var(--line);border-radius:13px}.event b{display:block}.event p{font-size:.82rem;color:var(--muted)}.event-score{font:800 1.1rem Manrope;color:var(--green);white-space:nowrap}.pending{font-size:.73rem;font-weight:800;background:#fff5dd;color:#805c16;padding:6px 10px;border-radius:999px}.source-note{font-size:.77rem;color:var(--muted);margin-top:18px}.source-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:15px}.source-links a{color:var(--green);font-weight:800;font-size:.8rem;text-decoration:underline;text-underline-offset:3px}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.info-card{background:white;border:1px solid var(--line);border-radius:17px;padding:23px}.info-card .icon{font-size:1.45rem;color:var(--green)}.info-card h3{font-size:1.05rem;margin:10px 0 6px}.info-card p{font-size:.87rem;color:var(--muted)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}.photo-wrap{background:var(--mint);padding:20px;border-radius:22px;min-height:300px;display:grid;place-items:center}.photo-wrap img{max-height:380px;object-fit:contain}.detail-list{display:grid;gap:16px}.detail{border-bottom:1px solid var(--line);padding-bottom:14px}.detail h3{font-size:1.05rem;margin-bottom:4px}.detail p{color:var(--muted);font-size:.9rem}
+.academy{background:#edf5ef}.academy-layout{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}.academy-side,.academy-main{background:white;border:1px solid var(--line);border-radius:18px;padding:19px}.academy-side h3,.academy-main h3{font-size:1.05rem;margin-bottom:12px}.search{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 13px;background:#fbfdfb;outline:none}.search:focus,input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #176b4315}.category-list{display:grid;gap:6px;margin-top:13px}.category-btn{border:0;background:transparent;text-align:left;padding:9px 10px;border-radius:9px;font-weight:700;color:#526257;font-size:.85rem}.category-btn.active,.category-btn:hover{background:var(--mint);color:var(--green)}.code-toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.code-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.code-card{border:1px solid var(--line);border-radius:13px;overflow:hidden}.code-card-head{display:flex;justify-content:space-between;gap:10px;padding:12px 13px;background:#f7faf7}.code-card-head b{font-size:.86rem}.code-card-head span{font-size:.68rem;color:var(--green);font-weight:800}.code-card p{font-size:.77rem;color:var(--muted);padding:9px 13px 0}.code-card pre{margin:10px 0 0;background:#102b20;color:#e2f1e6;padding:14px;overflow:auto;font: .73rem/1.55 Consolas,monospace;max-height:230px;white-space:pre}.code-card-foot{display:flex;justify-content:flex-end;padding:9px;border-top:1px solid var(--line)}.empty{padding:28px;text-align:center;color:var(--muted)}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.lesson{border:1px solid var(--line);border-radius:13px;padding:15px}.lesson-top{display:flex;justify-content:space-between;gap:12px}.lesson h4{font:800 .95rem Manrope}.lesson p{font-size:.82rem;color:var(--muted);margin:7px 0}.lesson .level{font-size:.68rem;color:var(--green);font-weight:800}.lesson details{margin-top:8px}.lesson summary{font-size:.79rem;font-weight:800;color:var(--green);cursor:pointer}.lesson .lesson-body{font-size:.8rem;color:#536158;padding-top:8px}.lesson code{background:var(--mint);padding:2px 4px;border-radius:4px}.progress-wrap{background:var(--mint);border-radius:999px;height:9px;overflow:hidden;margin:10px 0}.progress-bar{height:100%;width:0;background:var(--green);transition:width .25s}.lesson-check{display:flex;align-items:center;gap:7px;font-size:.75rem;font-weight:800;color:var(--green);margin-top:10px}.lesson-check input{accent-color:var(--green)}
+.tutor-box{background:linear-gradient(135deg,#103d2b,#176b43);color:white;border-radius:20px;padding:clamp(22px,4vw,35px);display:grid;grid-template-columns:.8fr 1.2fr;gap:25px;align-items:start}.tutor-box p{color:#ffffffb8;font-size:.9rem}.tutor-box h3{font-size:1.7rem;margin:8px 0}.tutor-controls{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}.tutor-controls button{background:#ffffff18;border:1px solid #ffffff36;color:white;border-radius:999px;padding:8px 12px;font-size:.78rem;font-weight:800}.tutor-controls button:hover{background:white;color:var(--green)}.tutor-answer{background:white;color:var(--ink);border-radius:14px;padding:18px;min-height:120px}.tutor-answer p{color:var(--muted)}.tutor-answer pre{background:#102b20;color:#e2f1e6;padding:12px;border-radius:9px;overflow:auto;margin-top:10px;font-size:.78rem}
+.auth-card{max-width:620px;margin:auto;background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(22px,4vw,35px);box-shadow:var(--shadow)}.auth-card h2{font-size:2rem}.auth-card>p{color:var(--muted);margin:6px 0 20px}.auth-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:.78rem;font-weight:800}.field input{border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-width:0}.auth-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.auth-status{font-size:.83rem;color:var(--muted);margin-top:12px;min-height:22px}.user-bar{display:flex;justify-content:space-between;gap:15px;align-items:center;background:var(--mint);border-radius:12px;padding:12px 15px;margin-bottom:15px}.user-bar strong{color:var(--green-dark)}.notice{background:#fff6df;border:1px solid #f0dfb2;color:#6c541d;padding:12px 14px;border-radius:11px;font-size:.8rem;margin-top:14px}
+footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:flex;justify-content:space-between;gap:30px;padding-bottom:30px;border-bottom:1px solid #ffffff20}.footer-brand{max-width:420px}.footer-brand img{width:55px;height:55px;object-fit:contain;background:white;border-radius:12px;padding:4px;margin-bottom:12px}.footer-brand p{font-size:.86rem;color:#ffffff91}.footer-links{display:flex;flex-wrap:wrap;gap:13px 20px;align-content:start}.footer-links a{font-size:.83rem;color:#ffffffc2}.footer-links a:hover{color:#b9e1c5}.copyright{display:flex;justify-content:space-between;gap:15px;padding-top:18px;font-size:.74rem;color:#ffffff70}
+.reveal{opacity:0;transform:translateY(18px);transition:.65s}.reveal.visible{opacity:1;transform:none}
+@media(max-width:950px){.nav-links{gap:11px}.nav-links a{font-size:.75rem}.nav-actions .btn{padding:9px 12px}.academy-layout{grid-template-columns:220px 1fr}.code-list{grid-template-columns:1fr}}
+@media(max-width:760px){.container{width:calc(100% - 32px)}.menu-toggle{display:block}.nav{height:68px}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--paper);padding:15px 22px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}.nav-links.open{display:flex}.nav-links a{padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem}.nav-actions .btn{display:none}.hero-inner{grid-template-columns:1fr;padding:65px 0 48px}.hero-visual{min-height:270px}.hero-robot{max-height:300px}.hero-meta{margin-top:30px}.intro .container{align-items:flex-start;flex-direction:column;gap:3px}.section{padding:68px 0}.highlights{grid-template-columns:repeat(2,1fr)}.team-facts{grid-template-columns:1fr}.fact:nth-child(n){border-left:0}.mission-grid,.split,.tutor-box{grid-template-columns:1fr}.season-stats{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:1fr 1fr}.academy-layout{grid-template-columns:1fr}.category-list{grid-template-columns:repeat(2,1fr)}.lesson-grid{grid-template-columns:1fr}.footer-top,.copyright{flex-direction:column}}
+@media(max-width:460px){.highlights,.info-grid,.values{grid-template-columns:1fr}.hero h1{font-size:3.05rem}.auth-form{grid-template-columns:1fr}.field.full{grid-column:auto}.event{grid-template-columns:1fr}.event-score{justify-self:start}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
 <body>
   <div class="topbar">
     <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="#home">
-        <img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo">
-        <span>ITKAN RANGERS<small>FTC TEAM #28922</small></span>
-      </a>
+      <a class="brand" href="#home"><img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo"><span>ITKAN RANGERS<small>FTC TEAM #28922</small></span></a>
       <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
       <div class="nav-links" id="navLinks">
-        <a href="#team">Our Team</a>
-        <a href="#mission">Mission</a>
-        <a href="#season">FTC</a>
-        <a href="#engineering">Engineering</a>
-        <a href="#robot">Our Robot</a>
-        <a href="#outreach">Outreach</a>
-        <a class="btn btn-primary nav-cta" href="#support">Support Us ↗</a>
+        <a href="#team">Home</a><a href="#seasons">Seasons</a><a href="#robot">Robot</a><a href="#academy">Code library</a><a href="#lessons">Learn</a><a href="#tutor">Tutor</a><a href="#account">Account</a>
       </div>
+      <div class="nav-actions"><a class="btn btn-primary btn-small" href="#academy">Start learning ↗</a></div>
     </nav>
   </div>
 
@@ -309,263 +48,377 @@
       <div class="hero-copy">
         <span class="eyebrow">Plano, Texas · FIRST Tech Challenge</span>
         <h1>Built to think.<br><span>Driven to build.</span></h1>
-        <p>We are the Itkan Rangers, FTC Team 28922. We design, build, and program robots while learning to solve real problems, work as a team, and make an impact beyond the competition field.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#robot">Explore our robot <span>↗</span></a>
-          <a class="btn btn-outline" href="#mission">Meet the team</a>
-        </div>
-        <div class="hero-meta">
-          <div><strong>#28922</strong><span>FTC team</span></div>
-          <div><strong>Plano, TX</strong><span>Our home</span></div>
-          <div><strong>Since 2024</strong><span>Rookie year</span></div>
-        </div>
+        <p>We are the Itkan Rangers, FTC Team 28922. We design, build, and program robots while learning to solve problems, work as a team, and share what we discover.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#seasons">Explore our seasons ↗</a><a class="btn btn-outline" href="#academy">Learn FTC programming</a></div>
+        <div class="hero-meta"><div><strong>#28922</strong><span>FTC team</span></div><div><strong>Plano, TX</strong><span>Our home</span></div><div><strong>Since 2024</strong><span>Rookie year</span></div></div>
       </div>
-      <div class="hero-visual">
-        <div class="hero-glow"></div>
-        <img class="hero-robot" src="https://ftcrangers.com/robot.png" alt="Itkan Rangers competition robot">
-        <div class="hero-tag"><b>ITKAN RANGERS</b>Engineering with purpose.</div>
-      </div>
+      <div class="hero-visual"><div class="hero-glow"></div><img class="hero-robot" src="https://ftcrangers.com/robot.png" alt="Itkan Rangers competition robot"><div class="hero-tag"><b>ITKAN RANGERS</b>Engineering with purpose.</div></div>
     </div>
   </header>
-
-  <div class="intro-strip">
-    <div class="container">
-      <p>Curiosity becomes creation. Ideas become engineering.</p>
-      <span>FIRST Tech Challenge · Team 28922</span>
-    </div>
-  </div>
+  <div class="intro"><div class="container"><strong>Curiosity becomes creation. Ideas become engineering.</strong><span>FIRST Tech Challenge · Team 28922</span></div></div>
 
   <main>
     <section class="section" id="team">
       <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Team snapshot</span>
-          <h2>A team built around <span class="accent">progress.</span></h2>
-          <p>From our first concepts to competition day, we keep learning, testing, and improving. Here's a quick look at the Rangers.</p>
+        <div class="section-head"><span class="eyebrow">Team snapshot</span><h2>Six highlights. <span class="accent">One Ranger journey.</span></h2><p>Selected competition highlights and team milestones. Season and event labels are included so results are not mixed together.</p></div>
+        <div class="highlights">
+          <article class="highlight"><div class="number">2×</div><p>Itkan internal scrimmage champions</p><small>Team milestone · internal scrimmages</small></article>
+          <article class="highlight"><div class="number">1st</div><p>FiT-North U-League AM Meet 3</p><small>2026 · DECODE season</small></article>
+          <article class="highlight"><div class="number">4–1–0</div><p>Qualification match record</p><small>2026 FiT-North Last Call Qualifier</small></article>
+          <article class="highlight"><div class="number">10th</div><p>Qualification ranking</p><small>2026 FiT-North Last Call Qualifier</small></article>
+          <article class="highlight"><div class="number">2nd</div><p>Control Award</p><small>2026 FiT-North U-League Tournament</small></article>
+          <article class="highlight"><div class="number">102–65</div><p>Recorded match score</p><small>INTO THE DEEP archive · 2024–25</small></article>
         </div>
-        <div class="stats-grid reveal">
-          <article class="stat-card"><div class="stat-number">2×</div><div class="stat-label">Itkan Internal Scrimmage Champions</div></article>
-          <article class="stat-card"><div class="stat-number">1st</div><div class="stat-label">FiT-North U-League AM Meet 3 · 2026</div></article>
-          <article class="stat-card"><div class="stat-number">12h</div><div class="stat-label">Weekly in-person collaboration during main season</div></article>
+        <div class="team-facts">
+          <div class="fact"><span>Team name</span><strong>Itkan Rangers</strong></div><div class="fact"><span>FTC number</span><strong>28922</strong></div><div class="fact"><span>Location</span><strong>Plano, Texas, USA</strong></div>
+          <div class="fact"><span>Rookie year</span><strong>2024</strong></div><div class="fact"><span>Competition region</span><strong>FiT-North</strong></div><div class="fact"><span>Sub-teams</span><strong>CAD / Build · Programming · Marketing</strong></div>
         </div>
-        <div class="team-facts reveal">
-          <div class="fact"><span>Team name</span><strong>Itkan Rangers</strong></div>
-          <div class="fact"><span>FTC number</span><strong>28922</strong></div>
-          <div class="fact"><span>Location</span><strong>Plano, Texas, USA</strong></div>
-          <div class="fact"><span>Rookie year</span><strong>2024</strong></div>
-          <div class="fact"><span>Competition</span><strong>FiT-North</strong></div>
-          <div class="fact"><span>Sub-teams</span><strong>CAD / Build · Programming · Marketing</strong></div>
-        </div>
-        <p style="margin-top:14px;color:var(--muted);font-size:.78rem;">The match record shown on the previous draft (20–11 overall, 17–9 qualification, 3–2 playoffs) has been left out until it can be confirmed against the correct season and event records.</p>
+        <p class="source-note">Results shown here are the verified highlights selected for this page. Full event-by-event records should be expanded only from official event result pages; unconfirmed scores are intentionally not estimated.</p>
       </div>
     </section>
 
-    <section class="section dark-section" id="mission">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Why we build</span>
-          <h2>Innovation starts with <span style="color:#ef9a55">people.</span></h2>
-          <p>Robotics gives us a place to turn curiosity into practical skills—and to share what we learn with the people around us.</p>
-        </div>
-        <div class="mission-layout reveal">
-          <blockquote class="mission-quote">Our mission is to spark curiosity, develop confident problem-solvers, and help shape future leaders—<span>one robot, one idea, and one breakthrough at a time.</span></blockquote>
-          <div class="values-grid">
-            <article class="value-card"><div class="value-icon">✦</div><h3>Discovery</h3><p>We explore new ideas and learn from every challenge.</p></article>
-            <article class="value-card"><div class="value-icon">✧</div><h3>Innovation</h3><p>We use creativity and persistence to solve problems.</p></article>
-            <article class="value-card"><div class="value-icon">◎</div><h3>Impact</h3><p>We use our skills to contribute to our community.</p></article>
-            <article class="value-card"><div class="value-icon">◌</div><h3>Inclusion</h3><p>We value different perspectives and make room for everyone.</p></article>
-            <article class="value-card"><div class="value-icon">⌘</div><h3>Teamwork</h3><p>We support each other and practice Gracious Professionalism.</p></article>
-            <article class="value-card"><div class="value-icon">✺</div><h3>Fun</h3><p>We enjoy building, programming, competing, and learning together.</p></article>
-          </div>
+    <section class="section dark" id="mission">
+      <div class="container"><div class="section-head"><span class="eyebrow" style="color:#b9e1c5">Why we build</span><h2>Innovation starts with <span style="color:#b9e1c5">people.</span></h2><p>Robotics gives us a place to turn curiosity into practical skills—and share what we learn with the people around us.</p></div>
+        <div class="mission-grid"><blockquote class="quote">Our mission is to spark curiosity, develop confident problem-solvers, and help shape future leaders—<span>one robot, one idea, and one breakthrough at a time.</span></blockquote>
+          <div class="values"><article class="value"><b>Discovery</b><p>We explore new ideas and learn from every challenge.</p></article><article class="value"><b>Innovation</b><p>We use creativity and persistence to solve problems.</p></article><article class="value"><b>Impact</b><p>We use our skills to contribute to our community.</p></article><article class="value"><b>Inclusion</b><p>We value different perspectives and make room for everyone.</p></article><article class="value"><b>Teamwork</b><p>We support each other and practice Gracious Professionalism.</p></article><article class="value"><b>Fun</b><p>We enjoy building, programming, competing, and learning together.</p></article></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="season">
+    <section class="section" id="seasons">
       <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">The competition</span>
-          <h2>What is <span class="accent">FIRST Tech Challenge?</span></h2>
-          <p>FTC brings students together to design, build, and program robots for a new game challenge each season. Teams compete in alliances while developing engineering, communication, and problem-solving skills.</p>
+        <div class="section-head"><span class="eyebrow">Competition archive</span><h2>Every season has a <span class="accent">story.</span></h2><p>Browse the Rangers' season pages. Verified scores and awards are separated by season; upcoming BIOBUZZ results stay marked as pending until matches are played.</p></div>
+        <div class="season-tabs" role="tablist" aria-label="Season archives">
+          <button class="tab active" data-season="decode" role="tab" aria-selected="true">DECODE · 2025–26</button>
+          <button class="tab" data-season="biobuzz" role="tab" aria-selected="false">BIOBUZZ · 2026–27</button>
+          <button class="tab" data-season="deep" role="tab" aria-selected="false">INTO THE DEEP · 2024–25</button>
         </div>
-        <div class="ftc-panel reveal">
-          <div>
-            <span class="eyebrow">More than a robot</span>
-            <h3>Engineering, collaboration, and competition.</h3>
-            <p>Teams work through the full engineering cycle: explore a challenge, design a solution, build and program it, then test and improve. Outreach and teamwork matter just as much as what happens on the field.</p>
-            <a class="btn btn-primary" style="margin-top:22px" href="https://www.firstinspires.org/programs/ftc/" target="_blank" rel="noopener">Explore FIRST Tech Challenge ↗</a>
+        <section class="season-panel active" id="season-decode" role="tabpanel">
+          <div class="season-top"><div><span class="eyebrow">2025–2026 season</span><h3>DECODE</h3><p>Rangers' DECODE season archive. The highlights below are the verified results available for this page; additional match-by-match rows can be added as official event records are confirmed.</p></div><span class="season-tag">Completed season</span></div>
+          <div class="season-stats">
+            <div class="season-stat"><strong>1st</strong><span>FiT-North U-League AM Meet 3</span></div>
+            <div class="season-stat"><strong>4–1–0</strong><span>Last Call Qualifier qualification record</span></div>
+            <div class="season-stat"><strong>10th</strong><span>Last Call Qualifier qualification rank</span></div>
+            <div class="season-stat"><strong>2nd</strong><span>U-League Tournament Control Award</span></div>
           </div>
-          <div class="ftc-points">
-            <div class="ftc-point"><i>01</i><div><strong>Design & build</strong><span>Create a robot using engineering principles and practical problem-solving.</span></div></div>
-            <div class="ftc-point"><i>02</i><div><strong>Program & iterate</strong><span>Develop autonomous routines, driver controls, and vision systems.</span></div></div>
-            <div class="ftc-point"><i>03</i><div><strong>Compete as an alliance</strong><span>Work with another team to take on the season's field challenge.</span></div></div>
-            <div class="ftc-point"><i>04</i><div><strong>Share your impact</strong><span>Learn to communicate, mentor, and connect with your community.</span></div></div>
+          <div class="event-list">
+            <article class="event"><div><b>FiT-North U-League AM Meet 3</b><p>Meet result · 2026</p></div><div class="event-score">1st place</div></article>
+            <article class="event"><div><b>FiT-North Last Call Qualifier</b><p>Qualification record and ranking</p></div><div class="event-score">4–1–0 · 10th</div></article>
+            <article class="event"><div><b>FiT-North U-League Tournament</b><p>Judged award result</p></div><div class="event-score">2nd · Control Award</div></article>
           </div>
-        </div>
-
-        <div class="season-card reveal" style="margin-top:25px">
-          <div class="season-content">
-            <span class="eyebrow">Previous season spotlight · 2025–2026</span>
-            <h3>DECODE</h3>
-            <p>DECODE challenged teams to collect and score game artifacts while coordinating autonomous actions, driver-controlled play, and an end-game strategy. This section is an archive of the season described on the team's previous website—not the current 2026–27 challenge.</p>
+          <p class="source-note">The original 102–65 score is not listed here because it belongs to the INTO THE DEEP season archive.</p>
+        </section>
+        <section class="season-panel" id="season-biobuzz" role="tabpanel">
+          <div class="season-top"><div><span class="eyebrow">2026–2027 season</span><h3>BIOBUZZ</h3><p>The current season page. Upcoming competitions, event details, match scores, rankings, and awards will be added as official results become available.</p></div><span class="season-tag">Upcoming / in progress</span></div>
+          <div class="season-stats">
+            <div class="season-stat"><strong>2026–27</strong><span>Season</span></div><div class="season-stat"><strong>Nov 21</strong><span>Next listed event date</span></div><div class="season-stat"><strong>—</strong><span>Match scores · pending</span></div><div class="season-stat"><strong>—</strong><span>Season ranking · pending</span></div>
           </div>
-          <div class="season-grid">
-            <div class="season-item"><b>The challenge</b><span>Collect artifacts and score them in the designated goal zones, while responding to the randomly selected motif.</span></div>
-            <div class="season-item"><b>Autonomous</b><span>Use pre-programmed robot actions during the opening 30-second period.</span></div>
-            <div class="season-item"><b>End game</b><span>Finish the match by positioning the robot in its base during the final 20 seconds.</span></div>
+          <div class="event-list">
+            <article class="event"><div><b>NTX Fall Qualifier #3</b><p>Listed upcoming event · November 21, 2026</p></div><span class="pending">Results pending</span></article>
+            <article class="event"><div><b>Qualification matches, playoff rounds & awards</b><p>Scores and standings will be added after official event results are published.</p></div><span class="pending">Not played / not verified</span></article>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="outreach">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Beyond the field</span>
-          <h2>Robotics is better when it's <span class="accent">shared.</span></h2>
-          <p>We want more people to see what engineering can make possible. Outreach gives us the chance to introduce robotics, share our experience, and support our community.</p>
-        </div>
-        <div class="outreach-grid reveal">
-          <article class="outreach-card">
-            <img src="https://ftcrangers.com/bakesale.jpg" alt="Itkan Robotics students at a community outreach and bake sale event" loading="lazy">
-            <div class="outreach-copy"><h3>Community showcase</h3><p>At a showcase at Allen Masjid, our team introduced visitors to robotics and ITKAN. The event welcomed more than 2,500 visitors, and the bake sale raised over $1,000 for the mission.</p></div>
-          </article>
-          <article class="outreach-card">
-            <div style="height:270px;background:linear-gradient(135deg,#29221e,#9b392b);display:grid;place-items:center;color:#fff;text-align:center;padding:30px;">
-              <div><div style="font:800 3.5rem Manrope;letter-spacing:-.08em;">RANGERS</div><div style="color:#f2b66c;letter-spacing:.2em;font-size:.75rem;font-weight:700;">BUILD · LEARN · SHARE</div></div>
-            </div>
-            <div class="outreach-copy"><h3>Build updates & media</h3><p>We share our progress, programming challenges, robot improvements, and team experiences. Follow our journey and see what we're working on.</p><a class="btn btn-light" style="margin-top:15px" href="https://www.youtube.com/" target="_blank" rel="noopener">Visit YouTube ↗</a></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="engineering" style="background:var(--paper-2)">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">CAD & build</span>
-          <h2>From first sketch to <span class="accent">field-ready.</span></h2>
-          <p>We use Onshape CAD and an iterative engineering process to make design decisions, test ideas, and improve reliability.</p>
-        </div>
-        <div class="process-grid reveal">
-          <article class="process-card"><h3>Find the problem</h3><p>Define the challenge and identify what the robot needs to do consistently.</p></article>
-          <article class="process-card"><h3>Brainstorm</h3><p>Compare possible designs, look for trade-offs, and choose practical concepts.</p></article>
-          <article class="process-card"><h3>Create a plan</h3><p>Break the robot into drivetrain, intake, transfer, and outtake systems.</p></article>
-          <article class="process-card"><h3>Design & build</h3><p>Use CAD and hands-on prototyping to turn the plan into a working robot.</p></article>
-          <article class="process-card"><h3>Test</h3><p>Run match-like tests to find weak points and collect useful feedback.</p></article>
-          <article class="process-card"><h3>Improve</h3><p>Refine mechanisms, strengthen the design, and make performance more repeatable.</p></article>
-        </div>
+          <p class="source-note">No BIOBUZZ match scores or rankings are invented or pre-filled.</p>
+        </section>
+        <section class="season-panel" id="season-deep" role="tabpanel">
+          <div class="season-top"><div><span class="eyebrow">2024–2025 season</span><h3>INTO THE DEEP</h3><p>Archived season page for the 2024–25 challenge. The recorded 102–65 match score belongs to this season; the opponent and event are not specified in the current verified summary, so they are not guessed here.</p></div><span class="season-tag">Archived season</span></div>
+          <div class="season-stats"><div class="season-stat"><strong>102–65</strong><span>Recorded match score</span></div><div class="season-stat"><strong>2024–25</strong><span>Season</span></div><div class="season-stat"><strong>—</strong><span>Overall record · not confirmed</span></div><div class="season-stat"><strong>—</strong><span>Final ranking · not confirmed</span></div></div>
+          <div class="event-list"><article class="event"><div><b>Recorded match result</b><p>Score retained in the INTO THE DEEP archive. Opponent and event label await confirmation.</p></div><div class="event-score">102–65</div></article></div>
+          <p class="source-note">Other match results, awards, and event rankings should be filled from the official event record rather than inferred from this single score.</p>
+        </section>
+        <div class="source-links"><a href="https://ftcscout.org/teams/28922" target="_blank" rel="noopener">FTCScout team record ↗</a><a href="https://ftc-events.firstinspires.org/" target="_blank" rel="noopener">FIRST official event results ↗</a><a href="https://ftcrangers.com/" target="_blank" rel="noopener">Existing team website ↗</a></div>
       </div>
     </section>
 
     <section class="section" id="robot">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Inside the machine</span>
-          <h2>Meet the <span class="accent">Rangers robot.</span></h2>
-          <p>Every mechanism has a job. Our robot combines a compact drivetrain, a purpose-built scoring system, and sensors that help it navigate the field.</p>
-        </div>
-        <div class="robot-layout reveal">
-          <div class="robot-image-wrap"><img src="https://ftcrangers.com/cad-robot.png" alt="CAD rendering of the Itkan Rangers robot" loading="lazy"></div>
-          <div class="robot-details">
-            <article class="robot-detail"><h3>Drivetrain · Swyft Drives</h3><p>Our drivetrain uses Swyft Drives, selected for a compact setup, speed, and durability.</p></article>
-            <article class="robot-detail"><h3>Scoring hood</h3><p>A shaped hood helps guide game pieces toward a more consistent scoring trajectory. We refine its angle and geometry through repeated testing.</p></article>
-            <article class="robot-detail"><h3>Limelight vision</h3><p>The Limelight camera helps identify AprilTags for alignment and can also support game-piece color detection.</p></article>
-            <article class="robot-detail"><h3>Odometry & pathing</h3><p>Odometry pods provide movement measurements that support autonomous navigation and Pedro Pathing routines.</p></article>
-          </div>
+      <div class="container"><div class="section-head"><span class="eyebrow">Inside the machine</span><h2>Meet the <span class="accent">Rangers robot.</span></h2><p>Every mechanism has a job. Our robot combines a drivetrain, scoring system, and sensors that support repeatable performance.</p></div>
+        <div class="split"><div class="photo-wrap"><img src="https://ftcrangers.com/cad-robot.png" alt="CAD rendering of the Itkan Rangers robot" loading="lazy"></div><div class="detail-list">
+          <article class="detail"><h3>Drivetrain · Swyft Drives</h3><p>Our drivetrain uses Swyft Drives, selected for a compact setup, speed, and durability.</p></article>
+          <article class="detail"><h3>Scoring hood</h3><p>A shaped hood guides game pieces toward a more consistent scoring trajectory. We refine its angle and geometry through testing.</p></article>
+          <article class="detail"><h3>Limelight vision</h3><p>The Limelight camera helps identify AprilTags for alignment and can support game-piece color detection.</p></article>
+          <article class="detail"><h3>Odometry & pathing</h3><p>Odometry pods provide movement measurements that support autonomous navigation and pathing routines.</p></article>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="section" id="engineering" style="background:#f0f6f1"><div class="container"><div class="section-head"><span class="eyebrow">CAD & build</span><h2>From first sketch to <span class="accent">field-ready.</span></h2><p>We use CAD and an iterative engineering process to make design decisions, test ideas, and improve reliability.</p></div><div class="info-grid">
+      <article class="info-card"><div class="icon">01</div><h3>Find the problem</h3><p>Define the challenge and identify what the robot needs to do consistently.</p></article><article class="info-card"><div class="icon">02</div><h3>Design & prototype</h3><p>Compare mechanisms, use CAD, and turn promising ideas into working prototypes.</p></article><article class="info-card"><div class="icon">03</div><h3>Test & improve</h3><p>Run match-like tests, collect feedback, and refine the robot for repeatable performance.</p></article>
+    </div></div></section>
+
+    <section class="section academy" id="academy">
+      <div class="container"><div class="section-head"><span class="eyebrow">FTC Java library</span><h2>Learn by reading. <span class="accent">Build by coding.</span></h2><p>Browse 50 starter examples for common FTC programming tasks. Snippets are provided without inline comments so the code stays clean and easy to copy.</p></div>
+        <div class="academy-layout">
+          <aside class="academy-side"><h3>Find an example</h3><input class="search" id="codeSearch" type="search" placeholder="Search code..."><div class="category-list" id="codeCategories"></div></aside>
+          <div class="academy-main"><div class="code-toolbar"><h3 id="codeHeading">All examples <span id="codeCount" style="color:var(--muted);font-size:.78rem"></span></h3><span style="font-size:.75rem;color:var(--muted)">FTC Java · 50 examples</span></div><div class="code-list" id="codeList"></div></div>
         </div>
       </div>
     </section>
 
-    <section class="section programming" id="programming">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Programming</span>
-          <h2>Code that brings the robot <span class="accent">to life.</span></h2>
-          <p>Our software is built around control, repeatability, and making the most of the robot's hardware.</p>
-        </div>
-        <div class="program-grid reveal">
-          <article class="program-card"><div class="mini-icon">⌘</div><h3>Java & FTC SDK</h3><p>We write robot code in Java using the FTC SDK, building the systems needed for autonomous and driver-controlled operation.</p></article>
-          <article class="program-card"><div class="mini-icon">◎</div><h3>Autonomous routines</h3><p>We combine odometry, vision, and path planning to help the robot move accurately and complete tasks without driver input.</p></article>
-          <article class="program-card"><div class="mini-icon">◉</div><h3>Limelight & sensing</h3><p>Vision-assisted alignment and sensor feedback help reduce guesswork and make robot behavior more consistent.</p></article>
-        </div>
+    <section class="section" id="lessons">
+      <div class="container"><div class="section-head"><span class="eyebrow">Robotics academy</span><h2>Go from beginner to <span class="accent">robot programmer.</span></h2><p>Twenty guided lessons with explanations, examples, and practice prompts. Mark lessons complete to track your learning progress on this device or, when signed in, sync it to your account.</p></div>
+        <div class="academy-main" style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><b id="progressText">0 of 20 lessons completed</b><span id="progressPercent" style="color:var(--green);font-weight:800">0%</span></div><div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div></div>
+        <div class="lesson-grid" id="lessonGrid"></div>
       </div>
     </section>
 
-    <section class="section" id="support">
-      <div class="container">
-        <div class="support-banner reveal">
-          <div>
-            <span class="eyebrow">Help us build what's next</span>
-            <h2>Support the Itkan Rangers.</h2>
-            <p>Donations and sponsorships help cover robot components, registration, travel, outreach materials, and media equipment. Your support helps students keep learning through hands-on engineering.</p>
-          </div>
-          <a class="btn" href="https://www.launchgood.com/v4/campaign/help_revive_the_ummah_with_itkan_rangers_team?src=6338452" target="_blank" rel="noopener">Support the team ↗</a>
-        </div>
-        <div class="section-head reveal" style="margin:55px 0 25px">
-          <span class="eyebrow">Partner with us</span>
-          <h2 style="font-size:2.2rem">Corporate sponsorship</h2>
-          <p>Our published sponsorship levels outline ways partners can help fund the season and support the team's work.</p>
-        </div>
-        <div class="sponsor-grid reveal">
-          <article class="sponsor-card"><div class="tier">Bronze Ranger</div><h3>$250–$499</h3><div class="price">Entry-level partnership</div><p>Helps cover competition registration or key equipment such as a controller or sensors.</p><ul><li>Website sponsor-page logo</li><li>Appreciation certificate</li></ul></article>
-          <article class="sponsor-card"><div class="tier">Silver Ranger</div><h3>$500–$999</h3><div class="price">Season support</div><p>Helps fund motors, hubs, and outreach materials for the season.</p><ul><li>Small team-shirt logo</li><li>Robot logo placement</li><li>Social media and YouTube promotion</li></ul></article>
-          <article class="sponsor-card"><div class="tier">Gold Ranger</div><h3>$1,000+</h3><div class="price">Major partnership</div><p>Helps provide core robot materials and supports further upgrades.</p><ul><li>Prominent shirt and robot placement</li><li>Potential team presentation</li><li>Recognition at competitions</li></ul></article>
-        </div>
-      </div>
-    </section>
+    <section class="section" id="tutor" style="background:#f0f6f1"><div class="container"><div class="section-head"><span class="eyebrow">Built-in robotics tutor</span><h2>Stuck on something? <span class="accent">Let's break it down.</span></h2><p>A guided, built-in tutor with prepared explanations and examples. It works without an external AI API; it is not an unrestricted ChatGPT connection.</p></div>
+      <div class="tutor-box"><div><span class="eyebrow" style="color:#c4e5cd">Rangers learning helper</span><h3>What are you working on?</h3><p>Choose a topic and get a short explanation, example, and next step.</p><div class="tutor-controls" id="tutorTopics"></div></div><div class="tutor-answer" id="tutorAnswer"><b>Choose a topic to begin.</b><p>Try mecanum drive, Java basics, encoders, autonomous, or sensors.</p></div></div>
+    </div></section>
+
+    <section class="section" id="account"><div class="container"><div class="auth-card"><span class="eyebrow">Rangers account</span><h2>Sign in to save progress.</h2><p>Create an account or log in to sync Robotics Academy lesson progress. Authentication uses Supabase.</p>
+      <div id="signedInBar" class="user-bar" hidden><div>Signed in as <strong id="userEmail"></strong></div><button class="btn btn-soft btn-small" id="logoutBtn">Log out</button></div>
+      <div id="authForms"><div class="auth-form"><div class="field full"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div><div class="field full"><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 8 characters"></div></div><div class="auth-actions"><button class="btn btn-primary" id="loginBtn">Log in</button><button class="btn btn-soft" id="signupBtn">Create account</button></div></div>
+      <div class="auth-status" id="authStatus" role="status" aria-live="polite">Add your Supabase project details in the configuration section at the bottom of this file to enable accounts.</div>
+      <div class="notice">Progress tracking works locally even before Supabase is configured. To enable real signup/login and cross-device progress sync, replace the two Supabase placeholders in the script with your project's Project URL and anon/public key. Never put a service-role key in this website.</div>
+    </div></div></section>
   </main>
 
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo" loading="lazy">
-          <h3 style="font:800 1.2rem Manrope;margin-bottom:8px">ITKAN RANGERS · #28922</h3>
-          <p>Engineering the future through creativity, collaboration, and Gracious Professionalism. Based in Plano, Texas.</p>
-        </div>
-        <div class="footer-links">
-          <a href="#team">Our Team</a><a href="#mission">Our Mission</a><a href="#season">FIRST Tech Challenge</a>
-          <a href="#engineering">CAD & Build</a><a href="#robot">Our Robot</a><a href="#programming">Programming</a>
-          <a href="#outreach">Outreach</a><a href="#support">Support Us</a>
-          <a href="https://ftcrangers.com/" target="_blank" rel="noopener">Official team website ↗</a>
-        </div>
-      </div>
-      <div class="copyright"><span>© <span id="year"></span> Itkan Rangers FTC #28922</span><span>Built with curiosity, teamwork, and Gracious Professionalism.</span></div>
-    </div>
-  </footer>
+  <footer><div class="container"><div class="footer-top"><div class="footer-brand"><img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo" loading="lazy"><h3 style="font-size:1.2rem;margin-bottom:7px">ITKAN RANGERS · #28922</h3><p>Engineering the future through creativity, collaboration, and Gracious Professionalism. Based in Plano, Texas.</p></div><div class="footer-links"><a href="#team">Home</a><a href="#seasons">Season archives</a><a href="#robot">Our robot</a><a href="#academy">FTC code library</a><a href="#lessons">Robotics Academy</a><a href="#tutor">Tutor</a><a href="#account">Account</a><a href="https://ftcrangers.com/" target="_blank" rel="noopener">Team website ↗</a></div></div><div class="copyright"><span>© <span id="year"></span> Itkan Rangers FTC #28922</span><span>Built with curiosity, teamwork, and Gracious Professionalism.</span></div></div></footer>
 
   <script>
+    const SUPABASE_URL = https://qpjrxoytxygkjdpauemw.supabase.co/rest/v1/;
+    const SUPABASE_ANON_KEY =  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwanJ4b3l0eHlna2pkcGF1ZW13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2NzU1MjIsImV4cCI6MjEwOTI1MTUyMn0.gB897qg0Fkr4BIvNYQZInK3070nXRaLA1cPLPwL7jtY;
+    const supabaseConfigured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_") && SUPABASE_ANON_KEY.length > 20 && !SUPABASE_ANON_KEY.includes("YOUR_");
+    const supabaseClient = supabaseConfigured && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    const codeExamples = [
+      ["Basic Linear OpMode","Basics","A minimal driver-controlled OpMode structure.","@TeleOp(name = \"Basic TeleOp\")\npublic class BasicTeleOp extends LinearOpMode {\n  @Override\n  public void runOpMode() {\n    waitForStart();\n    while (opModeIsActive()) {\n      telemetry.addData(\"Status\", \"Running\");\n      telemetry.update();\n    }\n  }\n}"],
+      ["Basic Autonomous","Autonomous","A simple autonomous OpMode that waits and reports status.","@Autonomous(name = \"Basic Auto\")\npublic class BasicAuto extends LinearOpMode {\n  @Override\n  public void runOpMode() {\n    waitForStart();\n    if (opModeIsActive()) {\n      telemetry.addData(\"Auto\", \"Started\");\n      telemetry.update();\n    }\n  }\n}"],
+      ["Gamepad Button A","Basics","Read the A button during a TeleOp loop.","if (gamepad1.a) {\n  telemetry.addData(\"Button A\", \"Pressed\");\n}"],
+      ["Gamepad Joystick","Basics","Read the left joystick axes.","double forward = -gamepad1.left_stick_y;\ndouble turn = gamepad1.right_stick_x;"],
+      ["Toggle on Button Press","Basics","Toggle a mechanism once per button press.","if (gamepad1.a && !lastA) {\n  enabled = !enabled;\n}\nlastA = gamepad1.a;"],
+      ["Telemetry Values","Basics","Display live values on the Driver Station.","telemetry.addData(\"Heading\", heading);\ntelemetry.addData(\"Power\", motorPower);\ntelemetry.update();"],
+      ["Motor Setup","Motors","Map a motor and set its zero-power behavior.","DcMotor motor = hardwareMap.get(DcMotor.class, \"motor\");\nmotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);"],
+      ["Motor Direction","Motors","Reverse a motor direction when mounting requires it.","motor.setDirection(DcMotor.Direction.REVERSE);"],
+      ["Motor Power","Motors","Set motor power using a value from -1 to 1.","motor.setPower(0.5);"],
+      ["Motor Stop","Motors","Stop a motor safely.","motor.setPower(0);"],
+      ["Run to Position","Motors","Command a motor to move to a target encoder position.","motor.setTargetPosition(1200);\nmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);\nmotor.setPower(0.5);"],
+      ["Encoder Position","Motors","Read the current encoder count.","int ticks = motor.getCurrentPosition();"],
+      ["Reset Encoder","Motors","Reset a motor encoder before a movement.","motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);\nmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);"],
+      ["Motor Busy Check","Motors","Check whether a motor is still moving to its target.","if (motor.isBusy()) {\n  telemetry.addData(\"Motor\", \"Moving\");\n}"],
+      ["Servo Position","Servos","Move a standard servo to a position from 0 to 1.","servo.setPosition(0.75);"],
+      ["Continuous Servo","Servos","Set continuous rotation servo power.","crServo.setPower(0.4);"],
+      ["Servo Toggle","Servos","Switch between two preset servo positions.","servo.setPosition(open ? 1.0 : 0.0);\nopen = !open;"],
+      ["Tank Drive","Drivetrains","Control left and right sides independently.","double left = -gamepad1.left_stick_y;\ndouble right = -gamepad1.right_stick_y;\nleftFront.setPower(left);\nleftRear.setPower(left);\nrightFront.setPower(right);\nrightRear.setPower(right);"],
+      ["Mecanum Drive","Drivetrains","Calculate wheel powers from forward, strafe, and turn inputs.","double y = -gamepad1.left_stick_y;\ndouble x = gamepad1.left_stick_x;\ndouble rx = gamepad1.right_stick_x;\ndouble denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);\nfrontLeft.setPower((y + x + rx) / denominator);\nbackLeft.setPower((y - x + rx) / denominator);\nfrontRight.setPower((y - x - rx) / denominator);\nbackRight.setPower((y + x - rx) / denominator);"],
+      ["Mecanum Slow Mode","Drivetrains","Reduce drive speed while a precision button is held.","double scale = gamepad1.left_bumper ? 0.35 : 1.0;\nfrontLeft.setPower(fl * scale);\nbackLeft.setPower(bl * scale);\nfrontRight.setPower(fr * scale);\nbackRight.setPower(br * scale);"],
+      ["X-Drive Mixing","Drivetrains","Basic diagonal wheel mixing for an X-drive layout.","frontLeft.setPower(y + x + turn);\nfrontRight.setPower(y - x - turn);\nbackLeft.setPower(y - x + turn);\nbackRight.setPower(y + x - turn);"],
+      ["Six Wheel Drive","Drivetrains","Drive three motors on each side together.","leftFront.setPower(left);\nleftMiddle.setPower(left);\nleftRear.setPower(left);\nrightFront.setPower(right);\nrightMiddle.setPower(right);\nrightRear.setPower(right);"],
+      ["Omni Drive","Drivetrains","Mix forward and rotation for a two-side omni setup.","leftMotor.setPower(forward + turn);\nrightMotor.setPower(forward - turn);"],
+      ["Claw Servo","Mechanisms","Open and close a claw with two positions.","if (gamepad2.a) claw.setPosition(0.2);\nif (gamepad2.b) claw.setPosition(0.8);"],
+      ["Lift Motor","Mechanisms","Control a lift motor with a gamepad trigger.","double liftPower = gamepad2.right_trigger - gamepad2.left_trigger;\nlift.setPower(liftPower);"],
+      ["Linear Slide","Mechanisms","Move a slide manually with a joystick.","slides.setPower(-gamepad2.left_stick_y);"],
+      ["Intake Motor","Mechanisms","Run an intake forward or reverse.","if (gamepad2.right_bumper) intake.setPower(1);\nelse if (gamepad2.left_bumper) intake.setPower(-1);\nelse intake.setPower(0);"],
+      ["Arm Preset","Mechanisms","Move an arm to a preset encoder position.","arm.setTargetPosition(850);\narm.setMode(DcMotor.RunMode.RUN_TO_POSITION);\narm.setPower(0.45);"],
+      ["Touch Sensor","Sensors","Read a digital touch sensor.","boolean pressed = touchSensor.isPressed();"],
+      ["Distance Sensor","Sensors","Read distance in centimeters.","double distanceCm = distanceSensor.getDistance(DistanceUnit.CM);"],
+      ["Color Sensor","Sensors","Read RGB values from a color sensor.","int red = colorSensor.red();\nint green = colorSensor.green();\nint blue = colorSensor.blue();"],
+      ["IMU Initialization","Sensors","Initialize the FTC IMU using hub orientation.","IMU imu = hardwareMap.get(IMU.class, \"imu\");\nIMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));\nimu.initialize(parameters);"],
+      ["IMU Heading","Sensors","Read yaw in degrees from the IMU.","double heading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);"],
+      ["Digital Channel","Sensors","Configure a digital channel as an input.","DigitalChannel limit = hardwareMap.get(DigitalChannel.class, \"limit\");\nlimit.setMode(DigitalChannel.Mode.INPUT);\nboolean active = !limit.getState();"],
+      ["Voltage Read","Sensors","Read the robot battery voltage.","double voltage = hardwareMap.voltageSensor.iterator().next().getVoltage();"],
+      ["Timed Drive","Autonomous","Drive for a timed interval in an autonomous OpMode.","leftMotor.setPower(0.4);\nrightMotor.setPower(0.4);\nsleep(700);\nleftMotor.setPower(0);\nrightMotor.setPower(0);"],
+      ["Encoder Drive","Autonomous","Move forward using encoder target positions.","int target = 900;\nleftMotor.setTargetPosition(target);\nrightMotor.setTargetPosition(target);\nleftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);\nrightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);\nleftMotor.setPower(0.45);\nrightMotor.setPower(0.45);"],
+      ["Autonomous Turn","Autonomous","Apply opposite motor powers for a timed turn.","leftMotor.setPower(0.35);\nrightMotor.setPower(-0.35);\nsleep(450);\nleftMotor.setPower(0);\nrightMotor.setPower(0);"],
+      ["Wait for Start","Autonomous","Keep the OpMode ready until the start signal.","telemetry.addLine(\"Ready\");\ntelemetry.update();\nwaitForStart();"],
+      ["Run Once After Start","Autonomous","Run a simple action after the match begins.","waitForStart();\nif (opModeIsActive()) {\n  intake.setPower(1);\n}"],
+      ["Range Check","Sensors","Use a distance threshold to trigger a response.","if (distanceSensor.getDistance(DistanceUnit.CM) < 8) {\n  intake.setPower(0);\n}"],
+      ["Color Decision","Sensors","Make a basic decision from a color sensor reading.","if (colorSensor.red() > colorSensor.blue()) {\n  telemetry.addData(\"Detected\", \"Red dominant\");\n}"],
+      ["Clip Motor Power","Utilities","Limit a calculated motor power to the valid range.","power = Math.max(-1.0, Math.min(1.0, power));"],
+      ["Deadband","Utilities","Ignore small joystick values near the center.","double stick = gamepad1.left_stick_y;\nif (Math.abs(stick) < 0.06) stick = 0;"],
+      ["Smooth Drive Input","Utilities","Apply a simple squared input curve for finer control.","double input = -gamepad1.left_stick_y;\ndouble shaped = Math.copySign(input * input, input);"],
+      ["Edge Detection","Utilities","Detect a button's transition from released to pressed.","boolean pressedNow = gamepad1.x;\nboolean justPressed = pressedNow && !pressedBefore;\npressedBefore = pressedNow;"],
+      ["Elapsed Timer","Utilities","Measure elapsed time with an ElapsedTime object.","ElapsedTime timer = new ElapsedTime();\ntimer.reset();\nif (timer.seconds() > 2.0) {\n  motor.setPower(0);\n}"],
+      ["OpMode Stop Check","Utilities","Keep a loop running only while the OpMode is active.","while (opModeIsActive()) {\n  idle();\n}"],
+      ["Motor Safety Stop","Utilities","Stop all drive motors when the OpMode ends.","frontLeft.setPower(0);\nfrontRight.setPower(0);\nbackLeft.setPower(0);\nbackRight.setPower(0);"],
+      ["Simple PID Formula","Utilities","Calculate a basic proportional correction value.","double error = target - current;\ndouble output = kp * error;\noutput = Math.max(-1, Math.min(1, output));"]
+    ];
+
+    const categories = ["All","Basics","Motors","Servos","Drivetrains","Mechanisms","Sensors","Autonomous","Utilities"];
+    let selectedCategory = "All";
+    const codeList = document.getElementById("codeList");
+    const codeSearch = document.getElementById("codeSearch");
+    const codeCategories = document.getElementById("codeCategories");
+
+    function renderCategories() {
+      codeCategories.innerHTML = categories.map(category => `<button class="category-btn ${category === selectedCategory ? "active" : ""}" data-category="${category}">${category}</button>`).join("");
+      codeCategories.querySelectorAll("button").forEach(button => button.addEventListener("click", () => {
+        selectedCategory = button.dataset.category;
+        renderCategories();
+        renderCode();
+      }));
+    }
+
+    function renderCode() {
+      const query = codeSearch.value.trim().toLowerCase();
+      const filtered = codeExamples.filter(item => (selectedCategory === "All" || item[1] === selectedCategory) && (item[0] + " " + item[1] + " " + item[2]).toLowerCase().includes(query));
+      document.getElementById("codeHeading").firstChild.textContent = selectedCategory === "All" ? "All examples " : selectedCategory + " ";
+      document.getElementById("codeCount").textContent = `(${filtered.length})`;
+      if (!filtered.length) {
+        codeList.innerHTML = `<div class="empty">No examples found. Try another search.</div>`;
+        return;
+      }
+      codeList.innerHTML = filtered.map((item, index) => `<article class="code-card"><div class="code-card-head"><b>${item[0]}</b><span>${item[1]}</span></div><p>${item[2]}</p><pre><code>${escapeHtml(item[3])}</code></pre><div class="code-card-foot"><button class="btn btn-soft btn-small copy-code" data-index="${codeExamples.indexOf(item)}">Copy code</button></div></article>`).join("");
+      codeList.querySelectorAll(".copy-code").forEach(button => button.addEventListener("click", async () => {
+        const snippet = codeExamples[Number(button.dataset.index)][3];
+        try {
+          await navigator.clipboard.writeText(snippet);
+          button.textContent = "Copied!";
+          setTimeout(() => button.textContent = "Copy code", 1200);
+        } catch {
+          button.textContent = "Select code to copy";
+        }
+      }));
+    }
+    function escapeHtml(value) {
+      return value.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
+    }
+    codeSearch.addEventListener("input", renderCode);
+    renderCategories();
+    renderCode();
+
+    const lessons = [
+      ["Java foundations","Beginner","Understand classes, methods, variables, and data types used in FTC projects.","A class groups related code. A method performs a task. Variables store values such as motor power or a sensor reading.","Create variables named forwardPower and turnPower, then print both with telemetry.","Build a tiny OpMode that displays a text message and two numeric values."],
+      ["Your first FTC OpMode","Beginner","Learn the structure of a LinearOpMode.","A LinearOpMode has a runOpMode method. Configure hardware before start, call waitForStart, then run while the OpMode is active.","Add a telemetry line before waitForStart and another inside the active loop.","Create a basic TeleOp that displays a running status."],
+      ["Hardware mapping","Beginner","Connect configured robot hardware to Java objects.","The hardware map connects configuration names in the Driver Station to code objects. Names must match exactly.","Map a motor using hardwareMap.get(DcMotor.class, \"leftMotor\").","Map two drive motors and display their names in telemetry."],
+      ["Motor power and direction","Beginner","Control motor direction, power, and stopping behavior.","Motor power is usually between -1 and 1. Reverse direction in code if the motor is mounted opposite to the expected direction.","Set a motor to 0.3 power, then stop it with 0.","Make a motor run forward with one button and reverse with another."],
+      ["Gamepad controls","Beginner","Read joystick, button, and trigger input.","Gamepad values update continuously. Use a loop to read them and apply them to robot hardware.","Use -gamepad1.left_stick_y for forward/backward movement.","Create a TeleOp that displays joystick values."],
+      ["Servo basics","Beginner","Move a standard servo to controlled positions.","A standard servo accepts a position between 0 and 1. Test safe mechanical limits before using it on the robot.","Set a servo to 0.2 for one position and 0.8 for another.","Build a two-button claw control."],
+      ["Tank drivetrain","Beginner","Drive left and right motor groups independently.","Tank drive uses one input for the left side and one for the right side. Reversing one side in code may be needed depending on mounting.","Map left and right motor groups and apply separate stick values.","Build a four-motor tank TeleOp."],
+      ["Mecanum drivetrain","Intermediate","Combine forward, strafe, and rotation inputs.","Mecanum wheels allow holonomic movement. Mix forward, strafe, and turn values, then normalize wheel powers to keep them in range.","Use y for forward, x for strafe, and rx for rotation.","Build a mecanum drive and test each direction separately."],
+      ["Omni and X-drive concepts","Intermediate","Understand wheel layouts and drive mixing.","Different wheel arrangements use different power equations. Confirm wheel orientation and test one movement axis at a time.","Compare the X-drive mixing snippet with mecanum mixing.","Draw the wheel directions and predict which wheels move for a right strafe."],
+      ["Encoders","Intermediate","Measure motor rotation using encoder ticks.","Encoders report position in ticks. Convert ticks to distance using the motor, gearing, and wheel dimensions of your robot.","Read getCurrentPosition and display it in telemetry.","Measure how many ticks your drivetrain needs to travel a known distance."],
+      ["Run to position","Intermediate","Move a motor toward an encoder target.","Set a target position, choose RUN_TO_POSITION, and apply power. Add timeouts and stop conditions in a competition-ready routine.","Set a lift target and check isBusy while the OpMode is active.","Create a lift preset with a safe stop condition."],
+      ["Sensors and digital inputs","Intermediate","Read touch switches and digital channels.","Sensors provide feedback from the physical robot. Configure digital channels correctly and confirm whether pressed means true or false for your hardware.","Read a limit switch and display its state.","Use a limit switch to prevent a mechanism from moving farther in one direction."],
+      ["Distance and color sensors","Intermediate","Use sensor readings to make decisions.","Distance sensors report a measurement in a selected unit. Color sensors provide channel values; lighting and surface conditions affect readings.","Read distance in centimeters and compare it to a threshold.","Create a simple object-nearby indicator."],
+      ["IMU and heading","Intermediate","Read the robot's orientation.","The IMU estimates robot orientation. Hub orientation parameters must match the way the Control Hub is mounted.","Read yaw in degrees and display it.","Create a heading display and identify the angle at which the robot faces forward."],
+      ["Autonomous structure","Intermediate","Organize a simple autonomous routine.","Autonomous code runs after the start signal without driver input. Plan the routine as small, testable steps.","Use waitForStart and check opModeIsActive before actions.","Write a sequence that moves, pauses, and stops."],
+      ["Encoder-based autonomous","Intermediate","Use encoder targets for repeatable movement.","Encoder movement is more repeatable than relying only on time, but wheel slip and mechanical differences still affect accuracy.","Set target positions on both sides and monitor isBusy.","Measure and tune a short forward movement."],
+      ["Heading correction","Advanced","Use heading feedback to correct robot rotation.","Compare the desired heading with the measured heading. A proportional controller can turn the robot toward the target.","Calculate error = targetHeading - currentHeading, then multiply by a tuned gain.","Create a controlled turn and tune the gain gradually."],
+      ["Mechanism state machines","Advanced","Coordinate claws, lifts, and intakes with clear states.","A state machine represents a mechanism's current task, such as IDLE, INTAKING, HOLDING, or SCORING. It prevents unrelated button logic from colliding.","Use an enum to represent mechanism states.","Build a three-state intake controller."],
+      ["Debugging and telemetry","Advanced","Find issues using telemetry and small tests.","Test one subsystem at a time. Display sensor values, motor targets, current positions, and state names to understand what the robot is doing.","Add telemetry for target position and current encoder position.","Create a checklist for testing one mechanism safely."],
+      ["Autonomous planning and testing","Advanced","Plan, measure, and improve a full autonomous routine.","Break an autonomous into repeatable segments. Measure outcomes, log errors, and change one variable at a time.","Record target and actual movement for each segment.","Plan a short routine with a start pose, two actions, and a safe finish."]
+    ];
+
+    const progressKey = "rangersAcademyProgressV1";
+    let completedLessons = new Set(JSON.parse(localStorage.getItem(progressKey) || "[]"));
+    function renderLessons() {
+      const grid = document.getElementById("lessonGrid");
+      grid.innerHTML = lessons.map((lesson,index) => `<article class="lesson"><div class="lesson-top"><h4>${String(index+1).padStart(2,"0")}. ${lesson[0]}</h4><span class="level">${lesson[1]}</span></div><p>${lesson[2]}</p><details><summary>Open lesson & practice</summary><div class="lesson-body"><b>Explanation</b><p>${lesson[3]}</p><b>Example</b><p>${lesson[4]}</p><b>Challenge</b><p>${lesson[5]}</p></div></details><label class="lesson-check"><input type="checkbox" data-lesson="${index}" ${completedLessons.has(index) ? "checked" : ""}> Mark complete</label></article>`).join("");
+      grid.querySelectorAll("[data-lesson]").forEach(input => input.addEventListener("change", async () => {
+        const index = Number(input.dataset.lesson);
+        if (input.checked) completedLessons.add(index); else completedLessons.delete(index);
+        localStorage.setItem(progressKey, JSON.stringify([...completedLessons]));
+        updateProgress();
+        await syncProgress();
+      }));
+      updateProgress();
+    }
+    function updateProgress() {
+      const count = completedLessons.size;
+      const percent = Math.round(count / lessons.length * 100);
+      document.getElementById("progressText").textContent = `${count} of ${lessons.length} lessons completed`;
+      document.getElementById("progressPercent").textContent = `${percent}%`;
+      document.getElementById("progressBar").style.width = `${percent}%`;
+    }
+    renderLessons();
+
+    const tutorData = {
+      "Java basics":["Java is the language used for many FTC robot programs. A class groups code, a method performs a task, and variables store values. In an FTC project, you often create a class that extends LinearOpMode or OpMode.","double drivePower = -gamepad1.left_stick_y;\ntelemetry.addData(\"Drive\", drivePower);\ntelemetry.update();","Try changing the joystick variable and displaying it with telemetry."],
+      "Mecanum drive":["A mecanum drivetrain can move forward, backward, sideways, and rotate. Combine three driver inputs: forward (y), strafe (x), and turn (rx). Normalize the wheel powers so none exceeds the allowed range.","double y = -gamepad1.left_stick_y;\ndouble x = gamepad1.left_stick_x;\ndouble rx = gamepad1.right_stick_x;\ndouble d = Math.max(Math.abs(y)+Math.abs(x)+Math.abs(rx),1);\nfrontLeft.setPower((y+x+rx)/d);\nbackLeft.setPower((y-x+rx)/d);\nfrontRight.setPower((y-x-rx)/d);\nbackRight.setPower((y+x-rx)/d);","Test forward, strafe, and turn separately at low power. If a wheel moves the wrong way, check motor direction and wheel orientation."],
+      ["Encoders":["An encoder measures motor rotation in ticks. You can use it to estimate how far a wheel has turned and move a mechanism to a repeatable target. Convert ticks to distance using your motor, gear ratio, and wheel size.","int target = 900;\nmotor.setTargetPosition(target);\nmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);\nmotor.setPower(0.4);","Display getCurrentPosition and compare it to your target while the motor moves."],
+      ["Autonomous":["Autonomous code runs after the match starts without driver joystick input. Break the routine into small steps, check opModeIsActive, and use sensors or encoders to make movement more repeatable.","waitForStart();\nif (opModeIsActive()) {\n  leftMotor.setPower(0.35);\n  rightMotor.setPower(0.35);\n  sleep(500);\n  leftMotor.setPower(0);\n  rightMotor.setPower(0);\n}","Start with one short movement on a safely supported robot, then test on the floor at low speed."],
+      ["Sensors":["Sensors provide information about the robot and its surroundings. A distance sensor can estimate how far away an object is; a touch switch can indicate contact; an IMU can report orientation.","double cm = distanceSensor.getDistance(DistanceUnit.CM);\ntelemetry.addData(\"Distance cm\", cm);\ntelemetry.update();","Read the sensor value while changing the robot's position and note how the value changes."],
+      ["Claws and lifts":["A claw is often controlled with a servo, while a lift may use a motor and encoder. Start with conservative positions and power, test mechanical limits, and add safeguards so the mechanism does not force itself past its range.","if (gamepad2.a) claw.setPosition(0.25);\nif (gamepad2.b) claw.setPosition(0.75);\nlift.setPower(-gamepad2.left_stick_y);","Identify the safe open and closed positions before connecting a game piece."]
+    };
+    document.getElementById("tutorTopics").innerHTML = Object.keys(tutorData).map(topic => `<button type="button" data-topic="${topic}">${topic}</button>`).join("");
+    document.getElementById("tutorTopics").querySelectorAll("button").forEach(button => button.addEventListener("click", () => {
+      const data = tutorData[button.dataset.topic];
+      document.getElementById("tutorAnswer").innerHTML = `<b>${button.dataset.topic}</b><p style="margin-top:7px">${data[0]}</p><pre>${escapeHtml(data[1])}</pre><p style="margin-top:10px"><b>Next step:</b> ${data[2]}</p>`;
+    }));
+
+    document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(item => { item.classList.toggle("active", item === tab); item.setAttribute("aria-selected", String(item === tab)); });
+      document.querySelectorAll(".season-panel").forEach(panel => panel.classList.toggle("active", panel.id === `season-${tab.dataset.season}`));
+    }));
+
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
-
     menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
-      menuToggle.textContent = isOpen ? "×" : "☰";
+      const open = navLinks.classList.toggle("open");
+      menuToggle.textContent = open ? "×" : "☰";
+      menuToggle.setAttribute("aria-expanded", String(open));
     });
-
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
-      });
-    });
-
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.textContent = "☰";
+      menuToggle.setAttribute("aria-expanded", "false");
+    }));
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
+    let currentUser = null;
+    async function syncProgress() {
+      if (!supabaseClient || !currentUser) return;
+      const { error } = await supabaseClient.auth.updateUser({ data: { rangersAcademyProgress: [...completedLessons] } });
+      if (error) document.getElementById("authStatus").textContent = `Progress is saved on this device. Cloud sync: ${error.message}`;
+    }
+    function showAuthState(user) {
+      currentUser = user || null;
+      document.getElementById("signedInBar").hidden = !user;
+      document.getElementById("authForms").hidden = !!user;
+      if (user) {
+        document.getElementById("userEmail").textContent = user.email || "Rangers member";
+        const saved = user.user_metadata && user.user_metadata.rangersAcademyProgress;
+        if (Array.isArray(saved)) {
+          completedLessons = new Set(saved.filter(n => Number.isInteger(n) && n >= 0 && n < lessons.length));
+          localStorage.setItem(progressKey, JSON.stringify([...completedLessons]));
+          renderLessons();
         }
-      });
-    }, { threshold: 0.12 });
+        document.getElementById("authStatus").textContent = "Signed in. Your lesson progress can sync to this account.";
+      }
+    }
+    async function handleAuth(action) {
+      const status = document.getElementById("authStatus");
+      if (!supabaseClient) {
+        status.textContent = "Supabase is not configured yet. Add your Project URL and anon/public key in the script at the bottom of index.html.";
+        return;
+      }
+      const email = document.getElementById("authEmail").value.trim();
+      const password = document.getElementById("authPassword").value;
+      if (!email || password.length < 8) {
+        status.textContent = "Enter a valid email and a password with at least 8 characters.";
+        return;
+      }
+      status.textContent = action === "signup" ? "Creating account..." : "Logging in...";
+      const result = action === "signup"
+        ? await supabaseClient.auth.signUp({ email, password })
+        : await supabaseClient.auth.signInWithPassword({ email, password });
+      if (result.error) {
+        status.textContent = result.error.message;
+        return;
+      }
+      if (result.data.user) showAuthState(result.data.user);
+      status.textContent = action === "signup" && !result.data.session ? "Account created. Check your email if email confirmation is enabled in Supabase." : "You're signed in.";
+      await syncProgress();
+    }
+    document.getElementById("loginBtn").addEventListener("click", () => handleAuth("login"));
+    document.getElementById("signupBtn").addEventListener("click", () => handleAuth("signup"));
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      if (supabaseClient) await supabaseClient.auth.signOut();
+      showAuthState(null);
+      document.getElementById("authStatus").textContent = "You are logged out. Progress remains saved on this device.";
+    });
+    if (supabaseClient) {
+      supabaseClient.auth.getSession().then(({ data }) => showAuthState(data.session?.user || null));
+      supabaseClient.auth.onAuthStateChange((_event, session) => showAuthState(session?.user || null));
+      document.getElementById("authStatus").textContent = "Supabase is connected. Log in or create an account.";
+    }
 
-    document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
+      }), { threshold: 0.12 });
+      document.querySelectorAll(".section-head,.highlight,.info-card,.season-panel,.auth-card").forEach(element => { element.classList.add("reveal"); observer.observe(element); });
+    }
   </script>
 </body>
 </html>
