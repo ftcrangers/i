@@ -1,16 +1,21 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123d2b">
-  <meta name="description" content="Itkan Rangers FTC Team 28922 — team highlights, season archives, FTC Java code, and robotics learning.">
-  <title>Itkan Rangers | FTC Team 28922</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#123d2b" name="theme-color"/>
+<meta content="Itkan Rangers FTC Team 28922 — team highlights, season archives, FTC Java code, and robotics learning." name="description"/>
+<title>Itkan Rangers | FTC Team 28922</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
     :root{--green:#176b43;--green-dark:#103d2b;--green-deep:#0b2c20;--mint:#e9f4ed;--mint2:#d7eadc;--paper:#f7faf7;--white:#fff;--ink:#17231c;--muted:#647269;--line:#dce7de;--gold:#d6aa48;--shadow:0 18px 50px rgba(15,55,35,.09);--radius:20px;--max:1180px}
     *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:90px}body{font-family:"DM Sans",sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}img{max-width:100%;display:block}.container{width:min(var(--max),calc(100% - 44px));margin:auto}.section{padding:88px 0}.section-head{max-width:720px;margin-bottom:34px}.eyebrow{font-size:.74rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--green);display:inline-flex;align-items:center;gap:9px}.eyebrow:before{content:"";height:2px;width:22px;background:var(--gold)}h1,h2,h3,.brand{font-family:Manrope,sans-serif;letter-spacing:-.045em}.section-head h2{font-size:clamp(2rem,4vw,3.35rem);line-height:1.08;margin:12px 0}.section-head p{color:var(--muted);max-width:650px}.accent{color:var(--green)}.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;border:1px solid transparent;border-radius:999px;padding:12px 19px;font-size:.9rem;font-weight:800;transition:.2s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--green);color:white;box-shadow:0 8px 20px #176b4325}.btn-primary:hover{background:var(--green-dark)}.btn-outline{border-color:#ffffff70;color:white}.btn-outline:hover{background:white;color:var(--green-dark)}.btn-soft{background:var(--mint);color:var(--green-dark);border-color:var(--line)}.btn-small{padding:8px 13px;font-size:.8rem}.topbar{position:sticky;top:0;z-index:100;background:#f7faf7ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1rem}.brand img{width:43px;height:43px;object-fit:contain;border-radius:12px}.brand small{display:block;font:800 .61rem "DM Sans";letter-spacing:.13em;color:var(--muted)}.nav-links{display:flex;align-items:center;gap:20px}.nav-links a{font-size:.82rem;font-weight:800;color:#405148}.nav-links a:hover{color:var(--green)}.nav-actions{display:flex;align-items:center;gap:9px}.menu-toggle{display:none;background:none;border:0;font-size:1.7rem;color:var(--green-dark)}
 .hero{position:relative;overflow:hidden;background:linear-gradient(118deg,#0c3022,#145c3b 66%,#21784c);color:white}.hero:after{content:"28922";position:absolute;right:-25px;bottom:-110px;font:800 clamp(12rem,29vw,27rem)/1 Manrope;color:#ffffff09;letter-spacing:-.1em}.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:45px;padding:90px 0 82px;min-height:590px}.hero .eyebrow{color:#e8d59e}.hero h1{font-size:clamp(3.2rem,7vw,6.4rem);line-height:.98;margin:20px 0}.hero h1 span{color:#b9e1c5}.hero-copy>p{color:#ffffffbd;max-width:580px;font-size:1.08rem;margin-bottom:27px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero-meta{display:flex;gap:27px;flex-wrap:wrap;margin-top:42px}.hero-meta strong{display:block;font:800 1.2rem Manrope}.hero-meta span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#ffffff80}.hero-visual{min-height:360px;display:grid;place-items:center;position:relative}.hero-glow{position:absolute;width:min(410px,90%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#b7e0c340,transparent 70%)}.hero-robot{position:relative;width:100%;max-width:470px;max-height:410px;object-fit:contain;filter:drop-shadow(0 25px 30px #0005)}.hero-tag{position:absolute;bottom:15px;left:0;background:white;color:var(--green-dark);padding:12px 16px;border-radius:13px;box-shadow:var(--shadow);font-size:.78rem}.hero-tag b{display:block;font:800 1rem Manrope}.intro{background:var(--green);color:white}.intro .container{padding:19px 0;display:flex;justify-content:space-between;gap:20px;align-items:center}.intro strong{font:800 1rem Manrope}.intro span{color:#ffffffb8;font-size:.84rem}
@@ -21,6 +26,8 @@
 .split{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}.photo-wrap{background:var(--mint);padding:20px;border-radius:22px;min-height:300px;display:grid;place-items:center}.photo-wrap img{max-height:380px;object-fit:contain}.detail-list{display:grid;gap:16px}.detail{border-bottom:1px solid var(--line);padding-bottom:14px}.detail h3{font-size:1.05rem;margin-bottom:4px}.detail p{color:var(--muted);font-size:.9rem}
 .academy{background:#edf5ef}.academy-layout{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}.academy-side,.academy-main{background:white;border:1px solid var(--line);border-radius:18px;padding:19px}.academy-side h3,.academy-main h3{font-size:1.05rem;margin-bottom:12px}.search{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 13px;background:#fbfdfb;outline:none}.search:focus,input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #176b4315}.category-list{display:grid;gap:6px;margin-top:13px}.category-btn{border:0;background:transparent;text-align:left;padding:9px 10px;border-radius:9px;font-weight:700;color:#526257;font-size:.85rem}.category-btn.active,.category-btn:hover{background:var(--mint);color:var(--green)}.code-toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.code-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.code-card{border:1px solid var(--line);border-radius:13px;overflow:hidden}.code-card-head{display:flex;justify-content:space-between;gap:10px;padding:12px 13px;background:#f7faf7}.code-card-head b{font-size:.86rem}.code-card-head span{font-size:.68rem;color:var(--green);font-weight:800}.code-card p{font-size:.77rem;color:var(--muted);padding:9px 13px 0}.code-card pre{margin:10px 0 0;background:#102b20;color:#e2f1e6;padding:14px;overflow:auto;font: .73rem/1.55 Consolas,monospace;max-height:230px;white-space:pre}.code-card-foot{display:flex;justify-content:flex-end;padding:9px;border-top:1px solid var(--line)}.empty{padding:28px;text-align:center;color:var(--muted)}
 .lesson-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.lesson{border:1px solid var(--line);border-radius:13px;padding:15px}.lesson-top{display:flex;justify-content:space-between;gap:12px}.lesson h4{font:800 .95rem Manrope}.lesson p{font-size:.82rem;color:var(--muted);margin:7px 0}.lesson .level{font-size:.68rem;color:var(--green);font-weight:800}.lesson details{margin-top:8px}.lesson summary{font-size:.79rem;font-weight:800;color:var(--green);cursor:pointer}.lesson .lesson-body{font-size:.8rem;color:#536158;padding-top:8px}.lesson code{background:var(--mint);padding:2px 4px;border-radius:4px}.progress-wrap{background:var(--mint);border-radius:999px;height:9px;overflow:hidden;margin:10px 0}.progress-bar{height:100%;width:0;background:var(--green);transition:width .25s}.lesson-check{display:flex;align-items:center;gap:7px;font-size:.75rem;font-weight:800;color:var(--green);margin-top:10px}.lesson-check input{accent-color:var(--green)}
+.xp-panel{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;background:#102b20;color:#fff;border-radius:16px;padding:18px 20px;margin:0 0 18px}.xp-panel p{color:#c8ddce;font-size:.8rem;margin-top:4px}.xp-number{font:800 1.8rem Manrope;color:#a9e6bc;text-align:right}.xp-track{height:8px;background:#355344;border-radius:99px;overflow:hidden;margin-top:10px}.xp-track span{display:block;height:100%;width:0;background:#8fd5a6}.challenge-section{margin-top:28px}.challenge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.challenge-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.challenge-card h4{font:800 .95rem Manrope}.challenge-card p{font-size:.82rem;color:var(--muted);margin:7px 0}.challenge-answer{margin-top:10px;padding:12px;background:#f0f6f1;border-radius:10px;font-size:.8rem;white-space:pre-wrap}.challenge-answer pre{white-space:pre;overflow:auto;background:#102b20;color:#e2f1e6;padding:12px;border-radius:8px;margin-top:8px;font: .73rem/1.5 Consolas,monospace}.challenge-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.challenge-done{color:var(--green);font-size:.75rem;font-weight:800;margin-top:8px}
+@media(max-width:760px){.challenge-grid{grid-template-columns:1fr}.xp-panel{grid-template-columns:1fr}.xp-number{text-align:left}}
 .tutor-box{background:linear-gradient(135deg,#103d2b,#176b43);color:white;border-radius:20px;padding:clamp(22px,4vw,35px);display:grid;grid-template-columns:.8fr 1.2fr;gap:25px;align-items:start}.tutor-box p{color:#ffffffb8;font-size:.9rem}.tutor-box h3{font-size:1.7rem;margin:8px 0}.tutor-controls{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}.tutor-controls button{background:#ffffff18;border:1px solid #ffffff36;color:white;border-radius:999px;padding:8px 12px;font-size:.78rem;font-weight:800}.tutor-controls button:hover{background:white;color:var(--green)}.tutor-answer{background:white;color:var(--ink);border-radius:14px;padding:18px;min-height:120px}.tutor-answer p{color:var(--muted)}.tutor-answer pre{background:#102b20;color:#e2f1e6;padding:12px;border-radius:9px;overflow:auto;margin-top:10px;font-size:.78rem}
 .auth-card{max-width:620px;margin:auto;background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(22px,4vw,35px);box-shadow:var(--shadow)}.auth-card h2{font-size:2rem}.auth-card>p{color:var(--muted);margin:6px 0 20px}.auth-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:.78rem;font-weight:800}.field input{border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-width:0}.auth-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.auth-status{font-size:.83rem;color:var(--muted);margin-top:12px;min-height:22px}.user-bar{display:flex;justify-content:space-between;gap:15px;align-items:center;background:var(--mint);border-radius:12px;padding:12px 15px;margin-bottom:15px}.user-bar strong{color:var(--green-dark)}.notice{background:#fff6df;border:1px solid #f0dfb2;color:#6c541d;padding:12px 14px;border-radius:11px;font-size:.8rem;margin-top:14px}
 footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:flex;justify-content:space-between;gap:30px;padding-bottom:30px;border-bottom:1px solid #ffffff20}.footer-brand{max-width:420px}.footer-brand img{width:55px;height:55px;object-fit:contain;background:white;border-radius:12px;padding:4px;margin-bottom:12px}.footer-brand p{font-size:.86rem;color:#ffffff91}.footer-links{display:flex;flex-wrap:wrap;gap:13px 20px;align-content:start}.footer-links a{font-size:.83rem;color:#ffffffc2}.footer-links a:hover{color:#b9e1c5}.copyright{display:flex;justify-content:space-between;gap:15px;padding-top:18px;font-size:.74rem;color:#ffffff70}
@@ -29,156 +36,110 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
 @media(max-width:760px){.container{width:calc(100% - 32px)}.menu-toggle{display:block}.nav{height:68px}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--paper);padding:15px 22px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}.nav-links.open{display:flex}.nav-links a{padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem}.nav-actions .btn{display:none}.hero-inner{grid-template-columns:1fr;padding:65px 0 48px}.hero-visual{min-height:270px}.hero-robot{max-height:300px}.hero-meta{margin-top:30px}.intro .container{align-items:flex-start;flex-direction:column;gap:3px}.section{padding:68px 0}.highlights{grid-template-columns:repeat(2,1fr)}.team-facts{grid-template-columns:1fr}.fact:nth-child(n){border-left:0}.mission-grid,.split,.tutor-box{grid-template-columns:1fr}.season-stats{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:1fr 1fr}.academy-layout{grid-template-columns:1fr}.category-list{grid-template-columns:repeat(2,1fr)}.lesson-grid{grid-template-columns:1fr}.footer-top,.copyright{flex-direction:column}}
 @media(max-width:460px){.highlights,.info-grid,.values{grid-template-columns:1fr}.hero h1{font-size:3.05rem}.auth-form{grid-template-columns:1fr}.field.full{grid-column:auto}.event{grid-template-columns:1fr}.event-score{justify-self:start}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-  </style>
+  
+.site-page{display:none;min-height:55vh}.site-page.active{display:block}.nav-links a.active{color:var(--green);text-decoration:underline;text-underline-offset:7px}.tutor-form{display:flex;gap:8px;margin-top:16px}.tutor-form input{flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--ink);background:#fff;outline:none}.tutor-reply{margin-top:16px;display:grid;gap:8px}.tutor-reply pre{white-space:pre-wrap}.tutor-note{font-size:.75rem;color:var(--muted)}@media(max-width:600px){.tutor-form{flex-direction:column}}
+.site-page.active .season-panel{display:block}.site-page.active .section{display:block}</style>
 </head>
 <body>
-  <div class="topbar">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="#home"><img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo"><span>ITKAN RANGERS<small>FTC TEAM #28922</small></span></a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#team">Home</a><a href="#seasons">Seasons</a><a href="#robot">Robot</a><a href="#academy">Code library</a><a href="#lessons">Learn</a><a href="#tutor">Tutor</a><a href="#account">Account</a>
-      </div>
-      <div class="nav-actions"><a class="btn btn-primary btn-small" href="#academy">Start learning ↗</a></div>
-    </nav>
-  </div>
-
-  <header class="hero" id="home">
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <span class="eyebrow">Plano, Texas · FIRST Tech Challenge</span>
-        <h1>Built to think.<br><span>Driven to build.</span></h1>
-        <p>We are the Itkan Rangers, FTC Team 28922. We design, build, and program robots while learning to solve problems, work as a team, and share what we discover.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="#seasons">Explore our seasons ↗</a><a class="btn btn-outline" href="#academy">Learn FTC programming</a></div>
-        <div class="hero-meta"><div><strong>#28922</strong><span>FTC team</span></div><div><strong>Plano, TX</strong><span>Our home</span></div><div><strong>Since 2024</strong><span>Rookie year</span></div></div>
-      </div>
-      <div class="hero-visual"><div class="hero-glow"></div><img class="hero-robot" src="https://ftcrangers.com/robot.png" alt="Itkan Rangers competition robot"><div class="hero-tag"><b>ITKAN RANGERS</b>Engineering with purpose.</div></div>
-    </div>
-  </header>
-  <div class="intro"><div class="container"><strong>Curiosity becomes creation. Ideas become engineering.</strong><span>FIRST Tech Challenge · Team 28922</span></div></div>
-
-  <main>
-    <section class="section" id="team">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">Team snapshot</span><h2>Six highlights. <span class="accent">One Ranger journey.</span></h2><p>Selected competition highlights and team milestones. Season and event labels are included so results are not mixed together.</p></div>
-        <div class="highlights">
-          <article class="highlight"><div class="number">2×</div><p>Itkan internal scrimmage champions</p><small>Team milestone · internal scrimmages</small></article>
-          <article class="highlight"><div class="number">1st</div><p>FiT-North U-League AM Meet 3</p><small>2026 · DECODE season</small></article>
-          <article class="highlight"><div class="number">4–1–0</div><p>Qualification match record</p><small>2026 FiT-North Last Call Qualifier</small></article>
-          <article class="highlight"><div class="number">10th</div><p>Qualification ranking</p><small>2026 FiT-North Last Call Qualifier</small></article>
-          <article class="highlight"><div class="number">2nd</div><p>Control Award</p><small>2026 FiT-North U-League Tournament</small></article>
-          <article class="highlight"><div class="number">102–65</div><p>Recorded match score</p><small>INTO THE DEEP archive · 2024–25</small></article>
-        </div>
-        <div class="team-facts">
-          <div class="fact"><span>Team name</span><strong>Itkan Rangers</strong></div><div class="fact"><span>FTC number</span><strong>28922</strong></div><div class="fact"><span>Location</span><strong>Plano, Texas, USA</strong></div>
-          <div class="fact"><span>Rookie year</span><strong>2024</strong></div><div class="fact"><span>Competition region</span><strong>FiT-North</strong></div><div class="fact"><span>Sub-teams</span><strong>CAD / Build · Programming · Marketing</strong></div>
-        </div>
-        <p class="source-note">Results shown here are the verified highlights selected for this page. Full event-by-event records should be expanded only from official event result pages; unconfirmed scores are intentionally not estimated.</p>
-      </div>
-    </section>
-
-    <section class="section dark" id="mission">
-      <div class="container"><div class="section-head"><span class="eyebrow" style="color:#b9e1c5">Why we build</span><h2>Innovation starts with <span style="color:#b9e1c5">people.</span></h2><p>Robotics gives us a place to turn curiosity into practical skills—and share what we learn with the people around us.</p></div>
-        <div class="mission-grid"><blockquote class="quote">Our mission is to spark curiosity, develop confident problem-solvers, and help shape future leaders—<span>one robot, one idea, and one breakthrough at a time.</span></blockquote>
-          <div class="values"><article class="value"><b>Discovery</b><p>We explore new ideas and learn from every challenge.</p></article><article class="value"><b>Innovation</b><p>We use creativity and persistence to solve problems.</p></article><article class="value"><b>Impact</b><p>We use our skills to contribute to our community.</p></article><article class="value"><b>Inclusion</b><p>We value different perspectives and make room for everyone.</p></article><article class="value"><b>Teamwork</b><p>We support each other and practice Gracious Professionalism.</p></article><article class="value"><b>Fun</b><p>We enjoy building, programming, competing, and learning together.</p></article></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="seasons">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">Competition archive</span><h2>Every season has a <span class="accent">story.</span></h2><p>Browse the Rangers' season pages. Verified scores and awards are separated by season; upcoming BIOBUZZ results stay marked as pending until matches are played.</p></div>
-        <div class="season-tabs" role="tablist" aria-label="Season archives">
-          <button class="tab active" data-season="decode" role="tab" aria-selected="true">DECODE · 2025–26</button>
-          <button class="tab" data-season="biobuzz" role="tab" aria-selected="false">BIOBUZZ · 2026–27</button>
-          <button class="tab" data-season="deep" role="tab" aria-selected="false">INTO THE DEEP · 2024–25</button>
-        </div>
-        <section class="season-panel active" id="season-decode" role="tabpanel">
-          <div class="season-top"><div><span class="eyebrow">2025–2026 season</span><h3>DECODE</h3><p>Rangers' DECODE season archive. The highlights below are the verified results available for this page; additional match-by-match rows can be added as official event records are confirmed.</p></div><span class="season-tag">Completed season</span></div>
-          <div class="season-stats">
-            <div class="season-stat"><strong>1st</strong><span>FiT-North U-League AM Meet 3</span></div>
-            <div class="season-stat"><strong>4–1–0</strong><span>Last Call Qualifier qualification record</span></div>
-            <div class="season-stat"><strong>10th</strong><span>Last Call Qualifier qualification rank</span></div>
-            <div class="season-stat"><strong>2nd</strong><span>U-League Tournament Control Award</span></div>
-          </div>
-          <div class="event-list">
-            <article class="event"><div><b>FiT-North U-League AM Meet 3</b><p>Meet result · 2026</p></div><div class="event-score">1st place</div></article>
-            <article class="event"><div><b>FiT-North Last Call Qualifier</b><p>Qualification record and ranking</p></div><div class="event-score">4–1–0 · 10th</div></article>
-            <article class="event"><div><b>FiT-North U-League Tournament</b><p>Judged award result</p></div><div class="event-score">2nd · Control Award</div></article>
-          </div>
-          <p class="source-note">The original 102–65 score is not listed here because it belongs to the INTO THE DEEP season archive.</p>
-        </section>
-        <section class="season-panel" id="season-biobuzz" role="tabpanel">
-          <div class="season-top"><div><span class="eyebrow">2026–2027 season</span><h3>BIOBUZZ</h3><p>The current season page. Upcoming competitions, event details, match scores, rankings, and awards will be added as official results become available.</p></div><span class="season-tag">Upcoming / in progress</span></div>
-          <div class="season-stats">
-            <div class="season-stat"><strong>2026–27</strong><span>Season</span></div><div class="season-stat"><strong>Nov 21</strong><span>Next listed event date</span></div><div class="season-stat"><strong>—</strong><span>Match scores · pending</span></div><div class="season-stat"><strong>—</strong><span>Season ranking · pending</span></div>
-          </div>
-          <div class="event-list">
-            <article class="event"><div><b>NTX Fall Qualifier #3</b><p>Listed upcoming event · November 21, 2026</p></div><span class="pending">Results pending</span></article>
-            <article class="event"><div><b>Qualification matches, playoff rounds & awards</b><p>Scores and standings will be added after official event results are published.</p></div><span class="pending">Not played / not verified</span></article>
-          </div>
-          <p class="source-note">No BIOBUZZ match scores or rankings are invented or pre-filled.</p>
-        </section>
-        <section class="season-panel" id="season-deep" role="tabpanel">
-          <div class="season-top"><div><span class="eyebrow">2024–2025 season</span><h3>INTO THE DEEP</h3><p>Archived season page for the 2024–25 challenge. The recorded 102–65 match score belongs to this season; the opponent and event are not specified in the current verified summary, so they are not guessed here.</p></div><span class="season-tag">Archived season</span></div>
-          <div class="season-stats"><div class="season-stat"><strong>102–65</strong><span>Recorded match score</span></div><div class="season-stat"><strong>2024–25</strong><span>Season</span></div><div class="season-stat"><strong>—</strong><span>Overall record · not confirmed</span></div><div class="season-stat"><strong>—</strong><span>Final ranking · not confirmed</span></div></div>
-          <div class="event-list"><article class="event"><div><b>Recorded match result</b><p>Score retained in the INTO THE DEEP archive. Opponent and event label await confirmation.</p></div><div class="event-score">102–65</div></article></div>
-          <p class="source-note">Other match results, awards, and event rankings should be filled from the official event record rather than inferred from this single score.</p>
-        </section>
-        <div class="source-links"><a href="https://ftcscout.org/teams/28922" target="_blank" rel="noopener">FTCScout team record ↗</a><a href="https://ftc-events.firstinspires.org/" target="_blank" rel="noopener">FIRST official event results ↗</a><a href="https://ftcrangers.com/" target="_blank" rel="noopener">Existing team website ↗</a></div>
-      </div>
-    </section>
-
-    <section class="section" id="robot">
-      <div class="container"><div class="section-head"><span class="eyebrow">Inside the machine</span><h2>Meet the <span class="accent">Rangers robot.</span></h2><p>Every mechanism has a job. Our robot combines a drivetrain, scoring system, and sensors that support repeatable performance.</p></div>
-        <div class="split"><div class="photo-wrap"><img src="https://ftcrangers.com/cad-robot.png" alt="CAD rendering of the Itkan Rangers robot" loading="lazy"></div><div class="detail-list">
-          <article class="detail"><h3>Drivetrain · Swyft Drives</h3><p>Our drivetrain uses Swyft Drives, selected for a compact setup, speed, and durability.</p></article>
-          <article class="detail"><h3>Scoring hood</h3><p>A shaped hood guides game pieces toward a more consistent scoring trajectory. We refine its angle and geometry through testing.</p></article>
-          <article class="detail"><h3>Limelight vision</h3><p>The Limelight camera helps identify AprilTags for alignment and can support game-piece color detection.</p></article>
-          <article class="detail"><h3>Odometry & pathing</h3><p>Odometry pods provide movement measurements that support autonomous navigation and pathing routines.</p></article>
-        </div></div>
-      </div>
-    </section>
-
-    <section class="section" id="engineering" style="background:#f0f6f1"><div class="container"><div class="section-head"><span class="eyebrow">CAD & build</span><h2>From first sketch to <span class="accent">field-ready.</span></h2><p>We use CAD and an iterative engineering process to make design decisions, test ideas, and improve reliability.</p></div><div class="info-grid">
-      <article class="info-card"><div class="icon">01</div><h3>Find the problem</h3><p>Define the challenge and identify what the robot needs to do consistently.</p></article><article class="info-card"><div class="icon">02</div><h3>Design & prototype</h3><p>Compare mechanisms, use CAD, and turn promising ideas into working prototypes.</p></article><article class="info-card"><div class="icon">03</div><h3>Test & improve</h3><p>Run match-like tests, collect feedback, and refine the robot for repeatable performance.</p></article>
-    </div></div></section>
-
-    <section class="section academy" id="academy">
-      <div class="container"><div class="section-head"><span class="eyebrow">FTC Java library</span><h2>Learn by reading. <span class="accent">Build by coding.</span></h2><p>Browse 50 starter examples for common FTC programming tasks. Snippets are provided without inline comments so the code stays clean and easy to copy.</p></div>
-        <div class="academy-layout">
-          <aside class="academy-side"><h3>Find an example</h3><input class="search" id="codeSearch" type="search" placeholder="Search code..."><div class="category-list" id="codeCategories"></div></aside>
-          <div class="academy-main"><div class="code-toolbar"><h3 id="codeHeading">All examples <span id="codeCount" style="color:var(--muted);font-size:.78rem"></span></h3><span style="font-size:.75rem;color:var(--muted)">FTC Java · 50 examples</span></div><div class="code-list" id="codeList"></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="lessons">
-      <div class="container"><div class="section-head"><span class="eyebrow">Robotics academy</span><h2>Go from beginner to <span class="accent">robot programmer.</span></h2><p>Twenty guided lessons with explanations, examples, and practice prompts. Mark lessons complete to track your learning progress on this device or, when signed in, sync it to your account.</p></div>
-        <div class="academy-main" style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><b id="progressText">0 of 20 lessons completed</b><span id="progressPercent" style="color:var(--green);font-weight:800">0%</span></div><div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div></div>
-        <div class="lesson-grid" id="lessonGrid"></div>
-      </div>
-    </section>
-
-    <section class="section" id="tutor" style="background:#f0f6f1"><div class="container"><div class="section-head"><span class="eyebrow">Built-in robotics tutor</span><h2>Stuck on something? <span class="accent">Let's break it down.</span></h2><p>A guided, built-in tutor with prepared explanations and examples. It works without an external AI API; it is not an unrestricted ChatGPT connection.</p></div>
-      <div class="tutor-box"><div><span class="eyebrow" style="color:#c4e5cd">Rangers learning helper</span><h3>What are you working on?</h3><p>Choose a topic and get a short explanation, example, and next step.</p><div class="tutor-controls" id="tutorTopics"></div></div><div class="tutor-answer" id="tutorAnswer"><b>Choose a topic to begin.</b><p>Try mecanum drive, Java basics, encoders, autonomous, or sensors.</p></div></div>
-    </div></section>
-
-    <section class="section" id="account"><div class="container"><div class="auth-card"><span class="eyebrow">Rangers account</span><h2>Sign in to save progress.</h2><p>Create an account or log in to sync Robotics Academy lesson progress. Authentication uses Supabase.</p>
-      <div id="signedInBar" class="user-bar" hidden><div>Signed in as <strong id="userEmail"></strong></div><button class="btn btn-soft btn-small" id="logoutBtn">Log out</button></div>
-      <div id="authForms"><div class="auth-form"><div class="field full"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div><div class="field full"><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 8 characters"></div></div><div class="auth-actions"><button class="btn btn-primary" id="loginBtn">Log in</button><button class="btn btn-soft" id="signupBtn">Create account</button></div></div>
-      <div class="auth-status" id="authStatus" role="status" aria-live="polite">Add your Supabase project details in the configuration section at the bottom of this file to enable accounts.</div>
-      <div class="notice">Progress tracking works locally even before Supabase is configured. To enable real signup/login and cross-device progress sync, replace the two Supabase placeholders in the script with your project's Project URL and anon/public key. Never put a service-role key in this website.</div>
-    </div></div></section>
-  </main>
-
-  <footer><div class="container"><div class="footer-top"><div class="footer-brand"><img src="https://ftcrangers.com/logo.png" alt="Itkan Rangers logo" loading="lazy"><h3 style="font-size:1.2rem;margin-bottom:7px">ITKAN RANGERS · #28922</h3><p>Engineering the future through creativity, collaboration, and Gracious Professionalism. Based in Plano, Texas.</p></div><div class="footer-links"><a href="#team">Home</a><a href="#seasons">Season archives</a><a href="#robot">Our robot</a><a href="#academy">FTC code library</a><a href="#lessons">Robotics Academy</a><a href="#tutor">Tutor</a><a href="#account">Account</a><a href="https://ftcrangers.com/" target="_blank" rel="noopener">Team website ↗</a></div></div><div class="copyright"><span>© <span id="year"></span> Itkan Rangers FTC #28922</span><span>Built with curiosity, teamwork, and Gracious Professionalism.</span></div></div></footer>
-
-  <script>
-    const SUPABASE_URL = https://qpjrxoytxygkjdpauemw.supabase.co/rest/v1/;
-    const SUPABASE_ANON_KEY =  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwanJ4b3l0eHlna2pkcGF1ZW13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2NzU1MjIsImV4cCI6MjEwOTI1MTUyMn0.gB897qg0Fkr4BIvNYQZInK3070nXRaLA1cPLPwL7jtY;
-    const supabaseConfigured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_") && SUPABASE_ANON_KEY.length > 20 && !SUPABASE_ANON_KEY.includes("YOUR_");
-    const supabaseClient = supabaseConfigured && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+<div class="topbar">
+<nav aria-label="Main navigation" class="nav container">
+<a class="brand" data-page-link="home" href="#home"><img alt="Itkan Rangers logo" src="https://ftcrangers.com/logo.png"/><span>ITKAN RANGERS<small>FTC TEAM #28922</small></span></a>
+<button aria-expanded="false" aria-label="Open navigation" class="menu-toggle" id="menuToggle">☰</button>
+<div class="nav-links" id="navLinks"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">Code Library</a><a data-page-link="academy" href="#academy">Academy</a><a data-page-link="tutor" href="#tutor">Tutor</a></div>
+<div class="nav-actions"><a class="btn btn-primary btn-small" data-page-link="academy" href="#academy">Start learning ↗</a></div>
+</nav>
+</div>
+<main><div class="site-page" id="page-home"><header class="hero" id="home">
+<div class="container hero-inner">
+<div class="hero-copy">
+<span class="eyebrow">Plano, Texas · FIRST Tech Challenge</span>
+<h1>Built to think.<br/><span>Driven to build.</span></h1>
+<p>We are the Itkan Rangers, FTC Team 28922. We design, build, and program robots while learning to solve problems, work as a team, and share what we discover.</p>
+<div class="hero-actions"><a class="btn btn-primary" data-page-link="decode" href="#decode">Explore our seasons ↗</a><a class="btn btn-outline" data-page-link="codes" href="#codes">Learn FTC programming</a></div>
+<div class="hero-meta"><div><strong>#28922</strong><span>FTC team</span></div><div><strong>Plano, TX</strong><span>Our home</span></div><div><strong>Since 2024</strong><span>Rookie year</span></div></div>
+</div>
+<div class="hero-visual"><div class="hero-glow"></div><img alt="Itkan Rangers competition robot" class="hero-robot" src="https://ftcrangers.com/robot.png"/><div class="hero-tag"><b>ITKAN RANGERS</b>Engineering with purpose.</div></div>
+</div>
+</header><div class="intro"><div class="container"><strong>Curiosity becomes creation. Ideas become engineering.</strong><span>FIRST Tech Challenge · Team 28922</span></div></div><section class="section" id="team">
+<div class="container">
+<div class="section-head"><span class="eyebrow">Team snapshot</span><h2>Six highlights. <span class="accent">One Ranger journey.</span></h2><p>Selected competition highlights and team milestones. Season and event labels are included so results are not mixed together.</p></div>
+<div class="highlights">
+<article class="highlight"><div class="number">2×</div><p>Itkan internal scrimmage champions</p><small>Team milestone · internal scrimmages</small></article>
+<article class="highlight"><div class="number">1st</div><p>FiT-North U-League AM Meet 3</p><small>2026 · DECODE season</small></article>
+<article class="highlight"><div class="number">4–1–0</div><p>Qualification match record</p><small>2026 FiT-North Last Call Qualifier</small></article>
+<article class="highlight"><div class="number">10th</div><p>Qualification ranking</p><small>2026 FiT-North Last Call Qualifier</small></article>
+<article class="highlight"><div class="number">2nd</div><p>Control Award</p><small>2026 FiT-North U-League Tournament</small></article>
+<article class="highlight"><div class="number">102–65</div><p>Recorded match score</p><small>INTO THE DEEP archive · 2024–25</small></article>
+</div>
+<div class="team-facts">
+<div class="fact"><span>Team name</span><strong>Itkan Rangers</strong></div><div class="fact"><span>FTC number</span><strong>28922</strong></div><div class="fact"><span>Location</span><strong>Plano, Texas, USA</strong></div>
+<div class="fact"><span>Rookie year</span><strong>2024</strong></div><div class="fact"><span>Competition region</span><strong>FiT-North</strong></div><div class="fact"><span>Sub-teams</span><strong>CAD / Build · Programming · Marketing</strong></div>
+</div>
+<p class="source-note">Results shown here are the verified highlights selected for this page. Full event-by-event records should be expanded only from official event result pages; unconfirmed scores are intentionally not estimated.</p>
+</div>
+</section><section class="section dark" id="mission">
+<div class="container"><div class="section-head"><span class="eyebrow" style="color:#b9e1c5">Why we build</span><h2>Innovation starts with <span style="color:#b9e1c5">people.</span></h2><p>Robotics gives us a place to turn curiosity into practical skills—and share what we learn with the people around us.</p></div>
+<div class="mission-grid"><blockquote class="quote">Our mission is to spark curiosity, develop confident problem-solvers, and help shape future leaders—<span>one robot, one idea, and one breakthrough at a time.</span></blockquote>
+<div class="values"><article class="value"><b>Discovery</b><p>We explore new ideas and learn from every challenge.</p></article><article class="value"><b>Innovation</b><p>We use creativity and persistence to solve problems.</p></article><article class="value"><b>Impact</b><p>We use our skills to contribute to our community.</p></article><article class="value"><b>Inclusion</b><p>We value different perspectives and make room for everyone.</p></article><article class="value"><b>Teamwork</b><p>We support each other and practice Gracious Professionalism.</p></article><article class="value"><b>Fun</b><p>We enjoy building, programming, competing, and learning together.</p></article></div>
+</div>
+</div>
+</section><section class="section" id="robot">
+<div class="container"><div class="section-head"><span class="eyebrow">Inside the machine</span><h2>Meet the <span class="accent">Rangers robot.</span></h2><p>Every mechanism has a job. Our robot combines a drivetrain, scoring system, and sensors that support repeatable performance.</p></div>
+<div class="split"><div class="photo-wrap"><img alt="CAD rendering of the Itkan Rangers robot" loading="lazy" src="https://ftcrangers.com/cad-robot.png"/></div><div class="detail-list">
+<article class="detail"><h3>Drivetrain · Swyft Drives</h3><p>Our drivetrain uses Swyft Drives, selected for a compact setup, speed, and durability.</p></article>
+<article class="detail"><h3>Scoring hood</h3><p>A shaped hood guides game pieces toward a more consistent scoring trajectory. We refine its angle and geometry through testing.</p></article>
+<article class="detail"><h3>Limelight vision</h3><p>The Limelight camera helps identify AprilTags for alignment and can support game-piece color detection.</p></article>
+<article class="detail"><h3>Odometry &amp; pathing</h3><p>Odometry pods provide movement measurements that support autonomous navigation and pathing routines.</p></article>
+</div></div>
+</div>
+</section><section class="section" id="engineering" style="background:#f0f6f1"><div class="container"><div class="section-head"><span class="eyebrow">CAD &amp; build</span><h2>From first sketch to <span class="accent">field-ready.</span></h2><p>We use CAD and an iterative engineering process to make design decisions, test ideas, and improve reliability.</p></div><div class="info-grid">
+<article class="info-card"><div class="icon">01</div><h3>Find the problem</h3><p>Define the challenge and identify what the robot needs to do consistently.</p></article><article class="info-card"><div class="icon">02</div><h3>Design &amp; prototype</h3><p>Compare mechanisms, use CAD, and turn promising ideas into working prototypes.</p></article><article class="info-card"><div class="icon">03</div><h3>Test &amp; improve</h3><p>Run match-like tests, collect feedback, and refine the robot for repeatable performance.</p></article>
+</div></div></section></div><div class="site-page" id="page-decode"><section class="season-panel" id="season-decode" role="tabpanel">
+<div class="season-top"><div><span class="eyebrow">2025–2026 season</span><h3>DECODE</h3><p>Rangers' DECODE season archive. The highlights below are the verified results available for this page; additional match-by-match rows can be added as official event records are confirmed.</p></div><span class="season-tag">Completed season</span></div>
+<div class="season-stats">
+<div class="season-stat"><strong>1st</strong><span>FiT-North U-League AM Meet 3</span></div>
+<div class="season-stat"><strong>4–1–0</strong><span>Last Call Qualifier qualification record</span></div>
+<div class="season-stat"><strong>10th</strong><span>Last Call Qualifier qualification rank</span></div>
+<div class="season-stat"><strong>2nd</strong><span>U-League Tournament Control Award</span></div>
+</div>
+<div class="event-list">
+<article class="event"><div><b>FiT-North U-League AM Meet 3</b><p>Meet result · 2026</p></div><div class="event-score">1st place</div></article>
+<article class="event"><div><b>FiT-North Last Call Qualifier</b><p>Qualification record and ranking</p></div><div class="event-score">4–1–0 · 10th</div></article>
+<article class="event"><div><b>FiT-North U-League Tournament</b><p>Judged award result</p></div><div class="event-score">2nd · Control Award</div></article>
+</div>
+<p class="source-note">The original 102–65 score is not listed here because it belongs to the INTO THE DEEP season archive.</p>
+</section></div><div class="site-page" id="page-biobuzz"><section class="season-panel" id="season-biobuzz" role="tabpanel">
+<div class="season-top"><div><span class="eyebrow">2026–2027 season</span><h3>BIOBUZZ</h3><p>The current season page. Upcoming competitions, event details, match scores, rankings, and awards will be added as official results become available.</p></div><span class="season-tag">Upcoming / in progress</span></div>
+<div class="season-stats">
+<div class="season-stat"><strong>2026–27</strong><span>Season</span></div><div class="season-stat"><strong>Nov 21</strong><span>Next listed event date</span></div><div class="season-stat"><strong>—</strong><span>Match scores · pending</span></div><div class="season-stat"><strong>—</strong><span>Season ranking · pending</span></div>
+</div>
+<div class="event-list">
+<article class="event"><div><b>NTX Fall Qualifier #3</b><p>Listed upcoming event · November 21, 2026</p></div><span class="pending">Results pending</span></article>
+<article class="event"><div><b>Qualification matches, playoff rounds &amp; awards</b><p>Scores and standings will be added after official event results are published.</p></div><span class="pending">Not played / not verified</span></article>
+</div>
+<p class="source-note">No BIOBUZZ match scores or rankings are invented or pre-filled.</p>
+</section></div><div class="site-page" id="page-into-the-deep"><section class="season-panel" id="season-deep" role="tabpanel">
+<div class="season-top"><div><span class="eyebrow">2024–2025 season</span><h3>INTO THE DEEP</h3><p>Archived season page for the 2024–25 challenge. The recorded 102–65 match score belongs to this season; the opponent and event are not specified in the current verified summary, so they are not guessed here.</p></div><span class="season-tag">Archived season</span></div>
+<div class="season-stats"><div class="season-stat"><strong>102–65</strong><span>Recorded match score</span></div><div class="season-stat"><strong>2024–25</strong><span>Season</span></div><div class="season-stat"><strong>—</strong><span>Overall record · not confirmed</span></div><div class="season-stat"><strong>—</strong><span>Final ranking · not confirmed</span></div></div>
+<div class="event-list"><article class="event"><div><b>Recorded match result</b><p>Score retained in the INTO THE DEEP archive. Opponent and event label await confirmation.</p></div><div class="event-score">102–65</div></article></div>
+<p class="source-note">Other match results, awards, and event rankings should be filled from the official event record rather than inferred from this single score.</p>
+</section></div><div class="site-page" id="page-codes"><section class="section academy" id="academy">
+<div class="container"><div class="section-head"><span class="eyebrow">FTC Java library</span><h2>Learn by reading. <span class="accent">Build by coding.</span></h2><p>Browse 50 starter examples for common FTC programming tasks. Snippets are provided without inline comments so the code stays clean and easy to copy.</p></div>
+<div class="academy-layout">
+<aside class="academy-side"><h3>Find an example</h3><input class="search" id="codeSearch" placeholder="Search code..." type="search"/><div class="category-list" id="codeCategories"></div></aside>
+<div class="academy-main"><div class="code-toolbar"><h3 id="codeHeading">All examples <span id="codeCount" style="color:var(--muted);font-size:.78rem"></span></h3><span style="font-size:.75rem;color:var(--muted)">FTC Java · 53 examples</span></div><div class="code-list" id="codeList"></div></div>
+</div>
+</div>
+</section></div><div class="site-page" id="page-academy"><section class="section" id="lessons">
+<div class="container"><div class="section-head"><span class="eyebrow">Robotics academy</span><h2>Go from beginner to <span class="accent">robot programmer.</span></h2><p>Twenty guided lessons, extra coding challenges, answer walkthroughs, and XP. Your progress is saved on this device.</p></div>
+<div class="xp-panel"><div><b id="xpLevel">Level 1 · Rookie Programmer</b><p id="xpProgressText">0 XP earned · Complete lessons and challenges to level up</p><div class="xp-track"><span id="xpBar"></span></div></div><div class="xp-number"><span id="xpTotal">0</span> XP</div></div><div class="academy-main" style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><b id="progressText">0 of 20 lessons completed</b><span id="progressPercent" style="color:var(--green);font-weight:800">0%</span></div><div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div></div>
+<div class="lesson-grid" id="lessonGrid"></div><div class="challenge-section"><div class="section-head"><span class="eyebrow">Put it into practice</span><h2>FTC coding <span class="accent">challenges.</span></h2><p>Try each task first, then reveal the answer. Completing a challenge earns XP once.</p></div><div class="challenge-grid" id="challengeGrid"></div></div>
+</div>
+</section></div><div class="site-page" id="page-tutor"><section class="section" id="tutor" style="background:#f0f6f1"><div class="container"><div class="section-head"><span class="eyebrow">Built-in robotics tutor</span><h2>Stuck on something? <span class="accent">Let's break it down.</span></h2><p>A guided, built-in tutor with prepared explanations and examples. It works without an external AI API; it is not an unrestricted ChatGPT connection.</p></div>
+<div class="tutor-box"><div><span class="eyebrow" style="color:#c4e5cd">Rangers learning helper</span><h3>What are you working on?</h3><p>Choose a topic and get a short explanation, example, and next step.</p><div class="tutor-controls" id="tutorTopics"></div></div><div class="tutor-answer" id="tutorAnswer"><b>Choose a topic to begin.</b><p>Try mecanum drive, Java basics, encoders, autonomous, or sensors.</p><form class="tutor-form" id="tutorForm"><input aria-label="Ask the robotics tutor" autocomplete="off" id="tutorQuestion" placeholder="Type your robotics or FTC programming question..." required="True" type="text"/><button class="btn btn-primary" type="submit">Ask tutor</button></form><div aria-live="polite" class="tutor-reply" id="tutorReply"></div></div></div>
+</div></section></div></main>
+<footer><div class="container"><div class="footer-top"><div class="footer-brand"><img alt="Itkan Rangers logo" loading="lazy" src="https://ftcrangers.com/logo.png"/><h3 style="font-size:1.2rem;margin-bottom:7px">ITKAN RANGERS · #28922</h3><p>Engineering the future through creativity, collaboration, and Gracious Professionalism. Based in Plano, Texas.</p></div><div class="footer-links"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">FTC Code Library</a><a data-page-link="academy" href="#academy">Robotics Academy</a><a data-page-link="tutor" href="#tutor">Robotics Tutor</a></div></div><div class="copyright"><span>© <span id="year"></span> Itkan Rangers FTC #28922</span><span>Built with curiosity, teamwork, and Gracious Professionalism.</span></div></div></footer>
+<script>
 
     const codeExamples = [
       ["Basic Linear OpMode","Basics","A minimal driver-controlled OpMode structure.","@TeleOp(name = \"Basic TeleOp\")\npublic class BasicTeleOp extends LinearOpMode {\n  @Override\n  public void runOpMode() {\n    waitForStart();\n    while (opModeIsActive()) {\n      telemetry.addData(\"Status\", \"Running\");\n      telemetry.update();\n    }\n  }\n}"],
@@ -230,7 +191,210 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
       ["Elapsed Timer","Utilities","Measure elapsed time with an ElapsedTime object.","ElapsedTime timer = new ElapsedTime();\ntimer.reset();\nif (timer.seconds() > 2.0) {\n  motor.setPower(0);\n}"],
       ["OpMode Stop Check","Utilities","Keep a loop running only while the OpMode is active.","while (opModeIsActive()) {\n  idle();\n}"],
       ["Motor Safety Stop","Utilities","Stop all drive motors when the OpMode ends.","frontLeft.setPower(0);\nfrontRight.setPower(0);\nbackLeft.setPower(0);\nbackRight.setPower(0);"],
-      ["Simple PID Formula","Utilities","Calculate a basic proportional correction value.","double error = target - current;\ndouble output = kp * error;\noutput = Math.max(-1, Math.min(1, output));"]
+      ["Simple PID Formula","Utilities","Calculate a basic proportional correction value.","double error = target - current;\ndouble output = kp * error;\noutput = Math.max(-1, Math.min(1, output));"],
+      ["Full Mecanum TeleOp with Adjustable Speed","Drivetrains","Complete four-motor mecanum TeleOp. Left stick drives and strafes, right stick rotates, and the triggers smoothly adjust the speed limit.",`package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+@TeleOp(name = "Mecanum Adjustable Drive")
+public class MecanumAdjustableDrive extends LinearOpMode {
+    private DcMotor frontLeft;
+    private DcMotor frontRight;
+    private DcMotor backLeft;
+    private DcMotor backRight;
+
+    @Override
+    public void runOpMode() {
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+        backRight = hardwareMap.get(DcMotor.class, "backRight");
+
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
+
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+            double y = -gamepad1.left_stick_y;
+            double x = gamepad1.left_stick_x;
+            double turn = gamepad1.right_stick_x;
+            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1.0);
+
+            double frontLeftPower = (y + x + turn) / denominator;
+            double backLeftPower = (y - x + turn) / denominator;
+            double frontRightPower = (y - x - turn) / denominator;
+            double backRightPower = (y + x - turn) / denominator;
+
+            double speedLimit = 0.25 + (gamepad1.right_trigger * 0.75);
+            if (gamepad1.left_bumper) {
+                speedLimit = 0.20;
+            }
+
+            frontLeft.setPower(frontLeftPower * speedLimit);
+            backLeft.setPower(backLeftPower * speedLimit);
+            frontRight.setPower(frontRightPower * speedLimit);
+            backRight.setPower(backRightPower * speedLimit);
+
+            telemetry.addData("Speed limit", speedLimit);
+            telemetry.addData("Forward", y);
+            telemetry.addData("Strafe", x);
+            telemetry.addData("Turn", turn);
+            telemetry.update();
+        }
+
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+    }
+}`],
+      ["DECODE Season Robot TeleOp Starter","Drivetrains","Full DECODE-labeled starter with mecanum driving, adjustable speed, intake, lift, and a scoring servo. Adapt mechanism names and limits to your robot build.",`package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
+@TeleOp(name = "DECODE Robot TeleOp")
+public class DecodeRobotTeleOp extends LinearOpMode {
+    private DcMotor frontLeft;
+    private DcMotor frontRight;
+    private DcMotor backLeft;
+    private DcMotor backRight;
+    private DcMotor intake;
+    private DcMotor lift;
+    private Servo scoreServo;
+
+    @Override
+    public void runOpMode() {
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        intake = hardwareMap.get(DcMotor.class, "intake");
+        lift = hardwareMap.get(DcMotor.class, "lift");
+        scoreServo = hardwareMap.get(Servo.class, "scoreServo");
+
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
+        lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+            double y = -gamepad1.left_stick_y;
+            double x = gamepad1.left_stick_x;
+            double turn = gamepad1.right_stick_x;
+            double divisor = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1.0);
+            double speed = gamepad1.left_bumper ? 0.30 : 0.75 + gamepad1.right_trigger * 0.25;
+
+            frontLeft.setPower(((y + x + turn) / divisor) * speed);
+            backLeft.setPower(((y - x + turn) / divisor) * speed);
+            frontRight.setPower(((y - x - turn) / divisor) * speed);
+            backRight.setPower(((y + x - turn) / divisor) * speed);
+
+            double intakePower = 0;
+            if (gamepad2.right_trigger > 0.1) intakePower = gamepad2.right_trigger;
+            if (gamepad2.left_trigger > 0.1) intakePower = -gamepad2.left_trigger;
+            intake.setPower(intakePower);
+
+            lift.setPower(-gamepad2.left_stick_y * 0.55);
+
+            if (gamepad2.a) scoreServo.setPosition(0.20);
+            if (gamepad2.b) scoreServo.setPosition(0.80);
+
+            telemetry.addData("Drive speed", speed);
+            telemetry.addData("Intake", intakePower);
+            telemetry.addData("Lift encoder", lift.getCurrentPosition());
+            telemetry.update();
+        }
+
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        intake.setPower(0);
+        lift.setPower(0);
+    }
+}`],
+      ["INTO THE DEEP Season Robot TeleOp Starter","Drivetrains","Full INTO THE DEEP-labeled starter with mecanum drive, adjustable precision mode, intake, lift, and claw servo. Adapt motor directions and servo positions to your robot.",`package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
+@TeleOp(name = "Into The Deep Robot TeleOp")
+public class IntoTheDeepRobotTeleOp extends LinearOpMode {
+    private DcMotor frontLeft;
+    private DcMotor frontRight;
+    private DcMotor backLeft;
+    private DcMotor backRight;
+    private DcMotor intake;
+    private DcMotor lift;
+    private Servo claw;
+
+    @Override
+    public void runOpMode() {
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        intake = hardwareMap.get(DcMotor.class, "intake");
+        lift = hardwareMap.get(DcMotor.class, "lift");
+        claw = hardwareMap.get(Servo.class, "claw");
+
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
+        lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        claw.setPosition(0.35);
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+            double y = -gamepad1.left_stick_y;
+            double x = gamepad1.left_stick_x;
+            double turn = gamepad1.right_stick_x;
+            double divisor = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1.0);
+            double speed = gamepad1.left_bumper ? 0.25 : 0.80;
+
+            frontLeft.setPower(((y + x + turn) / divisor) * speed);
+            backLeft.setPower(((y - x + turn) / divisor) * speed);
+            frontRight.setPower(((y - x - turn) / divisor) * speed);
+            backRight.setPower(((y + x - turn) / divisor) * speed);
+
+            double intakePower = 0;
+            if (gamepad2.right_trigger > 0.1) intakePower = gamepad2.right_trigger;
+            if (gamepad2.left_trigger > 0.1) intakePower = -gamepad2.left_trigger;
+            intake.setPower(intakePower);
+
+            lift.setPower(-gamepad2.left_stick_y * 0.45);
+
+            if (gamepad2.a) claw.setPosition(0.70);
+            if (gamepad2.b) claw.setPosition(0.35);
+
+            telemetry.addData("Drive mode", gamepad1.left_bumper ? "Precision" : "Normal");
+            telemetry.addData("Lift position", lift.getCurrentPosition());
+            telemetry.addData("Intake power", intakePower);
+            telemetry.update();
+        }
+
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        intake.setPower(0);
+        lift.setPower(0);
+    }
+}`]
     ];
 
     const categories = ["All","Basics","Motors","Servos","Drivetrains","Mechanisms","Sensors","Autonomous","Utilities"];
@@ -300,35 +464,74 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
     ];
 
     const progressKey = "rangersAcademyProgressV1";
+    const challengeKey = "rangersAcademyChallengesV1";
     let completedLessons = new Set(JSON.parse(localStorage.getItem(progressKey) || "[]"));
+    let completedChallenges = new Set(JSON.parse(localStorage.getItem(challengeKey) || "[]"));
+
+    const challenges = [
+      ["Mecanum wheel math","Write the four wheel power equations using forward, strafe, and turn values.","The standard mix is FL = y + x + turn, BL = y - x + turn, FR = y - x - turn, and BR = y + x - turn. Divide each by the largest combined magnitude or 1, whichever is larger.","double y = -gamepad1.left_stick_y;\ndouble x = gamepad1.left_stick_x;\ndouble turn = gamepad1.right_stick_x;\ndouble d = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1.0);\nfrontLeft.setPower((y + x + turn) / d);\nbackLeft.setPower((y - x + turn) / d);\nfrontRight.setPower((y - x - turn) / d);\nbackRight.setPower((y + x - turn) / d);"],
+      ["Adjustable drive speed","Make the robot drive at 30% speed while a precision button is held, otherwise use full speed.","Use a speed multiplier and multiply every wheel power by it. Keep the same multiplier for all four wheels.","double speed = gamepad1.left_bumper ? 0.30 : 1.0;\nfrontLeft.setPower(fl * speed);\nbackLeft.setPower(bl * speed);\nfrontRight.setPower(fr * speed);\nbackRight.setPower(br * speed);"],
+      ["Toggle a claw","Make button A toggle a claw between open and closed without rapidly switching while the button is held.","Use edge detection: compare the current button state to its previous state, then update the previous state each loop.","if (gamepad2.a && !lastA) {\n    clawOpen = !clawOpen;\n    claw.setPosition(clawOpen ? 0.75 : 0.25);\n}\nlastA = gamepad2.a;"],
+      ["Encoder target","Set a lift target of 1200 ticks and run the motor toward it.","Set the target position, switch to RUN_TO_POSITION, and apply positive power. Add a limit switch or other protection for your actual mechanism.","lift.setTargetPosition(1200);\nlift.setMode(DcMotor.RunMode.RUN_TO_POSITION);\nlift.setPower(0.4);"],
+      ["Sensor threshold","Stop an intake when a distance sensor reads less than 6 centimeters.","Read the sensor in centimeters and compare it to 6.0. Confirm the sensor is configured and the measured unit matches the threshold.","double distance = distanceSensor.getDistance(DistanceUnit.CM);\nif (distance < 6.0) {\n    intake.setPower(0);\n}"],
+      ["Autonomous safety","Write a short autonomous loop that only continues while the OpMode is active and stops the motor afterward.","Check opModeIsActive in the loop condition, then set motor power to zero after the loop. Also stop all motors at the end of the OpMode.","while (opModeIsActive()) {\n    motor.setPower(0.25);\n    if (motor.isBusy()) {\n        telemetry.addData(\"Motor\", \"Moving\");\n    }\n    telemetry.update();\n}\nmotor.setPower(0);"],
+      ["Gamepad deadband","Ignore joystick values smaller than 0.08 so small stick drift does not move the robot.","Check the absolute value. If it is below 0.08, set the input to zero before calculating wheel powers.","double y = -gamepad1.left_stick_y;\nif (Math.abs(y) < 0.08) {\n    y = 0;\n}"],
+      ["Telemetry debugging","Display the lift target and current encoder position on the Driver Station.","Use telemetry.addData for both values and call telemetry.update to send the display update.","telemetry.addData(\"Lift target\", lift.getTargetPosition());\ntelemetry.addData(\"Lift current\", lift.getCurrentPosition());\ntelemetry.update();"]
+    ];
+
     function renderLessons() {
       const grid = document.getElementById("lessonGrid");
-      grid.innerHTML = lessons.map((lesson,index) => `<article class="lesson"><div class="lesson-top"><h4>${String(index+1).padStart(2,"0")}. ${lesson[0]}</h4><span class="level">${lesson[1]}</span></div><p>${lesson[2]}</p><details><summary>Open lesson & practice</summary><div class="lesson-body"><b>Explanation</b><p>${lesson[3]}</p><b>Example</b><p>${lesson[4]}</p><b>Challenge</b><p>${lesson[5]}</p></div></details><label class="lesson-check"><input type="checkbox" data-lesson="${index}" ${completedLessons.has(index) ? "checked" : ""}> Mark complete</label></article>`).join("");
-      grid.querySelectorAll("[data-lesson]").forEach(input => input.addEventListener("change", async () => {
+      grid.innerHTML = lessons.map((lesson,index) => `<article class="lesson"><div class="lesson-top"><h4>${String(index+1).padStart(2,"0")}. ${lesson[0]}</h4><span class="level">${lesson[1]}</span></div><p>${lesson[2]}</p><details><summary>Open lesson & practice</summary><div class="lesson-body"><b>Explanation</b><p>${lesson[3]}</p><b>Example</b><p>${lesson[4]}</p><b>Challenge</b><p>${lesson[5]}</p></div></details><label class="lesson-check"><input type="checkbox" data-lesson="${index}" ${completedLessons.has(index) ? "checked" : ""}> Mark complete · +50 XP</label></article>`).join("");
+      grid.querySelectorAll("[data-lesson]").forEach(input => input.addEventListener("change", () => {
         const index = Number(input.dataset.lesson);
         if (input.checked) completedLessons.add(index); else completedLessons.delete(index);
         localStorage.setItem(progressKey, JSON.stringify([...completedLessons]));
         updateProgress();
-        await syncProgress();
       }));
       updateProgress();
     }
+
+    function renderChallenges() {
+      const grid = document.getElementById("challengeGrid");
+      grid.innerHTML = challenges.map((challenge,index) => `<article class="challenge-card"><div class="lesson-top"><h4>${String(index+1).padStart(2,"0")}. ${challenge[0]}</h4><span class="level">+30 XP</span></div><p>${challenge[1]}</p><div class="challenge-actions"><button class="btn btn-soft btn-small" data-reveal="${index}">Show answer</button>${completedChallenges.has(index) ? '' : `<button class="btn btn-primary btn-small" data-complete="${index}">Mark complete</button>`}</div><div class="challenge-answer" id="challengeAnswer${index}" ${completedChallenges.has(index) ? '' : 'hidden'}><b>Answer</b><p>${challenge[2]}</p><pre>${escapeHtml(challenge[3])}</pre></div>${completedChallenges.has(index) ? '<div class="challenge-done">Completed · +30 XP earned</div>' : ''}</article>`).join("");
+      grid.querySelectorAll("[data-reveal]").forEach(button => button.addEventListener("click", () => {
+        document.getElementById(`challengeAnswer${Number(button.dataset.reveal)}`).hidden = false;
+      }));
+      grid.querySelectorAll("[data-complete]").forEach(button => button.addEventListener("click", () => {
+        const index = Number(button.dataset.complete);
+        completedChallenges.add(index);
+        localStorage.setItem(challengeKey, JSON.stringify([...completedChallenges]));
+        renderChallenges();
+        updateProgress();
+      }));
+    }
+
     function updateProgress() {
       const count = completedLessons.size;
       const percent = Math.round(count / lessons.length * 100);
       document.getElementById("progressText").textContent = `${count} of ${lessons.length} lessons completed`;
       document.getElementById("progressPercent").textContent = `${percent}%`;
       document.getElementById("progressBar").style.width = `${percent}%`;
+      const xp = count * 50 + completedChallenges.size * 30;
+      const level = Math.floor(xp / 250) + 1;
+      const levelNames = ["Rookie Programmer","Code Explorer","Robot Builder","Drive Specialist","Autonomous Engineer","FTC Code Master"];
+      const name = levelNames[Math.min(level - 1, levelNames.length - 1)];
+      document.getElementById("xpTotal").textContent = xp;
+      document.getElementById("xpLevel").textContent = `Level ${level} · ${name}`;
+      document.getElementById("xpProgressText").textContent = `${xp} XP earned · ${250 - (xp % 250)} XP to next level`;
+      document.getElementById("xpBar").style.width = `${(xp % 250) / 250 * 100}%`;
     }
+
     renderLessons();
+    renderChallenges();
 
     const tutorData = {
       "Java basics":["Java is the language used for many FTC robot programs. A class groups code, a method performs a task, and variables store values. In an FTC project, you often create a class that extends LinearOpMode or OpMode.","double drivePower = -gamepad1.left_stick_y;\ntelemetry.addData(\"Drive\", drivePower);\ntelemetry.update();","Try changing the joystick variable and displaying it with telemetry."],
       "Mecanum drive":["A mecanum drivetrain can move forward, backward, sideways, and rotate. Combine three driver inputs: forward (y), strafe (x), and turn (rx). Normalize the wheel powers so none exceeds the allowed range.","double y = -gamepad1.left_stick_y;\ndouble x = gamepad1.left_stick_x;\ndouble rx = gamepad1.right_stick_x;\ndouble d = Math.max(Math.abs(y)+Math.abs(x)+Math.abs(rx),1);\nfrontLeft.setPower((y+x+rx)/d);\nbackLeft.setPower((y-x+rx)/d);\nfrontRight.setPower((y-x-rx)/d);\nbackRight.setPower((y+x-rx)/d);","Test forward, strafe, and turn separately at low power. If a wheel moves the wrong way, check motor direction and wheel orientation."],
-      ["Encoders":["An encoder measures motor rotation in ticks. You can use it to estimate how far a wheel has turned and move a mechanism to a repeatable target. Convert ticks to distance using your motor, gear ratio, and wheel size.","int target = 900;\nmotor.setTargetPosition(target);\nmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);\nmotor.setPower(0.4);","Display getCurrentPosition and compare it to your target while the motor moves."],
-      ["Autonomous":["Autonomous code runs after the match starts without driver joystick input. Break the routine into small steps, check opModeIsActive, and use sensors or encoders to make movement more repeatable.","waitForStart();\nif (opModeIsActive()) {\n  leftMotor.setPower(0.35);\n  rightMotor.setPower(0.35);\n  sleep(500);\n  leftMotor.setPower(0);\n  rightMotor.setPower(0);\n}","Start with one short movement on a safely supported robot, then test on the floor at low speed."],
-      ["Sensors":["Sensors provide information about the robot and its surroundings. A distance sensor can estimate how far away an object is; a touch switch can indicate contact; an IMU can report orientation.","double cm = distanceSensor.getDistance(DistanceUnit.CM);\ntelemetry.addData(\"Distance cm\", cm);\ntelemetry.update();","Read the sensor value while changing the robot's position and note how the value changes."],
-      ["Claws and lifts":["A claw is often controlled with a servo, while a lift may use a motor and encoder. Start with conservative positions and power, test mechanical limits, and add safeguards so the mechanism does not force itself past its range.","if (gamepad2.a) claw.setPosition(0.25);\nif (gamepad2.b) claw.setPosition(0.75);\nlift.setPower(-gamepad2.left_stick_y);","Identify the safe open and closed positions before connecting a game piece."]
+      "Encoders":["An encoder measures motor rotation in ticks. You can use it to estimate how far a wheel has turned and move a mechanism to a repeatable target. Convert ticks to distance using your motor, gear ratio, and wheel size.","int target = 900;\nmotor.setTargetPosition(target);\nmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);\nmotor.setPower(0.4);","Display getCurrentPosition and compare it to your target while the motor moves."],
+      "Autonomous": ["Autonomous code runs after the match starts without driver joystick input. Break the routine into small steps, check opModeIsActive, and use sensors or encoders to make movement more repeatable.","waitForStart();\nif (opModeIsActive()) {\n  leftMotor.setPower(0.35);\n  rightMotor.setPower(0.35);\n  sleep(500);\n  leftMotor.setPower(0);\n  rightMotor.setPower(0);\n}","Start with one short movement on a safely supported robot, then test on the floor at low speed."],
+      "Sensors": ["Sensors provide information about the robot and its surroundings. A distance sensor can estimate how far away an object is; a touch switch can indicate contact; an IMU can report orientation.","double cm = distanceSensor.getDistance(DistanceUnit.CM);\ntelemetry.addData(\"Distance cm\", cm);\ntelemetry.update();","Read the sensor value while changing the robot's position and note how the value changes."],
+      "Claws and lifts": ["A claw is often controlled with a servo, while a lift may use a motor and encoder. Start with conservative positions and power, test mechanical limits, and add safeguards so the mechanism does not force itself past its range.","if (gamepad2.a) claw.setPosition(0.25);\nif (gamepad2.b) claw.setPosition(0.75);\nlift.setPower(-gamepad2.left_stick_y);","Identify the safe open and closed positions before connecting a game piece."]
     };
     document.getElementById("tutorTopics").innerHTML = Object.keys(tutorData).map(topic => `<button type="button" data-topic="${topic}">${topic}</button>`).join("");
     document.getElementById("tutorTopics").querySelectorAll("button").forEach(button => button.addEventListener("click", () => {
@@ -336,10 +539,6 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
       document.getElementById("tutorAnswer").innerHTML = `<b>${button.dataset.topic}</b><p style="margin-top:7px">${data[0]}</p><pre>${escapeHtml(data[1])}</pre><p style="margin-top:10px"><b>Next step:</b> ${data[2]}</p>`;
     }));
 
-    document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(item => { item.classList.toggle("active", item === tab); item.setAttribute("aria-selected", String(item === tab)); });
-      document.querySelectorAll(".season-panel").forEach(panel => panel.classList.toggle("active", panel.id === `season-${tab.dataset.season}`));
-    }));
 
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
@@ -355,70 +554,45 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
     }));
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    let currentUser = null;
-    async function syncProgress() {
-      if (!supabaseClient || !currentUser) return;
-      const { error } = await supabaseClient.auth.updateUser({ data: { rangersAcademyProgress: [...completedLessons] } });
-      if (error) document.getElementById("authStatus").textContent = `Progress is saved on this device. Cloud sync: ${error.message}`;
-    }
-    function showAuthState(user) {
-      currentUser = user || null;
-      document.getElementById("signedInBar").hidden = !user;
-      document.getElementById("authForms").hidden = !!user;
-      if (user) {
-        document.getElementById("userEmail").textContent = user.email || "Rangers member";
-        const saved = user.user_metadata && user.user_metadata.rangersAcademyProgress;
-        if (Array.isArray(saved)) {
-          completedLessons = new Set(saved.filter(n => Number.isInteger(n) && n >= 0 && n < lessons.length));
-          localStorage.setItem(progressKey, JSON.stringify([...completedLessons]));
-          renderLessons();
-        }
-        document.getElementById("authStatus").textContent = "Signed in. Your lesson progress can sync to this account.";
-      }
-    }
-    async function handleAuth(action) {
-      const status = document.getElementById("authStatus");
-      if (!supabaseClient) {
-        status.textContent = "Supabase is not configured yet. Add your Project URL and anon/public key in the script at the bottom of index.html.";
-        return;
-      }
-      const email = document.getElementById("authEmail").value.trim();
-      const password = document.getElementById("authPassword").value;
-      if (!email || password.length < 8) {
-        status.textContent = "Enter a valid email and a password with at least 8 characters.";
-        return;
-      }
-      status.textContent = action === "signup" ? "Creating account..." : "Logging in...";
-      const result = action === "signup"
-        ? await supabaseClient.auth.signUp({ email, password })
-        : await supabaseClient.auth.signInWithPassword({ email, password });
-      if (result.error) {
-        status.textContent = result.error.message;
-        return;
-      }
-      if (result.data.user) showAuthState(result.data.user);
-      status.textContent = action === "signup" && !result.data.session ? "Account created. Check your email if email confirmation is enabled in Supabase." : "You're signed in.";
-      await syncProgress();
-    }
-    document.getElementById("loginBtn").addEventListener("click", () => handleAuth("login"));
-    document.getElementById("signupBtn").addEventListener("click", () => handleAuth("signup"));
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      if (supabaseClient) await supabaseClient.auth.signOut();
-      showAuthState(null);
-      document.getElementById("authStatus").textContent = "You are logged out. Progress remains saved on this device.";
-    });
-    if (supabaseClient) {
-      supabaseClient.auth.getSession().then(({ data }) => showAuthState(data.session?.user || null));
-      supabaseClient.auth.onAuthStateChange((_event, session) => showAuthState(session?.user || null));
-      document.getElementById("authStatus").textContent = "Supabase is connected. Log in or create an account.";
-    }
-
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(entries => entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
       }), { threshold: 0.12 });
       document.querySelectorAll(".section-head,.highlight,.info-card,.season-panel,.auth-card").forEach(element => { element.classList.add("reveal"); observer.observe(element); });
     }
-  </script>
+  
+
+    const pageIds = ["home","decode","biobuzz","into-the-deep","codes","academy","tutor"];
+    function showPage(id, updateHash=true) {
+      if (!pageIds.includes(id)) id = "home";
+      document.querySelectorAll(".site-page").forEach(page => page.classList.toggle("active", page.id === `page-${id}`));
+      document.querySelectorAll("[data-page-link]").forEach(link => link.classList.toggle("active", link.dataset.pageLink === id));
+      if (updateHash && location.hash !== `#${id}`) history.pushState({page:id}, "", `#${id}`);
+      navLinks.classList.remove("open");
+      menuToggle.textContent = "☰";
+      menuToggle.setAttribute("aria-expanded", "false");
+      window.scrollTo({top:0,behavior:"instant"});
+    }
+    document.querySelectorAll("[data-page-link]").forEach(link => link.addEventListener("click", event => { event.preventDefault(); showPage(link.dataset.pageLink); }));
+    window.addEventListener("popstate", () => showPage(location.hash.slice(1), false));
+    showPage(location.hash.slice(1) || "home", false);
+
+    const tutorForm = document.getElementById("tutorForm");
+    if (tutorForm) tutorForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const q = document.getElementById("tutorQuestion").value.trim().toLowerCase();
+      const reply = document.getElementById("tutorReply");
+      if (!q) return;
+      let key = "Java basics";
+      if (/mecanum|swerve|omni|tank|drivetrain|drive train|x-drive|six wheel/.test(q)) key = "Mecanum drive";
+      else if (/encoder|ticks|run to position/.test(q)) key = "Encoders";
+      else if (/autonomous|auto mode|path|trajectory/.test(q)) key = "Autonomous";
+      else if (/sensor|imu|distance|color|touch|limit switch/.test(q)) key = "Sensors";
+      else if (/claw|lift|slide|arm|intake|servo|mechanism/.test(q)) key = "Claws and lifts";
+      else if (/java|class|method|variable|telemetry|gamepad|compile|error/.test(q)) key = "Java basics";
+      const data = tutorData[key];
+      reply.innerHTML = `<b>${key}</b><p>${data[0]}</p><pre>${escapeHtml(data[1])}</pre><p><b>Try this next:</b> ${data[2]}</p><p class="tutor-note">This is a built-in guided tutor, so it matches questions to prepared FTC topics rather than generating unrestricted answers.</p>`;
+    });
+</script>
 </body>
 </html>
