@@ -167,6 +167,29 @@ body[data-dashboarddensity="compact"] .dashboard-card{padding:12px}
 @media(max-width:900px){.settings-layout{grid-template-columns:1fr}.more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.more-hero{grid-template-columns:1fr}.tool-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.more-grid{grid-template-columns:1fr}.tool-fields{grid-template-columns:1fr}.setting-row{gap:8px}.setting-row select{width:145px}.tool-panel{padding:15px}.more-hero{margin-bottom:18px}}
 
+
+body[data-font="system"]{font-family:system-ui,sans-serif}body[data-font="serif"]{font-family:Georgia,serif}
+body[data-lineheight="relaxed"]{line-height:1.85}body[data-lineheight="tight"]{line-height:1.35}
+body[data-letterspacing="wide"]{letter-spacing:.025em}
+body[data-navlabels="compact"] .nav-links a{font-size:.74rem}
+body[data-breadcrumbs="off"] .tool-header .eyebrow{display:none}
+body[data-academysidebar="off"] .academy-side{display:none!important}
+body[data-codedescriptions="off"] .code-card p{display:none!important}
+body[data-codetheme="light"] pre{background:#f1f4f2!important;color:#1b2a20!important;border:1px solid #d6e0d8}
+body[data-codelines="on"] pre{border-left:4px solid var(--green);padding-left:1.2rem}
+body[data-contrast="on"]{--muted:#34483b;--line:#687d70}
+body[data-theme="dark"][data-contrast="on"]{--muted:#e5eee7;--line:#a6b9ab}
+body[data-reducemotion="on"] *,body[data-reducemotion="on"] *:before,body[data-reducemotion="on"] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+body[data-animations="off"] *,body[data-animations="off"] *:before,body[data-animations="off"] *:after{animation:none!important}
+body[data-hovereffects="off"] .more-card:hover{transform:none;box-shadow:none}
+body[data-focusring="on"] :focus-visible{outline:3px solid var(--green)!important;outline-offset:3px!important}
+body[data-printfriendly="on"]{background:white!important;color:black!important}
+body[data-printfriendly="on"] .topbar,body[data-printfriendly="on"] footer{display:none!important}
+body[data-datasaver="on"] .hero-glow{display:none!important}
+body[data-dashboarddensity="compact"] .dashboard-card{padding:12px}
+body[data-cardshadow="off"] .more-card,body[data-cardshadow="off"] .tool-panel,body[data-cardshadow="off"] .settings-group{box-shadow:none}
+body[data-borders="off"] .more-card,body[data-borders="off"] .tool-panel,body[data-borders="off"] .settings-group{border-color:transparent}
+
 </style>
 </head>
 <body>
@@ -955,7 +978,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
     let activeSettings=readSettings50();
     function applySettings50(){
       const body=document.body,root=document.documentElement;
-      settings50.forEach(item=>{const key=item[0],value=activeSettings[key];body.dataset[key]=String(value)});
+      settings50.forEach(item=>{const key=item[0],value=activeSettings[key];body.dataset[key]=typeof value==="boolean"?(value?"on":"off"):String(value)});
       const theme=activeSettings.theme==="system"?(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):activeSettings.theme;
       body.dataset.theme=theme;
       body.dataset.accent=activeSettings.accent;
@@ -966,6 +989,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       root.style.setProperty("--text-scale",({small:".92",normal:"1",large:"1.08",xlarge:"1.16"}[activeSettings.textSize]||"1"));
       root.style.setProperty("--code-size",({small:".72rem",normal:".82rem",large:".96rem"}[activeSettings.codeSize]||".82rem"));
       document.querySelectorAll("[data-setting]").forEach(el=>{const k=el.dataset.setting;if(el.type==="checkbox")el.checked=!!activeSettings[k];else el.value=activeSettings[k]});
+      document.querySelectorAll("[title]").forEach(el=>{if(activeSettings.toolTips){if(el.dataset.savedTitle!==undefined){el.setAttribute("title",el.dataset.savedTitle);delete el.dataset.savedTitle}}else if(el.hasAttribute("title")){el.dataset.savedTitle=el.getAttribute("title");el.removeAttribute("title")}});
       const status=document.getElementById("settingsStatus");if(status)status.textContent="Saved on this device · "+settings50.length+" settings available.";
     }
     function saveSettings50(){localStorage.setItem(settingKey,JSON.stringify(activeSettings));applySettings50()}
@@ -1034,10 +1058,10 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
     morePage.innerHTML='<section class="section"><div class="container"><div class="section-head"><span class="eyebrow">RANGERS TOOLBOX</span><h2>More ways to <span class="accent">build smarter.</span></h2><p>Search the directory for calculators, robot logs, programming helpers, and competition tools.</p></div><div class="more-hero"><div><input id="moreSearch" class="more-search" type="search" placeholder="Search 100 tools and features..." aria-label="Search more tools"/><div class="more-count" id="moreCount">100 searchable features</div></div><div class="more-count">30 dedicated tool pages · saved locally</div></div><div class="more-filters" id="moreFilters"></div><div class="more-grid" id="moreGrid"></div></div></section>';
     document.querySelector("main").append(morePage);
     const moreCategories=["All","Competition","Calculators","Build","Robot care","Practice","Robot tuning","CAD","Electrical","Programming","Team"];
-    let activeMoreCategory="All";
+    let activeMoreCategory=activeSettings.rememberFilters?(localStorage.getItem("rangersMoreCategory")||"All"):"All";
     const featureItems=moreFeatures.map((name,index)=>({name:name,tool:moreTools[index%moreTools.length],category:moreTools[index%moreTools.length].cat,desc:"Open the "+moreTools[index%moreTools.length].name+" workspace to use this feature."}));
     const moreFilters=document.getElementById("moreFilters"),moreGrid=document.getElementById("moreGrid"),moreSearch=document.getElementById("moreSearch"),moreCount=document.getElementById("moreCount");
-    moreCategories.forEach(cat=>{const btn=document.createElement("button");btn.className="more-filter"+(cat==="All"?" active":"");btn.textContent=cat;btn.type="button";btn.addEventListener("click",()=>{activeMoreCategory=cat;moreFilters.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===cat));renderMore()});moreFilters.append(btn)});
+    moreCategories.forEach(cat=>{const btn=document.createElement("button");btn.className="more-filter"+(cat==="All"?" active":"");btn.textContent=cat;btn.type="button";btn.addEventListener("click",()=>{activeMoreCategory=cat;if(activeSettings.rememberFilters)localStorage.setItem("rangersMoreCategory",cat);moreFilters.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===cat));renderMore()});moreFilters.append(btn)});
     function renderMore(){
       const q=moreSearch.value.trim().toLowerCase();
       const filtered=featureItems.filter(item=>(activeMoreCategory==="All"||item.category===activeMoreCategory)&&(!q||(item.name+" "+item.category+" "+item.desc).toLowerCase().includes(q)));
@@ -1089,6 +1113,8 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       if(tool.mode!=="log"){const records=getToolRecords(tool.id);records.push({date:new Date().toLocaleString(),label:result});localStorage.setItem("rangersTool_"+tool.id,JSON.stringify(records));paintToolHistory(tool)}
     }
     moreTools.forEach(tool=>{
+      const pageNode=document.getElementById("page-"+tool.id);const draftKey="rangersToolDraft_"+tool.id;let savedDraft=[];try{savedDraft=JSON.parse(localStorage.getItem(draftKey)||"[]")}catch(e){}
+      pageNode.querySelectorAll("[data-tool-field]").forEach((field,index)=>{if(savedDraft[index]!==undefined)field.value=savedDraft[index];field.addEventListener("input",()=>{if(activeSettings.autosave){const values=Array.from(pageNode.querySelectorAll("[data-tool-field]")).map(input=>input.value);localStorage.setItem(draftKey,JSON.stringify(values))}})});
       paintToolHistory(tool);
       document.querySelector('[data-tool-run="'+tool.id+'"]').addEventListener("click",()=>runTool(tool));
       document.querySelector('[data-tool-clear="'+tool.id+'"]').addEventListener("click",()=>{document.querySelectorAll("#page-"+tool.id+" [data-tool-field]").forEach(el=>el.value="");document.getElementById("tool-output-"+tool.id).textContent="Fields cleared."});
