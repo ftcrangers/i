@@ -1291,6 +1291,7 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
       download(name,content,type="application/json"){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)},
       csv(rows){return rows.map(row=>row.map(value=>'"'+String(value??"").replace(/"/g,'""')+'"').join(",")).join("\n")}
     };
+    const byId=id=>document.getElementById(id);
     const today = new Date().toISOString().slice(0,10);
     ["nbDate","mtDate"].forEach(id=>{const el=document.getElementById(id);if(el)el.value=today;});
     const notebookForm=document.getElementById("notebookForm");
@@ -1301,7 +1302,7 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
       if(!entries.length){wrap.innerHTML='<p class="source-note">Your saved entries will appear here.</p>';return;}
       entries.slice().reverse().forEach(entry=>{const card=document.createElement("article");card.className="tool-record";const h=document.createElement("h4");h.textContent=entry.title+" · "+entry.type;const date=document.createElement("p");date.textContent=entry.date;card.append(h,date);[["Work",entry.work],["Result",entry.result],["Next steps",entry.next]].forEach(([label,value])=>{if(value){const p=document.createElement("p");p.textContent=label+": "+value;card.append(p)}});wrap.append(card)});
     }
-    if(notebookForm)notebookForm.addEventListener("submit",event=>{event.preventDefault();const entries=rangersStore.read("notebook");entries.push({date:nbDate.value,type:nbType.value,title:nbTitle.value.trim(),work:nbWork.value.trim(),result:nbResult.value.trim(),next:nbNext.value.trim()});rangersStore.write("notebook",entries);notebookForm.reset();nbDate.value=today;renderNotebook()});
+    if(notebookForm)notebookForm.addEventListener("submit",event=>{event.preventDefault();const entries=rangersStore.read("notebook");entries.push({date:byId("nbDate").value,type:byId("nbType").value,title:byId("nbTitle").value.trim(),work:byId("nbWork").value.trim(),result:byId("nbResult").value.trim(),next:byId("nbNext").value.trim()});rangersStore.write("notebook",entries);notebookForm.reset();byId("nbDate").value=today;renderNotebook()});
     document.getElementById("exportNotebook")?.addEventListener("click",()=>rangersStore.download("rangers-engineering-notebook.json",JSON.stringify(rangersStore.read("notebook"),null,2)));
     renderNotebook();
 
@@ -1312,12 +1313,12 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
       for(let r=0;r<8;r++)for(let c=0;c<8;c++){const index=r*8+c,button=document.createElement("button");button.type="button";button.className="planner-cell";button.setAttribute("aria-label","Field cell row "+(r+1)+", column "+(c+1));const found=route.findIndex(p=>p.index===index);if(index===0)button.classList.add("is-start");if(found>=0){button.classList.add(found===route.length-1?"is-latest":"is-waypoint");button.textContent=String(found+1)}else if(index===0)button.textContent="S";button.addEventListener("click",()=>{if(route.length<30){route.push({index,row:r+1,col:c+1});renderRoute()}});field.append(button)}
       document.getElementById("waypointCount").textContent=route.length+" waypoint"+(route.length===1?"":"s")+" added.";
       const list=document.getElementById("waypointList");list.innerHTML="";if(!route.length){list.innerHTML="<li>No waypoints yet. Select a cell on the field.</li>"}else route.forEach((p,i)=>{const li=document.createElement("li");li.textContent="Point "+(i+1)+": row "+p.row+", column "+p.col;list.append(li)});
-      document.getElementById("routeSummary").textContent=route.length?"Start: "+plannerStart.value+". "+route.length+" ordered waypoint(s). Convert and test this route using your team's approved localization and motion-planning code.":"Add waypoints to build a route outline.";
+      document.getElementById("routeSummary").textContent=route.length?"Start: "+byId("plannerStart").value+". "+route.length+" ordered waypoint(s). Convert and test this route using your team's approved localization and motion-planning code.":"Add waypoints to build a route outline.";
     }
     document.getElementById("undoWaypoint")?.addEventListener("click",()=>{route.pop();renderRoute()});
     document.getElementById("clearWaypoints")?.addEventListener("click",()=>{route=[];renderRoute()});
     document.getElementById("plannerStart")?.addEventListener("change",renderRoute);
-    document.getElementById("exportRoute")?.addEventListener("click",()=>{const payload={start:plannerStart.value,grid:"8x8 conceptual grid; not field-calibrated",waypoints:route.map(({row,col},i)=>({order:i+1,row,col}))};rangersStore.download("rangers-autonomous-route.json",JSON.stringify(payload,null,2))});
+    document.getElementById("exportRoute")?.addEventListener("click",()=>{const payload={start:byId("plannerStart").value,grid:"8x8 conceptual grid; not field-calibrated",waypoints:route.map(({row,col},i)=>({order:i+1,row,col}))};rangersStore.download("rangers-autonomous-route.json",JSON.stringify(payload,null,2))});
     renderRoute();
 
     const scoutingForm=document.getElementById("scoutingForm");
@@ -1327,7 +1328,7 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
       if(!records.length){body.innerHTML='<tr><td colspan="6">No scouting records yet.</td></tr>';return;}
       records.slice().reverse().forEach(record=>{const tr=document.createElement("tr");[record.match,record.team,record.auto,record.tele,record.end,record.auto+record.tele+record.end].forEach(v=>{const td=document.createElement("td");td.textContent=v;tr.append(td)});body.append(tr);const p=document.createElement("p");p.className="source-note";p.textContent=record.event+" · "+record.match+" · Team "+record.team+" · "+record.reliability+(record.notes?" · "+record.notes:"");details.append(p)});
     }
-    if(scoutingForm)scoutingForm.addEventListener("submit",event=>{event.preventDefault();const records=rangersStore.read("scouting");records.push({event:scEvent.value.trim(),match:scMatch.value.trim(),team:Number(scTeam.value),auto:Number(scAuto.value),tele:Number(scTele.value),end:Number(scEnd.value),reliability:scReliability.value,notes:scNotes.value.trim()});rangersStore.write("scouting",records);scoutingForm.reset();renderScouting()});
+    if(scoutingForm)scoutingForm.addEventListener("submit",event=>{event.preventDefault();const records=rangersStore.read("scouting");records.push({event:byId("scEvent").value.trim(),match:byId("scMatch").value.trim(),team:Number(byId("scTeam").value),auto:Number(byId("scAuto").value),tele:Number(byId("scTele").value),end:Number(byId("scEnd").value),reliability:byId("scReliability").value,notes:byId("scNotes").value.trim()});rangersStore.write("scouting",records);scoutingForm.reset();renderScouting()});
     document.getElementById("exportScouting")?.addEventListener("click",()=>{const rows=[["Event","Match","Team","Auto","TeleOp","Endgame","Total","Reliability","Notes"],...rangersStore.read("scouting").map(r=>[r.event,r.match,r.team,r.auto,r.tele,r.end,r.auto+r.tele+r.end,r.reliability,r.notes])];rangersStore.download("rangers-scouting.csv",rangersStore.csv(rows),"text/csv")});
     renderScouting();
 
@@ -1337,7 +1338,7 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
       if(!entries.length){wrap.innerHTML='<p class="source-note">No maintenance entries yet.</p>';return}
       entries.slice().reverse().forEach(entry=>{const card=document.createElement("article");card.className="tool-record";const h=document.createElement("h4");h.textContent=entry.subsystem+" · "+entry.status;const p=document.createElement("p");p.textContent=entry.date+(entry.notes?" · "+entry.notes:"");card.append(h,p);wrap.append(card)});
     }
-    if(maintenanceForm)maintenanceForm.addEventListener("submit",event=>{event.preventDefault();const entries=rangersStore.read("maintenance");entries.push({date:mtDate.value,subsystem:mtSubsystem.value,status:mtStatus.value,notes:mtNotes.value.trim()});rangersStore.write("maintenance",entries);maintenanceForm.reset();mtDate.value=today;renderMaintenance()});
+    if(maintenanceForm)maintenanceForm.addEventListener("submit",event=>{event.preventDefault();const entries=rangersStore.read("maintenance");entries.push({date:byId("mtDate").value,subsystem:byId("mtSubsystem").value,status:byId("mtStatus").value,notes:byId("mtNotes").value.trim()});rangersStore.write("maintenance",entries);maintenanceForm.reset();byId("mtDate").value=today;renderMaintenance()});
     document.getElementById("exportMaintenance")?.addEventListener("click",()=>{const rows=[["Date","Subsystem","Status","Notes"],...rangersStore.read("maintenance").map(r=>[r.date,r.subsystem,r.status,r.notes])];rangersStore.download("rangers-maintenance.csv",rangersStore.csv(rows),"text/csv")});
     renderMaintenance();
 
