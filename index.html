@@ -68,6 +68,24 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
 @media(max-width:800px){.hub-grid{grid-template-columns:1fr 1fr}.builder-layout{grid-template-columns:1fr}.media-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.hub-grid,.media-grid{grid-template-columns:1fr}.robot-stage{min-height:300px}}
 
+
+.tool-layout{display:grid;grid-template-columns:minmax(260px,.85fr) minmax(0,1.15fr);gap:16px;align-items:start}
+.planner-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr);gap:16px;align-items:start}
+.tool-form{display:grid;gap:11px}.tool-form label,.hub-card>label{display:grid;gap:5px;font-size:.82rem;font-weight:700;color:var(--ink)}
+.tool-form input,.tool-form select,.tool-form textarea,.hub-card>label select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:.86rem}
+.tool-form textarea{resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tool-heading{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.tool-heading h3{margin-bottom:3px}
+.tool-records{display:grid;gap:10px;margin-top:12px}.tool-record{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fbfdfb}.tool-record h4{margin:0 0 5px;font-size:.95rem}.tool-record p{font-size:.82rem;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0}
+.planner-field{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;margin:12px 0;padding:8px;background:#e9f1e9;border:1px solid #c8d8ca;border-radius:12px;aspect-ratio:1.25/1}
+.planner-cell{min-width:0;border:1px solid #c6d5c8;border-radius:5px;background:#f9fcf9;color:#52705c;font-size:.68rem;cursor:pointer}
+.planner-cell:focus-visible{outline:3px solid #d2a83e;outline-offset:1px}.planner-cell.is-start{background:#d4ead8;border:2px solid #2b7a46}.planner-cell.is-waypoint{background:#b9d6c2;border:2px solid #4b8a60}.planner-cell.is-latest{background:#f2d991;border:2px solid #bd8c20}
+.planner-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.75rem;color:var(--muted);margin-bottom:10px}.planner-legend span{display:flex;align-items:center;gap:5px}.planner-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;background:#d4ead8;border:1px solid #2b7a46}.planner-legend .legend-point{background:#b9d6c2;border-color:#4b8a60}.planner-legend .legend-end{background:#f2d991;border-color:#bd8c20}
+.waypoint-list{padding-left:20px;font-size:.84rem;color:var(--ink)}.waypoint-list li{padding:3px 0}
+.table-scroll{overflow-x:auto}.tool-table{width:100%;border-collapse:collapse;font-size:.8rem}.tool-table th,.tool-table td{text-align:left;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}.tool-table th{color:var(--muted);font-weight:700}
+.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.check-grid label{display:flex;gap:8px;align-items:flex-start;font-size:.83rem;color:var(--ink)}.check-grid input{accent-color:#27633f;margin-top:3px}
+@media(max-width:800px){.tool-layout,.planner-layout{grid-template-columns:1fr}}
+@media(max-width:520px){.form-row,.check-grid{grid-template-columns:1fr}.planner-field{gap:2px;padding:4px}.planner-cell{font-size:.55rem}}
+
 </style>
 </head>
 <body>
@@ -75,7 +93,7 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
 <nav aria-label="Main navigation" class="nav container">
 <a class="brand" data-page-link="home" href="#home"><img alt="Itkan Rangers logo" src="https://ftcrangers.com/logo.png"/><span>ITKAN RANGERS<small>FTC TEAM #28922</small></span></a>
 <button aria-expanded="false" aria-label="Open navigation" class="menu-toggle" id="menuToggle">☰</button>
-<div class="nav-links" id="navLinks"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">Code Library</a><a data-page-link="academy" href="#academy">Academy</a><a data-page-link="dashboard" href="#dashboard">Dashboard</a></div>
+<div class="nav-links" id="navLinks"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">Code Library</a><a data-page-link="academy" href="#academy">Academy</a><a data-page-link="dashboard" href="#dashboard">Dashboard</a><a data-page-link="engineering-notebook" href="#engineering-notebook">Notebook</a><a data-page-link="autonomous-planner" href="#autonomous-planner">Auto Planner</a><a data-page-link="scouting" href="#scouting">Scouting</a><a data-page-link="maintenance" href="#maintenance">Maintenance</a></div>
 <div class="nav-actions"><a class="btn btn-primary btn-small" data-page-link="academy" href="#academy">Start learning ↗</a></div>
 </nav>
 </div>
@@ -254,8 +272,39 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
 <div class="hub-grid" style="margin-top:15px"><article class="hub-card"><h3>Team milestone</h3><div class="hub-stat">3×</div><p>Itkan Internal Scrimmage champions, based on the team's latest update.</p></article><article class="hub-card"><h3>Learning paths</h3><div class="hub-stat">5</div><p>Structured FTC courses in the Academy.</p></article><article class="hub-card"><h3>Season archives</h3><div class="hub-stat">3</div><p>DECODE, BIOBUZZ, and INTO THE DEEP.</p></article></div>
 </div></section></div>
 
+
+<div class="site-page" id="page-engineering-notebook"><section class="section"><div class="container">
+<div class="section-head"><span class="eyebrow">Engineering notebook</span><h2>Document the <span class="accent">process.</span></h2><p>Keep design decisions, prototypes, test results, and next steps together. Entries are saved in this browser on this device.</p></div>
+<div class="tool-layout"><form class="hub-card tool-form" id="notebookForm"><h3>New notebook entry</h3>
+<label>Date<input id="nbDate" type="date" required></label><label>Entry type<select id="nbType"><option>Meeting</option><option>Design decision</option><option>Prototype test</option><option>Programming</option><option>Competition reflection</option></select></label>
+<label>Title<input id="nbTitle" maxlength="100" placeholder="Example: Intake roller test" required></label><label>What did we work on?<textarea id="nbWork" rows="3" maxlength="1500" placeholder="Describe the task or idea..." required></textarea></label>
+<label>Result / what did we learn?<textarea id="nbResult" rows="3" maxlength="1500" placeholder="Record observations and results..."></textarea></label><label>Next steps<textarea id="nbNext" rows="2" maxlength="800" placeholder="What should the team try next?"></textarea></label>
+<button class="btn btn-primary" type="submit">Save notebook entry</button></form>
+<div class="hub-card"><div class="tool-heading"><div><h3>Notebook archive</h3><p id="notebookCount" class="source-note">0 entries saved on this device.</p></div><div class="hub-actions"><button class="btn btn-soft btn-small" id="exportNotebook" type="button">Export JSON</button></div></div><div id="notebookEntries" class="tool-records"><p class="source-note">Your saved entries will appear here.</p></div></div>
+</div></div></section></div>
+
+<div class="site-page" id="page-autonomous-planner"><section class="section"><div class="container">
+<div class="section-head"><span class="eyebrow">Autonomous path planner</span><h2>Map your <span class="accent">autonomous.</span></h2><p>Tap cells to add ordered waypoints to a simple field sketch. This is a planning aid, not a calibrated field map or a ready-to-run autonomous program.</p></div>
+<div class="planner-layout"><div class="hub-card"><div class="tool-heading"><div><h3>Field sketch</h3><p class="source-note">Blue alliance shown · 8 × 8 planning grid</p></div><button class="btn btn-soft btn-small" id="undoWaypoint" type="button">Undo</button></div><div class="planner-field" id="plannerField" role="group" aria-label="Autonomous planning grid"></div><div class="planner-legend"><span><i class="legend-start"></i>Start</span><span><i class="legend-point"></i>Waypoint</span><span><i class="legend-end"></i>Latest point</span></div><div class="hub-actions"><button class="btn btn-soft btn-small" id="clearWaypoints" type="button">Clear route</button><button class="btn btn-primary btn-small" id="exportRoute" type="button">Export route</button></div></div>
+<div class="hub-card"><h3>Route details</h3><label>Starting position<select id="plannerStart"><option value="Blue left">Blue left</option><option value="Blue right">Blue right</option><option value="Red left">Red left</option><option value="Red right">Red right</option></select></label><p id="waypointCount" class="source-note">0 waypoints added.</p><ol id="waypointList" class="waypoint-list"><li>No waypoints yet. Select a cell on the field.</li></ol><div class="source-note" id="routeSummary">Add waypoints to build a route outline.</div></div></div>
+</div></section></div>
+
+<div class="site-page" id="page-scouting"><section class="section"><div class="container">
+<div class="section-head"><span class="eyebrow">Competition scouting</span><h2>Record what you <span class="accent">observe.</span></h2><p>Log match observations from public event play or team-approved scouting. These are team-entered notes, not official FIRST results.</p></div>
+<div class="tool-layout"><form class="hub-card tool-form" id="scoutingForm"><h3>Add match observation</h3><label>Event / competition<input id="scEvent" maxlength="100" placeholder="Event name" required></label><div class="form-row"><label>Match<input id="scMatch" maxlength="30" placeholder="Q12" required></label><label>Team number<input id="scTeam" type="number" min="1" max="99999" required></label></div>
+<div class="form-row"><label>Autonomous points<input id="scAuto" type="number" min="0" max="500" value="0" required></label><label>TeleOp points<input id="scTele" type="number" min="0" max="500" value="0" required></label></div><label>Endgame points<input id="scEnd" type="number" min="0" max="500" value="0" required></label><label>Robot reliability<select id="scReliability"><option>Not observed</option><option>Consistent</option><option>Mostly consistent</option><option>Intermittent issues</option><option>Did not complete match</option></select></label><label>Notes<textarea id="scNotes" rows="3" maxlength="800" placeholder="Strategy, mechanisms, observed strengths, or issues..."></textarea></label><button class="btn btn-primary" type="submit">Save scouting record</button></form>
+<div class="hub-card"><div class="tool-heading"><div><h3>Scouting log</h3><p id="scoutingCount" class="source-note">0 records saved.</p></div><button class="btn btn-soft btn-small" id="exportScouting" type="button">Export CSV</button></div><div class="table-scroll"><table class="tool-table"><thead><tr><th>Match</th><th>Team</th><th>Auto</th><th>TeleOp</th><th>Endgame</th><th>Total</th></tr></thead><tbody id="scoutingRows"><tr><td colspan="6">No scouting records yet.</td></tr></tbody></table></div><div id="scoutingDetails" class="tool-records"></div></div></div>
+</div></section></div>
+
+<div class="site-page" id="page-maintenance"><section class="section"><div class="container">
+<div class="section-head"><span class="eyebrow">Robot maintenance</span><h2>Keep the robot <span class="accent">match-ready.</span></h2><p>Track inspections and service notes. Follow your team's safety procedures and have a mentor supervise repairs or electrical work.</p></div>
+<div class="tool-layout"><form class="hub-card tool-form" id="maintenanceForm"><h3>Log an inspection</h3><label>Date<input id="mtDate" type="date" required></label><label>Subsystem<select id="mtSubsystem"><option>Drivetrain</option><option>Intake</option><option>Scoring mechanism</option><option>End effector</option><option>Wiring and connectors</option><option>Battery and power</option><option>Sensors</option><option>Fasteners and frame</option></select></label><label>Status<select id="mtStatus"><option>Checked — OK</option><option>Needs attention</option><option>Service completed</option><option>Monitor next session</option></select></label><label>Inspection notes<textarea id="mtNotes" rows="3" maxlength="1000" placeholder="What was checked? What needs follow-up?"></textarea></label><button class="btn btn-primary" type="submit">Save maintenance log</button></form>
+<div class="hub-card"><div class="tool-heading"><div><h3>Maintenance history</h3><p id="maintenanceCount" class="source-note">0 records saved.</p></div><button class="btn btn-soft btn-small" id="exportMaintenance" type="button">Export CSV</button></div><div id="maintenanceEntries" class="tool-records"><p class="source-note">No maintenance entries yet.</p></div></div></div>
+<div class="hub-card" style="margin-top:16px"><h3>Pre-match visual check</h3><p class="source-note">Use your team's official inspection and safety checklist as the source of truth.</p><div class="check-grid" id="preMatchChecks"><label><input type="checkbox"> Robot frame and fasteners visually checked</label><label><input type="checkbox"> Wheels and drivetrain move freely</label><label><input type="checkbox"> Mechanisms move through expected range</label><label><input type="checkbox"> Cables are secured and clear of moving parts</label><label><input type="checkbox"> Battery is secured and inspected by a mentor</label><label><input type="checkbox"> Driver station and robot communication checked</label></div></div>
+</div></section></div>
+
 </main>
-<button class="corner-menu-button" id="cornerMenuButton" aria-label="Open learning menu" aria-expanded="false">☰</button><aside class="corner-menu" id="cornerMenu" aria-label="Quick navigation"><div class="corner-menu-top"><b>RANGERS HUB</b><button id="cornerMenuClose" aria-label="Close menu">×</button></div><a data-page-link="academy" href="#academy"><span>01</span><b>Academy</b><small>CAD + Programming</small></a><a data-page-link="tutor" href="#tutor"><span>02</span><b>Tutor</b><small>Ask a robotics question</small></a><a data-page-link="courses" href="#courses"><span>03</span><b>Courses</b><small>Five learning paths</small></a><a data-page-link="games" href="#games"><span>04</span><b>Games</b><small>Four playable challenges</small></a><a data-page-link="dashboard" href="#dashboard"><span>05</span><b>Dashboard</b><small>XP + progress</small></a><a data-page-link="robot-builder" href="#robot-builder"><span>06</span><b>Robot Builder</b><small>Design a robot concept</small></a><a data-page-link="media" href="#media"><span>07</span><b>Media Center</b><small>Photos + videos</small></a><a data-page-link="competition-center" href="#competition-center"><span>08</span><b>Competition Center</b><small>Season archives</small></a><a data-page-link="leaderboard" href="#leaderboard"><span>09</span><b>Leaderboard</b><small>Shared team progress</small></a></aside><div class="corner-backdrop" id="cornerBackdrop"></div>
+<button class="corner-menu-button" id="cornerMenuButton" aria-label="Open learning menu" aria-expanded="false">☰</button><aside class="corner-menu" id="cornerMenu" aria-label="Quick navigation"><div class="corner-menu-top"><b>RANGERS HUB</b><button id="cornerMenuClose" aria-label="Close menu">×</button></div><a data-page-link="academy" href="#academy"><span>01</span><b>Academy</b><small>CAD + Programming</small></a><a data-page-link="tutor" href="#tutor"><span>02</span><b>Tutor</b><small>Ask a robotics question</small></a><a data-page-link="courses" href="#courses"><span>03</span><b>Courses</b><small>Five learning paths</small></a><a data-page-link="engineering-notebook" href="#engineering-notebook"><span>05</span><b>Engineering Notebook</b><small>Record designs and tests</small></a><a data-page-link="autonomous-planner" href="#autonomous-planner"><span>06</span><b>Autonomous Planner</b><small>Map a route on the field</small></a><a data-page-link="scouting" href="#scouting"><span>07</span><b>Competition Scouting</b><small>Track match observations</small></a><a data-page-link="maintenance" href="#maintenance"><span>08</span><b>Maintenance</b><small>Robot inspection log</small></a><a data-page-link="games" href="#games"><span>04</span><b>Games</b><small>Four playable challenges</small></a><a data-page-link="dashboard" href="#dashboard"><span>05</span><b>Dashboard</b><small>XP + progress</small></a><a data-page-link="robot-builder" href="#robot-builder"><span>06</span><b>Robot Builder</b><small>Design a robot concept</small></a><a data-page-link="media" href="#media"><span>07</span><b>Media Center</b><small>Photos + videos</small></a><a data-page-link="competition-center" href="#competition-center"><span>08</span><b>Competition Center</b><small>Season archives</small></a><a data-page-link="leaderboard" href="#leaderboard"><span>09</span><b>Leaderboard</b><small>Shared team progress</small></a></aside><div class="corner-backdrop" id="cornerBackdrop"></div>
 <footer><div class="container"><div class="footer-top"><div class="footer-brand"><img alt="Itkan Rangers logo" loading="lazy" src="https://ftcrangers.com/logo.png"/><h3 style="font-size:1.2rem;margin-bottom:7px">ITKAN RANGERS · #28922</h3><p>Engineering the future through creativity, collaboration, and Gracious Professionalism. Based in Plano, Texas.</p></div><div class="footer-links"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">FTC Code Library</a><a data-page-link="academy" href="#academy">Robotics Academy</a><a data-page-link="tutor" href="#tutor">Robotics Tutor</a></div></div><div class="copyright"><span>© <span id="year"></span> Itkan Rangers FTC #28922</span><span>Built with curiosity, teamwork, and Gracious Professionalism.</span></div></div></footer>
 <script>
 
@@ -692,7 +741,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
     }
   
 
-    const pageIds = ["home","decode","biobuzz","into-the-deep","codes","academy","tutor","courses","games","cad","programming","dashboard","robot-showcase","competition-center","robot-builder","media","leaderboard"];
+    const pageIds = ["home","decode","biobuzz","into-the-deep","codes","academy","tutor","courses","games","cad","programming","dashboard","robot-showcase","competition-center","robot-builder","media","leaderboard","engineering-notebook","autonomous-planner","scouting","maintenance"];
     function showPage(id, updateHash=true) {
       if (!pageIds.includes(id)) id = "home";
       document.querySelectorAll(".site-page").forEach(page => page.classList.toggle("active", page.id === `page-${id}`));
@@ -1233,6 +1282,64 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
         const label=document.createElement("p");label.textContent=file.name+" · "+Math.round(file.size/1024)+" KB";item.append(media,label);grid.append(item);
       });
     });
+
+
+    // Rangers engineering tools: all records are stored locally in this browser.
+    const rangersStore = {
+      read(key){try{return JSON.parse(localStorage.getItem("rangers_"+key)||"[]")}catch{return []}},
+      write(key,value){localStorage.setItem("rangers_"+key,JSON.stringify(value))},
+      download(name,content,type="application/json"){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)},
+      csv(rows){return rows.map(row=>row.map(value=>'"'+String(value??"").replace(/"/g,'""')+'"').join(",")).join("\n")}
+    };
+    const today = new Date().toISOString().slice(0,10);
+    ["nbDate","mtDate"].forEach(id=>{const el=document.getElementById(id);if(el)el.value=today;});
+    const notebookForm=document.getElementById("notebookForm");
+    function renderNotebook(){
+      const entries=rangersStore.read("notebook"),wrap=document.getElementById("notebookEntries");
+      document.getElementById("notebookCount").textContent=entries.length+" entr"+(entries.length===1?"y":"ies")+" saved on this device.";
+      wrap.innerHTML="";
+      if(!entries.length){wrap.innerHTML='<p class="source-note">Your saved entries will appear here.</p>';return;}
+      entries.slice().reverse().forEach(entry=>{const card=document.createElement("article");card.className="tool-record";const h=document.createElement("h4");h.textContent=entry.title+" · "+entry.type;const date=document.createElement("p");date.textContent=entry.date;card.append(h,date);[["Work",entry.work],["Result",entry.result],["Next steps",entry.next]].forEach(([label,value])=>{if(value){const p=document.createElement("p");p.textContent=label+": "+value;card.append(p)}});wrap.append(card)});
+    }
+    if(notebookForm)notebookForm.addEventListener("submit",event=>{event.preventDefault();const entries=rangersStore.read("notebook");entries.push({date:nbDate.value,type:nbType.value,title:nbTitle.value.trim(),work:nbWork.value.trim(),result:nbResult.value.trim(),next:nbNext.value.trim()});rangersStore.write("notebook",entries);notebookForm.reset();nbDate.value=today;renderNotebook()});
+    document.getElementById("exportNotebook")?.addEventListener("click",()=>rangersStore.download("rangers-engineering-notebook.json",JSON.stringify(rangersStore.read("notebook"),null,2)));
+    renderNotebook();
+
+    let route=[];
+    const field=document.getElementById("plannerField");
+    function renderRoute(){
+      field.innerHTML="";
+      for(let r=0;r<8;r++)for(let c=0;c<8;c++){const index=r*8+c,button=document.createElement("button");button.type="button";button.className="planner-cell";button.setAttribute("aria-label","Field cell row "+(r+1)+", column "+(c+1));const found=route.findIndex(p=>p.index===index);if(index===0)button.classList.add("is-start");if(found>=0){button.classList.add(found===route.length-1?"is-latest":"is-waypoint");button.textContent=String(found+1)}else if(index===0)button.textContent="S";button.addEventListener("click",()=>{if(route.length<30){route.push({index,row:r+1,col:c+1});renderRoute()}});field.append(button)}
+      document.getElementById("waypointCount").textContent=route.length+" waypoint"+(route.length===1?"":"s")+" added.";
+      const list=document.getElementById("waypointList");list.innerHTML="";if(!route.length){list.innerHTML="<li>No waypoints yet. Select a cell on the field.</li>"}else route.forEach((p,i)=>{const li=document.createElement("li");li.textContent="Point "+(i+1)+": row "+p.row+", column "+p.col;list.append(li)});
+      document.getElementById("routeSummary").textContent=route.length?"Start: "+plannerStart.value+". "+route.length+" ordered waypoint(s). Convert and test this route using your team's approved localization and motion-planning code.":"Add waypoints to build a route outline.";
+    }
+    document.getElementById("undoWaypoint")?.addEventListener("click",()=>{route.pop();renderRoute()});
+    document.getElementById("clearWaypoints")?.addEventListener("click",()=>{route=[];renderRoute()});
+    document.getElementById("plannerStart")?.addEventListener("change",renderRoute);
+    document.getElementById("exportRoute")?.addEventListener("click",()=>{const payload={start:plannerStart.value,grid:"8x8 conceptual grid; not field-calibrated",waypoints:route.map(({row,col},i)=>({order:i+1,row,col}))};rangersStore.download("rangers-autonomous-route.json",JSON.stringify(payload,null,2))});
+    renderRoute();
+
+    const scoutingForm=document.getElementById("scoutingForm");
+    function renderScouting(){
+      const records=rangersStore.read("scouting"),body=document.getElementById("scoutingRows"),details=document.getElementById("scoutingDetails");
+      document.getElementById("scoutingCount").textContent=records.length+" record(s) saved on this device.";body.innerHTML="";details.innerHTML="";
+      if(!records.length){body.innerHTML='<tr><td colspan="6">No scouting records yet.</td></tr>';return;}
+      records.slice().reverse().forEach(record=>{const tr=document.createElement("tr");[record.match,record.team,record.auto,record.tele,record.end,record.auto+record.tele+record.end].forEach(v=>{const td=document.createElement("td");td.textContent=v;tr.append(td)});body.append(tr);const p=document.createElement("p");p.className="source-note";p.textContent=record.event+" · "+record.match+" · Team "+record.team+" · "+record.reliability+(record.notes?" · "+record.notes:"");details.append(p)});
+    }
+    if(scoutingForm)scoutingForm.addEventListener("submit",event=>{event.preventDefault();const records=rangersStore.read("scouting");records.push({event:scEvent.value.trim(),match:scMatch.value.trim(),team:Number(scTeam.value),auto:Number(scAuto.value),tele:Number(scTele.value),end:Number(scEnd.value),reliability:scReliability.value,notes:scNotes.value.trim()});rangersStore.write("scouting",records);scoutingForm.reset();renderScouting()});
+    document.getElementById("exportScouting")?.addEventListener("click",()=>{const rows=[["Event","Match","Team","Auto","TeleOp","Endgame","Total","Reliability","Notes"],...rangersStore.read("scouting").map(r=>[r.event,r.match,r.team,r.auto,r.tele,r.end,r.auto+r.tele+r.end,r.reliability,r.notes])];rangersStore.download("rangers-scouting.csv",rangersStore.csv(rows),"text/csv")});
+    renderScouting();
+
+    const maintenanceForm=document.getElementById("maintenanceForm");
+    function renderMaintenance(){
+      const entries=rangersStore.read("maintenance"),wrap=document.getElementById("maintenanceEntries");document.getElementById("maintenanceCount").textContent=entries.length+" record(s) saved on this device.";wrap.innerHTML="";
+      if(!entries.length){wrap.innerHTML='<p class="source-note">No maintenance entries yet.</p>';return}
+      entries.slice().reverse().forEach(entry=>{const card=document.createElement("article");card.className="tool-record";const h=document.createElement("h4");h.textContent=entry.subsystem+" · "+entry.status;const p=document.createElement("p");p.textContent=entry.date+(entry.notes?" · "+entry.notes:"");card.append(h,p);wrap.append(card)});
+    }
+    if(maintenanceForm)maintenanceForm.addEventListener("submit",event=>{event.preventDefault();const entries=rangersStore.read("maintenance");entries.push({date:mtDate.value,subsystem:mtSubsystem.value,status:mtStatus.value,notes:mtNotes.value.trim()});rangersStore.write("maintenance",entries);maintenanceForm.reset();mtDate.value=today;renderMaintenance()});
+    document.getElementById("exportMaintenance")?.addEventListener("click",()=>{const rows=[["Date","Subsystem","Status","Notes"],...rangersStore.read("maintenance").map(r=>[r.date,r.subsystem,r.status,r.notes])];rangersStore.download("rangers-maintenance.csv",rangersStore.csv(rows),"text/csv")});
+    renderMaintenance();
 
 </script>
 </body>
