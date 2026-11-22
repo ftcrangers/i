@@ -888,6 +888,246 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
 
     const pageIds = ["home","decode","biobuzz","into-the-deep","codes","academy","tutor","courses","games","cad","programming","dashboard","robot-showcase","competition-center","robot-builder","media","leaderboard","engineering-notebook","autonomous-planner","scouting","maintenance","parts-hub","settings","more"];
 
+    const settings50 = [
+      ["theme","Theme","Light, dark, or follow your device","Appearance","select",[["light","Light"],["dark","Dark"],["system","System"]],"light"],
+      ["textSize","Text size","Scale all regular website text","Appearance","select",[["small","Small"],["normal","Normal"],["large","Large"],["xlarge","Extra large"]],"normal"],
+      ["accent","Accent color","Choose the highlight palette","Appearance","select",[["green","Rangers green"],["blue","Blue"],["purple","Purple"],["orange","Orange"]],"green"],
+      ["font","Font family","Choose a clean system or serif font","Appearance","select",[["default","Site font"],["system","System sans-serif"],["serif","Serif"]],"default"],
+      ["lineHeight","Line spacing","Control vertical spacing between text lines","Appearance","select",[["tight","Tight"],["normal","Normal"],["relaxed","Relaxed"]],"normal"],
+      ["letterSpacing","Letter spacing","Use standard or more open letter spacing","Appearance","select",[["normal","Normal"],["wide","Wide"]],"normal"],
+      ["corners","Card corners","Rounded or sharper surfaces","Appearance","select",[["rounded","Rounded"],["sharp","Sharp"]],"rounded"],
+      ["width","Content width","Set standard or wide page content","Appearance","select",[["standard","Standard"],["wide","Wide"]],"standard"],
+      ["spacing","Page spacing","Set compact, comfortable, or spacious sections","Appearance","select",[["compact","Compact"],["comfortable","Comfortable"],["spacious","Spacious"]],"comfortable"],
+      ["cardShadow","Card shadows","Turn card shadows on or off","Appearance","select",[["on","On"],["off","Off"]],"on"],
+      ["borders","Card borders","Show or hide decorative card borders","Appearance","select",[["on","On"],["off","Off"]],"on"],
+      ["texture","Background texture","Choose a plain or subtle dotted background","Appearance","select",[["plain","Plain"],["dots","Subtle dots"]],"plain"],
+      ["compactHeader","Compact header","Use a shorter navigation bar","Navigation","check",[] ,false],
+      ["sticky","Sticky navigation","Keep the top navigation visible while scrolling","Navigation","check",[],true],
+      ["navLabels","Navigation labels","Use full or compact labels in menus","Navigation","select",[["full","Full labels"],["compact","Compact labels"]],"full"],
+      ["breadcrumbs","Tool breadcrumbs","Show the tool category context","Navigation","check",[],true],
+      ["footer","Show footer","Display the site footer","Navigation","check",[],true],
+      ["quickMenu","Floating quick menu","Show the floating quick menu (off by default)","Navigation","check",[],false],
+      ["backTop","Back to top button","Show a floating back-to-top control","Navigation","check",[],false],
+      ["landing","Starting page","Choose the page to open when no URL tab is selected","Navigation","select",[["home","Home"],["academy","Academy"],["more","More"],["dashboard","Dashboard"],["codes","Code Library"]],"home"],
+      ["linkStyle","Link style","Use normal or underlined links","Navigation","select",[["normal","Normal"],["underline","Underlined"]],"normal"],
+      ["buttonStyle","Button shape","Choose rounded, square, or pill buttons","Navigation","select",[["rounded","Rounded"],["square","Square"],["pill","Pill"]],"rounded"],
+      ["confirmClear","Confirm resets","Ask before resetting all site preferences","Behavior","check",[],true],
+      ["autosave","Autosave tool notes","Save each tool entry when you add it","Behavior","check",[],true],
+      ["rememberFilters","Remember More search","Keep the last More search and category filter","Behavior","check",[],true],
+      ["exportFormat","Default export format","Choose CSV or JSON for tool records","Behavior","select",[["csv","CSV"],["json","JSON"]],"csv"],
+      ["codeSize","Code text size","Set the font size inside code examples","Code & learning","select",[["small","Small"],["normal","Normal"],["large","Large"]],"normal"],
+      ["codeWrap","Wrap long code lines","Wrap long lines instead of horizontal scrolling","Code & learning","check",[],false],
+      ["codeLines","Show code line numbers","Display line numbering on code samples","Code & learning","check",[],false],
+      ["codeDescriptions","Show code descriptions","Show short explanations above code examples","Code & learning","check",[],true],
+      ["codeTheme","Code block theme","Choose a dark or light code surface","Code & learning","select",[["dark","Dark"],["light","Light"]],"dark"],
+      ["xp","Show XP panels","Display learning XP panels","Code & learning","check",[],true],
+      ["tips","Show tutor tips","Display learning helper notes","Code & learning","check",[],true],
+      ["academySidebar","Academy sidebar","Show the Academy navigation sidebar","Code & learning","check",[],true],
+      ["courseProgress","Course progress","Show course completion progress","Code & learning","check",[],true],
+      ["challengeHints","Challenge hints","Show hints on learning challenges","Code & learning","check",[],true],
+      ["tutorExamples","Tutor examples","Include example snippets in tutor answers","Code & learning","check",[],true],
+      ["seasonStats","Season statistics","Show season stat panels","Team content","check",[],true],
+      ["competitionDates","Competition dates","Show event date details where available","Team content","check",[],true],
+      ["robotSpecs","Robot specifications","Show robot specification panels","Team content","check",[],true],
+      ["mediaCaptions","Media captions","Show captions beneath media items","Team content","check",[],true],
+      ["toolTips","Interface tooltips","Keep helper tooltips enabled","Team content","check",[],true],
+      ["reduceMotion","Reduce motion","Disable most animated transitions","Accessibility","check",[],false],
+      ["contrast","High contrast","Increase contrast for text and borders","Accessibility","check",[],false],
+      ["focusRing","Visible focus ring","Make keyboard focus outlines more visible","Accessibility","check",[],true],
+      ["animations","Animations","Enable decorative animations","Accessibility","check",[],true],
+      ["hoverEffects","Hover effects","Enable card hover movement","Accessibility","check",[],true],
+      ["printFriendly","Print-friendly mode","Simplify the page for printing","Accessibility","check",[],false],
+      ["dataSaver","Data saver","Reduce image rendering work where supported","Accessibility","check",[],false],
+      ["dashboardDensity","Dashboard density","Choose standard or compact dashboard cards","Team content","select",[["standard","Standard"],["compact","Compact"]],"standard"]
+    ];
+    const settingGroups = ["Appearance","Navigation","Behavior","Code & learning","Team content","Accessibility"];
+    const settingRoot = document.getElementById("settingsGroups");
+    settingGroups.forEach(group => {
+      const groupItems = settings50.filter(item => item[3] === group);
+      const section = document.createElement("section");
+      section.className = "settings-group";
+      section.innerHTML = "<h3>" + group + "</h3><p>" + groupItems.length + " adjustable preferences</p>";
+      groupItems.forEach(item => {
+        const key=item[0], label=item[1], desc=item[2], type=item[4], options=item[5], def=item[6];
+        const row=document.createElement("div");row.className="setting-row";
+        const copy=document.createElement("div");copy.innerHTML="<b>"+label+"</b><small>"+desc+"</small>";
+        let control;
+        if(type==="check"){
+          const wrap=document.createElement("label");wrap.className="setting-switch";
+          control=document.createElement("input");control.type="checkbox";control.dataset.setting=key;control.setAttribute("aria-label",label);
+          const track=document.createElement("span");wrap.append(control,track);row.append(copy,wrap);
+        }else{
+          control=document.createElement("select");control.dataset.setting=key;control.setAttribute("aria-label",label);
+          options.forEach(opt=>{const option=document.createElement("option");option.value=opt[0];option.textContent=opt[1];control.append(option)});
+          row.append(copy,control);
+        }
+        section.append(row);
+      });
+      settingRoot.append(section);
+    });
+    const settingDefaults={};settings50.forEach(item=>settingDefaults[item[0]]=item[6]);
+    const settingKey="rangersSiteSettingsV2";
+    function readSettings50(){
+      try{
+        const saved=JSON.parse(localStorage.getItem(settingKey)||"{}");
+        if(!Object.keys(saved).length){
+          const old=JSON.parse(localStorage.getItem("rangersSiteSettingsV1")||"{}");
+          if(old.theme)saved.theme=old.theme;if(old.textSize)saved.textSize=old.textSize;if(old.accent)saved.accent=old.accent;
+          if(old.corners)saved.corners=old.corners;if(old.width)saved.width=old.width;if(old.spacing)saved.spacing=saved.spacing||old.spacing;
+          if(old.contrast!==undefined)saved.contrast=old.contrast;if(old.motion!==undefined)saved.reduceMotion=old.motion;
+          if(old.sticky!==undefined)saved.sticky=old.sticky;if(old.xp!==undefined)saved.xp=old.xp;if(old.tips!==undefined)saved.tips=old.tips;
+          saved.quickMenu=false;
+        }
+        return Object.assign({},settingDefaults,saved);
+      }catch(e){return Object.assign({},settingDefaults)}
+    }
+    let activeSettings=readSettings50();
+    function applySettings50(){
+      const body=document.body,root=document.documentElement;
+      settings50.forEach(item=>{const key=item[0],value=activeSettings[key];body.dataset[key]=typeof value==="boolean"?(value?"on":"off"):String(value)});
+      const theme=activeSettings.theme==="system"?(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):activeSettings.theme;
+      body.dataset.theme=theme;
+      body.dataset.accent=activeSettings.accent;
+      body.dataset.corners=activeSettings.corners;
+      body.dataset.width=activeSettings.width;
+      body.dataset.spacing=activeSettings.spacing;
+      body.dataset.quickMenu=activeSettings.quickMenu?"on":"off";
+      root.style.setProperty("--text-scale",({small:".92",normal:"1",large:"1.08",xlarge:"1.16"}[activeSettings.textSize]||"1"));
+      root.style.setProperty("--code-size",({small:".72rem",normal:".82rem",large:".96rem"}[activeSettings.codeSize]||".82rem"));
+      document.querySelectorAll("[data-setting]").forEach(el=>{const k=el.dataset.setting;if(el.type==="checkbox")el.checked=!!activeSettings[k];else el.value=activeSettings[k]});
+      document.querySelectorAll("[title]").forEach(el=>{if(activeSettings.toolTips){if(el.dataset.savedTitle!==undefined){el.setAttribute("title",el.dataset.savedTitle);delete el.dataset.savedTitle}}else if(el.hasAttribute("title")){el.dataset.savedTitle=el.getAttribute("title");el.removeAttribute("title")}});
+      const status=document.getElementById("settingsStatus");if(status)status.textContent="Saved on this device · "+settings50.length+" settings available.";
+    }
+    function saveSettings50(){localStorage.setItem(settingKey,JSON.stringify(activeSettings));applySettings50()}
+    document.querySelectorAll("[data-setting]").forEach(el=>el.addEventListener("change",()=>{activeSettings[el.dataset.setting]=el.type==="checkbox"?el.checked:el.value;saveSettings50()}));
+    document.getElementById("resetSettings")?.addEventListener("click",()=>{
+      if(activeSettings.confirmClear&&!window.confirm("Reset all 50 website settings to their defaults?"))return;
+      activeSettings=Object.assign({},settingDefaults);saveSettings50();
+    });
+    applySettings50();
+    if(window.matchMedia)window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",()=>{if(activeSettings.theme==="system")applySettings50()});
+    document.getElementById("backToTop")?.addEventListener("click",()=>window.scrollTo({top:0,behavior:activeSettings.reduceMotion?"auto":"smooth"}));
+
+    const moreTools = [
+      {id:"match-planner",name:"Match Planner",cat:"Competition",icon:"🗓",desc:"Build a match-day plan and track prep tasks.",mode:"log",fields:["Match or event","Time / slot","Plan notes"]},
+      {id:"event-checklist",name:"Event Checklist",cat:"Competition",icon:"☑",desc:"Keep a reusable list of event-day essentials.",mode:"log",fields:["Checklist item","Owner","Status / note"]},
+      {id:"gear-ratio",name:"Gear Ratio Calculator",cat:"Calculators",icon:"⚙",desc:"Calculate output ratio and estimate output speed.",mode:"calc",formula:"ratio",fields:["Driving gear teeth","Driven gear teeth","Motor RPM"]},
+      {id:"wheel-distance",name:"Wheel Distance Calculator",cat:"Calculators",icon:"⭕",desc:"Estimate travel distance per wheel rotation.",mode:"calc",formula:"wheel",fields:["Wheel diameter (in)","Rotations","Drive multiplier"]},
+      {id:"encoder-calculator",name:"Encoder Calculator",cat:"Calculators",icon:"📟",desc:"Convert wheel rotations into encoder ticks.",mode:"calc",formula:"encoder",fields:["Ticks per rotation","Wheel rotations","Gear ratio"]},
+      {id:"motor-speed",name:"Motor Speed Planner",cat:"Calculators",icon:"🔄",desc:"Estimate output RPM after a gear reduction.",mode:"calc",formula:"speed",fields:["Motor RPM","Input teeth","Output teeth"]},
+      {id:"servo-planner",name:"Servo Position Planner",cat:"Calculators",icon:"🎛",desc:"Convert a target angle into a normalized servo position.",mode:"calc",formula:"servo",fields:["Target angle (0–180)","Minimum angle","Maximum angle"]},
+      {id:"parts-cost",name:"Parts Cost Calculator",cat:"Build",icon:"🧾",desc:"Estimate a parts list subtotal from unit cost and quantity.",mode:"calc",formula:"cost",fields:["Part name","Unit cost ($)","Quantity"]},
+      {id:"battery-log",name:"Battery Log",cat:"Robot care",icon:"🔋",desc:"Record battery checks and usage notes.",mode:"log",fields:["Battery label","Voltage reading","Condition / notes"]},
+      {id:"pit-checklist",name:"Pit Checklist",cat:"Robot care",icon:"🧰",desc:"Record pit tasks, checks, and responsibilities.",mode:"log",fields:["Pit task","Assigned to","Result / note"]},
+      {id:"match-timer",name:"Match Timer",cat:"Competition",icon:"⏱",desc:"Plan an FTC match timeline and time segments.",mode:"calc",formula:"timer",fields:["Total match seconds","Autonomous seconds","Endgame seconds"]},
+      {id:"auto-timeline",name:"Autonomous Timeline",cat:"Programming",icon:"🧭",desc:"Estimate the time budget for autonomous actions.",mode:"calc",formula:"timeline",fields:["Action 1 seconds","Action 2 seconds","Action 3 seconds"]},
+      {id:"score-calculator",name:"Score Calculator",cat:"Competition",icon:"🏁",desc:"Add scoring categories into a match total.",mode:"calc",formula:"score",fields:["Category 1 points","Category 2 points","Category 3 points"]},
+      {id:"strategy-matrix",name:"Strategy Matrix",cat:"Competition",icon:"📊",desc:"Log strategy options and compare expected outcomes.",mode:"log",fields:["Strategy option","Expected benefit","Risks / notes"]},
+      {id:"alliance-notes",name:"Alliance Notes",cat:"Competition",icon:"🤝",desc:"Keep organized notes for alliance discussions.",mode:"log",fields:["Team / partner","Discussion topic","Notes / next step"]},
+      {id:"driver-practice",name:"Driver Practice Log",cat:"Practice",icon:"🎮",desc:"Track practice sessions and improvement notes.",mode:"log",fields:["Practice focus","Duration (minutes)","What to improve"]},
+      {id:"cycle-tracker",name:"Cycle Tracker",cat:"Practice",icon:"🔁",desc:"Record cycle attempts, timing, and observations.",mode:"log",fields:["Cycle number","Time (seconds)","Observation"]},
+      {id:"intake-tuning",name:"Intake Tuning Log",cat:"Robot tuning",icon:"🛞",desc:"Record intake tests and tuning changes.",mode:"log",fields:["Test configuration","Result","Next adjustment"]},
+      {id:"shooter-tuning",name:"Shooter Tuning Log",cat:"Robot tuning",icon:"🎯",desc:"Track repeatable shooter tests and settings.",mode:"log",fields:["Shooter setting","Test result","Adjustment notes"]},
+      {id:"lift-tuning",name:"Lift Tuning Log",cat:"Robot tuning",icon:"🦾",desc:"Record lift positions, loads, and observations.",mode:"log",fields:["Target position","Load / test","Observation"]},
+      {id:"cad-converter",name:"CAD Unit Converter",cat:"CAD",icon:"📐",desc:"Convert between inches, millimeters, and centimeters.",mode:"calc",formula:"units",fields:["Value","From unit (in/mm/cm)","To unit (in/mm/cm)"]},
+      {id:"material-estimator",name:"Material Estimator",cat:"CAD",icon:"🧱",desc:"Estimate material length and add a small allowance.",mode:"calc",formula:"material",fields:["Base length (in)","Allowance (%)","Quantity"]},
+      {id:"fastener-guide",name:"Fastener Reference Log",cat:"Build",icon:"🔩",desc:"Save fastener sizes and where they are used.",mode:"log",fields:["Fastener size","Location on robot","Notes"]},
+      {id:"wire-planner",name:"Wire Length Planner",cat:"Electrical",icon:"🔌",desc:"Estimate total wire length from repeated runs.",mode:"calc",formula:"wire",fields:["Length per run (in)","Number of runs","Extra allowance (%)"]},
+      {id:"electrical-map",name:"Electrical Map Notes",cat:"Electrical",icon:"🗺",desc:"Record device connections and port assignments.",mode:"log",fields:["Device name","Hub / port","Connection notes"]},
+      {id:"sensor-test",name:"Sensor Test Log",cat:"Programming",icon:"📡",desc:"Record sensor readings and test observations.",mode:"log",fields:["Sensor name","Reading","Expected / actual notes"]},
+      {id:"code-builder",name:"OpMode Starter Builder",cat:"Programming",icon:"⌨",desc:"Generate a basic FTC Java OpMode starter from a few choices.",mode:"code",fields:["Class name","OpMode name","TeleOp or Autonomous"]},
+      {id:"bug-tracker",name:"Code Bug Tracker",cat:"Programming",icon:"🐞",desc:"Record software bugs, symptoms, and fixes to try.",mode:"log",fields:["Bug title","Where it happens","Steps / fix notes"]},
+      {id:"release-checklist",name:"Code Release Checklist",cat:"Programming",icon:"🚦",desc:"Track review steps before a code build is used.",mode:"log",fields:["Review step","Reviewer","Status / notes"]},
+      {id:"meeting-agenda",name:"Team Meeting Agenda",cat:"Team",icon:"📝",desc:"Organize meeting topics, owners, and decisions.",mode:"log",fields:["Agenda topic","Owner","Decision / notes"]}
+    ];
+    const moreFeatures = [
+      "Match schedule organizer","Match-day role assignments","Pre-match checklist","Post-match debrief","Pit setup checklist","Event packing list","Robot inspection notes","Battery rotation record","Battery health history","Spare parts checklist",
+      "Gear ratio comparison","Output RPM estimate","Wheel circumference","Distance per rotation","Encoder tick conversion","Motor speed comparison","Servo angle conversion","Servo range notes","Parts subtotal","Quantity cost breakdown",
+      "Autonomous time budget","Action sequence timing","Match clock planner","Autonomous/teleop split","Endgame time planner","Scoring category total","Alliance strategy notes","Partner team notes","Match result record","Event goals tracker",
+      "Driver practice history","Practice duration log","Cycle time history","Intake configuration history","Shooter setting history","Lift position history","Robot tuning observations","Test result archive","Repeatability notes","Improvement targets",
+      "CAD unit conversion","Inch to millimeter conversion","Millimeter to inch conversion","Material length estimate","Cut allowance estimate","Fastener location notes","Build measurement log","Part quantity planning","Wire run estimate","Electrical port map",
+      "Sensor reading history","Sensor expectation checks","Device connection record","Hub port assignment notes","OpMode class starter","TeleOp starter template","Autonomous starter template","Bug reproduction notes","Fix attempt history","Code review checklist",
+      "Meeting topic planner","Decision record","Task owner list","Team action items","Design review notes","Prototype comparison","Robot weight notes","Subsystem handoff notes","Competition travel plan","Pit crew assignments",
+      "Match strategy options","Risk and benefit notes","Scoring scenario notes","Cycle observation log","Game-piece handling notes","Driver feedback notes","Operator feedback notes","Autonomous route notes","Practice goal tracker","Test session summary",
+      "Robot maintenance history","Hardware change record","Servo configuration notes","Motor configuration notes","Encoder setup notes","Sensor calibration record","CAD revision notes","Assembly checklist","Wiring inspection record","Build session journal",
+      "Code naming helper","Java class naming","Tool record export","Local notes archive","CSV download","JSON download","Searchable tool directory","Category filters","Saved browser records","Resettable tool workspace"
+    ];
+    function makeToolPage(tool){
+      const page=document.createElement("div");page.className="site-page more-tool-page";page.id="page-"+tool.id;
+      const fields=tool.fields.map((field,index)=>'<label>'+field+'<input data-tool-field="'+index+'" placeholder="Enter '+field.toLowerCase()+'" '+(tool.mode==="log"&&index===2?'type="text"':'type="text"')+' /></label>').join("");
+      page.innerHTML='<section class="section"><div class="container tool-shell"><div class="tool-header"><div class="tool-symbol">'+tool.icon+'</div><div><span class="eyebrow">'+tool.cat+' TOOL</span><h2>'+tool.name+'</h2><p>'+tool.desc+'</p></div></div><div class="tool-panel"><div class="tool-fields">'+fields+'</div><div class="tool-actions"><button class="btn btn-primary" data-tool-run="'+tool.id+'">'+(tool.mode==="calc"||tool.mode==="code"?"Run tool":"Save entry")+'</button><button class="btn btn-soft" data-tool-clear="'+tool.id+'">Clear fields</button><button class="btn btn-outline" data-tool-export="'+tool.id+'">Export records</button></div><div class="tool-output" id="tool-output-'+tool.id+'" aria-live="polite">Your result or saved entry will appear here.</div><div class="tool-history" id="tool-history-'+tool.id+'"></div><p class="tool-hint">Entries are stored only in this browser. Check robot plans with your team and follow the current FTC rules and mentor guidance.</p></div></div></section>';
+      document.querySelector("main").append(page);
+      return page;
+    }
+    moreTools.forEach(tool=>{pageIds.push(tool.id);makeToolPage(tool)});
+    const morePage=document.createElement("div");morePage.className="site-page";morePage.id="page-more";
+    morePage.innerHTML='<section class="section"><div class="container"><div class="section-head"><span class="eyebrow">RANGERS TOOLBOX</span><h2>More ways to <span class="accent">build smarter.</span></h2><p>Search the directory for calculators, robot logs, programming helpers, and competition tools.</p></div><div class="more-hero"><div><input id="moreSearch" class="more-search" type="search" placeholder="Search 100 tools and features..." aria-label="Search more tools"/><div class="more-count" id="moreCount">100 searchable features</div></div><div class="more-count">30 dedicated tool pages · saved locally</div></div><div class="more-filters" id="moreFilters"></div><div class="more-grid" id="moreGrid"></div></div></section>';
+    document.querySelector("main").append(morePage);
+    const moreCategories=["All","Competition","Calculators","Build","Robot care","Practice","Robot tuning","CAD","Electrical","Programming","Team"];
+    let activeMoreCategory=activeSettings.rememberFilters?(localStorage.getItem("rangersMoreCategory")||"All"):"All";
+    const featureItems=moreFeatures.map((name,index)=>({name:name,tool:moreTools[index%moreTools.length],category:moreTools[index%moreTools.length].cat,desc:"Open the "+moreTools[index%moreTools.length].name+" workspace to use this feature."}));
+    const moreFilters=document.getElementById("moreFilters"),moreGrid=document.getElementById("moreGrid"),moreSearch=document.getElementById("moreSearch"),moreCount=document.getElementById("moreCount");
+    moreCategories.forEach(cat=>{const btn=document.createElement("button");btn.className="more-filter"+(cat==="All"?" active":"");btn.textContent=cat;btn.type="button";btn.addEventListener("click",()=>{activeMoreCategory=cat;if(activeSettings.rememberFilters)localStorage.setItem("rangersMoreCategory",cat);moreFilters.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===cat));renderMore()});moreFilters.append(btn)});
+    function renderMore(){
+      const q=moreSearch.value.trim().toLowerCase();
+      const filtered=featureItems.filter(item=>(activeMoreCategory==="All"||item.category===activeMoreCategory)&&(!q||(item.name+" "+item.category+" "+item.desc).toLowerCase().includes(q)));
+      moreGrid.innerHTML="";
+      filtered.forEach(item=>{const card=document.createElement("button");card.type="button";card.className="more-card";card.innerHTML='<div class="more-card-top"><span class="more-category">'+item.category+'</span><span>'+item.tool.icon+'</span></div><h3>'+item.name+'</h3><p>'+item.desc+'</p><span class="more-open">Open workspace →</span>';card.addEventListener("click",()=>showPage(item.tool.id));moreGrid.append(card)});
+      moreCount.textContent=filtered.length+" of 100 features shown";
+    }
+    moreSearch.addEventListener("input",renderMore);renderMore();
+    if(activeSettings.rememberFilters){const savedMore=localStorage.getItem("rangersMoreSearch");if(savedMore)moreSearch.value=savedMore;moreSearch.addEventListener("input",()=>localStorage.setItem("rangersMoreSearch",moreSearch.value))}
+    function getToolRecords(id){try{return JSON.parse(localStorage.getItem("rangersTool_"+id)||"[]")}catch(e){return []}}
+    function paintToolHistory(tool){
+      const holder=document.getElementById("tool-history-"+tool.id);if(!holder)return;holder.innerHTML="";
+      getToolRecords(tool.id).slice().reverse().forEach((record,index)=>{const row=document.createElement("div");row.className="tool-record";const label=document.createElement("span");label.textContent=record.label+" · "+record.date;const remove=document.createElement("button");remove.type="button";remove.textContent="Remove";remove.addEventListener("click",()=>{const records=getToolRecords(tool.id);records.splice(records.length-1-index,1);localStorage.setItem("rangersTool_"+tool.id,JSON.stringify(records));paintToolHistory(tool)});row.append(label,remove);holder.append(row)});
+    }
+    function downloadToolRecords(tool){
+      const records=getToolRecords(tool.id);if(!records.length){alert("There are no saved records to export yet.");return}
+      const format=activeSettings.exportFormat;
+      const content=format==="json"?JSON.stringify(records,null,2):["Date,Entry",...records.map(r=>'"'+r.date+'","'+r.label.replace(/"/g,'""')+'"')].join("\n");
+      const blob=new Blob([content],{type:format==="json"?"application/json":"text/csv"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=tool.id+"-records."+format;a.click();URL.revokeObjectURL(url);
+    }
+    function runTool(tool){
+      const page=document.getElementById("page-"+tool.id),values=Array.from(page.querySelectorAll("[data-tool-field]")).map(el=>el.value.trim()),out=document.getElementById("tool-output-"+tool.id);
+      if(values.some(v=>!v)){out.textContent="Fill in all fields first.";return}
+      let result="";
+      const n=values.map(v=>Number(v));
+      if(tool.mode==="calc"){
+        switch(tool.formula){
+          case "ratio":result="Gear ratio: "+(n[1]/n[0]).toFixed(3)+":1 · Estimated output RPM: "+(n[2]*n[0]/n[1]).toFixed(1);break;
+          case "wheel":result="Distance: "+(Math.PI*n[0]*n[1]*n[2]).toFixed(2)+" inches";break;
+          case "encoder":result="Estimated encoder ticks: "+(n[0]*n[1]*n[2]).toFixed(0);break;
+          case "speed":result="Estimated output RPM: "+(n[0]*n[1]/n[2]).toFixed(1);break;
+          case "servo":result="Normalized target position: "+Math.max(0,Math.min(1,(n[0]-n[1])/(n[2]-n[1]))).toFixed(3);break;
+          case "cost":result="Estimated subtotal for "+values[0]+": $"+(n[1]*n[2]).toFixed(2);break;
+          case "timer":result="Remaining match time after autonomous and endgame segments: "+(n[0]-n[1]-n[2]).toFixed(1)+" seconds";break;
+          case "timeline":result="Total planned autonomous action time: "+(n[0]+n[1]+n[2]).toFixed(1)+" seconds";break;
+          case "score":result="Total points across the three entered categories: "+(n[0]+n[1]+n[2]).toFixed(1);break;
+          case "units":{const factors={in:25.4,mm:1,cm:10};const from=values[1].toLowerCase(),to=values[2].toLowerCase();if(!factors[from]||!factors[to]){out.textContent="Use in, mm, or cm for the unit fields.";return}result="Converted value: "+(n[0]*factors[from]/factors[to]).toFixed(3)+" "+to;break}
+          case "material":result="Estimated material length including allowance: "+(n[0]*(1+n[1]/100)*n[2]).toFixed(2)+" inches";break;
+          case "wire":result="Estimated total wire length: "+(n[0]*n[1]*(1+n[2]/100)).toFixed(2)+" inches";break;
+        }
+      }else if(tool.mode==="code"){
+        const className=values[0].replace(/[^A-Za-z0-9_]/g,"");if(!/^[A-Za-z_]/.test(className)){out.textContent="Use a valid Java class name beginning with a letter or underscore.";return}
+        const mode=values[2].toLowerCase().includes("auto")?"Autonomous":"TeleOp";
+        result='@'+mode+'(name = "'+values[1]+'")\npublic class '+className+' extends LinearOpMode {\n  @Override\n  public void runOpMode() {\n    waitForStart();\n    while (opModeIsActive()) {\n      telemetry.addData("Status", "Running");\n      telemetry.update();\n    }\n  }\n}';
+      }else{
+        const label=values.join(" · ");const records=getToolRecords(tool.id);records.push({date:new Date().toLocaleString(),label:label});localStorage.setItem("rangersTool_"+tool.id,JSON.stringify(records));result="Saved entry: "+label;paintToolHistory(tool);
+      }
+      out.textContent=result;
+      if(tool.mode!=="log"){const records=getToolRecords(tool.id);records.push({date:new Date().toLocaleString(),label:result});localStorage.setItem("rangersTool_"+tool.id,JSON.stringify(records));paintToolHistory(tool)}
+    }
+    moreTools.forEach(tool=>{
+      const pageNode=document.getElementById("page-"+tool.id);const draftKey="rangersToolDraft_"+tool.id;let savedDraft=[];try{savedDraft=JSON.parse(localStorage.getItem(draftKey)||"[]")}catch(e){}
+      pageNode.querySelectorAll("[data-tool-field]").forEach((field,index)=>{if(savedDraft[index]!==undefined)field.value=savedDraft[index];field.addEventListener("input",()=>{if(activeSettings.autosave){const values=Array.from(pageNode.querySelectorAll("[data-tool-field]")).map(input=>input.value);localStorage.setItem(draftKey,JSON.stringify(values))}})});
+      paintToolHistory(tool);
+      document.querySelector('[data-tool-run="'+tool.id+'"]').addEventListener("click",()=>runTool(tool));
+      document.querySelector('[data-tool-clear="'+tool.id+'"]').addEventListener("click",()=>{document.querySelectorAll("#page-"+tool.id+" [data-tool-field]").forEach(el=>el.value="");document.getElementById("tool-output-"+tool.id).textContent="Fields cleared."});
+      document.querySelector('[data-tool-export="'+tool.id+'"]').addEventListener("click",()=>downloadToolRecords(tool));
+    });
+    const backTop=document.createElement("button");backTop.id="backToTop";backTop.type="button";backTop.setAttribute("aria-label","Back to top");backTop.textContent="↑";document.body.append(backTop);backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:activeSettings.reduceMotion?"auto":"smooth"}));
+
     function showPage(id, updateHash=true) {
       if (!pageIds.includes(id)) id = "home";
       document.querySelectorAll(".site-page").forEach(page => page.classList.toggle("active", page.id === `page-${id}`));
