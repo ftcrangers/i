@@ -214,6 +214,7 @@ body[data-print-friendly="on"]{background:white!important;color:black!important}
 body[data-data-saver="on"] .hero-glow{display:none!important}
 body[data-dashboard-density="compact"] .dashboard-card{padding:12px}
 
+body[data-theme="dark"] .more-filter{background:var(--white);color:var(--muted);border-color:var(--line)}body[data-theme="dark"] .more-filter.active{background:var(--green);color:#fff;border-color:var(--green)}
 </style>
 </head>
 <body>
@@ -1069,6 +1070,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
     const featureItems=moreFeatures.map((name,index)=>{const tool=moreTools[featureToolOrder[index]??(index%moreTools.length)];return {name:name,tool:tool,category:tool.cat,desc:"Open the "+tool.name+" workspace to use this feature."}});
     const moreFilters=document.getElementById("moreFilters"),moreGrid=document.getElementById("moreGrid"),moreSearch=document.getElementById("moreSearch"),moreCount=document.getElementById("moreCount");
     moreCategories.forEach(cat=>{const btn=document.createElement("button");btn.className="more-filter"+(cat==="All"?" active":"");btn.textContent=cat;btn.type="button";btn.addEventListener("click",()=>{activeMoreCategory=cat;if(activeSettings.rememberFilters)localStorage.setItem("rangersMoreCategory",cat);moreFilters.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===cat));renderMore()});moreFilters.append(btn)});
+    moreFilters.querySelectorAll("button").forEach(btn=>btn.classList.toggle("active",btn.textContent===activeMoreCategory));
     function renderMore(){
       const q=moreSearch.value.trim().toLowerCase();
       const filtered=featureItems.filter(item=>(activeMoreCategory==="All"||item.category===activeMoreCategory)&&(!q||(item.name+" "+item.category+" "+item.desc).toLowerCase().includes(q)));
