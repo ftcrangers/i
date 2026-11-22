@@ -120,11 +120,101 @@ body[data-spacing="compact"] .section{padding:54px 0}body[data-spacing="spacious
 @media(max-width:650px){.nav{height:70px}.brand{font-size:.88rem}.brand img{width:39px;height:39px}.nav-shortcuts{display:none}.menu-toggle{margin-left:auto;padding:9px 11px}.nav-links{left:16px;right:16px;top:calc(100% + 6px);width:auto;grid-template-columns:repeat(2,minmax(0,1fr));max-height:70vh;overflow:auto}.nav-links a{white-space:normal}.setting-row{gap:10px}.setting-row select{width:135px}.settings-intro{display:block}.settings-icon{margin-bottom:12px}.settings-status{margin-top:14px}}
 
 
-.settings-layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:18px;align-items:start}.settings-groups{display:grid;gap:14px}.settings-group{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:18px}.settings-group h3{font:800 1rem Manrope;color:var(--ink);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:4px}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border:0}.setting-row>div{display:grid;gap:3px;min-width:0}.setting-row b{font-size:.85rem}.setting-row small{font-size:.72rem;color:var(--muted)}.setting-row select{width:155px;max-width:44%;padding:8px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink)}.setting-switch{position:relative;display:inline-flex;flex:0 0 auto;width:44px;height:25px}.setting-switch input{position:absolute;opacity:0}.setting-switch span{position:absolute;inset:0;border-radius:99px;background:#b8c5bc;cursor:pointer}.setting-switch span:before{content:"";position:absolute;width:17px;height:17px;left:4px;top:4px;background:white;border-radius:50%;transition:.2s}.setting-switch input:checked+span{background:var(--green)}.setting-switch input:checked+span:before{transform:translateX(19px)}
-.more-search-wrap{max-width:750px;margin:0 auto 26px}.more-search-wrap input{width:100%;padding:14px 17px;border:1px solid var(--line);border-radius:13px;background:var(--white);color:var(--ink);font:inherit}.more-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}.more-filter{padding:8px 14px;border:1px solid var(--line);border-radius:99px;background:var(--white);color:var(--ink);font-weight:700;cursor:pointer}.more-filter.active{background:var(--green);color:white}.more-count{font-size:.78rem;color:var(--muted)}.more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.more-feature{display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--white);min-height:140px}.more-feature-top{display:flex;justify-content:space-between;gap:8px}.more-feature-icon{font-size:1.2rem}.more-feature-status{font-size:.65rem;font-weight:800;text-transform:uppercase;color:var(--green)}.more-feature-status.planned{color:var(--muted)}.more-feature h3{font:800 .9rem Manrope;color:var(--ink)}.more-feature p{font-size:.75rem;color:var(--muted);line-height:1.45;flex:1}.more-feature a{color:var(--green);font-size:.77rem;font-weight:800;text-decoration:none}.more-empty{text-align:center;padding:28px;color:var(--muted)}
-body[data-quick-menu="off"] .corner-menu-button{display:none!important}body[data-header-density="compact"] .nav{height:68px}body[data-header-density="roomy"] .nav{height:94px}body[data-font-family="system"]{font-family:Arial,Helvetica,sans-serif}body[data-font-family="rounded"]{font-family:"Trebuchet MS",Arial,sans-serif}body[data-line-height="relaxed"] p{line-height:1.9}body[data-line-height="tight"] p{line-height:1.35}body[data-letter-spacing="wide"]{letter-spacing:.025em}body[data-card-shadow="off"] .highlight,body[data-card-shadow="off"] .info-card,body[data-card-shadow="off"] .season-panel,body[data-card-shadow="off"] .settings-group,body[data-card-shadow="off"] .more-feature{box-shadow:none}body[data-border="strong"] .highlight,body[data-border="strong"] .info-card,body[data-border="strong"] .season-panel,body[data-border="strong"] .settings-group,body[data-border="strong"] .more-feature{border-width:2px}body[data-button-size="large"] .btn{padding:15px 22px}body[data-button-size="small"] .btn{padding:9px 14px}body[data-link-style="underline"] a:not(.btn){text-decoration:underline}body[data-show-footer="off"] footer,body[data-show-social="off"] .social-links{display:none!important}body[data-show-stats="off"] .team-facts,body[data-show-stats="off"] .season-stats{display:none!important}body[data-show-page-intros="off"] .section-head p{display:none!important}body[data-show-images="off"] .hero img,body[data-show-images="off"] .info-card img{display:none!important}body[data-show-robot-cards="off"] .robot-showcase-card{display:none!important}body[data-focus-mode="on"] .topbar,body[data-focus-mode="on"] footer{opacity:.45}body[data-focus-mode="on"] .topbar:hover,body[data-focus-mode="on"] footer:hover{opacity:1}body[data-reading-width="narrow"] .section .container{max-width:900px}body[data-reading-width="wide"] .section .container{max-width:1440px}body[data-motion="reduced"] *,body[data-motion="reduced"] *:before,body[data-motion="reduced"] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}body[data-theme="dark"] .settings-group,body[data-theme="dark"] .more-feature,body[data-theme="dark"] .more-search-wrap input,body[data-theme="dark"] .more-filter{background:var(--white);color:var(--ink);border-color:var(--line)}
-@media(max-width:900px){.settings-layout{grid-template-columns:1fr}.more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.more-grid{grid-template-columns:1fr}.setting-row{gap:8px}.setting-row select{width:130px}}
+/* More hub, 50 settings and responsive tool workspaces */
+body[data-quick-menu="off"] .corner-menu-button,body[data-quick-menu="off"] .corner-menu,body[data-quick-menu="off"] .corner-backdrop{display:none!important}
+.settings-layout{grid-template-columns:240px minmax(0,1fr)}
+.settings-groups{display:grid;gap:16px;min-width:0}
+.settings-group{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 25px #123d2b07}
+.settings-group h3{font:800 1.05rem Manrope;margin:0 0 6px;color:var(--ink)}
+.settings-group>p{font-size:.78rem;color:var(--muted);margin:0 0 10px}
+.setting-row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:11px 0;border-bottom:1px solid var(--line)}
+.setting-row:last-child{border-bottom:0}.setting-row>div{display:grid;gap:3px;min-width:0}.setting-row b{font-size:.84rem}.setting-row small{font-size:.72rem;color:var(--muted)}
+.setting-row select{width:170px;max-width:48%;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font-size:.78rem}
+.setting-switch{position:relative;display:inline-flex;flex:0 0 auto;width:46px;height:26px}.setting-switch input{position:absolute;opacity:0;width:1px;height:1px}.setting-switch span{position:absolute;inset:0;background:#b8c5bc;border-radius:99px;cursor:pointer;transition:.2s}.setting-switch span:before{content:"";position:absolute;width:18px;height:18px;left:4px;top:4px;background:white;border-radius:50%;transition:.2s}.setting-switch input:checked+span{background:var(--green)}.setting-switch input:checked+span:before{transform:translateX(20px)}.setting-switch input:focus-visible+span{outline:3px solid var(--gold);outline-offset:3px}
+.more-hero{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;margin-bottom:26px}.more-search{width:100%;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--white);color:var(--ink);font-size:1rem;box-shadow:0 8px 25px #123d2b0a}
+.more-filters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}.more-filter{border:1px solid var(--line);border-radius:999px;background:var(--white);color:var(--muted);padding:8px 13px;font-size:.78rem;font-weight:800;cursor:pointer}.more-filter.active{background:var(--green);border-color:var(--green);color:white}
+.more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.more-card{display:flex;flex-direction:column;gap:9px;text-align:left;padding:17px;border:1px solid var(--line);border-radius:15px;background:var(--white);color:var(--ink);min-height:150px;box-shadow:0 6px 20px #123d2b08;cursor:pointer;transition:transform .18s,box-shadow .18s}.more-card:hover{transform:translateY(-3px);box-shadow:0 14px 28px #123d2b12}.more-card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.more-card .more-category{font-size:.66rem;text-transform:uppercase;letter-spacing:.09em;color:var(--green);font-weight:900}.more-card h3{font:800 .96rem Manrope;margin:0}.more-card p{font-size:.76rem;color:var(--muted);margin:0;line-height:1.5}.more-card .more-open{font-size:.74rem;color:var(--green);font-weight:800;margin-top:auto}.more-count{font-size:.8rem;color:var(--muted);margin-bottom:12px}
+.more-tool-page .tool-shell{max-width:900px;margin:auto}.tool-header{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}.tool-symbol{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:var(--mint);color:var(--green);font-size:1.4rem;flex:0 0 auto}.tool-panel{padding:22px;background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 25px #123d2b08}.tool-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.tool-fields label{display:grid;gap:6px;font-size:.78rem;font-weight:800;color:var(--muted)}.tool-fields input,.tool-fields textarea,.tool-fields select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font:inherit;font-size:.88rem}.tool-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.tool-output{margin-top:16px;padding:15px;border-radius:12px;background:var(--mint);color:var(--ink);min-height:52px;font-size:.9rem;white-space:pre-wrap}.tool-history{display:grid;gap:8px;margin-top:14px}.tool-record{display:flex;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:.8rem}.tool-record button{border:0;background:transparent;color:var(--green);font-weight:800;cursor:pointer}.tool-hint{font-size:.76rem;color:var(--muted);margin-top:12px}
+body[data-theme="dark"] .settings-group,body[data-theme="dark"] .settings-intro,body[data-theme="dark"] .more-card,body[data-theme="dark"] .tool-panel{background:var(--white);color:var(--ink);border-color:var(--line)}
+body[data-theme="dark"] .more-search,body[data-theme="dark"] .tool-fields input,body[data-theme="dark"] .tool-fields textarea,body[data-theme="dark"] .tool-fields select,body[data-theme="dark"] .setting-row select{background:#101a14;color:var(--ink);border-color:var(--line)}
+body[data-theme="dark"] .tool-record{background:#101a14;color:var(--ink);border-color:var(--line)}
+body[data-cardshadow="off"] .more-card,body[data-cardshadow="off"] .tool-panel,body[data-cardshadow="off"] .settings-group{box-shadow:none}
+body[data-borders="off"] .more-card,body[data-borders="off"] .tool-panel,body[data-borders="off"] .settings-group{border-color:transparent}
+body[data-texture="dots"]{background-image:radial-gradient(#4d87601a 1px,transparent 1px);background-size:18px 18px}
+body[data-texture="plain"]{background-image:none}
+body[data-font="system"]{font-family:system-ui,sans-serif}body[data-font="serif"]{font-family:Georgia,serif}
+body[data-lineheight="relaxed"]{line-height:1.85}body[data-lineheight="tight"]{line-height:1.35}
+body[data-letterspacing="wide"]{letter-spacing:.025em}
+body[data-compactheader="on"] .nav{height:64px}
+body[data-sticky="off"] .topbar{position:relative}
+body[data-footer="off"] footer{display:none!important}
+body[data-backtop="on"] #backToTop{display:grid}#backToTop{display:none;position:fixed;right:22px;bottom:22px;z-index:60;width:44px;height:44px;border:0;border-radius:50%;background:var(--green);color:white;font-size:1.2rem;box-shadow:0 8px 22px #0002;cursor:pointer}
+body[data-linkstyle="underline"] a:not(.btn){text-decoration:underline;text-underline-offset:3px}
+body[data-buttonstyle="square"] .btn{border-radius:6px}body[data-buttonstyle="pill"] .btn{border-radius:999px}
+body[data-codewrap="on"] pre{white-space:pre-wrap;overflow-wrap:anywhere}
+body[data-codedescriptions="off"] .code-card p{display:none!important}
+body[data-xp="off"] .xp-panel,body[data-courseprogress="off"] .course-progress,body[data-challengehints="off"] .challenge-hint,body[data-tutorexamples="off"] .tutor-example{display:none!important}
+body[data-seasonstats="off"] .season-stat,body[data-competitiondates="off"] .competition-date,body[data-robotspecs="off"] .robot-spec,body[data-mediacaptions="off"] .media-caption{display:none!important}
+body[data-tooltip="off"] [title]{cursor:inherit}
+body[data-reducemotion="on"] *,body[data-reducemotion="on"] *:before,body[data-reducemotion="on"] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+body[data-animations="off"] *,body[data-animations="off"] *:before,body[data-animations="off"] *:after{animation:none!important}
+body[data-hovereffects="off"] .more-card:hover{transform:none;box-shadow:none}
+body[data-contrast="high"]{--muted:#34483b;--line:#687d70}body[data-theme="dark"][data-contrast="high"]{--muted:#e5eee7;--line:#a6b9ab}
+body[data-focusring="on"] :focus-visible{outline:3px solid var(--green)!important;outline-offset:3px!important}
+body[data-printfriendly="on"]{background:white!important;color:black!important}body[data-printfriendly="on"] .topbar,body[data-printfriendly="on"] footer{display:none!important}
+body[data-datasaver="on"] img{content-visibility:auto}
+body[data-dashboarddensity="compact"] .dashboard-card{padding:12px}
+@media(max-width:900px){.settings-layout{grid-template-columns:1fr}.more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.more-hero{grid-template-columns:1fr}.tool-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.more-grid{grid-template-columns:1fr}.tool-fields{grid-template-columns:1fr}.setting-row{gap:8px}.setting-row select{width:145px}.tool-panel{padding:15px}.more-hero{margin-bottom:18px}}
 
+
+body[data-font="system"]{font-family:system-ui,sans-serif}body[data-font="serif"]{font-family:Georgia,serif}
+body[data-lineheight="relaxed"]{line-height:1.85}body[data-lineheight="tight"]{line-height:1.35}
+body[data-letterspacing="wide"]{letter-spacing:.025em}
+body[data-navlabels="compact"] .nav-links a{font-size:.74rem}
+body[data-breadcrumbs="off"] .tool-header .eyebrow{display:none}
+body[data-academysidebar="off"] .academy-side{display:none!important}
+body[data-codedescriptions="off"] .code-card p{display:none!important}
+body[data-codetheme="light"] pre{background:#f1f4f2!important;color:#1b2a20!important;border:1px solid #d6e0d8}
+body[data-codelines="on"] pre{border-left:4px solid var(--green);padding-left:1.2rem}
+body[data-contrast="on"]{--muted:#34483b;--line:#687d70}
+body[data-theme="dark"][data-contrast="on"]{--muted:#e5eee7;--line:#a6b9ab}
+body[data-reducemotion="on"] *,body[data-reducemotion="on"] *:before,body[data-reducemotion="on"] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+body[data-animations="off"] *,body[data-animations="off"] *:before,body[data-animations="off"] *:after{animation:none!important}
+body[data-hovereffects="off"] .more-card:hover{transform:none;box-shadow:none}
+body[data-focusring="on"] :focus-visible{outline:3px solid var(--green)!important;outline-offset:3px!important}
+body[data-printfriendly="on"]{background:white!important;color:black!important}
+body[data-printfriendly="on"] .topbar,body[data-printfriendly="on"] footer{display:none!important}
+body[data-datasaver="on"] .hero-glow{display:none!important}
+body[data-dashboarddensity="compact"] .dashboard-card{padding:12px}
+body[data-cardshadow="off"] .more-card,body[data-cardshadow="off"] .tool-panel,body[data-cardshadow="off"] .settings-group{box-shadow:none}
+body[data-borders="off"] .more-card,body[data-borders="off"] .tool-panel,body[data-borders="off"] .settings-group{border-color:transparent}
+
+
+/* Attribute selectors use the kebab-case names generated by dataset. */
+body[data-compact-header="on"] .nav{height:64px}
+body[data-line-height="relaxed"]{line-height:1.85}body[data-line-height="tight"]{line-height:1.35}
+body[data-letter-spacing="wide"]{letter-spacing:.025em}
+body[data-nav-labels="compact"] .nav-links a{font-size:.74rem}
+body[data-card-shadow="off"] .more-card,body[data-card-shadow="off"] .tool-panel,body[data-card-shadow="off"] .settings-group{box-shadow:none}
+body[data-back-top="on"] #backToTop{display:grid}
+body[data-link-style="underline"] a:not(.btn){text-decoration:underline;text-underline-offset:3px}
+body[data-button-style="square"] .btn{border-radius:6px}body[data-button-style="pill"] .btn{border-radius:999px}
+body[data-code-wrap="on"] pre{white-space:pre-wrap;overflow-wrap:anywhere}
+body[data-code-descriptions="off"] .code-card p{display:none!important}
+body[data-code-theme="light"] pre{background:#f1f4f2!important;color:#1b2a20!important;border:1px solid #d6e0d8}
+body[data-code-lines="on"] pre{border-left:4px solid var(--green);padding-left:1.2rem}
+body[data-academy-sidebar="off"] .academy-side{display:none!important}
+body[data-course-progress="off"] .course-progress,body[data-challenge-hints="off"] .challenge-hint,body[data-tutor-examples="off"] .tutor-example{display:none!important}
+body[data-season-stats="off"] .season-stat,body[data-competition-dates="off"] .competition-date,body[data-robot-specs="off"] .robot-spec,body[data-media-captions="off"] .media-caption{display:none!important}
+body[data-reduce-motion="on"] *,body[data-reduce-motion="on"] *:before,body[data-reduce-motion="on"] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+body[data-focus-ring="on"] :focus-visible{outline:3px solid var(--green)!important;outline-offset:3px!important}
+body[data-hover-effects="off"] .more-card:hover{transform:none;box-shadow:none}
+body[data-print-friendly="on"]{background:white!important;color:black!important}body[data-print-friendly="on"] .topbar,body[data-print-friendly="on"] footer{display:none!important}
+body[data-data-saver="on"] .hero-glow{display:none!important}
+body[data-dashboard-density="compact"] .dashboard-card{padding:12px}
+
+body[data-theme="dark"] .more-filter{background:var(--white);color:var(--muted);border-color:var(--line)}body[data-theme="dark"] .more-filter.active{background:var(--green);color:#fff;border-color:var(--green)}
 </style>
 </head>
 <body>
@@ -132,7 +222,7 @@ body[data-quick-menu="off"] .corner-menu-button{display:none!important}body[data
 <a class="brand" data-page-link="home" href="#home"><img alt="Itkan Rangers logo" src="https://ftcrangers.com/logo.png"/><span>ITKAN RANGERS<small>FTC TEAM #28922</small></span></a>
 <div class="nav-shortcuts"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">Seasons</a><a data-page-link="academy" href="#academy">Academy</a><a data-page-link="parts-hub" href="#parts-hub">Parts Hub</a><a data-page-link="more" href="#more">More</a></div>
 <button aria-expanded="false" aria-label="Open navigation" class="menu-toggle" id="menuToggle">☰ <span>Menu</span></button>
-<div class="nav-links" id="navLinks"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">Code Library</a><a data-page-link="academy" href="#academy">Academy</a><a data-page-link="dashboard" href="#dashboard">Dashboard</a><a data-page-link="engineering-notebook" href="#engineering-notebook">Notebook</a><a data-page-link="autonomous-planner" href="#autonomous-planner">Auto Planner</a><a data-page-link="scouting" href="#scouting">Scouting</a><a data-page-link="maintenance" href="#maintenance">Maintenance</a><a data-page-link="parts-hub" href="#parts-hub">Parts Hub</a><a data-page-link="more" href="#more">More</a><a data-page-link="settings" href="#settings">Settings</a></div>
+<div class="nav-links" id="navLinks"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">Code Library</a><a data-page-link="academy" href="#academy">Academy</a><a data-page-link="dashboard" href="#dashboard">Dashboard</a><a data-page-link="engineering-notebook" href="#engineering-notebook">Notebook</a><a data-page-link="autonomous-planner" href="#autonomous-planner">Auto Planner</a><a data-page-link="scouting" href="#scouting">Scouting</a><a data-page-link="maintenance" href="#maintenance">Maintenance</a><a data-page-link="parts-hub" href="#parts-hub">Parts Hub</a><a data-page-link="more" href="#more">More tools</a><a data-page-link="settings" href="#settings">Settings · 50 options</a></div>
 </nav></div>
 <main><div class="site-page" id="page-home"><header class="hero" id="home">
 <div class="container hero-inner">
@@ -358,10 +448,9 @@ body[data-quick-menu="off"] .corner-menu-button{display:none!important}body[data
 <div class="hub-card parts-list-card"><div class="tool-heading"><div><h3>Our build list</h3><p class="source-note" id="partsListCount">0 items saved on this device.</p></div><div class="hub-actions"><button type="button" class="btn btn-soft btn-small" id="exportPartsList">Export CSV</button><button type="button" class="btn btn-soft btn-small" id="clearPartsList">Clear list</button></div></div><div id="partsBuildList" class="parts-build-list"><p class="source-note">Add components above to start a parts list for your next robot build.</p></div><form id="customPartForm" class="custom-part-form"><label for="customPartName">Add another part</label><input id="customPartName" maxlength="100" placeholder="Enter a part or material name" required/><button class="btn btn-primary btn-small" type="submit">Add item</button></form></div>
 </div></section></div>
 
-<div class="site-page" id="page-settings"><section class="section"><div class="container"><div class="section-head"><span class="eyebrow">YOUR EXPERIENCE</span><h2>Settings & <span class="accent">preferences.</span></h2><p>50 adjustable settings. Changes save automatically on this device.</p></div><div class="settings-layout"><article class="settings-intro"><div class="settings-icon">⚙</div><h3>Make it yours</h3><p>Personalize how the Rangers site looks and works.</p><div class="settings-status" id="settingsStatus" role="status">Saved automatically on this device.</div><button class="btn btn-soft" id="resetSettings" type="button">Reset all settings</button></article><div id="settingsControls" class="settings-groups"></div></div></div></section></div>
-<div class="site-page" id="page-more"><section class="section"><div class="container"><div class="section-head"><span class="eyebrow">RANGERS TOOLBOX</span><h2>More <span class="accent">features.</span></h2><p>Search the directory of 100 team tools, guides, and feature ideas.</p></div><div class="more-search-wrap"><input id="moreSearch" type="search" placeholder="Search features..." aria-label="Search features"/><div class="more-filter-row"><button class="more-filter active" data-more-filter="all">All</button><button class="more-filter" data-more-filter="available">Available</button><button class="more-filter" data-more-filter="planned">Coming soon</button></div><p id="moreCount" class="more-count">100 features</p></div><div id="moreGrid" class="more-grid"></div><p id="moreEmpty" class="more-empty" hidden>No matching features.</p></div></section></div>
+<div class="site-page" id="page-settings"><section class="section settings-page"><div class="container"><div class="section-head"><span class="eyebrow">YOUR EXPERIENCE</span><h2>Settings & <span class="accent">preferences.</span></h2><p>50 controls to shape the Rangers site. Your preferences are saved on this device.</p></div><div class="settings-layout"><article class="settings-intro"><div class="settings-icon">⚙</div><h3>Make it yours</h3><p>Every option below changes the way the site looks or behaves. Your choices stay in this browser.</p><div class="settings-status" id="settingsStatus" role="status">Settings are ready.</div><button class="btn btn-soft" id="resetSettings" type="button">Reset all 50 settings</button></article><div class="settings-groups" id="settingsGroups"></div></div></div></section></div>
 </main>
-<button class="corner-menu-button" id="cornerMenuButton" aria-label="Open learning menu" aria-expanded="false">☰</button><aside class="corner-menu" id="cornerMenu" aria-label="Quick navigation"><div class="corner-menu-top"><b>RANGERS HUB</b><button id="cornerMenuClose" aria-label="Close menu">×</button></div><a data-page-link="academy" href="#academy"><span>01</span><b>Academy</b><small>CAD + Programming</small></a><a data-page-link="tutor" href="#tutor"><span>02</span><b>Tutor</b><small>Ask a robotics question</small></a><a data-page-link="courses" href="#courses"><span>03</span><b>Courses</b><small>Five learning paths</small></a><a data-page-link="engineering-notebook" href="#engineering-notebook"><span>05</span><b>Engineering Notebook</b><small>Record designs and tests</small></a><a data-page-link="autonomous-planner" href="#autonomous-planner"><span>06</span><b>Autonomous Planner</b><small>Map a route on the field</small></a><a data-page-link="scouting" href="#scouting"><span>07</span><b>Competition Scouting</b><small>Track match observations</small></a><a data-page-link="maintenance" href="#maintenance"><span>08</span><b>Maintenance</b><small>Robot inspection log</small></a><a data-page-link="parts-hub" href="#parts-hub"><span>09</span><b>Parts Hub</b><small>Browse FTC components</small></a><a data-page-link="games" href="#games"><span>04</span><b>Games</b><small>Four playable challenges</small></a><a data-page-link="dashboard" href="#dashboard"><span>05</span><b>Dashboard</b><small>XP + progress</small></a><a data-page-link="robot-builder" href="#robot-builder"><span>06</span><b>Robot Builder</b><small>Design a robot concept</small></a><a data-page-link="media" href="#media"><span>07</span><b>Media Center</b><small>Photos + videos</small></a><a data-page-link="competition-center" href="#competition-center"><span>08</span><b>Competition Center</b><small>Season archives</small></a><a data-page-link="leaderboard" href="#leaderboard"><span>09</span><b>Leaderboard</b><small>Shared team progress</small></a><a data-page-link="more" href="#more"><span>＋</span><b>More</b><small>Search the feature directory</small></a><a data-page-link="settings" href="#settings"><span>⚙</span><b>Settings</b><small>Personalize your experience</small></a></aside><div class="corner-backdrop" id="cornerBackdrop"></div>
+<button class="corner-menu-button" id="cornerMenuButton" aria-label="Open learning menu" aria-expanded="false">☰</button><aside class="corner-menu" id="cornerMenu" aria-label="Quick navigation"><div class="corner-menu-top"><b>RANGERS HUB</b><button id="cornerMenuClose" aria-label="Close menu">×</button></div><a data-page-link="academy" href="#academy"><span>01</span><b>Academy</b><small>CAD + Programming</small></a><a data-page-link="tutor" href="#tutor"><span>02</span><b>Tutor</b><small>Ask a robotics question</small></a><a data-page-link="courses" href="#courses"><span>03</span><b>Courses</b><small>Five learning paths</small></a><a data-page-link="engineering-notebook" href="#engineering-notebook"><span>05</span><b>Engineering Notebook</b><small>Record designs and tests</small></a><a data-page-link="autonomous-planner" href="#autonomous-planner"><span>06</span><b>Autonomous Planner</b><small>Map a route on the field</small></a><a data-page-link="scouting" href="#scouting"><span>07</span><b>Competition Scouting</b><small>Track match observations</small></a><a data-page-link="maintenance" href="#maintenance"><span>08</span><b>Maintenance</b><small>Robot inspection log</small></a><a data-page-link="parts-hub" href="#parts-hub"><span>09</span><b>Parts Hub</b><small>Browse FTC components</small></a><a data-page-link="games" href="#games"><span>04</span><b>Games</b><small>Four playable challenges</small></a><a data-page-link="dashboard" href="#dashboard"><span>05</span><b>Dashboard</b><small>XP + progress</small></a><a data-page-link="robot-builder" href="#robot-builder"><span>06</span><b>Robot Builder</b><small>Design a robot concept</small></a><a data-page-link="media" href="#media"><span>07</span><b>Media Center</b><small>Photos + videos</small></a><a data-page-link="competition-center" href="#competition-center"><span>08</span><b>Competition Center</b><small>Season archives</small></a><a data-page-link="leaderboard" href="#leaderboard"><span>09</span><b>Leaderboard</b><small>Shared team progress</small></a><a data-page-link="more" href="#more"><span>✦</span><b>More tools</b><small>Search 100 features</small></a><a data-page-link="settings" href="#settings"><span>⚙</span><b>Settings</b><small>Personalize your experience</small></a></aside><div class="corner-backdrop" id="cornerBackdrop"></div>
 <footer><div class="container"><div class="footer-top"><div class="footer-brand"><img alt="Itkan Rangers logo" loading="lazy" src="https://ftcrangers.com/logo.png"/><h3 style="font-size:1.2rem;margin-bottom:7px">ITKAN RANGERS · #28922</h3><p>Engineering the future through creativity, collaboration, and Gracious Professionalism. Based in Plano, Texas.</p></div><div class="footer-links"><a data-page-link="home" href="#home">Home</a><a data-page-link="decode" href="#decode">DECODE</a><a data-page-link="biobuzz" href="#biobuzz">BIOBUZZ</a><a data-page-link="into-the-deep" href="#into-the-deep">INTO THE DEEP</a><a data-page-link="codes" href="#codes">FTC Code Library</a><a data-page-link="academy" href="#academy">Robotics Academy</a><a data-page-link="tutor" href="#tutor">Robotics Tutor</a></div></div><div class="copyright"><span>© <span id="year"></span> Itkan Rangers FTC #28922</span><span>Built with curiosity, teamwork, and Gracious Professionalism.</span></div></div></footer>
 <script>
 
@@ -800,25 +889,250 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
 
     const pageIds = ["home","decode","biobuzz","into-the-deep","codes","academy","tutor","courses","games","cad","programming","dashboard","robot-showcase","competition-center","robot-builder","media","leaderboard","engineering-notebook","autonomous-planner","scouting","maintenance","parts-hub","settings","more"];
 
-
-    const rangerSettingSchema=[
-      ["theme","Theme","Appearance","select","light",[["light","Light"],["dark","Dark"],["system","System"]]],["textSize","Text size","Appearance","select","normal",[["small","Small"],["normal","Normal"],["large","Large"],["xlarge","Extra large"]]],["accent","Accent color","Appearance","select","green",[["green","Rangers green"],["blue","Blue"],["purple","Purple"],["orange","Orange"]]],["corners","Card corners","Appearance","select","rounded",[["rounded","Rounded"],["sharp","Sharper"]]],["width","Content width","Appearance","select","standard",[["standard","Standard"],["wide","Wide"]]],["spacing","Page spacing","Appearance","select","comfortable",[["compact","Compact"],["comfortable","Comfortable"],["spacious","Spacious"]]],["contrast","High contrast","Accessibility","toggle",false],["motion","Reduce motion","Accessibility","toggle",false],
-      ["fontFamily","Font style","Appearance","select","default",[["default","Default"],["system","System"],["rounded","Rounded"]]],["lineHeight","Line spacing","Appearance","select","normal",[["tight","Tight"],["normal","Normal"],["relaxed","Relaxed"]]],["letterSpacing","Letter spacing","Appearance","select","normal",[["normal","Normal"],["wide","Wide"]]],["cardShadow","Card shadows","Appearance","toggle",true],["border","Border strength","Appearance","select","normal",[["normal","Normal"],["strong","Strong"]]],["headerDensity","Header height","Appearance","select","normal",[["compact","Compact"],["normal","Normal"],["roomy","Roomy"]]],["buttonSize","Button size","Appearance","select","normal",[["small","Small"],["normal","Normal"],["large","Large"]]],["linkStyle","Link style","Appearance","select","normal",[["normal","Standard"],["underline","Underline links"]]],["readingWidth","Reading width","Appearance","select","standard",[["narrow","Narrow"],["standard","Standard"],["wide","Wide"]]],["codeSize","Code text size","Code","select","normal",[["small","Small"],["normal","Normal"],["large","Large"]]],
-      ["sticky","Sticky top bar","Navigation","toggle",true],["quickMenu","Floating quick menu","Navigation","toggle",false],["showQuicklinks","Show top shortcuts","Navigation","toggle",true],["navStyle","Navigation density","Navigation","select","full",[["minimal","Minimal"],["full","Full"]]],["showFooter","Show footer","Navigation","toggle",true],["showBreadcrumbs","Show breadcrumbs","Navigation","toggle",true],
-      ["showPageIntros","Show page introductions","Content","toggle",true],["showCardDescriptions","Show card descriptions","Content","toggle",true],["showStats","Show team statistics","Content","toggle",true],["showRobotCards","Show robot showcase","Content","toggle",true],["showImages","Show decorative images","Content","toggle",true],["showSocial","Show social links","Content","toggle",true],
-      ["xp","Show XP panels","Academy","toggle",true],["tips","Show tutor tips","Academy","toggle",true],["focusMode","Focus mode","Behavior","toggle",false],["printMode","Print-friendly mode","Behavior","toggle",false],["rememberLastPage","Remember last page","Behavior","toggle",true],["confirmClear","Confirm before clearing lists","Behavior","toggle",true],["autoSave","Auto-save local tools","Behavior","toggle",true],
-      ["showCodeLineNumbers","Code line numbers","Code","toggle",false],["wrapCode","Wrap long code lines","Code","toggle",false],["codeFont","Code font","Code","select","mono",[["mono","Monospace"],["system","System"]]],["defaultCodeLanguage","Default code language","Code","select","java",[["java","Java"],["blocks","Blocks"],["text","Plain text"]]],
-      ["academyLevel","Academy difficulty","Learning","select","beginner",[["beginner","Beginner"],["intermediate","Intermediate"],["advanced","Advanced"]]],["showLessonProgress","Show lesson progress","Learning","toggle",true],["showChallengeHints","Show challenge hints","Learning","toggle",true],["compactLessonCards","Compact lesson cards","Learning","toggle",false],
-      ["dashboardDensity","Dashboard layout","Dashboard","select","comfortable",[["compact","Compact"],["comfortable","Comfortable"]]],["scoutingUnits","Scouting score units","Competition","select","points",[["points","Points"],["percent","Percent"]]],["maintenanceReminders","Maintenance reminders","Competition","toggle",true],["partsShowPrices","Show Parts Hub price notes","Parts Hub","toggle",true],["mediaGrid","Media gallery layout","Media","select","grid",[["grid","Grid"],["list","List"]]]
+    const settings50 = [
+      ["theme","Theme","Light, dark, or follow your device","Appearance","select",[["light","Light"],["dark","Dark"],["system","System"]],"light"],
+      ["textSize","Text size","Scale all regular website text","Appearance","select",[["small","Small"],["normal","Normal"],["large","Large"],["xlarge","Extra large"]],"normal"],
+      ["accent","Accent color","Choose the highlight palette","Appearance","select",[["green","Rangers green"],["blue","Blue"],["purple","Purple"],["orange","Orange"]],"green"],
+      ["font","Font family","Choose a clean system or serif font","Appearance","select",[["default","Site font"],["system","System sans-serif"],["serif","Serif"]],"default"],
+      ["lineHeight","Line spacing","Control vertical spacing between text lines","Appearance","select",[["tight","Tight"],["normal","Normal"],["relaxed","Relaxed"]],"normal"],
+      ["letterSpacing","Letter spacing","Use standard or more open letter spacing","Appearance","select",[["normal","Normal"],["wide","Wide"]],"normal"],
+      ["corners","Card corners","Rounded or sharper surfaces","Appearance","select",[["rounded","Rounded"],["sharp","Sharp"]],"rounded"],
+      ["width","Content width","Set standard or wide page content","Appearance","select",[["standard","Standard"],["wide","Wide"]],"standard"],
+      ["spacing","Page spacing","Set compact, comfortable, or spacious sections","Appearance","select",[["compact","Compact"],["comfortable","Comfortable"],["spacious","Spacious"]],"comfortable"],
+      ["cardShadow","Card shadows","Turn card shadows on or off","Appearance","select",[["on","On"],["off","Off"]],"on"],
+      ["borders","Card borders","Show or hide decorative card borders","Appearance","select",[["on","On"],["off","Off"]],"on"],
+      ["texture","Background texture","Choose a plain or subtle dotted background","Appearance","select",[["plain","Plain"],["dots","Subtle dots"]],"plain"],
+      ["compactHeader","Compact header","Use a shorter navigation bar","Navigation","check",[] ,false],
+      ["sticky","Sticky navigation","Keep the top navigation visible while scrolling","Navigation","check",[],true],
+      ["navLabels","Navigation labels","Use full or compact labels in menus","Navigation","select",[["full","Full labels"],["compact","Compact labels"]],"full"],
+      ["breadcrumbs","Tool breadcrumbs","Show the tool category context","Navigation","check",[],true],
+      ["footer","Show footer","Display the site footer","Navigation","check",[],true],
+      ["quickMenu","Floating quick menu","Show the floating quick menu (off by default)","Navigation","check",[],false],
+      ["backTop","Back to top button","Show a floating back-to-top control","Navigation","check",[],false],
+      ["landing","Starting page","Choose the page to open when no URL tab is selected","Navigation","select",[["home","Home"],["academy","Academy"],["more","More"],["dashboard","Dashboard"],["codes","Code Library"]],"home"],
+      ["linkStyle","Link style","Use normal or underlined links","Navigation","select",[["normal","Normal"],["underline","Underlined"]],"normal"],
+      ["buttonStyle","Button shape","Choose rounded, square, or pill buttons","Navigation","select",[["rounded","Rounded"],["square","Square"],["pill","Pill"]],"rounded"],
+      ["confirmClear","Confirm resets","Ask before resetting all site preferences","Behavior","check",[],true],
+      ["autosave","Autosave tool notes","Save each tool entry when you add it","Behavior","check",[],true],
+      ["rememberFilters","Remember More search","Keep the last More search and category filter","Behavior","check",[],true],
+      ["exportFormat","Default export format","Choose CSV or JSON for tool records","Behavior","select",[["csv","CSV"],["json","JSON"]],"csv"],
+      ["codeSize","Code text size","Set the font size inside code examples","Code & learning","select",[["small","Small"],["normal","Normal"],["large","Large"]],"normal"],
+      ["codeWrap","Wrap long code lines","Wrap long lines instead of horizontal scrolling","Code & learning","check",[],false],
+      ["codeLines","Code block marker","Add a visual marker to code examples","Code & learning","check",[],false],
+      ["codeDescriptions","Show code descriptions","Show short explanations above code examples","Code & learning","check",[],true],
+      ["codeTheme","Code block theme","Choose a dark or light code surface","Code & learning","select",[["dark","Dark"],["light","Light"]],"dark"],
+      ["xp","Show XP panels","Display learning XP panels","Code & learning","check",[],true],
+      ["tips","Show tutor tips","Display learning helper notes","Code & learning","check",[],true],
+      ["academySidebar","Academy sidebar","Show the Academy navigation sidebar","Code & learning","check",[],true],
+      ["courseProgress","Course progress","Show course completion progress","Code & learning","check",[],true],
+      ["challengeHints","Challenge hints","Show hints on learning challenges","Code & learning","check",[],true],
+      ["tutorExamples","Tutor examples","Include example snippets in tutor answers","Code & learning","check",[],true],
+      ["seasonStats","Season statistics","Show season stat panels","Team content","check",[],true],
+      ["competitionDates","Competition dates","Show event date details where available","Team content","check",[],true],
+      ["robotSpecs","Robot specifications","Show robot specification panels","Team content","check",[],true],
+      ["mediaCaptions","Media captions","Show captions beneath media items","Team content","check",[],true],
+      ["toolTips","Interface tooltips","Keep helper tooltips enabled","Team content","check",[],true],
+      ["reduceMotion","Reduce motion","Disable most animated transitions","Accessibility","check",[],false],
+      ["contrast","High contrast","Increase contrast for text and borders","Accessibility","check",[],false],
+      ["focusRing","Visible focus ring","Make keyboard focus outlines more visible","Accessibility","check",[],true],
+      ["animations","Animations","Enable decorative animations","Accessibility","check",[],true],
+      ["hoverEffects","Hover effects","Enable card hover movement","Accessibility","check",[],true],
+      ["printFriendly","Print-friendly mode","Simplify the page for printing","Accessibility","check",[],false],
+      ["dataSaver","Simplify decorative effects","Hide the large decorative hero glow","Accessibility","check",[],false],
+      ["dashboardDensity","Dashboard density","Choose standard or compact dashboard cards","Team content","select",[["standard","Standard"],["compact","Compact"]],"standard"]
     ];
-    const rangerSettingDefaults=Object.fromEntries(rangerSettingSchema.map(x=>[x[0],x[4]])),rangerSettingKey="rangersSiteSettingsV1";
-    function readRangerSettings(){try{return {...rangerSettingDefaults,...JSON.parse(localStorage.getItem(rangerSettingKey)||"{}")}}catch{return {...rangerSettingDefaults}}}
-    function renderRangerSettings(){const host=document.getElementById("settingsControls");if(!host)return;const groups=[...new Set(rangerSettingSchema.map(x=>x[2]))];host.innerHTML=groups.map(g=>'<section class="settings-group"><h3>'+g+'</h3>'+rangerSettingSchema.filter(x=>x[2]===g).map(([k,l,c,t,d,o])=>'<div class="setting-row"><div><b>'+l+'</b><small>Customize '+l.toLowerCase()+'.</small></div>'+(t==="toggle"?'<label class="setting-switch"><input type="checkbox" data-setting="'+k+'" aria-label="'+l+'"/><span></span></label>':'<select data-setting="'+k+'" aria-label="'+l+'">'+o.map(v=>'<option value="'+v[0]+'">'+v[1]+'</option>').join("")+'</select>')+'</div>').join("")+'</section>').join("")}
-    function applyRangerSettings(x){const b=document.body,r=document.documentElement,t=x.theme==="system"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):x.theme;b.dataset.theme=t;b.dataset.accent=x.accent;b.dataset.corners=x.corners;b.dataset.width=x.width;b.dataset.spacing=x.spacing;b.dataset.contrast=x.contrast?"high":"normal";b.dataset.motion=x.motion?"reduced":"normal";b.dataset.sticky=x.sticky?"on":"off";b.dataset.quickMenu=x.quickMenu?"on":"off";b.dataset.xp=x.xp?"on":"off";b.dataset.tips=x.tips?"on":"off";["showQuicklinks","navStyle","showFooter","showBreadcrumbs","showPageIntros","showCardDescriptions","showStats","showRobotCards","showImages","showSocial","focusMode","printMode","showCodeLineNumbers","wrapCode","showLessonProgress","showChallengeHints","compactLessonCards","maintenanceReminders","partsShowPrices","mediaGrid","fontFamily","lineHeight","letterSpacing","cardShadow","border","headerDensity","buttonSize","readingWidth","codeFont","defaultCodeLanguage","academyLevel","dashboardDensity","scoutingUnits"].forEach(k=>b.dataset[k.replace(/[A-Z]/g,m=>"-"+m.toLowerCase())]=String(x[k]));r.style.setProperty("--text-scale",({small:".92",normal:"1",large:"1.08",xlarge:"1.16"}[x.textSize]||"1"));r.style.setProperty("--code-size",({small:".72rem",normal:".82rem",large:".96rem"}[x.codeSize]||".82rem"));document.querySelectorAll("[data-setting]").forEach(el=>{if(el.type==="checkbox")el.checked=!!x[el.dataset.setting];else el.value=x[el.dataset.setting]??rangerSettingDefaults[el.dataset.setting]});const status=document.getElementById("settingsStatus");if(status)status.textContent="All preferences saved on this device."}
-    renderRangerSettings();let rangerSettings=readRangerSettings();if(localStorage.getItem("rangersSettingsVersion")!=="2"){rangerSettings.quickMenu=false;localStorage.setItem("rangersSiteSettingsV1",JSON.stringify(rangerSettings));localStorage.setItem("rangersSettingsVersion","2")}applyRangerSettings(rangerSettings);
-    document.getElementById("settingsControls")?.addEventListener("change",e=>{const el=e.target.closest("[data-setting]");if(!el)return;rangerSettings[el.dataset.setting]=el.type==="checkbox"?el.checked:el.value;localStorage.setItem(rangerSettingKey,JSON.stringify(rangerSettings));applyRangerSettings(rangerSettings)});
-    document.getElementById("resetSettings")?.addEventListener("click",()=>{rangerSettings={...rangerSettingDefaults};localStorage.setItem(rangerSettingKey,JSON.stringify(rangerSettings));applyRangerSettings(rangerSettings);document.getElementById("settingsStatus").textContent="All 50 settings reset."});
-    if(matchMedia)matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",()=>{if(rangerSettings.theme==="system")applyRangerSettings(rangerSettings)});
+    const settingGroups = ["Appearance","Navigation","Behavior","Code & learning","Team content","Accessibility"];
+    const settingRoot = document.getElementById("settingsGroups");
+    settingGroups.forEach(group => {
+      const groupItems = settings50.filter(item => item[3] === group);
+      const section = document.createElement("section");
+      section.className = "settings-group";
+      section.innerHTML = "<h3>" + group + "</h3><p>" + groupItems.length + " adjustable preferences</p>";
+      groupItems.forEach(item => {
+        const key=item[0], label=item[1], desc=item[2], type=item[4], options=item[5], def=item[6];
+        const row=document.createElement("div");row.className="setting-row";
+        const copy=document.createElement("div");copy.innerHTML="<b>"+label+"</b><small>"+desc+"</small>";
+        let control;
+        if(type==="check"){
+          const wrap=document.createElement("label");wrap.className="setting-switch";
+          control=document.createElement("input");control.type="checkbox";control.dataset.setting=key;control.setAttribute("aria-label",label);
+          const track=document.createElement("span");wrap.append(control,track);row.append(copy,wrap);
+        }else{
+          control=document.createElement("select");control.dataset.setting=key;control.setAttribute("aria-label",label);
+          options.forEach(opt=>{const option=document.createElement("option");option.value=opt[0];option.textContent=opt[1];control.append(option)});
+          row.append(copy,control);
+        }
+        section.append(row);
+      });
+      settingRoot.append(section);
+    });
+    const settingDefaults={};settings50.forEach(item=>settingDefaults[item[0]]=item[6]);
+    const settingKey="rangersSiteSettingsV2";
+    function readSettings50(){
+      try{
+        const saved=JSON.parse(localStorage.getItem(settingKey)||"{}");
+        if(!Object.keys(saved).length){
+          const old=JSON.parse(localStorage.getItem("rangersSiteSettingsV1")||"{}");
+          if(old.theme)saved.theme=old.theme;if(old.textSize)saved.textSize=old.textSize;if(old.accent)saved.accent=old.accent;
+          if(old.corners)saved.corners=old.corners;if(old.width)saved.width=old.width;if(old.spacing)saved.spacing=saved.spacing||old.spacing;
+          if(old.contrast!==undefined)saved.contrast=old.contrast;if(old.motion!==undefined)saved.reduceMotion=old.motion;
+          if(old.sticky!==undefined)saved.sticky=old.sticky;if(old.xp!==undefined)saved.xp=old.xp;if(old.tips!==undefined)saved.tips=old.tips;
+          saved.quickMenu=false;
+        }
+        return Object.assign({},settingDefaults,saved);
+      }catch(e){return Object.assign({},settingDefaults)}
+    }
+    let activeSettings=readSettings50();
+    function applySettings50(){
+      const body=document.body,root=document.documentElement;
+      settings50.forEach(item=>{const key=item[0],value=activeSettings[key];body.dataset[key]=typeof value==="boolean"?(value?"on":"off"):String(value)});
+      const theme=activeSettings.theme==="system"?(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):activeSettings.theme;
+      body.dataset.theme=theme;
+      body.dataset.accent=activeSettings.accent;
+      body.dataset.corners=activeSettings.corners;
+      body.dataset.width=activeSettings.width;
+      body.dataset.spacing=activeSettings.spacing;
+      body.dataset.quickMenu=activeSettings.quickMenu?"on":"off";
+      root.style.setProperty("--text-scale",({small:".92",normal:"1",large:"1.08",xlarge:"1.16"}[activeSettings.textSize]||"1"));
+      root.style.setProperty("--code-size",({small:".72rem",normal:".82rem",large:".96rem"}[activeSettings.codeSize]||".82rem"));
+      document.querySelectorAll("[data-setting]").forEach(el=>{const k=el.dataset.setting;if(el.type==="checkbox")el.checked=!!activeSettings[k];else el.value=activeSettings[k]});
+      document.querySelectorAll("[title]").forEach(el=>{if(activeSettings.toolTips){if(el.dataset.savedTitle!==undefined){el.setAttribute("title",el.dataset.savedTitle);delete el.dataset.savedTitle}}else if(el.hasAttribute("title")){el.dataset.savedTitle=el.getAttribute("title");el.removeAttribute("title")}});
+      const status=document.getElementById("settingsStatus");if(status)status.textContent="Saved on this device · "+settings50.length+" settings available.";
+    }
+    function saveSettings50(){localStorage.setItem(settingKey,JSON.stringify(activeSettings));applySettings50()}
+    document.querySelectorAll("[data-setting]").forEach(el=>el.addEventListener("change",()=>{activeSettings[el.dataset.setting]=el.type==="checkbox"?el.checked:el.value;saveSettings50()}));
+    document.getElementById("resetSettings")?.addEventListener("click",()=>{
+      if(activeSettings.confirmClear&&!window.confirm("Reset all 50 website settings to their defaults?"))return;
+      activeSettings=Object.assign({},settingDefaults);saveSettings50();
+    });
+    applySettings50();
+    if(window.matchMedia)window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",()=>{if(activeSettings.theme==="system")applySettings50()});
+    document.getElementById("backToTop")?.addEventListener("click",()=>window.scrollTo({top:0,behavior:activeSettings.reduceMotion?"auto":"smooth"}));
+
+    const moreTools = [
+      {id:"match-planner",name:"Match Planner",cat:"Competition",icon:"🗓",desc:"Build a match-day plan and track prep tasks.",mode:"log",fields:["Match or event","Time / slot","Plan notes"]},
+      {id:"event-checklist",name:"Event Checklist",cat:"Competition",icon:"☑",desc:"Keep a reusable list of event-day essentials.",mode:"log",fields:["Checklist item","Owner","Status / note"]},
+      {id:"gear-ratio",name:"Gear Ratio Calculator",cat:"Calculators",icon:"⚙",desc:"Calculate output ratio and estimate output speed.",mode:"calc",formula:"ratio",fields:["Driving gear teeth","Driven gear teeth","Motor RPM"]},
+      {id:"wheel-distance",name:"Wheel Distance Calculator",cat:"Calculators",icon:"⭕",desc:"Estimate travel distance per wheel rotation.",mode:"calc",formula:"wheel",fields:["Wheel diameter (in)","Rotations","Drive multiplier"]},
+      {id:"encoder-calculator",name:"Encoder Calculator",cat:"Calculators",icon:"📟",desc:"Convert wheel rotations into encoder ticks.",mode:"calc",formula:"encoder",fields:["Ticks per rotation","Wheel rotations","Gear ratio"]},
+      {id:"motor-speed",name:"Motor Speed Planner",cat:"Calculators",icon:"🔄",desc:"Estimate output RPM after a gear reduction.",mode:"calc",formula:"speed",fields:["Motor RPM","Input teeth","Output teeth"]},
+      {id:"servo-planner",name:"Servo Position Planner",cat:"Calculators",icon:"🎛",desc:"Convert a target angle into a normalized servo position.",mode:"calc",formula:"servo",fields:["Target angle (0–180)","Minimum angle","Maximum angle"]},
+      {id:"parts-cost",name:"Parts Cost Calculator",cat:"Build",icon:"🧾",desc:"Estimate a parts list subtotal from unit cost and quantity.",mode:"calc",formula:"cost",fields:["Part name","Unit cost ($)","Quantity"]},
+      {id:"battery-log",name:"Battery Log",cat:"Robot care",icon:"🔋",desc:"Record battery checks and usage notes.",mode:"log",fields:["Battery label","Voltage reading","Condition / notes"]},
+      {id:"pit-checklist",name:"Pit Checklist",cat:"Robot care",icon:"🧰",desc:"Record pit tasks, checks, and responsibilities.",mode:"log",fields:["Pit task","Assigned to","Result / note"]},
+      {id:"match-timer",name:"Match Timer",cat:"Competition",icon:"⏱",desc:"Plan an FTC match timeline and time segments.",mode:"calc",formula:"timer",fields:["Total match seconds","Autonomous seconds","Endgame seconds"]},
+      {id:"auto-timeline",name:"Autonomous Timeline",cat:"Programming",icon:"🧭",desc:"Estimate the time budget for autonomous actions.",mode:"calc",formula:"timeline",fields:["Action 1 seconds","Action 2 seconds","Action 3 seconds"]},
+      {id:"score-calculator",name:"Score Calculator",cat:"Competition",icon:"🏁",desc:"Add scoring categories into a match total.",mode:"calc",formula:"score",fields:["Category 1 points","Category 2 points","Category 3 points"]},
+      {id:"strategy-matrix",name:"Strategy Matrix",cat:"Competition",icon:"📊",desc:"Log strategy options and compare expected outcomes.",mode:"log",fields:["Strategy option","Expected benefit","Risks / notes"]},
+      {id:"alliance-notes",name:"Alliance Notes",cat:"Competition",icon:"🤝",desc:"Keep organized notes for alliance discussions.",mode:"log",fields:["Team / partner","Discussion topic","Notes / next step"]},
+      {id:"driver-practice",name:"Driver Practice Log",cat:"Practice",icon:"🎮",desc:"Track practice sessions and improvement notes.",mode:"log",fields:["Practice focus","Duration (minutes)","What to improve"]},
+      {id:"cycle-tracker",name:"Cycle Tracker",cat:"Practice",icon:"🔁",desc:"Record cycle attempts, timing, and observations.",mode:"log",fields:["Cycle number","Time (seconds)","Observation"]},
+      {id:"intake-tuning",name:"Intake Tuning Log",cat:"Robot tuning",icon:"🛞",desc:"Record intake tests and tuning changes.",mode:"log",fields:["Test configuration","Result","Next adjustment"]},
+      {id:"shooter-tuning",name:"Shooter Tuning Log",cat:"Robot tuning",icon:"🎯",desc:"Track repeatable shooter tests and settings.",mode:"log",fields:["Shooter setting","Test result","Adjustment notes"]},
+      {id:"lift-tuning",name:"Lift Tuning Log",cat:"Robot tuning",icon:"🦾",desc:"Record lift positions, loads, and observations.",mode:"log",fields:["Target position","Load / test","Observation"]},
+      {id:"cad-converter",name:"CAD Unit Converter",cat:"CAD",icon:"📐",desc:"Convert between inches, millimeters, and centimeters.",mode:"calc",formula:"units",fields:["Value","From unit (in/mm/cm)","To unit (in/mm/cm)"]},
+      {id:"material-estimator",name:"Material Estimator",cat:"CAD",icon:"🧱",desc:"Estimate material length and add a small allowance.",mode:"calc",formula:"material",fields:["Base length (in)","Allowance (%)","Quantity"]},
+      {id:"fastener-guide",name:"Fastener Reference Log",cat:"Build",icon:"🔩",desc:"Save fastener sizes and where they are used.",mode:"log",fields:["Fastener size","Location on robot","Notes"]},
+      {id:"wire-planner",name:"Wire Length Planner",cat:"Electrical",icon:"🔌",desc:"Estimate total wire length from repeated runs.",mode:"calc",formula:"wire",fields:["Length per run (in)","Number of runs","Extra allowance (%)"]},
+      {id:"electrical-map",name:"Electrical Map Notes",cat:"Electrical",icon:"🗺",desc:"Record device connections and port assignments.",mode:"log",fields:["Device name","Hub / port","Connection notes"]},
+      {id:"sensor-test",name:"Sensor Test Log",cat:"Programming",icon:"📡",desc:"Record sensor readings and test observations.",mode:"log",fields:["Sensor name","Reading","Expected / actual notes"]},
+      {id:"code-builder",name:"OpMode Starter Builder",cat:"Programming",icon:"⌨",desc:"Generate a basic FTC Java OpMode starter from a few choices.",mode:"code",fields:["Class name","OpMode name","TeleOp or Autonomous"]},
+      {id:"bug-tracker",name:"Code Bug Tracker",cat:"Programming",icon:"🐞",desc:"Record software bugs, symptoms, and fixes to try.",mode:"log",fields:["Bug title","Where it happens","Steps / fix notes"]},
+      {id:"release-checklist",name:"Code Release Checklist",cat:"Programming",icon:"🚦",desc:"Track review steps before a code build is used.",mode:"log",fields:["Review step","Reviewer","Status / notes"]},
+      {id:"meeting-agenda",name:"Team Meeting Agenda",cat:"Team",icon:"📝",desc:"Organize meeting topics, owners, and decisions.",mode:"log",fields:["Agenda topic","Owner","Decision / notes"]}
+    ];
+    const moreFeatures = [
+      "Match schedule organizer","Match-day role assignments","Pre-match checklist","Post-match debrief","Pit setup checklist","Event packing list","Robot inspection notes","Battery rotation record","Battery health history","Spare parts checklist",
+      "Gear ratio comparison","Output RPM estimate","Wheel circumference","Distance per rotation","Encoder tick conversion","Motor speed comparison","Servo angle conversion","Servo range notes","Parts subtotal","Quantity cost breakdown",
+      "Autonomous time budget","Action sequence timing","Match clock planner","Autonomous/teleop split","Endgame time planner","Scoring category total","Alliance strategy notes","Partner team notes","Match result record","Event goals tracker",
+      "Driver practice history","Practice duration log","Cycle time history","Intake configuration history","Shooter setting history","Lift position history","Robot tuning observations","Test result archive","Repeatability notes","Improvement targets",
+      "CAD unit conversion","Inch to millimeter conversion","Millimeter to inch conversion","Material length estimate","Cut allowance estimate","Fastener location notes","Build measurement log","Part quantity planning","Wire run estimate","Electrical port map",
+      "Sensor reading history","Sensor expectation checks","Device connection record","Hub port assignment notes","OpMode class starter","TeleOp starter template","Autonomous starter template","Bug reproduction notes","Fix attempt history","Code review checklist",
+      "Meeting topic planner","Decision record","Task owner list","Team action items","Design review notes","Prototype comparison","Robot weight notes","Subsystem handoff notes","Competition travel plan","Pit crew assignments",
+      "Match strategy options","Risk and benefit notes","Scoring scenario notes","Cycle observation log","Game-piece handling notes","Driver feedback notes","Operator feedback notes","Autonomous route notes","Practice goal tracker","Test session summary",
+      "Robot maintenance history","Hardware change record","Servo configuration notes","Motor configuration notes","Encoder setup notes","Sensor calibration record","CAD revision notes","Assembly checklist","Wiring inspection record","Build session journal",
+      "Code naming helper","Java class naming","Tool record export","Local notes archive","CSV download","JSON download","Searchable tool directory","Category filters","Saved browser records","Resettable tool workspace"
+    ];
+    function makeToolPage(tool){
+      const page=document.createElement("div");page.className="site-page more-tool-page";page.id="page-"+tool.id;
+      const fields=tool.fields.map((field,index)=>'<label>'+field+'<input data-tool-field="'+index+'" placeholder="Enter '+field.toLowerCase()+'" '+(tool.mode==="log"&&index===2?'type="text"':'type="text"')+' /></label>').join("");
+      page.innerHTML='<section class="section"><div class="container tool-shell"><div class="tool-header"><div class="tool-symbol">'+tool.icon+'</div><div><span class="eyebrow">'+tool.cat+' TOOL</span><h2>'+tool.name+'</h2><p>'+tool.desc+'</p></div></div><div class="tool-panel"><div class="tool-fields">'+fields+'</div><div class="tool-actions"><button class="btn btn-primary" data-tool-run="'+tool.id+'">'+(tool.mode==="calc"||tool.mode==="code"?"Run tool":"Save entry")+'</button><button class="btn btn-soft" data-tool-clear="'+tool.id+'">Clear fields</button><button class="btn btn-outline" data-tool-export="'+tool.id+'">Export records</button></div><div class="tool-output" id="tool-output-'+tool.id+'" aria-live="polite">Your result or saved entry will appear here.</div><div class="tool-history" id="tool-history-'+tool.id+'"></div><p class="tool-hint">Entries are stored only in this browser. Check robot plans with your team and follow the current FTC rules and mentor guidance.</p></div></div></section>';
+      document.querySelector("main").append(page);
+      return page;
+    }
+    moreTools.forEach(tool=>{pageIds.push(tool.id);makeToolPage(tool)});
+    const morePage=document.createElement("div");morePage.className="site-page";morePage.id="page-more";
+    morePage.innerHTML='<section class="section"><div class="container"><div class="section-head"><span class="eyebrow">RANGERS TOOLBOX</span><h2>More ways to <span class="accent">build smarter.</span></h2><p>Search the directory for calculators, robot logs, programming helpers, and competition tools.</p></div><div class="more-hero"><div><input id="moreSearch" class="more-search" type="search" placeholder="Search 100 tools and features..." aria-label="Search more tools"/><div class="more-count" id="moreCount">100 searchable features</div></div><div class="more-count">30 dedicated tool pages · saved locally</div></div><div class="more-filters" id="moreFilters"></div><div class="more-grid" id="moreGrid"></div></div></section>';
+    document.querySelector("main").append(morePage);
+    const moreCategories=["All","Competition","Calculators","Build","Robot care","Practice","Robot tuning","CAD","Electrical","Programming","Team"];
+    let activeMoreCategory=activeSettings.rememberFilters?(localStorage.getItem("rangersMoreCategory")||"All"):"All";
+    const featureToolOrder=[0,0,1,0,9,1,9,8,8,9,2,5,3,3,4,5,6,6,7,7,10,11,10,11,12,12,13,14,12,10,15,16,16,17,18,19,17,17,15,15,20,20,20,21,22,21,21,22,23,23,24,24,24,24,25,25,25,26,26,26,29,29,29,29,29,29,29,29,29,29,13,13,12,16,17,17,17,11,15,16,9,8,9,6,6,25,20,21,24,29,26,26,28,27,28,29,29,29,29,29];
+    const featureItems=moreFeatures.map((name,index)=>{const tool=moreTools[featureToolOrder[index]??(index%moreTools.length)];return {name:name,tool:tool,category:tool.cat,desc:"Open the "+tool.name+" workspace to use this feature."}});
+    const moreFilters=document.getElementById("moreFilters"),moreGrid=document.getElementById("moreGrid"),moreSearch=document.getElementById("moreSearch"),moreCount=document.getElementById("moreCount");
+    moreCategories.forEach(cat=>{const btn=document.createElement("button");btn.className="more-filter"+(cat==="All"?" active":"");btn.textContent=cat;btn.type="button";btn.addEventListener("click",()=>{activeMoreCategory=cat;if(activeSettings.rememberFilters)localStorage.setItem("rangersMoreCategory",cat);moreFilters.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===cat));renderMore()});moreFilters.append(btn)});
+    moreFilters.querySelectorAll("button").forEach(btn=>btn.classList.toggle("active",btn.textContent===activeMoreCategory));
+    function renderMore(){
+      const q=moreSearch.value.trim().toLowerCase();
+      const filtered=featureItems.filter(item=>(activeMoreCategory==="All"||item.category===activeMoreCategory)&&(!q||(item.name+" "+item.category+" "+item.desc).toLowerCase().includes(q)));
+      moreGrid.innerHTML="";
+      filtered.forEach(item=>{const card=document.createElement("button");card.type="button";card.className="more-card";card.innerHTML='<div class="more-card-top"><span class="more-category">'+item.category+'</span><span>'+item.tool.icon+'</span></div><h3>'+item.name+'</h3><p>'+item.desc+'</p><span class="more-open">Open workspace →</span>';card.addEventListener("click",()=>showPage(item.tool.id));moreGrid.append(card)});
+      moreCount.textContent=filtered.length+" of 100 features shown";
+    }
+    moreSearch.addEventListener("input",renderMore);renderMore();
+    if(activeSettings.rememberFilters){const savedMore=localStorage.getItem("rangersMoreSearch");if(savedMore)moreSearch.value=savedMore;moreSearch.addEventListener("input",()=>localStorage.setItem("rangersMoreSearch",moreSearch.value))}
+    function getToolRecords(id){try{return JSON.parse(localStorage.getItem("rangersTool_"+id)||"[]")}catch(e){return []}}
+    function paintToolHistory(tool){
+      const holder=document.getElementById("tool-history-"+tool.id);if(!holder)return;holder.innerHTML="";
+      getToolRecords(tool.id).slice().reverse().forEach((record,index)=>{const row=document.createElement("div");row.className="tool-record";const label=document.createElement("span");label.textContent=record.label+" · "+record.date;const remove=document.createElement("button");remove.type="button";remove.textContent="Remove";remove.addEventListener("click",()=>{const records=getToolRecords(tool.id);records.splice(records.length-1-index,1);localStorage.setItem("rangersTool_"+tool.id,JSON.stringify(records));paintToolHistory(tool)});row.append(label,remove);holder.append(row)});
+    }
+    function downloadToolRecords(tool){
+      const records=getToolRecords(tool.id);if(!records.length){alert("There are no saved records to export yet.");return}
+      const format=activeSettings.exportFormat;
+      const content=format==="json"?JSON.stringify(records,null,2):["Date,Entry",...records.map(r=>'"'+r.date+'","'+r.label.replace(/"/g,'""')+'"')].join("\n");
+      const blob=new Blob([content],{type:format==="json"?"application/json":"text/csv"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=tool.id+"-records."+format;a.click();URL.revokeObjectURL(url);
+    }
+    function runTool(tool){
+      const page=document.getElementById("page-"+tool.id),values=Array.from(page.querySelectorAll("[data-tool-field]")).map(el=>el.value.trim()),out=document.getElementById("tool-output-"+tool.id);
+      if(values.some(v=>!v)){out.textContent="Fill in all fields first.";return}
+      let result="";
+      const n=values.map(v=>Number(v));
+      if(tool.mode==="calc"){
+        const numericFields=tool.formula==="cost"?n.slice(1):tool.formula==="units"?[n[0]]:n;
+        if(numericFields.some(v=>!Number.isFinite(v))){out.textContent="Enter valid numbers in the numeric fields.";return}
+        if((tool.formula==="ratio"&&(n[0]===0||n[1]===0))||(tool.formula==="speed"&&n[2]===0)||(tool.formula==="servo"&&n[2]===n[1])){out.textContent="Check the gear teeth or angle range; the divisor cannot be zero.";return}
+        switch(tool.formula){
+          case "ratio":result="Gear ratio: "+(n[1]/n[0]).toFixed(3)+":1 · Estimated output RPM: "+(n[2]*n[0]/n[1]).toFixed(1);break;
+          case "wheel":result="Distance: "+(Math.PI*n[0]*n[1]*n[2]).toFixed(2)+" inches";break;
+          case "encoder":result="Estimated encoder ticks: "+(n[0]*n[1]*n[2]).toFixed(0);break;
+          case "speed":result="Estimated output RPM: "+(n[0]*n[1]/n[2]).toFixed(1);break;
+          case "servo":result="Normalized target position: "+Math.max(0,Math.min(1,(n[0]-n[1])/(n[2]-n[1]))).toFixed(3);break;
+          case "cost":result="Estimated subtotal for "+values[0]+": $"+(n[1]*n[2]).toFixed(2);break;
+          case "timer":result="Remaining match time after autonomous and endgame segments: "+(n[0]-n[1]-n[2]).toFixed(1)+" seconds";break;
+          case "timeline":result="Total planned autonomous action time: "+(n[0]+n[1]+n[2]).toFixed(1)+" seconds";break;
+          case "score":result="Total points across the three entered categories: "+(n[0]+n[1]+n[2]).toFixed(1);break;
+          case "units":{const factors={in:25.4,mm:1,cm:10};const from=values[1].toLowerCase(),to=values[2].toLowerCase();if(!factors[from]||!factors[to]){out.textContent="Use in, mm, or cm for the unit fields.";return}result="Converted value: "+(n[0]*factors[from]/factors[to]).toFixed(3)+" "+to;break}
+          case "material":result="Estimated material length including allowance: "+(n[0]*(1+n[1]/100)*n[2]).toFixed(2)+" inches";break;
+          case "wire":result="Estimated total wire length: "+(n[0]*n[1]*(1+n[2]/100)).toFixed(2)+" inches";break;
+        }
+      }else if(tool.mode==="code"){
+        const className=values[0].replace(/[^A-Za-z0-9_]/g,"");if(!/^[A-Za-z_]/.test(className)){out.textContent="Use a valid Java class name beginning with a letter or underscore.";return}
+        const mode=values[2].toLowerCase().includes("auto")?"Autonomous":"TeleOp";
+        result='@'+mode+'(name = "'+values[1]+'")\npublic class '+className+' extends LinearOpMode {\n  @Override\n  public void runOpMode() {\n    waitForStart();\n    while (opModeIsActive()) {\n      telemetry.addData("Status", "Running");\n      telemetry.update();\n    }\n  }\n}';
+      }else{
+        const label=values.join(" · ");const records=getToolRecords(tool.id);records.push({date:new Date().toLocaleString(),label:label});localStorage.setItem("rangersTool_"+tool.id,JSON.stringify(records));result="Saved entry: "+label;paintToolHistory(tool);
+      }
+      out.textContent=result;
+      if(tool.mode!=="log"){const records=getToolRecords(tool.id);records.push({date:new Date().toLocaleString(),label:result});localStorage.setItem("rangersTool_"+tool.id,JSON.stringify(records));paintToolHistory(tool)}
+    }
+    moreTools.forEach(tool=>{
+      const pageNode=document.getElementById("page-"+tool.id);const draftKey="rangersToolDraft_"+tool.id;let savedDraft=[];try{savedDraft=JSON.parse(localStorage.getItem(draftKey)||"[]")}catch(e){}
+      pageNode.querySelectorAll("[data-tool-field]").forEach((field,index)=>{if(savedDraft[index]!==undefined)field.value=savedDraft[index];field.addEventListener("input",()=>{if(activeSettings.autosave){const values=Array.from(pageNode.querySelectorAll("[data-tool-field]")).map(input=>input.value);localStorage.setItem(draftKey,JSON.stringify(values))}})});
+      paintToolHistory(tool);
+      document.querySelector('[data-tool-run="'+tool.id+'"]').addEventListener("click",()=>runTool(tool));
+      document.querySelector('[data-tool-clear="'+tool.id+'"]').addEventListener("click",()=>{document.querySelectorAll("#page-"+tool.id+" [data-tool-field]").forEach(el=>el.value="");document.getElementById("tool-output-"+tool.id).textContent="Fields cleared."});
+      document.querySelector('[data-tool-export="'+tool.id+'"]').addEventListener("click",()=>downloadToolRecords(tool));
+    });
+    const backTop=document.createElement("button");backTop.id="backToTop";backTop.type="button";backTop.setAttribute("aria-label","Back to top");backTop.textContent="↑";document.body.append(backTop);backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:activeSettings.reduceMotion?"auto":"smooth"}));
 
     function showPage(id, updateHash=true) {
       if (!pageIds.includes(id)) id = "home";
@@ -832,17 +1146,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
     }
     document.querySelectorAll("[data-page-link]").forEach(link => link.addEventListener("click", event => { event.preventDefault(); showPage(link.dataset.pageLink); }));
     window.addEventListener("popstate", () => showPage(location.hash.slice(1), false));
-    showPage(location.hash.slice(1) || "home", false);
-
-
-    const moreNames=[
-"Robot showcase","Competition center","Robot builder","Engineering notebook","Autonomous path planner","Match scouting","Robot maintenance","Parts buying hub","FTC code library","Academy","CAD lessons","Programming lessons","Tutor assistant","Course library","Robot games","DECODE season","BIOBUZZ season","Into the Deep archive","Team dashboard","Media center","Leaderboard","Parts inventory","Competition preparation","Drive practice","Autonomous notes","Learning progress","Season statistics","Build documentation","Scouting exports","Maintenance exports",
-"Wheel speed calculator","Gear ratio calculator","Wheel circumference calculator","Motor RPM converter","Linear slide estimator","Servo position planner","Robot weight tracker","Battery log","Pit checklist","Match-day timeline","Driver practice log","Autonomous test log","Code snippet pad","Sensor reference","Motor reference","Servo reference","Gamepad reference","FTC terminology","CAD shortcut guide","Build issue tracker","Design decision log","Subsystem checklist","Wiring checklist","Fastener checklist","Robot dimensions sheet","Intake tuning notes","Shooter tuning notes","Claw tuning notes","Drive team roles","Event packing list","Match result log","Alliance notes","Opponent notes","Strategy worksheet","Practice field checklist","Driver controls map","Autonomous routine planner","Encoder distance helper","Servo range notes","Sensor placement notes","Camera setup notes","Vision test log","TeleOp checklist","Autonomous checklist","Code review checklist","Version notes","Bug report form","Test case library","Risk review worksheet","Meeting agenda builder","Meeting notes","Task board","Team goal tracker","Outreach planner","Presentation outline","Portfolio checklist","Media upload guide","Photo shot list","Social post planner","Sponsor info sheet","Parts comparison notes","Budget tracker","Purchase request list","Robot change log","Field setup notes","Game scoring reference","DECODE practice guide","BIOBUZZ practice guide","Settings and accessibility","Official FTC resource links"
-    ];
-    const moreRoutes={"Robot showcase":"robot-showcase","Competition center":"competition-center","Robot builder":"robot-builder","Engineering notebook":"engineering-notebook","Autonomous path planner":"autonomous-planner","Match scouting":"scouting","Robot maintenance":"maintenance","Parts buying hub":"parts-hub","FTC code library":"codes","Academy":"academy","CAD lessons":"cad","Programming lessons":"programming","Tutor assistant":"tutor","Course library":"courses","Robot games":"games","DECODE season":"decode","BIOBUZZ season":"biobuzz","Into the Deep archive":"into-the-deep","Team dashboard":"dashboard","Media center":"media","Leaderboard":"leaderboard","Parts inventory":"parts-hub","Competition preparation":"competition-center","Drive practice":"games","Autonomous notes":"engineering-notebook","Learning progress":"dashboard","Season statistics":"decode","Build documentation":"engineering-notebook","Scouting exports":"scouting","Maintenance exports":"maintenance","Design decision log":"engineering-notebook","Subsystem checklist":"maintenance","Drive team roles":"competition-center","Match result log":"scouting","Alliance notes":"scouting","Opponent notes":"scouting","Autonomous routine planner":"autonomous-planner","Sensor placement notes":"engineering-notebook","Meeting notes":"engineering-notebook","Media upload guide":"media","Parts comparison notes":"parts-hub","Purchase request list":"parts-hub","Robot change log":"engineering-notebook","Field setup notes":"competition-center","Game scoring reference":"biobuzz","DECODE practice guide":"decode","BIOBUZZ practice guide":"biobuzz","Settings and accessibility":"settings","Official FTC resource links":"competition-center"};
-    const moreGrid=document.getElementById("moreGrid"),moreSearch=document.getElementById("moreSearch");let moreFilter="all";
-    function renderMore(){if(!moreGrid)return;const q=(moreSearch?.value||"").toLowerCase().trim();const rows=moreNames.filter(n=>(!q||n.toLowerCase().includes(q))&&(moreFilter==="all"||(moreFilter==="available"?!!moreRoutes[n]:!moreRoutes[n])));moreGrid.innerHTML=rows.map(n=>{const route=moreRoutes[n];return '<article class="more-feature"><div class="more-feature-top"><span class="more-feature-icon">✦</span><span class="more-feature-status '+(route?"":"planned")+'">'+(route?"Available":"Coming soon")+'</span></div><h3>'+n+'</h3><p>'+(route?"Open the existing Rangers tool or resource.":"Feature idea listed for a future update.")+'</p>'+(route?'<a href="#'+route+'" data-page-link="'+route+'">Open →</a>':'<span class="more-feature-status planned">On the roadmap</span>')+'</article>'}).join("");document.getElementById("moreCount").textContent=rows.length+" of "+moreNames.length+" features";document.getElementById("moreEmpty").hidden=rows.length>0;moreGrid.querySelectorAll("[data-page-link]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPage(a.dataset.pageLink)}))}
-    moreSearch?.addEventListener("input",renderMore);document.querySelectorAll("[data-more-filter]").forEach(b=>b.addEventListener("click",()=>{moreFilter=b.dataset.moreFilter;document.querySelectorAll("[data-more-filter]").forEach(x=>x.classList.toggle("active",x===b));renderMore()}));renderMore();
+    showPage(location.hash.slice(1) || activeSettings.landing || "home", false);
 
     const tutorForm = document.getElementById("tutorForm");
     if (tutorForm) tutorForm.addEventListener("submit", event => {
