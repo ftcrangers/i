@@ -1041,18 +1041,273 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       {id:"release-checklist",name:"Code Release Checklist",cat:"Programming",icon:"🚦",desc:"Track review steps before a code build is used.",mode:"log",fields:["Review step","Reviewer","Status / notes"]},
       {id:"meeting-agenda",name:"Team Meeting Agenda",cat:"Team",icon:"📝",desc:"Organize meeting topics, owners, and decisions.",mode:"log",fields:["Agenda topic","Owner","Decision / notes"]}
     ];
-    const moreFeatures = [
-      "Match schedule organizer","Match-day role assignments","Pre-match checklist","Post-match debrief","Pit setup checklist","Event packing list","Robot inspection notes","Battery rotation record","Battery health history","Spare parts checklist",
-      "Gear ratio comparison","Output RPM estimate","Wheel circumference","Distance per rotation","Encoder tick conversion","Motor speed comparison","Servo angle conversion","Servo range notes","Parts subtotal","Quantity cost breakdown",
-      "Autonomous time budget","Action sequence timing","Match clock planner","Autonomous/teleop split","Endgame time planner","Scoring category total","Alliance strategy notes","Partner team notes","Match result record","Event goals tracker",
-      "Driver practice history","Practice duration log","Cycle time history","Intake configuration history","Shooter setting history","Lift position history","Robot tuning observations","Test result archive","Repeatability notes","Improvement targets",
-      "CAD unit conversion","Inch to millimeter conversion","Millimeter to inch conversion","Material length estimate","Cut allowance estimate","Fastener location notes","Build measurement log","Part quantity planning","Wire run estimate","Electrical port map",
-      "Sensor reading history","Sensor expectation checks","Device connection record","Hub port assignment notes","OpMode class starter","TeleOp starter template","Autonomous starter template","Bug reproduction notes","Fix attempt history","Code review checklist",
-      "Meeting topic planner","Decision record","Task owner list","Team action items","Design review notes","Prototype comparison","Robot weight notes","Subsystem handoff notes","Competition travel plan","Pit crew assignments",
-      "Match strategy options","Risk and benefit notes","Scoring scenario notes","Cycle observation log","Game-piece handling notes","Driver feedback notes","Operator feedback notes","Autonomous route notes","Practice goal tracker","Test session summary",
-      "Robot maintenance history","Hardware change record","Servo configuration notes","Motor configuration notes","Encoder setup notes","Sensor calibration record","CAD revision notes","Assembly checklist","Wiring inspection record","Build session journal",
-      "Code naming helper","Java class naming","Tool record export","Local notes archive","CSV download","JSON download","Searchable tool directory","Category filters","Saved browser records","Resettable tool workspace"
-    ];
+    const extraToolGroups = {
+  "Competition": [
+    "Match Strategy Builder",
+    "Autonomous Route Planner",
+    "Alliance Coordination Board",
+    "Scouting Observation Sheet",
+    "Opponent Robot Profile",
+    "Match Debrief Journal",
+    "Event Run Sheet",
+    "Inspection Readiness Tracker",
+    "Queue Readiness Checklist",
+    "Field Reset Checklist",
+    "Match Role Rotation",
+    "Drive Team Briefing",
+    "Pit Crew Schedule",
+    "Tournament Progress Tracker",
+    "Qualification Ranking Notes",
+    "Playoff Qualification Planner",
+    "Alliance Selection Notes",
+    "Penalty Observation Log",
+    "Referee Question Log",
+    "Match Video Review Notes",
+    "Event Travel Checklist",
+    "Competition Budget Planner",
+    "Award Submission Planner"
+  ],
+  "Calculators": [
+    "Unit Conversion Desk",
+    "RPM to RPS Converter",
+    "Inches to Millimeters Converter",
+    "Millimeters to Inches Converter",
+    "Degrees to Radians Converter",
+    "Time Split Calculator",
+    "Average Cycle Time Calculator",
+    "Cycle Efficiency Calculator",
+    "Percentage Change Calculator",
+    "Tolerance Stack Estimator",
+    "Bolt Circle Calculator",
+    "Gear Tooth Difference Calculator",
+    "Pulley Ratio Calculator",
+    "Belt Travel Estimator",
+    "Battery Runtime Estimator",
+    "Voltage Drop Estimator",
+    "Power and Current Calculator",
+    "Robot Weight Budget",
+    "Center of Mass Worksheet",
+    "Ramp Angle Calculator",
+    "Field Tile Distance Calculator",
+    "Autonomous Time Budgeter",
+    "Scoring Scenario Calculator"
+  ],
+  "Build": [
+    "Bill of Materials Builder",
+    "Fastener Inventory",
+    "Hardware Quantity Planner",
+    "Subsystem Build Sheet",
+    "Prototype Comparison Board",
+    "Revision Change Log",
+    "Assembly Sequence Planner",
+    "Tool Checkout Register",
+    "3D Print Queue",
+    "Printed Part Cost Log",
+    "Material Cut List",
+    "Stock Material Inventory",
+    "Bearing Placement Notes",
+    "Bracket Design Log",
+    "Frame Measurement Sheet",
+    "Chain Tension Record",
+    "Belt Routing Notes",
+    "Gearbox Assembly Log",
+    "Wheel Configuration Planner",
+    "Mounting Hole Record",
+    "Spare Hardware Planner",
+    "Build Photo Index",
+    "Design Decision Register"
+  ],
+  "Robot care": [
+    "Daily Robot Inspection",
+    "Pre-Event Robot Check",
+    "Post-Event Maintenance",
+    "Motor Inspection Log",
+    "Servo Inspection Log",
+    "Wheel Wear Tracker",
+    "Tread Replacement Log",
+    "Chain Inspection Log",
+    "Belt Inspection Log",
+    "Fastener Torque Check Log",
+    "Battery Charge Record",
+    "Battery Assignment Board",
+    "Connector Inspection Log",
+    "Wire Damage Report",
+    "Control Hub Health Log",
+    "Expansion Hub Health Log",
+    "Camera Lens Cleaning Log",
+    "Sensor Cleaning Log",
+    "Robot Transport Checklist",
+    "Storage Preparation Checklist",
+    "Repair Priority Board",
+    "Maintenance Schedule",
+    "Incident and Repair Notes"
+  ],
+  "Practice": [
+    "Driver Skills Scorecard",
+    "Operator Skills Scorecard",
+    "Timed Driving Course",
+    "Precision Parking Practice",
+    "Straight-Line Driving Drill",
+    "Strafe Control Drill",
+    "Turning Accuracy Drill",
+    "Obstacle Navigation Drill",
+    "Driver Consistency Tracker",
+    "TeleOp Repetition Counter",
+    "Autonomous Rehearsal Log",
+    "Starting Position Practice",
+    "Game Piece Handling Drill",
+    "Cycle Route Practice",
+    "Endgame Rehearsal",
+    "Team Communication Drill",
+    "Human Player Practice Log",
+    "Practice Field Setup",
+    "Practice Session Planner",
+    "Weekly Practice Goals",
+    "Skills Progress Journal",
+    "Practice Video Review",
+    "Scrimmage Notes"
+  ],
+  "Robot tuning": [
+    "Drivetrain Direction Test",
+    "Motor Power Tuning Log",
+    "Joystick Response Tuner",
+    "Acceleration Test Log",
+    "Deceleration Test Log",
+    "Turning Response Log",
+    "Strafe Compensation Log",
+    "Wheel Slip Observation",
+    "Odometry Accuracy Log",
+    "Encoder Consistency Test",
+    "IMU Calibration Notes",
+    "Vision Exposure Test",
+    "Camera Position Test",
+    "Color Sensor Test Log",
+    "Distance Sensor Test Log",
+    "Touch Sensor Test Log",
+    "Intake Speed Comparison",
+    "Roller Grip Test",
+    "Lift Repeatability Test",
+    "Arm Position Test",
+    "Servo Range Test",
+    "Mechanism Cycle Test",
+    "Subsystem Reliability Log"
+  ],
+  "CAD": [
+    "Onshape Document Planner",
+    "Part Naming Organizer",
+    "Assembly Structure Planner",
+    "Sketch Constraint Checklist",
+    "Dimension Review Sheet",
+    "Hole Pattern Planner",
+    "Bearing Fit Reference",
+    "Shaft Fit Reference",
+    "Clearance Check Log",
+    "Interference Review Notes",
+    "Motion Study Planner",
+    "Joint Reference Sheet",
+    "Exploded View Checklist",
+    "Drawing Release Checklist",
+    "3D Print Orientation Notes",
+    "Print Clearance Planner",
+    "Wall Thickness Review",
+    "Fillet and Chamfer Notes",
+    "Mass Properties Record",
+    "Material Assignment Log",
+    "CAD Version Comparison",
+    "Export File Checklist",
+    "CAD Peer Review Sheet"
+  ],
+  "Electrical": [
+    "Control Hub Port Planner",
+    "Expansion Hub Port Planner",
+    "Motor Port Assignment",
+    "Servo Port Assignment",
+    "Digital Channel Map",
+    "Analog Channel Map",
+    "I2C Device Register",
+    "USB Device Inventory",
+    "Power Distribution Map",
+    "Wire Label Generator",
+    "Wire Color Reference",
+    "Connector Pinout Notes",
+    "Electrical Inspection Checklist",
+    "Cable Length Register",
+    "Strain Relief Checklist",
+    "Grounding Review Notes",
+    "Fuse and Protection Notes",
+    "Battery Connector Log",
+    "Electrical Change History",
+    "Sensor Bus Planner",
+    "Device Naming Register",
+    "Wiring Photo Index",
+    "Electrical Troubleshooting Journal"
+  ],
+  "Programming": [
+    "Java Class Planner",
+    "OpMode Naming Organizer",
+    "Hardware Map Register",
+    "Motor Direction Reference",
+    "Servo Position Table",
+    "Gamepad Mapping Sheet",
+    "Button Binding Planner",
+    "Telemetry Layout Planner",
+    "State Machine Planner",
+    "Autonomous Step Planner",
+    "Path Waypoint Notes",
+    "PID Tuning Record",
+    "Encoder Reset Checklist",
+    "IMU Setup Checklist",
+    "Vision Pipeline Notes",
+    "AprilTag Test Log",
+    "Camera Calibration Record",
+    "Unit Test Checklist",
+    "Code Review Notes",
+    "Git Commit Journal",
+    "Build Version Tracker",
+    "Driver Station Checklist",
+    "Software Release Notes"
+  ],
+  "Team": [
+    "Team Task Board",
+    "Meeting Minutes",
+    "Action Item Tracker",
+    "Mentor Feedback Log",
+    "New Member Onboarding",
+    "Training Attendance",
+    "Workshop Planner",
+    "Outreach Event Planner",
+    "Community Demo Checklist",
+    "Presentation Outline Builder",
+    "Portfolio Evidence Tracker",
+    "Engineering Notebook Index",
+    "Award Evidence Organizer",
+    "Sponsor Contact Log",
+    "Sponsor Update Planner",
+    "Fundraising Goal Tracker",
+    "Team Budget Ledger",
+    "Travel Rooming Checklist",
+    "Permission Form Tracker",
+    "Media Caption Planner",
+    "Photo Release Checklist",
+    "Team Resource Directory",
+    "Season Goals Dashboard"
+  ]
+};
+    Object.entries(extraToolGroups).forEach(([category,names])=>{
+      names.forEach((name,index)=>{
+        const id="extra-"+name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+        moreTools.push({
+          id,
+          name,
+          cat:category,
+          icon:({Competition:"🏁",Calculators:"🧮",Build:"🧱","Robot care":"🧰",Practice:"🎮","Robot tuning":"🎛",CAD:"📐",Electrical:"🔌",Programming:"💻",Team:"👥"})[category],
+          desc:"A focused "+category.toLowerCase()+" workspace for "+name.toLowerCase()+". Save notes, measurements, owners, and results.",
+          mode:"log",
+          fields:["Item / task / measurement","Owner / value / status","Notes / result / next step"]
+        });
+      });
+    });
+    const moreFeatureCount=moreTools.length;
     function makeToolPage(tool){
       const page=document.createElement("div");page.className="site-page more-tool-page";page.id="page-"+tool.id;
       const fields=tool.fields.map((field,index)=>'<label>'+field+'<input data-tool-field="'+index+'" placeholder="Enter '+field.toLowerCase()+'" '+(tool.mode==="log"&&index===2?'type="text"':'type="text"')+' /></label>').join("");
@@ -1062,12 +1317,11 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
     }
     moreTools.forEach(tool=>{pageIds.push(tool.id);makeToolPage(tool)});
     const morePage=document.createElement("div");morePage.className="site-page";morePage.id="page-more";
-    morePage.innerHTML='<section class="section"><div class="container"><div class="section-head"><span class="eyebrow">RANGERS TOOLBOX</span><h2>More ways to <span class="accent">build smarter.</span></h2><p>Search the directory for calculators, robot logs, programming helpers, and competition tools.</p></div><div class="more-hero"><div><input id="moreSearch" class="more-search" type="search" placeholder="Search 100 tools and features..." aria-label="Search more tools"/><div class="more-count" id="moreCount">100 searchable features</div></div><div class="more-count">30 dedicated tool pages · saved locally</div></div><div class="more-filters" id="moreFilters"></div><div class="more-grid" id="moreGrid"></div></div></section>';
+    morePage.innerHTML='<section class="section"><div class="container"><div class="section-head"><span class="eyebrow">RANGERS TOOLBOX</span><h2>More ways to <span class="accent">build smarter.</span></h2><p>Search the directory for calculators, robot logs, programming helpers, and competition tools.</p></div><div class="more-hero"><div><input id="moreSearch" class="more-search" type="search" placeholder="Search 260+ tools..." aria-label="Search more tools"/><div class="more-count" id="moreCount">260+ searchable tools</div></div><div class="more-count">260 dedicated workspaces · saved locally</div></div><div class="more-filters" id="moreFilters"></div><div class="more-grid" id="moreGrid"></div></div></section>';
     document.querySelector("main").append(morePage);
     const moreCategories=["All","Competition","Calculators","Build","Robot care","Practice","Robot tuning","CAD","Electrical","Programming","Team"];
     let activeMoreCategory=activeSettings.rememberFilters?(localStorage.getItem("rangersMoreCategory")||"All"):"All";
-    const featureToolOrder=[0,0,1,0,9,1,9,8,8,9,2,5,3,3,4,5,6,6,7,7,10,11,10,11,12,12,13,14,12,10,15,16,16,17,18,19,17,17,15,15,20,20,20,21,22,21,21,22,23,23,24,24,24,24,25,25,25,26,26,26,29,29,29,29,29,29,29,29,29,29,13,13,12,16,17,17,17,11,15,16,9,8,9,6,6,25,20,21,24,29,26,26,28,27,28,29,29,29,29,29];
-    const featureItems=moreFeatures.map((name,index)=>{const tool=moreTools[featureToolOrder[index]??(index%moreTools.length)];return {name:name,tool:tool,category:tool.cat,desc:"Open the "+tool.name+" workspace to use this feature."}});
+    const featureItems=moreTools.map(tool=>({name:tool.name,tool,category:tool.cat,desc:tool.desc}));
     const moreFilters=document.getElementById("moreFilters"),moreGrid=document.getElementById("moreGrid"),moreSearch=document.getElementById("moreSearch"),moreCount=document.getElementById("moreCount");
     moreCategories.forEach(cat=>{const btn=document.createElement("button");btn.className="more-filter"+(cat==="All"?" active":"");btn.textContent=cat;btn.type="button";btn.addEventListener("click",()=>{activeMoreCategory=cat;if(activeSettings.rememberFilters)localStorage.setItem("rangersMoreCategory",cat);moreFilters.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===cat));renderMore()});moreFilters.append(btn)});
     moreFilters.querySelectorAll("button").forEach(btn=>btn.classList.toggle("active",btn.textContent===activeMoreCategory));
@@ -1076,7 +1330,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       const filtered=featureItems.filter(item=>(activeMoreCategory==="All"||item.category===activeMoreCategory)&&(!q||(item.name+" "+item.category+" "+item.desc).toLowerCase().includes(q)));
       moreGrid.innerHTML="";
       filtered.forEach(item=>{const card=document.createElement("button");card.type="button";card.className="more-card";card.innerHTML='<div class="more-card-top"><span class="more-category">'+item.category+'</span><span>'+item.tool.icon+'</span></div><h3>'+item.name+'</h3><p>'+item.desc+'</p><span class="more-open">Open workspace →</span>';card.addEventListener("click",()=>showPage(item.tool.id));moreGrid.append(card)});
-      moreCount.textContent=filtered.length+" of 100 features shown";
+      moreCount.textContent=filtered.length+" of "+featureItems.length+" tools shown";
     }
     moreSearch.addEventListener("input",renderMore);renderMore();
     if(activeSettings.rememberFilters){const savedMore=localStorage.getItem("rangersMoreSearch");if(savedMore)moreSearch.value=savedMore;moreSearch.addEventListener("input",()=>localStorage.setItem("rangersMoreSearch",moreSearch.value))}

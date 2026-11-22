@@ -7,6 +7,7 @@ Static GitHub Pages site for Itkan Rangers FTC Team 28922.
 The website includes:
 
 - Team dashboard with Academy progress, XP totals, and a local mechanism-test planner.
+- Searchable More Hub with 260 dedicated tool workspaces across competition, calculations, build, robot care, practice, tuning, CAD, electrical, programming, and team operations.
 - Robot showcase with the drivetrain, scoring hood, vision, and odometry highlights.
 - Competition Center linking the DECODE, BIOBUZZ, and INTO THE DEEP season archives.
 - Interactive robot builder with selectable drivetrain, intake, scoring mechanism, end effector, and sensor concept. The builder exports a plain-text configuration summary; it is a concept sketch, not dimensionally accurate CAD.
