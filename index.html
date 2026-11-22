@@ -1065,7 +1065,8 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
     document.querySelector("main").append(morePage);
     const moreCategories=["All","Competition","Calculators","Build","Robot care","Practice","Robot tuning","CAD","Electrical","Programming","Team"];
     let activeMoreCategory=activeSettings.rememberFilters?(localStorage.getItem("rangersMoreCategory")||"All"):"All";
-    const featureItems=moreFeatures.map((name,index)=>({name:name,tool:moreTools[index%moreTools.length],category:moreTools[index%moreTools.length].cat,desc:"Open the "+moreTools[index%moreTools.length].name+" workspace to use this feature."}));
+    const featureToolOrder=[0,0,1,0,9,1,9,8,8,9,2,5,3,3,4,5,6,6,7,7,10,11,10,11,12,12,13,14,12,10,15,16,16,17,18,19,17,17,15,15,20,20,20,21,22,21,21,22,23,23,24,24,24,24,25,25,25,26,26,26,29,29,29,29,29,29,29,29,29,29,13,13,12,16,17,17,17,11,15,16,9,8,9,6,6,25,20,21,24,29,26,26,28,27,28,29,29,29,29,29];
+    const featureItems=moreFeatures.map((name,index)=>{const tool=moreTools[featureToolOrder[index]??(index%moreTools.length)];return {name:name,tool:tool,category:tool.cat,desc:"Open the "+tool.name+" workspace to use this feature."}});
     const moreFilters=document.getElementById("moreFilters"),moreGrid=document.getElementById("moreGrid"),moreSearch=document.getElementById("moreSearch"),moreCount=document.getElementById("moreCount");
     moreCategories.forEach(cat=>{const btn=document.createElement("button");btn.className="more-filter"+(cat==="All"?" active":"");btn.textContent=cat;btn.type="button";btn.addEventListener("click",()=>{activeMoreCategory=cat;if(activeSettings.rememberFilters)localStorage.setItem("rangersMoreCategory",cat);moreFilters.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===cat));renderMore()});moreFilters.append(btn)});
     function renderMore(){
@@ -1094,6 +1095,9 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       let result="";
       const n=values.map(v=>Number(v));
       if(tool.mode==="calc"){
+        const numericFields=tool.formula==="cost"?n.slice(1):tool.formula==="units"?[n[0]]:n;
+        if(numericFields.some(v=>!Number.isFinite(v))){out.textContent="Enter valid numbers in the numeric fields.";return}
+        if((tool.formula==="ratio"&&(n[0]===0||n[1]===0))||(tool.formula==="speed"&&n[2]===0)||(tool.formula==="servo"&&n[2]===n[1])){out.textContent="Check the gear teeth or angle range; the divisor cannot be zero.";return}
         switch(tool.formula){
           case "ratio":result="Gear ratio: "+(n[1]/n[0]).toFixed(3)+":1 · Estimated output RPM: "+(n[2]*n[0]/n[1]).toFixed(1);break;
           case "wheel":result="Distance: "+(Math.PI*n[0]*n[1]*n[2]).toFixed(2)+" inches";break;
