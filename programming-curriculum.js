@@ -110,3 +110,4 @@ window.rangersProgrammingLessons = [
 ["Competition code release checklist","Confirm the correct branch, build status, OpMode names, configuration, tuning notes, and rollback version before an event.","Prepare a release checklist and a concise change log for a competition build."],
 ["Capstone: complete FTC control system","Combine hardware mapping, subsystems, driver control, sensors, autonomous logic, telemetry, and testing into a maintainable robot software project.","Build a structured FTC software project plan with subsystem classes, one driver-controlled feature, one autonomous action, tests, and a release checklist."]
 ];
+window.rangersProgrammingLessons.splice(90,10);
