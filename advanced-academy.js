@@ -1,6 +1,6 @@
 
 (function(){
-const extra=[
+const extra=[...(window.rangersExtraCadLessons||[]),
 ["Design intent and master sketches","Plan wheel axes, frame rails, centerlines, and pivots in a master layout. Use datums, construction geometry, named dimensions, and fully constrained sketches so changes propagate predictably.","Build a top-view chassis skeleton with wheel axes and a pivot. Change the wheelbase and inspect dependent geometry."],
 ["Robust parametric part modeling","Build editable parts with fully constrained sketches, meaningful dimensions, stable references, and a readable feature tree. Prefer planes and named geometry over fragile transient edges.","Model a motor or bearing plate with editable hole spacing and thickness. Change a dimension without breaking features."],
 ["Hardware measurement and fit","Use the exact hardware revision and manufacturer drawings where possible. Record units and measurement sources. Account for fastener, shaft, bearing, printed-part, and tool clearances.","Measure one FTC component, model its mounting interface, and label datasheet dimensions separately from team measurements."],
