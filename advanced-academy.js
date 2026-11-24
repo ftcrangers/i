@@ -31,6 +31,7 @@ function start(){
  const cad=[...extra.map(x=>({track:"CAD",title:x[0],body:x[1],task:x[2],steps:["Define the real hardware interface and design goal.","Create the feature or assembly using stable references and named dimensions.","Inspect fit, motion, tool access, and the model from multiple views.","Change a controlling dimension or component position and check what updates.","Record measurements, assumptions, and anything requiring physical validation."],checks:["The model meets the stated design goal.","Dimensions, references, fit, or motion have been checked.","Evidence and one improvement are documented."]}))];
  const prog=(window.rangersProgrammingLessons||[]).map(x=>({track:"Programming",title:x[0],body:x[1],task:x[2],steps:["Identify the FTC SDK class, API, or Java concept involved.","Build the smallest clear implementation before integrating it with the robot.","Add telemetry, validation, or tests so behavior can be observed.","Check edge cases, units, hardware names, and OpMode lifecycle behavior.","Record what worked, what you tested, and what remains to verify on the robot."]}));
  let current={track:"CAD",index:0,page:0};
+ let reviewStartedAt=0,reviewTimer=null;
  const style=document.createElement("style");
  style.textContent=".adv-academy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:16px 0}.adv-academy-card{border:1px solid var(--line,#dce8df);border-radius:16px;padding:17px;background:var(--card,#fff)}.adv-academy-card h3{margin:9px 0}.adv-academy-card p{color:var(--muted);line-height:1.55;font-size:.9rem}.adv-academy-card button{width:100%;margin-top:12px}.adv-academy-view{position:fixed;inset:0;z-index:10060;background:#07130de8;display:none;align-items:center;justify-content:center;padding:12px}.adv-academy-view.open{display:flex}.adv-academy-panel{width:min(900px,100%);max-height:96vh;overflow:auto;background:var(--card,#fff);color:var(--text,#183326);border-radius:20px}.adv-academy-head,.adv-academy-foot{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line,#dce8df);position:sticky;top:0;background:var(--card,#fff);z-index:2}.adv-academy-foot{top:auto;bottom:0;border-top:1px solid var(--line,#dce8df);border-bottom:0}.adv-academy-content{padding:22px;min-height:330px}.adv-academy-content p,.adv-academy-content li{line-height:1.7;color:var(--muted)}.adv-academy-block{padding:14px;border:1px solid var(--line,#dce8df);border-radius:12px;margin:12px 0;background:var(--soft,#f4f8f4)}.adv-academy-dots{display:flex;gap:6px;padding:0 20px}.adv-academy-dots span{height:6px;flex:1;border-radius:9px;background:#e4ece6}.adv-academy-dots .on{background:var(--green,#21834e)}.adv-academy-evidence{width:100%;min-height:125px;padding:12px;border:1px solid var(--line,#cbd9cf);border-radius:10px;font:inherit}.adv-academy-check{display:flex;gap:9px;padding:10px;border:1px solid var(--line,#dce8df);border-radius:10px;margin:8px 0}.adv-academy-result{padding:12px;border-radius:10px;background:var(--soft,#f1f7f2);margin-top:12px;font-weight:750}@media(max-width:600px){.adv-academy-content{padding:15px}.adv-academy-head,.adv-academy-foot{padding:12px}}";
  document.head.appendChild(style);
@@ -39,6 +40,16 @@ function start(){
  document.body.appendChild(modal);
  const lessons=()=>current.track==="CAD"?cad:prog;
  const lesson=()=>lessons()[current.index];
+ function reviewKeywords(l){
+  const stop=new Set(["the","and","with","from","this","that","your","into","using","use","used","work","build","test","lesson","robot","robotics","real","actual","create","make","good","should","could","would","will","must","need","what","when","where","why","how","their","they","them","then","also","more","less","each","one","two","three","four","page","step","steps","result","evidence","check","complete","completed","about","after","before","over","under","very","such","have","has","had","for","are","was","were","been","being","its","our","out","all","any","can","not","but","you","is","of","in","on","to","a","an","or","as","by","at","it"]);
+  const source=[l.title||"",l.body||"",l.task||""].join(" ").toLowerCase();
+  const words=source.match(/[a-z][a-z0-9+#.-]{2,}/g)||[];
+  return [...new Set(words.filter(w=>w.length>2&&!stop.has(w)))].slice(0,8);
+ }
+ function matchedReviewKeywords(l,evidence){
+  const words=new Set((evidence.toLowerCase().match(/[a-z][a-z0-9+#.-]{2,}/g)||[]));
+  return reviewKeywords(l).filter(w=>words.has(w));
+ }
  function data(){
   const l=lesson(),t=l.task||"Complete the practical activity and document the result.";
   if(current.page===0)return{label:"LEARN · 1 OF 4",title:"Understand the idea",body:l.body,blocks:[["Why it matters",current.track==="CAD"?"Good CAD communicates design intent so teammates can build, adjust, and repair the robot.":"Good programming makes robot behavior predictable and easier to debug."],["Learning goal","Explain "+l.title.toLowerCase()+" and identify where it appears on a real FTC robot."]]};
@@ -53,24 +64,65 @@ function start(){
   let h='<div class="eyebrow">'+esc(d.label)+'</div><h2>'+esc(d.title)+'</h2><p>'+esc(d.body)+'</p>';
   if(d.steps)h+='<ol>'+d.steps.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ol>';
   if(d.blocks)d.blocks.forEach(x=>h+='<div class="adv-academy-block"><b>'+esc(x[0])+'</b><p>'+esc(x[1])+'</p></div>');
-  if(current.page===3){h+='<label for="advEvidence"><b>Your evidence / test notes</b></label><textarea id="advEvidence" class="adv-academy-evidence" placeholder="What did you build? What did you test? What happened? What would you improve?">'+esc(s.evidence||"")+'</textarea>';h+=d.checks.map((x,i)=>'<label class="adv-academy-check"><input type="checkbox" data-adv-check="'+i+'" '+((s.checks||[]).includes(i)?"checked":"")+'><span>'+esc(x)+'</span></label>').join("");h+='<div class="adv-academy-result" id="advResult">'+(s.passed?"✓ Passed and saved on this device.":"Pass requires written evidence and all three review checks.")+'</div>'}
-  document.getElementById("advContent").innerHTML=h;document.getElementById("advBack").disabled=current.page===0;document.getElementById("advNext").textContent=current.page===3?"Check my work":"Next page →";
+  if(current.page===3){
+   const keywords=reviewKeywords(l);
+   h+='<label for="advEvidence"><b>Your evidence / test notes</b></label><textarea id="advEvidence" class="adv-academy-evidence" placeholder="What did you build? What did you test? What happened? What would you improve?">'+esc(s.evidence||"")+'</textarea>';
+   h+='<div class="adv-academy-block"><b>Topic keyword check</b><p>Use at least '+Math.min(2,keywords.length)+' relevant keywords in your evidence: '+esc(keywords.slice(0,6).join(" · "))+'.</p></div>';
+   h+=d.checks.map((x,i)=>'<label class="adv-academy-check"><input type="checkbox" data-adv-check="'+i+'" '+((s.checks||[]).includes(i)?"checked":"")+'><span>'+esc(x)+'</span></label>').join("");
+   h+='<div class="adv-academy-result" id="advTimer" aria-live="polite">Review unlocks in 10 seconds…</div>';
+   h+='<div class="adv-academy-result" id="advResult">'+(s.passed?"✓ Passed and saved on this device.":"Pass needs 10 seconds, at least 40 characters, 2 topic keywords, and all review checks.")+'</div>';
+  }
+  document.getElementById("advContent").innerHTML=h;
+  document.getElementById("advBack").disabled=current.page===0;
+  const nextButton=document.getElementById("advNext");
+  nextButton.textContent=current.page===3?"Check my work":"Next page →";
+  if(current.page===3){
+   if(!reviewStartedAt)reviewStartedAt=Date.now();
+   if(reviewTimer)clearInterval(reviewTimer);
+   const updateTimer=()=>{
+    const remaining=Math.max(0,10000-(Date.now()-reviewStartedAt));
+    const timer=document.getElementById("advTimer");
+    if(timer)timer.textContent=remaining>0?"Review unlocks in "+Math.ceil(remaining/1000)+" seconds…":"✓ Review ready — submit when your evidence is complete.";
+    nextButton.disabled=remaining>0;
+    if(remaining===0&&reviewTimer){clearInterval(reviewTimer);reviewTimer=null;}
+   };
+   updateTimer();
+   if(Date.now()-reviewStartedAt<10000)reviewTimer=setInterval(updateTimer,200);
+  }else{
+   if(reviewTimer){clearInterval(reviewTimer);reviewTimer=null;}
+   reviewStartedAt=0;
+   nextButton.disabled=false;
+  }
   const all=load();all[id]={...all[id],lastPage:Math.max(all[id]?.lastPage||0,current.page)};save(all);
  }
  function render(host,list,track){
   host.innerHTML='<div class="adv-academy-grid">'+list.map((l,i)=>{const s=load()[track+"-"+i]||{};return '<article class="adv-academy-card"><div class="academy-lesson-meta"><span>'+(track==="CAD"?"CAD":"PROGRAMMING")+'</span><span>'+(s.passed?"✓ PASSED":"4 PAGES")+'</span></div><h3>'+String(i+1).padStart(2,"0")+' · '+esc(l.title)+'</h3><p>'+esc(l.body)+'</p><button class="btn btn-primary btn-small" data-adv-open="'+track+':'+i+'">'+(s.passed?"Review lesson":"Open lesson")+'</button></article>'}).join("")+'</div>';
-  host.querySelectorAll("[data-adv-open]").forEach(b=>b.addEventListener("click",()=>{const a=b.dataset.advOpen.split(":");current={track:a[0],index:Number(a[1]),page:0};modal.classList.add("open");draw()}));
+  host.querySelectorAll("[data-adv-open]").forEach(b=>b.addEventListener("click",()=>{const a=b.dataset.advOpen.split(":");current={track:a[0],index:Number(a[1]),page:0};reviewStartedAt=0;if(reviewTimer){clearInterval(reviewTimer);reviewTimer=null;}modal.classList.add("open");draw()}));
  }
  function submit(){
-  const d=data(),e=document.getElementById("advEvidence").value.trim(),checks=[...document.querySelectorAll("[data-adv-check]")].filter(x=>x.checked).map(x=>Number(x.dataset.advCheck)),passed=e.length>=40&&checks.length===d.checks.length,id=current.track+"-"+current.index,all=load();
-  all[id]={...(all[id]||{}),lastPage:3,evidence:e,checks,passed,submittedAt:new Date().toISOString()};save(all);
-  document.getElementById("advResult").textContent=passed?"✓ Passed! Your evidence and review checks are saved on this device.":"Not passed. Add at least 40 characters about your actual work and check all three criteria.";
+  const d=data(),l=lesson(),e=document.getElementById("advEvidence").value.trim();
+  const checks=[...document.querySelectorAll("[data-adv-check]")].filter(x=>x.checked).map(x=>Number(x.dataset.advCheck));
+  const matched=matchedReviewKeywords(l,e),required=Math.min(2,reviewKeywords(l).length);
+  const waited=reviewStartedAt>0&&Date.now()-reviewStartedAt>=10000;
+  const enoughText=e.length>=40,hasKeywords=matched.length>=required,allChecks=checks.length===d.checks.length;
+  const passed=waited&&enoughText&&hasKeywords&&allChecks,id=current.track+"-"+current.index,all=load();
+  all[id]={...(all[id]||{}),lastPage:3,evidence:e,checks,passed,matchedKeywords:matched,submittedAt:new Date().toISOString()};save(all);
+  const result=document.getElementById("advResult");
+  if(passed)result.textContent="✓ Passed! Your evidence includes relevant topic keywords and all review checks. Progress is saved on this device.";
+  else{
+   const issues=[];
+   if(!waited)issues.push("spend the full 10 seconds on this review");
+   if(!enoughText)issues.push("write at least 40 characters about your actual work");
+   if(!hasKeywords)issues.push("include at least "+required+" topic keywords (matched: "+(matched.join(", ")||"none")+")");
+   if(!allChecks)issues.push("check all "+d.checks.length+" review criteria");
+   result.textContent="Not passed yet: "+issues.join("; ")+".";
+  }
   if(passed){const xp=JSON.parse(localStorage.getItem("rangersPlatformXpV2")||"{}");const award="advanced-v2-"+id;if(!xp[award]){xp[award]=60;localStorage.setItem("rangersPlatformXpV2",JSON.stringify(xp));}}
   render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
  }
  document.getElementById("advClose").addEventListener("click",()=>modal.classList.remove("open"));modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("open")});
  document.getElementById("advBack").addEventListener("click",()=>{if(current.page>0){current.page--;draw()}});
- document.getElementById("advNext").addEventListener("click",()=>{if(current.page<3){current.page++;draw()}else submit()});
+ document.getElementById("advNext").addEventListener("click",()=>{if(current.page<3){current.page++;if(current.page===3)reviewStartedAt=Date.now();draw()}else submit()});
  render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
