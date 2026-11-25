@@ -264,6 +264,7 @@ async function dashboard(user,profile){
   content.querySelector("#rgLogout").addEventListener("click",async()=>{await supabase.auth.signOut();authView();});
   await show(location.hash==="#admin-applications"&&lead?"review":"home");
 }
+window.rangersLoadCloudProgress=async()=>{const user=await getUser();if(!user)return {data:[],error:null};return supabase.from("user_progress").select("academy,lesson_id,completed,completed_at").eq("user_id",user.id).eq("completed",true);};
 window.rangersCloudSyncProgress=async(academy,lessonId,completed=true)=>{
   const user=await getUser();if(!user)return {error:"Sign in to sync progress."};
   return supabase.from("user_progress").upsert({user_id:user.id,academy,lesson_id:String(lessonId),completed,completed_at:completed?new Date().toISOString():null,updated_at:new Date().toISOString()},{onConflict:"user_id,academy,lesson_id"});
