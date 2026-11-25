@@ -185,6 +185,20 @@ create trigger on_auth_user_created_rangers
 after insert on auth.users
 for each row execute procedure public.create_profile_for_new_user();
 
+-- Also bootstrap the owner if their Auth account existed before this schema was installed.
+insert into public.profiles(id, email, display_name, role)
+select id, lower(email), coalesce(nullif(raw_user_meta_data->>'display_name',''), 'Rangers Owner'), 'owner'
+from auth.users where lower(email) = 'humzanagaria@gmail.com'
+on conflict (id) do update set role = 'owner', email = excluded.email;
+
+insert into public.team_members(user_id, membership_status)
+select id, 'active' from auth.users where lower(email) = 'humzanagaria@gmail.com'
+on conflict (user_id) do update set membership_status = 'active';
+
+insert into public.user_xp(user_id, xp, level)
+select id, 0, 1 from auth.users where lower(email) = 'humzanagaria@gmail.com'
+on conflict (user_id) do nothing;
+
 -- Prevent users from editing their own role, email, or moderation flags directly.
 create or replace function public.protect_profile_privileged_fields()
 returns trigger language plpgsql set search_path = public
@@ -285,6 +299,8 @@ create policy "Users update own profile" on public.profiles for update to authen
 
 create policy "Users manage own progress" on public.user_progress for all to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
 create policy "Users read own XP" on public.user_xp for select to authenticated using (user_id = auth.uid());
+create policy "Opted-in XP is visible for leaderboard" on public.user_xp for select to authenticated
+using (exists (select 1 from public.profiles p where p.id = user_id and p.profile_public = true and p.leaderboard_opt_in = true));
 create policy "Team leads read XP for leaderboard" on public.user_xp for select to authenticated using (public.is_team_admin());
 create policy "Achievements visible to signed in users" on public.achievements for select to authenticated using (true);
 create policy "Users read own achievements" on public.user_achievements for select to authenticated using (user_id = auth.uid());
@@ -328,3 +344,11 @@ join public.user_xp x on x.user_id = p.id
 where p.profile_public = true and p.leaderboard_opt_in = true;
 
 grant select on public.public_leaderboard to authenticated;
+
+create or replace view public.public_student_profiles
+with (security_invoker = true) as
+select id, display_name, avatar_url
+from public.profiles
+where profile_public = true;
+
+grant select on public.public_student_profiles to authenticated;
