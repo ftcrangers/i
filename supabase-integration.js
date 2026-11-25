@@ -213,7 +213,7 @@ async function dashboard(user,profile){
   };
   content.querySelectorAll("[data-panel]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.panel)));
   content.querySelector("#rgLogout").addEventListener("click",async()=>{await supabase.auth.signOut();authView();});
-  await show(location.hash==="#admin-applications"&&lead?"review":"home");
+  await show(location.hash==="#admin-applications"&&lead?"review":location.hash==="#admin"&&lead?"admin":"home");
 }
 window.rangersCloudSyncProgress=async(academy,lessonId,completed=true)=>{
   const user=await getUser();if(!user)return {error:"Sign in to sync progress."};
