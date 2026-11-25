@@ -265,6 +265,14 @@ async function dashboard(user,profile){
   content.querySelector("#rgLogout").addEventListener("click",async()=>{await supabase.auth.signOut();authView();});
   await show(location.hash==="#admin-applications"&&lead?"review":"home");
 }
+window.rangersLoadLessonNote=async(academy,lessonId)=>{
+  const user=await getUser();if(!user)return {error:{message:"Sign in to sync notes."}};
+  return supabase.from("academy_lesson_notes").select("note,updated_at").eq("user_id",user.id).eq("academy",academy).eq("lesson_id",String(lessonId)).maybeSingle();
+};
+window.rangersSaveLessonNote=async(academy,lessonId,note)=>{
+  const user=await getUser();if(!user)return {error:{message:"Sign in to sync notes."}};
+  return supabase.from("academy_lesson_notes").upsert({user_id:user.id,academy,lesson_id:String(lessonId),note:String(note||""),updated_at:new Date().toISOString()},{onConflict:"user_id,academy,lesson_id"});
+};
 window.rangersLoadCloudProgress=async()=>{const user=await getUser();if(!user)return {data:[],error:{message:"Sign in to sync Academy progress."}};return supabase.from("user_progress").select("academy,lesson_id,completed,completed_at").eq("user_id",user.id).eq("completed",true);};
 window.rangersCloudSyncProgress=async(academy,lessonId,completed=true)=>{
   const user=await getUser();if(!user)return {error:"Sign in to sync progress."};
