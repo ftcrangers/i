@@ -58,6 +58,7 @@ async function hydrateAccountSettings(session){
   await syncProfileSettings(session.user,data);
 }
 supabase.auth.getSession().then(({data})=>{
+  window.dispatchEvent(new Event("rangers-auth-state"));
   syncAccountButton(data.session);
   hydrateAccountSettings(data.session);
 });
@@ -264,11 +265,21 @@ async function dashboard(user,profile){
   content.querySelector("#rgLogout").addEventListener("click",async()=>{await supabase.auth.signOut();authView();});
   await show(location.hash==="#admin-applications"&&lead?"review":"home");
 }
+window.rangersLoadCloudProgress=async()=>{const user=await getUser();if(!user)return {data:[],error:{message:"Sign in to sync Academy progress."}};return supabase.from("user_progress").select("academy,lesson_id,completed,completed_at").eq("user_id",user.id).eq("completed",true);};
+window.rangersLoadAcademyNote=async(academy,lessonId)=>{
+  const user=await getUser();if(!user)return {data:null};
+  return supabase.from("academy_notes").select("content").eq("user_id",user.id).eq("academy",academy).eq("lesson_id",String(lessonId)).maybeSingle();
+};
+window.rangersSaveAcademyNote=async(academy,lessonId,content)=>{
+  const user=await getUser();if(!user)return {error:{message:"Sign in to sync notes."}};
+  return supabase.from("academy_notes").upsert({user_id:user.id,academy,lesson_id:String(lessonId),content:String(content||""),updated_at:new Date().toISOString()},{onConflict:"user_id,academy,lesson_id"});
+};
 window.rangersCloudSyncProgress=async(academy,lessonId,completed=true)=>{
   const user=await getUser();if(!user)return {error:"Sign in to sync progress."};
   return supabase.from("user_progress").upsert({user_id:user.id,academy,lesson_id:String(lessonId),completed,completed_at:completed?new Date().toISOString():null,updated_at:new Date().toISOString()},{onConflict:"user_id,academy,lesson_id"});
 };
 supabase.auth.onAuthStateChange((_event,session)=>{
+  window.dispatchEvent(new Event("rangers-auth-state"));
   syncAccountButton(session);
   if(session)hydrateAccountSettings(session);
   if(modal.classList.contains("open"))setTimeout(()=>session?render():authView(),0);

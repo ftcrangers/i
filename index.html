@@ -218,6 +218,41 @@ body[data-dashboard-density="compact"] .dashboard-card{padding:12px}
 body[data-theme="dark"] .more-filter{background:var(--white);color:var(--muted);border-color:var(--line)}body[data-theme="dark"] .more-filter.active{background:var(--green);color:#fff;border-color:var(--green)}
 
 .java-code-lab-section{margin:28px 0 10px}.java-lab-shell{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(16px,3vw,28px);box-shadow:var(--shadow)}.java-lab-intro{max-width:850px;margin-bottom:22px}.java-lab-intro h2{font-size:clamp(1.8rem,4vw,2.7rem);margin:8px 0}.java-lab-intro p{color:var(--muted);font-size:.9rem}.java-lab-note{margin-top:12px;padding:12px 14px;border-radius:11px;background:var(--mint);border:1px solid var(--line)}.java-lab-layout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:16px}.java-lab-list{display:grid;align-content:start;gap:6px}.java-lab-list button{display:flex;align-items:center;gap:9px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px;font-size:.78rem;font-weight:800;color:var(--ink)}.java-lab-list button span{color:var(--green);font-variant-numeric:tabular-nums}.java-lab-list button.active{background:var(--green-dark);border-color:var(--green-dark);color:#fff}.java-lab-list button.active span{color:#b9e1c5}.java-lab-work{min-width:0;border:1px solid var(--line);border-radius:15px;padding:16px}.java-lab-lesson-head h3{font-size:1.45rem;margin:5px 0}.java-lab-lesson-head p{color:var(--muted);font-size:.86rem;margin-bottom:15px}.java-lab-columns{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:16px}.java-lab-section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:12px 0 8px;font-size:.83rem}.java-lab-section-head span{color:var(--muted);font-size:.7rem}.java-lab-columns textarea{width:100%;border:1px solid #294b39;border-radius:10px;padding:13px;background:#102b20;color:#e2f1e6;font:.78rem/1.6 Consolas,monospace;resize:vertical;tab-size:4}.java-lab-columns #javaEditor{min-height:320px;white-space:pre;overflow:auto}.java-lab-actions{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}.java-lab-stdin-label{font-size:.75rem;font-weight:800}.java-lab-columns .java-lab-stdin{min-height:58px;margin-top:5px}.java-lab-output{background:#0b2117;color:#e2f1e6;border-radius:10px;padding:10px 13px;margin-top:12px}.java-lab-output .java-lab-section-head{margin-top:0}.java-lab-output pre{min-height:100px;max-height:240px;overflow:auto;white-space:pre-wrap;word-break:break-word;font:.76rem/1.55 Consolas,monospace}.java-lab-explanations{display:grid;gap:8px}.java-explain-item{padding:10px;border:1px solid var(--line);border-radius:10px;background:#f7faf7}.java-explain-item code{font-size:.72rem;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--green-dark)}.java-explain-item p{font-size:.78rem;color:var(--muted);margin-top:5px}.java-lab-task{padding:13px;border-radius:11px;background:var(--mint);margin-top:12px;font-size:.83rem}.java-lab-task p{color:var(--muted);margin-top:5px}.java-lab-privacy{font-size:.72rem;color:var(--muted);margin-top:13px}@media(max-width:850px){.java-lab-layout{grid-template-columns:1fr}.java-lab-list{grid-template-columns:repeat(2,minmax(0,1fr))}.java-lab-columns{grid-template-columns:1fr}}@media(max-width:480px){.java-lab-list{grid-template-columns:1fr}.java-lab-work{padding:11px}}
+
+/* Academy dark-mode coverage */
+body[data-theme="dark"]{--card:#18251d;--text:#edf5ef;--soft:#22382b;--green:#8fd5a6;--green-dark:#b5e4c2}
+body[data-theme="dark"] .cad-lesson,
+body[data-theme="dark"] .program-lesson,
+body[data-theme="dark"] .course-card,
+body[data-theme="dark"] .adv-academy-card,
+body[data-theme="dark"] .adv-academy-panel,
+body[data-theme="dark"] .adv-academy-head,
+body[data-theme="dark"] .adv-academy-foot,
+body[data-theme="dark"] .lesson-code-explain article,
+body[data-theme="dark"] .lesson-teaching-grid section,
+body[data-theme="dark"] .ftc-line-teaching article,
+body[data-theme="dark"] .adv-academy-check{background:#18251d;color:#edf5ef;border-color:#304438}
+body[data-theme="dark"] .adv-academy-block,
+body[data-theme="dark"] .adv-academy-result,
+body[data-theme="dark"] .ftc-workspace,
+body[data-theme="dark"] .ftc-workspace-left{background:#22382b;color:#edf5ef;border-color:#304438}
+body[data-theme="dark"] .adv-academy-content p,
+body[data-theme="dark"] .adv-academy-content li,
+body[data-theme="dark"] .adv-academy-card p,
+body[data-theme="dark"] .lesson-teaching>p,
+body[data-theme="dark"] .lesson-code-explain p,
+body[data-theme="dark"] .lesson-teaching-grid p,
+body[data-theme="dark"] .lesson-teaching-grid li,
+body[data-theme="dark"] .ftc-workspace-left p,
+body[data-theme="dark"] .ftc-workspace-left li,
+body[data-theme="dark"] .ftc-line-teaching p{color:#aab9ae}
+body[data-theme="dark"] .adv-academy-evidence,
+body[data-theme="dark"] .ftc-workspace-right textarea{background:#101a14;color:#edf5ef;border-color:#405848}
+body[data-theme="dark"] .lesson-code-explain code,
+body[data-theme="dark"] .ftc-line-teaching code{color:#a9e6bc}
+body[data-theme="dark"] .adv-academy-dots span{background:#304438}
+body[data-theme="dark"] .adv-academy-dots .on{background:#8fd5a6}
+
 </style>
 </head>
 <body>
