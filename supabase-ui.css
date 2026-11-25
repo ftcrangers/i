@@ -17,3 +17,22 @@
 .rg-status{padding:11px 13px;border-radius:10px;background:#14251a;border:1px solid #2d583a;color:#b8f3c8;font-size:.83rem;margin:12px 0}.rg-error{background:#2b1715;border-color:#6c3731;color:#ffc6bd}
 .rg-record{border:1px solid var(--rg-line);border-radius:13px;padding:13px;margin-top:10px;background:#0c150f}.rg-record strong{display:block;color:#eaffef}.rg-record small{color:var(--rg-muted)}.rg-muted{color:var(--rg-muted);font-size:.82rem}
 @media(max-width:650px){#rangersCloudDock{right:12px;bottom:12px}#rangersCloudLaunch{padding:11px 14px}.rg-content{padding:17px}.rg-head{padding:15px 17px}.rg-grid{grid-template-columns:1fr}.rg-title{font-size:1.8rem}}
+
+/* Account button now lives in the top navigation instead of floating over page content. */
+#rangersCloudDock{position:relative;right:auto;bottom:auto;z-index:110;display:flex;align-items:center;margin-left:12px;flex:0 0 auto}
+#rangersCloudLaunch{border:1px solid #b8d8c1;background:#103d2b;color:#fff;border-radius:999px;padding:10px 16px;font-size:.8rem;font-weight:900;white-space:nowrap;box-shadow:0 7px 18px #103d2b20;transition:transform .18s,background .18s}
+#rangersCloudLaunch:hover{background:#176b43;transform:translateY(-1px)}
+#rangersCloudLaunch[data-signed-in="true"]{background:#e8f4eb;color:#103d2b;border-color:#c7e0ce}
+#rangersCloudLaunch:focus-visible{outline:3px solid #d6aa48;outline-offset:3px}
+.rg-dashboard-hero{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:25px 26px;border:1px solid #31543d;border-radius:19px;background:radial-gradient(circle at 90% 0%,#2a7543 0,transparent 40%),linear-gradient(135deg,#102b1b,#0d1710);box-shadow:0 18px 42px #0003}
+.rg-dashboard-hero .rg-title{margin:9px 0 7px}.rg-dashboard-hero .rg-sub{max-width:620px}
+.rg-avatar{width:64px;height:64px;flex:0 0 64px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#a8e8b8,#4caa6c);color:#0b2c20;font:900 1.7rem Manrope;box-shadow:0 10px 25px #0003}
+.rg-stat-grid{margin:15px 0 25px}.rg-stat-card{min-height:136px;display:flex;flex-direction:column;justify-content:center}.rg-card-label{font-size:.66rem;letter-spacing:.13em;font-weight:900;color:#9cb3a2}.rg-stat-card .rg-stat{margin:7px 0 1px}.rg-section-heading{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:23px 0 12px}.rg-section-heading h2{font:900 1.2rem Manrope;color:#f2fff5;margin-top:3px}.rg-account-email{font-size:.75rem;color:#9cb3a2;overflow-wrap:anywhere}
+.rg-panel-surface{border:1px solid #284333;background:#0c150f;border-radius:16px;padding:18px;min-height:120px}.rg-home-note{margin-top:14px;padding:12px 14px;border-radius:11px;background:#14251a;border:1px solid #284333}
+.rg-footer-actions{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:16px;padding-top:14px;border-top:1px solid #284333}
+.rg-settings-callout{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.rg-settings-callout .rg-sub{max-width:520px}
+#rangersCloudPanel{width:min(1000px,100%);max-height:min(92vh,940px);border-radius:25px}
+.rg-content{padding:clamp(18px,3vw,30px)}
+.rg-card{transition:transform .18s,border-color .18s}.rg-card:hover{transform:translateY(-2px);border-color:#477253}
+.rg-tab{transition:background .18s,border-color .18s}
+@media(max-width:650px){#rangersCloudDock{margin-left:auto}#rangersCloudLaunch{padding:9px 11px;font-size:.73rem;max-width:130px;overflow:hidden;text-overflow:ellipsis}.rg-dashboard-hero{padding:19px}.rg-avatar{width:48px;height:48px;flex-basis:48px;border-radius:15px}.rg-section-heading{align-items:flex-start;flex-direction:column}.rg-footer-actions{align-items:flex-start;flex-direction:column}}
