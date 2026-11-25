@@ -1,0 +1,4 @@
+project_id = "hnhbavlgqbkxbvqdrlgh"
+
+[functions.notify-admin-application]
+verify_jwt = true
