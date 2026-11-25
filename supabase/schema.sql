@@ -294,7 +294,7 @@ alter table public.parts_lists enable row level security;
 alter table public.notebook_entries enable row level security;
 alter table public.announcements enable row level security;
 
-create policy "Profiles readable by signed in users" on public.profiles for select to authenticated using (true);
+create policy "Profiles readable by owner or team leads" on public.profiles for select to authenticated using (id = auth.uid() or public.is_team_admin());
 create policy "Users update own profile" on public.profiles for update to authenticated using (id = auth.uid()) with check (id = auth.uid());
 
 create policy "Users manage own progress" on public.user_progress for all to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
@@ -337,7 +337,7 @@ on conflict (id) do nothing;
 
 -- Public leaderboard view: only profiles that explicitly opt in are included.
 create or replace view public.public_leaderboard
-with (security_invoker = true) as
+with (security_invoker = false) as
 select p.id, p.display_name, p.avatar_url, x.xp, x.level
 from public.profiles p
 join public.user_xp x on x.user_id = p.id
@@ -346,7 +346,7 @@ where p.profile_public = true and p.leaderboard_opt_in = true;
 grant select on public.public_leaderboard to authenticated;
 
 create or replace view public.public_student_profiles
-with (security_invoker = true) as
+with (security_invoker = false) as
 select id, display_name, avatar_url
 from public.profiles
 where profile_public = true;
