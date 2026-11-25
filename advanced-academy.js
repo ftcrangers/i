@@ -144,6 +144,37 @@ function start(){
   }
   const all=load();all[id]={...all[id],lastPage:Math.max(all[id]?.lastPage||0,current.page)};save(all);
  }
+ async function hydrateCloudProgress(){
+  if(typeof window.rangersLoadCloudProgress!=="function")return;
+  try{
+   const remote=await window.rangersLoadCloudProgress();
+   if(remote.error)throw remote.error;
+   const all=load(),remoteKeys=new Set();
+   (remote.data||[]).forEach(row=>{
+    const academyName=String(row.academy||"").toLowerCase();
+    const track=academyName==="cad"?"CAD":academyName==="programming"?"Programming":null;
+    if(!track)return;
+    const lessonId=String(row.lesson_id||"");
+    const prefix=track+"-";
+    if(!lessonId.startsWith(prefix))return;
+    const index=Number(lessonId.slice(prefix.length));
+    if(!Number.isInteger(index)||index<0)return;
+    const id=track+"-"+index;
+    remoteKeys.add(id);
+    if(!all[id]?.passed)all[id]={...(all[id]||{}),passed:true,syncedFromCloud:true};
+   });
+   save(all);
+   for(const [id,state] of Object.entries(all)){
+    if(!state?.passed||remoteKeys.has(id))continue;
+    const split=id.lastIndexOf("-");
+    const track=id.slice(0,split);
+    if(!["CAD","Programming"].includes(track))continue;
+    const result=await window.rangersCloudSyncProgress(track.toLowerCase(),id,true);
+    if(result?.error)console.warn("Could not upload saved Academy progress:",result.error.message);
+   }
+   render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
+  }catch(error){console.warn("Academy cloud progress could not be loaded:",error.message||error);}
+ }
  function render(host,list,track){
   host.innerHTML='<div class="adv-academy-grid">'+list.map((l,i)=>{const s=load()[track+"-"+i]||{};return '<article class="adv-academy-card"><div class="academy-lesson-meta"><span>'+(track==="CAD"?"CAD":"PROGRAMMING")+'</span><span>'+(s.passed?"✓ PASSED":"4 PAGES")+'</span></div><h3>'+String(i+1).padStart(2,"0")+' · '+esc(l.title)+'</h3><p>'+esc(l.body)+'</p><button class="btn btn-primary btn-small" data-adv-open="'+track+':'+i+'">'+(s.passed?"Review lesson":"Open lesson")+'</button></article>'}).join("")+'</div>';
   host.querySelectorAll("[data-adv-open]").forEach(b=>b.addEventListener("click",()=>{const a=b.dataset.advOpen.split(":");current={track:a[0],index:Number(a[1]),page:0};reviewStartedAt=0;if(reviewTimer){clearInterval(reviewTimer);reviewTimer=null;}modal.classList.add("open");draw()}));
@@ -165,8 +196,13 @@ function start(){
   const enoughText=e.length>=40,hasKeywords=matched.length>=required,allChecks=checks.length===d.checks.length;
   const passed=waited&&enoughText&&hasKeywords&&allChecks,id=current.track+"-"+current.index,all=load();
   all[id]={...(all[id]||{}),lastPage:3,evidence:e,checks,passed,matchedKeywords:matched,submittedAt:new Date().toISOString()};save(all);
+   let cloudSyncMessage="";
+   if(passed&&typeof window.rangersCloudSyncProgress==="function"){
+    const synced=await window.rangersCloudSyncProgress(current.track.toLowerCase(),id,true);
+    cloudSyncMessage=synced?.error?" Cloud sync failed: "+synced.error.message:" Progress synced to your Rangers account.";
+   }
   const result=document.getElementById("advResult");
-  if(passed)result.textContent="✓ Passed! Your evidence includes relevant topic keywords and all review checks. Progress is saved on this device.";
+  if(passed)result.textContent="✓ Passed! Your evidence includes relevant topic keywords and all review checks. Progress is saved on this device."+cloudSyncMessage;
   else{
    const issues=[];
    if(!waited)issues.push("complete the review check");
@@ -184,6 +220,7 @@ function start(){
  document.getElementById("advBack").addEventListener("click",()=>{if(current.page>0){current.page--;draw()}});
  document.getElementById("advNext").addEventListener("click",()=>{if(current.page<3){current.page++;if(current.page===3)reviewStartedAt=Date.now();draw()}else submit()});
  render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
+  hydrateCloudProgress();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();
