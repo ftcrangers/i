@@ -1009,9 +1009,19 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       root.style.setProperty("--code-size",({small:".72rem",normal:".82rem",large:".96rem"}[activeSettings.codeSize]||".82rem"));
       document.querySelectorAll("[data-setting]").forEach(el=>{const k=el.dataset.setting;if(el.type==="checkbox")el.checked=!!activeSettings[k];else el.value=activeSettings[k]});
       document.querySelectorAll("[title]").forEach(el=>{if(activeSettings.toolTips){if(el.dataset.savedTitle!==undefined){el.setAttribute("title",el.dataset.savedTitle);delete el.dataset.savedTitle}}else if(el.hasAttribute("title")){el.dataset.savedTitle=el.getAttribute("title");el.removeAttribute("title")}});
-      const status=document.getElementById("settingsStatus");if(status)status.textContent="Saved on this device · "+settings50.length+" settings available.";
+      const status=document.getElementById("settingsStatus");if(status)status.textContent="Saved on this device"+(window.rangersCloudSettingsEnabled?" · syncs with your Rangers account":"")+" · "+settings50.length+" settings available.";
     }
-    function saveSettings50(){localStorage.setItem(settingKey,JSON.stringify(activeSettings));applySettings50()}
+    function saveSettings50(){
+      localStorage.setItem(settingKey,JSON.stringify(activeSettings));
+      applySettings50();
+      if(typeof window.rangersSettingsChanged==="function")window.rangersSettingsChanged(Object.assign({},activeSettings));
+    }
+    window.rangersGetSettings50=()=>Object.assign({},activeSettings);
+    window.rangersApplySettings50=incoming=>{
+      if(!incoming||typeof incoming!=="object")return;
+      activeSettings=Object.assign({},settingDefaults,incoming);
+      saveSettings50();
+    };
     document.querySelectorAll("[data-setting]").forEach(el=>el.addEventListener("change",()=>{activeSettings[el.dataset.setting]=el.type==="checkbox"?el.checked:el.value;saveSettings50()}));
     document.getElementById("resetSettings")?.addEventListener("click",()=>{
       if(activeSettings.confirmClear&&!window.confirm("Reset all 50 website settings to their defaults?"))return;
