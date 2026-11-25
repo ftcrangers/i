@@ -32,7 +32,17 @@ function syncAccountButton(session){
     launch.dataset.signedIn="false";
   }
 }
-supabase.auth.getSession().then(({data})=>syncAccountButton(data.session));
+window.rangersCloudSettingsEnabled=true;
+async function hydrateAccountSettings(session){
+  if(!session?.user)return;
+  const {data,error}=await supabase.from("profiles").select("preferences").eq("id",session.user.id).maybeSingle();
+  if(error||!data)return;
+  await syncProfileSettings(session.user,data);
+}
+supabase.auth.getSession().then(({data})=>{
+  syncAccountButton(data.session);
+  hydrateAccountSettings(data.session);
+});
 modal.querySelector("#rgClose").addEventListener("click", close);
 modal.addEventListener("click", e => {if(e.target===modal)close();});
 document.addEventListener("keydown", e => {if(e.key==="Escape")close();});
@@ -159,5 +169,6 @@ window.rangersCloudSyncProgress=async(academy,lessonId,completed=true)=>{
 };
 supabase.auth.onAuthStateChange((_event,session)=>{
   syncAccountButton(session);
+  if(session)hydrateAccountSettings(session);
   if(modal.classList.contains("open"))setTimeout(()=>session?render():authView(),0);
 });
