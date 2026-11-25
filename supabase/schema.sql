@@ -11,6 +11,7 @@ create table if not exists public.profiles (
   role text not null default 'student' check (role in ('student','admin','co_owner','owner')),
   profile_public boolean not null default false,
   leaderboard_opt_in boolean not null default false,
+  preferences jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
