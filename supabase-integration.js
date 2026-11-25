@@ -27,8 +27,20 @@ const getUser = async()=>{const r=await supabase.auth.getUser();return r.data.us
 async function render(){
   const user=await getUser();
   if(!user)return authView();
+
+  // Repair profiles for accounts created before the profile trigger was installed.
+  const setup=await supabase.rpc("ensure_my_profile");
+  if(setup.error){
+    console.error("Rangers profile bootstrap failed:",setup.error);
+    return authView("You're signed in, but your profile needs a database update. Please contact the site owner. ("+setup.error.message+")");
+  }
+
   const result=await supabase.from("profiles").select("*").eq("id",user.id).maybeSingle();
-  if(result.error||!result.data)return authView("Profile setup is still finishing. Refresh in a moment.");
+  if(result.error){
+    console.error("Rangers profile lookup failed:",result.error);
+    return authView("You're signed in, but your profile could not be loaded. ("+result.error.message+")");
+  }
+  if(!result.data)return authView("You're signed in, but your profile could not be created. Please contact the site owner.");
   dashboard(user,result.data);
 }
 function authView(message=""){
