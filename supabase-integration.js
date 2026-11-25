@@ -6,8 +6,9 @@ window.rangersSupabase = supabase;
 
 const dock = document.createElement("div");
 dock.id = "rangersCloudDock";
-dock.innerHTML = '<button id="rangersCloudLaunch" type="button">◈ Rangers Account</button>';
-document.body.append(dock);
+dock.innerHTML = '<button id="rangersCloudLaunch" type="button" aria-label="Open Rangers account">◈ Log in</button>';
+const siteNav = document.querySelector(".nav");
+(siteNav || document.body).append(dock);
 const modal = document.createElement("div");
 modal.id = "rangersCloudModal";
 modal.innerHTML = '<section id="rangersCloudPanel"><header class="rg-head"><div class="rg-brand">ITKAN RANGERS<small>ROBOTICS PLATFORM · STUDENT PORTAL</small></div><button class="rg-close" id="rgClose" type="button">×</button></header><main class="rg-content" id="rgContent"></main></section>';
@@ -16,6 +17,22 @@ const content = modal.querySelector("#rgContent");
 const launch = dock.querySelector("button");
 const close = () => modal.classList.remove("open");
 launch.addEventListener("click", () => {modal.classList.add("open");render();});
+function syncAccountButton(session){
+  const user=session?.user;
+  if(user){
+    const name=user.user_metadata?.display_name || user.email?.split("@")[0] || "Account";
+    launch.textContent="◈ "+name;
+    launch.title=user.email || "Open your Rangers account";
+    launch.setAttribute("aria-label","Open Rangers account for "+name);
+    launch.dataset.signedIn="true";
+  }else{
+    launch.textContent="◈ Log in";
+    launch.title="Log in or create a Rangers account";
+    launch.setAttribute("aria-label","Log in to your Rangers account");
+    launch.dataset.signedIn="false";
+  }
+}
+supabase.auth.getSession().then(({data})=>syncAccountButton(data.session));
 modal.querySelector("#rgClose").addEventListener("click", close);
 modal.addEventListener("click", e => {if(e.target===modal)close();});
 document.addEventListener("keydown", e => {if(e.key==="Escape")close();});
@@ -23,6 +40,26 @@ const esc = v => String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">
 const field = (label,id,type,placeholder) => '<div class="rg-field"><label for="'+id+'">'+label+'</label><input id="'+id+'" type="'+type+'" placeholder="'+placeholder+'" required></div>';
 const status = (message,error=false) => {const el=content.querySelector("#rgStatus");if(el){el.hidden=false;el.textContent=message;el.className="rg-status"+(error?" rg-error":"");}};
 const getUser = async()=>{const r=await supabase.auth.getUser();return r.data.user;};
+
+let syncingCloudSettings=false;
+async function syncProfileSettings(user,profile){
+  const local=window.rangersGetSettings50?.() || {};
+  const remote=profile.preferences && typeof profile.preferences==="object" ? profile.preferences : {};
+  if(Object.keys(remote).length){
+    syncingCloudSettings=true;
+    try{window.rangersApplySettings50?.(remote);}finally{syncingCloudSettings=false;}
+  }else if(Object.keys(local).length){
+    const {error}=await supabase.from("profiles").update({preferences:local}).eq("id",user.id);
+    if(error)console.warn("Could not save initial Rangers preferences:",error.message);
+  }
+}
+window.rangersSettingsChanged=async preferences=>{
+  if(syncingCloudSettings)return;
+  const user=await getUser();
+  if(!user)return;
+  const {error}=await supabase.from("profiles").update({preferences}).eq("id",user.id);
+  if(error)console.warn("Rangers preferences remain saved on this device; cloud sync failed:",error.message);
+};
 
 async function render(){
   const user=await getUser();
@@ -41,6 +78,7 @@ async function render(){
     return authView("You're signed in, but your profile could not be loaded. ("+result.error.message+")");
   }
   if(!result.data)return authView("You're signed in, but your profile could not be created. Please contact the site owner.");
+  await syncProfileSettings(user,result.data);
   dashboard(user,result.data);
 }
 function authView(message=""){
@@ -75,11 +113,11 @@ async function dashboard(user,profile){
   ]);
   const xp=results[0].data||{xp:0,level:1},progress=results[1].data||[],projects=results[2].data||[],badges=results[3].data||[];
   const completed=progress.filter(p=>p.completed).length,lead=["owner","co_owner"].includes(profile.role);
-  content.innerHTML='<div class="rg-kicker">STUDENT CONTROL CENTER · '+esc(profile.role.toUpperCase())+'</div><h1 class="rg-title">Welcome back, '+esc(profile.display_name)+'.</h1><p class="rg-sub">Your Rangers learning, code, and team activity in one place.</p><div class="rg-grid"><article class="rg-card"><p>EXPERIENCE POINTS</p><div class="rg-stat">'+Number(xp.xp).toLocaleString()+'</div><p>Level '+xp.level+'</p></article><article class="rg-card"><p>COMPLETED LESSONS</p><div class="rg-stat">'+completed+'</div><p>Cloud-saved progress</p></article><article class="rg-card"><p>SAVED JAVA PROJECTS</p><div class="rg-stat">'+projects.length+'</div><p>Cloud workspace</p></article><article class="rg-card"><p>ACHIEVEMENTS</p><div class="rg-stat">'+badges.length+'</div><p>Badges earned</p></article></div><div class="rg-tabs"><button class="rg-tab active" data-panel="home">Overview</button><button class="rg-tab" data-panel="code">Code projects</button><button class="rg-tab" data-panel="profile">Profile & privacy</button><button class="rg-tab" data-panel="apply">Admin application</button>'+(lead?'<button class="rg-tab" data-panel="review">Application review</button>':'')+'<button class="rg-tab" data-panel="leaderboard">Leaderboard</button></div><section id="rgPanel"></section><div class="rg-actions"><button class="rg-btn secondary" id="rgLogout">Log out</button></div><div id="rgStatus" class="rg-status" hidden></div>';
+  content.innerHTML='<section class="rg-dashboard-hero"><div><div class="rg-kicker">RANGERS STUDENT PORTAL · '+esc(profile.role.toUpperCase())+'</div><h1 class="rg-title">Welcome back, '+esc(profile.display_name)+'.</h1><p class="rg-sub">Your learning progress, saved code, and team workspace — all in one place.</p></div><div class="rg-avatar" aria-hidden="true">'+esc((profile.display_name||"R").trim().charAt(0).toUpperCase())+'</div></section><div class="rg-grid rg-stat-grid"><article class="rg-card rg-stat-card"><span class="rg-card-label">EXPERIENCE POINTS</span><div class="rg-stat">'+Number(xp.xp).toLocaleString()+'</div><p>Level '+xp.level+'</p></article><article class="rg-card rg-stat-card"><span class="rg-card-label">LESSONS COMPLETED</span><div class="rg-stat">'+completed+'</div><p>Across both academies</p></article><article class="rg-card rg-stat-card"><span class="rg-card-label">SAVED PROJECTS</span><div class="rg-stat">'+projects.length+'</div><p>Java code workspace</p></article><article class="rg-card rg-stat-card"><span class="rg-card-label">ACHIEVEMENTS</span><div class="rg-stat">'+badges.length+'</div><p>Milestones earned</p></article></div><div class="rg-section-heading"><div><span class="rg-kicker">YOUR WORKSPACE</span><h2>Account dashboard</h2></div><span class="rg-account-email">'+esc(user.email||"")+'</span></div><div class="rg-tabs"><button class="rg-tab active" data-panel="home">Overview</button><button class="rg-tab" data-panel="code">Code projects</button><button class="rg-tab" data-panel="profile">Profile & privacy</button><button class="rg-tab" data-panel="settings">Site settings</button><button class="rg-tab" data-panel="apply">Admin application</button>'+(lead?'<button class="rg-tab" data-panel="review">Application review</button>':'')+'<button class="rg-tab" data-panel="leaderboard">Leaderboard</button></div><section id="rgPanel" class="rg-panel-surface"></section><div class="rg-footer-actions"><span class="rg-muted">Signed in securely with your Rangers account</span><button class="rg-btn secondary" id="rgLogout">Log out</button></div><div id="rgStatus" class="rg-status" hidden></div>'
   const panel=content.querySelector("#rgPanel");
   const show=async name=>{
     content.querySelectorAll("[data-panel]").forEach(b=>b.classList.toggle("active",b.dataset.panel===name));
-    if(name==="home")panel.innerHTML='<div class="rg-grid"><article class="rg-card"><h3>CAD Academy</h3><p>' + progress.filter(p=>p.academy==="cad"&&p.completed).length+' completed lessons</p></article><article class="rg-card"><h3>Programming Academy</h3><p>'+progress.filter(p=>p.academy==="programming"&&p.completed).length+' completed lessons</p></article><article class="rg-card"><h3>Achievements</h3><p>'+badges.map(b=>esc(b.achievements?.icon||"🏆")+" "+esc(b.achievements?.title||b.achievement_id)).join("<br>")+'</p></article></div><p class="rg-muted" style="margin-top:12px">Academy lesson buttons will be connected to cloud progress in the next integration pass.</p>';
+    if(name==="home")panel.innerHTML='<div class="rg-grid"><article class="rg-card"><h3>CAD Academy</h3><p>'+progress.filter(p=>p.academy==="cad"&&p.completed).length+' completed lessons</p><div class="rg-meter"><span style="width:'+Math.min(100,progress.filter(p=>p.academy==="cad"&&p.completed).length*5)+'%"></span></div></article><article class="rg-card"><h3>Programming Academy</h3><p>'+progress.filter(p=>p.academy==="programming"&&p.completed).length+' completed lessons</p><div class="rg-meter"><span style="width:'+Math.min(100,progress.filter(p=>p.academy==="programming"&&p.completed).length*5)+'%"></span></div></article><article class="rg-card"><h3>Recent achievements</h3><p>'+ (badges.length?badges.map(b=>esc(b.achievements?.icon||"🏆")+" "+esc(b.achievements?.title||b.achievement_id)).join("<br>"):"Your earned badges will appear here as you complete learning milestones.")+'</p></article></div><p class="rg-muted rg-home-note">Your account data is private. Your site preferences sync to this account when you are signed in.</p>';
     if(name==="code"){
       const r=await supabase.from("saved_code").select("*").eq("user_id",user.id).order("updated_at",{ascending:false});const list=r.data||[];
       panel.innerHTML='<h2 class="rg-title" style="font-size:1.5rem">Cloud code workspace</h2><form id="rgCodeForm" class="rg-form">'+field("Project name","rgCodeTitle","text","Mecanum TeleOp")+'<div class="rg-field"><label for="rgCodeText">Java code</label><textarea id="rgCodeText" required placeholder="Write or paste Java code..."></textarea></div><button class="rg-btn">Save project to cloud</button></form><div id="rgProjects">'+list.map(p=>'<article class="rg-record"><strong>'+esc(p.title)+'</strong><small>'+esc(p.language)+' · '+new Date(p.updated_at).toLocaleString()+'</small><div class="rg-actions"><button class="rg-btn secondary" data-open="'+p.id+'">Open</button><button class="rg-btn danger" data-delete="'+p.id+'">Delete</button></div></article>').join("")+'</div>';
@@ -90,7 +128,11 @@ async function dashboard(user,profile){
     if(name==="profile"){
       panel.innerHTML='<h2 class="rg-title" style="font-size:1.5rem">Profile & privacy</h2><form id="rgProfileForm" class="rg-form">'+field("Display name","rgDisplayName","text","Your display name")+'<div class="rg-field"><label><input id="rgPublic" type="checkbox" style="width:auto"> Public student profile</label></div><div class="rg-field"><label><input id="rgOptIn" type="checkbox" style="width:auto"> Show me on XP leaderboard</label></div><button class="rg-btn">Save profile settings</button></form><p class="rg-muted">Email and private learning records are never shown publicly.</p>';
       panel.querySelector("#rgDisplayName").value=profile.display_name||"";panel.querySelector("#rgPublic").checked=!!profile.profile_public;panel.querySelector("#rgOptIn").checked=!!profile.leaderboard_opt_in;
-      panel.querySelector("form").addEventListener("submit",async e=>{e.preventDefault();const r=await supabase.from("profiles").update({display_name:panel.querySelector("#rgDisplayName").value.trim(),profile_public:panel.querySelector("#rgPublic").checked,leaderboard_opt_in:panel.querySelector("#rgOptIn").checked}).eq("id",user.id);if(r.error)status(r.error.message,true);else status("Profile saved.");});
+      panel.querySelector("form").addEventListener("submit",async e=>{e.preventDefault();const r=await supabase.from("profiles").update({display_name:panel.querySelector("#rgDisplayName").value.trim(),profile_public:panel.querySelector("#rgPublic").checked,leaderboard_opt_in:panel.querySelector("#rgOptIn").checked}).eq("id",user.id);if(r.error)status(r.error.message,true);else{profile.display_name=panel.querySelector("#rgDisplayName").value.trim();profile.profile_public=panel.querySelector("#rgPublic").checked;profile.leaderboard_opt_in=panel.querySelector("#rgOptIn").checked;status("Profile saved.");}});
+    }
+    if(name==="settings"){
+      panel.innerHTML='<div class="rg-settings-callout"><div><span class="rg-kicker">PERSONALIZE YOUR EXPERIENCE</span><h2 class="rg-title" style="font-size:1.45rem">Website settings</h2><p class="rg-sub">Your preferences are saved on this device and synced to your Rangers account while signed in.</p></div><button class="rg-btn" id="rgOpenSiteSettings" type="button">Open all 50 settings ↗</button></div>';
+      panel.querySelector("#rgOpenSiteSettings").addEventListener("click",()=>{close();location.hash="#settings";});
     }
     if(name==="apply"){
       const ex=await supabase.from("admin_applications").select("status,assigned_role").eq("applicant_id",user.id).order("created_at",{ascending:false}).limit(1).maybeSingle();
@@ -115,4 +157,7 @@ window.rangersCloudSyncProgress=async(academy,lessonId,completed=true)=>{
   const user=await getUser();if(!user)return {error:"Sign in to sync progress."};
   return supabase.from("user_progress").upsert({user_id:user.id,academy,lesson_id:String(lessonId),completed,completed_at:completed?new Date().toISOString():null,updated_at:new Date().toISOString()},{onConflict:"user_id,academy,lesson_id"});
 };
-supabase.auth.onAuthStateChange((_event,session)=>{if(modal.classList.contains("open"))setTimeout(()=>session?render():authView(),0);});
+supabase.auth.onAuthStateChange((_event,session)=>{
+  syncAccountButton(session);
+  if(modal.classList.contains("open"))setTimeout(()=>session?render():authView(),0);
+});
