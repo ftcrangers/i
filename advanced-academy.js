@@ -51,7 +51,7 @@ function start(){
   if(typeof window.rangersLoadLessonNote!=="function"){noteStatus.textContent="Saved on this device. Sign in to sync notes.";return;}
   const result=await window.rangersLoadLessonNote(current.track.toLowerCase(),id);
   if(result?.data?.note){noteText.value=result.data.note;all[id]=result.data.note;localStorage.setItem(academyNotesKey,JSON.stringify(all));noteStatus.textContent="Synced from your Rangers account.";}
-  else if(result?.error)noteStatus.textContent="Saved on this device · cloud note unavailable.";
+  else if(result?.error)noteStatus.textContent="Saved on this device · cloud note unavailable.";else if(all[id]){const saved=await window.rangersSaveLessonNote(current.track.toLowerCase(),id,all[id]);noteStatus.textContent=saved?.error?"Saved on this device · cloud sync failed.":"Local note synced to your Rangers account."; }
  }
  noteToggle.addEventListener("click",()=>notePanel.classList.toggle("open"));
  document.getElementById("advNotesClose").addEventListener("click",()=>notePanel.classList.remove("open"));
