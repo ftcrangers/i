@@ -62,7 +62,7 @@ Deno.serve(async (req) => {
       "",
       "Review securely: " + reviewUrl,
       "Sign in with an owner or co-owner account to review. This email does not grant permissions."
-    ].join("\\n"),
+    ].join("\n"),
     html: `
       <div style="margin:0;padding:32px 14px;background:#eef4ef;font-family:Arial,Helvetica,sans-serif;color:#17251c">
         <div style="max-width:620px;margin:0 auto;background:#ffffff;border:1px solid #dce8de;border-radius:18px;overflow:hidden">
