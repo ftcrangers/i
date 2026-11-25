@@ -36,3 +36,19 @@
 .rg-card{transition:transform .18s,border-color .18s}.rg-card:hover{transform:translateY(-2px);border-color:#477253}
 .rg-tab{transition:background .18s,border-color .18s}
 @media(max-width:650px){#rangersCloudDock{margin-left:auto}#rangersCloudLaunch{padding:9px 11px;font-size:.73rem;max-width:130px;overflow:hidden;text-overflow:ellipsis}.rg-dashboard-hero{padding:19px}.rg-avatar{width:48px;height:48px;flex-basis:48px;border-radius:15px}.rg-section-heading{align-items:flex-start;flex-direction:column}.rg-footer-actions{align-items:flex-start;flex-direction:column}}
+
+.rg-admin-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.rg-admin-action{display:grid;gap:7px;text-align:left;border:1px solid #31543d;border-radius:15px;background:linear-gradient(145deg,#142219,#0e1711);padding:17px;color:#eaffef;cursor:pointer}
+.rg-admin-action:hover{border-color:#60bf7c;transform:translateY(-1px)}
+.rg-admin-action b{font:900 1rem Manrope,sans-serif}.rg-admin-action span{font-size:.8rem;color:#9cb3a2;line-height:1.5}
+.rg-wide-form{max-width:760px}.rg-editor-divider{height:1px;background:#284333;margin:8px 0}
+.rg-checkline{display:flex;align-items:center;gap:9px;color:#cde6d3;font-size:.83rem;font-weight:800}
+.rg-checkline input{accent-color:#39c66b;width:17px;height:17px}
+.rg-member-record{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.rg-member-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rg-member-controls select{background:#07100a;color:#f1fff4;border:1px solid #31513c;border-radius:9px;padding:9px}
+.rg-role-pill{display:inline-flex;border:1px solid #3b7650;border-radius:999px;padding:6px 10px;color:#b6f3c8;background:#10251a;font-size:.68rem;font-weight:900;text-transform:uppercase}
+.rg-announcement-copy{white-space:pre-wrap;color:#c0d4c5;margin-top:8px;font-size:.86rem}
+.rangers-site-announcement{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 20px;background:#e8f5eb;color:#123d2b;border-bottom:1px solid #c9e1cf;font-size:.88rem}
+.rangers-site-announcement strong{font-weight:900}.rangers-site-announcement span{color:#355d43}
+@media(max-width:650px){.rg-admin-actions{grid-template-columns:1fr}.rg-member-record{align-items:flex-start}.rg-member-controls{width:100%}.rg-member-controls select{flex:1}}
