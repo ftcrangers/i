@@ -221,6 +221,7 @@ function start(){
  document.getElementById("advNext").addEventListener("click",()=>{if(current.page<3){current.page++;if(current.page===3)reviewStartedAt=Date.now();draw()}else submit()});
  render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
   hydrateCloudProgress();
+  window.addEventListener("rangers-auth-state",hydrateCloudProgress);
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();
