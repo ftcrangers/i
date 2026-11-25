@@ -53,31 +53,33 @@ function start(){
  let notesSaveTimer=null;
  const currentNoteId=()=>current.track+"-"+current.index;
  async function loadLessonNote(){
-  const id=currentNoteId(),local=readNotes()[id]||"";
+  const id=currentNoteId(),academy=current.track.toLowerCase(),local=readNotes()[id]||"";
   notesText.value=local;
   document.getElementById("advNotesContext").textContent=(current.track==="CAD"?"CAD":"Programming")+" · "+lesson().title;
   notesStatus.textContent="Saved on this device";
   if(typeof window.rangersLoadAcademyNote!=="function")return;
-  const remote=await window.rangersLoadAcademyNote(current.track.toLowerCase(),id);
+  const remote=await window.rangersLoadAcademyNote(academy,id);
+  if(id!==currentNoteId())return;
   if(remote?.error){notesStatus.textContent="Saved locally · cloud unavailable";return;}
   if(remote?.data?.content!==undefined&&remote.data.content!==null){
    notesText.value=remote.data.content;
    const all=readNotes();all[id]=remote.data.content;writeNotes(all);
    notesStatus.textContent="Synced from your account";
   }else if(local.trim()){
-   const saved=await window.rangersSaveAcademyNote?.(current.track.toLowerCase(),id,local);
+   const saved=await window.rangersSaveAcademyNote?.(academy,id,local);
+   if(id!==currentNoteId())return;
    if(saved?.error)notesStatus.textContent="Saved locally · cloud sync failed";
    else if(saved)notesStatus.textContent="Saved on this device and account";
   }
  }
  function saveLessonNote(){
-  const id=currentNoteId(),all=readNotes();all[id]=notesText.value;writeNotes(all);
+  const id=currentNoteId(),academy=current.track.toLowerCase(),value=notesText.value,all=readNotes();all[id]=value;writeNotes(all);
   notesStatus.textContent="Saving…";
   if(notesSaveTimer)clearTimeout(notesSaveTimer);
   notesSaveTimer=setTimeout(async()=>{
    if(typeof window.rangersSaveAcademyNote!=="function"){notesStatus.textContent="Saved on this device";return;}
-   const result=await window.rangersSaveAcademyNote(current.track.toLowerCase(),id,notesText.value);
-   notesStatus.textContent=result?.error?"Saved locally · cloud sync failed":"Saved on this device and account";
+   const result=await window.rangersSaveAcademyNote(academy,id,value);
+   if(id===currentNoteId())notesStatus.textContent=result?.error?"Saved locally · cloud sync failed":"Saved on this device and account";
   },650);
  }
  notesToggle.addEventListener("click",async()=>{
