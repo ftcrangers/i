@@ -36,3 +36,16 @@
 .rg-card{transition:transform .18s,border-color .18s}.rg-card:hover{transform:translateY(-2px);border-color:#477253}
 .rg-tab{transition:background .18s,border-color .18s}
 @media(max-width:650px){#rangersCloudDock{margin-left:auto}#rangersCloudLaunch{padding:9px 11px;font-size:.73rem;max-width:130px;overflow:hidden;text-overflow:ellipsis}.rg-dashboard-hero{padding:19px}.rg-avatar{width:48px;height:48px;flex-basis:48px;border-radius:15px}.rg-section-heading{align-items:flex-start;flex-direction:column}.rg-footer-actions{align-items:flex-start;flex-direction:column}}
+
+
+/* Rangers Admin Center */
+.rg-admin-section{margin-top:22px;padding-top:18px;border-top:1px solid var(--rg-line)}
+.rg-admin-section>h3{font:900 1.05rem Manrope;color:#eaffef;margin-bottom:10px}
+.rg-admin-section .rg-record p{color:#c4d8ca;font-size:.84rem;line-height:1.55;margin:9px 0}
+.rg-badge{display:inline-flex;align-items:center;border:1px solid #477253;background:#14291b;color:#bdf2c9;border-radius:999px;padding:7px 11px;font-size:.7rem;font-weight:900;letter-spacing:.08em}
+.rg-inline-check{display:flex;align-items:center;gap:9px;color:#cde6d3;font-size:.8rem;font-weight:700}
+.rg-inline-check input{accent-color:#39c66b;width:17px;height:17px}
+.rg-record select{border:1px solid #31513c;border-radius:9px;background:#07100a;color:#f1fff4;padding:9px 11px;min-width:135px}
+.rg-record .rg-actions .rg-btn{font-size:.78rem}
+.rg-admin-section .rg-record:hover{border-color:#477253}
+@media(max-width:650px){.rg-record .rg-actions{align-items:stretch}.rg-record .rg-actions>*{flex:1}.rg-record select{width:100%}}
