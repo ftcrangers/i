@@ -49,3 +49,11 @@
 .rg-record .rg-actions .rg-btn{font-size:.78rem}
 .rg-admin-section .rg-record:hover{border-color:#477253}
 @media(max-width:650px){.rg-record .rg-actions{align-items:stretch}.rg-record .rg-actions>*{flex:1}.rg-record select{width:100%}}
+
+.rg-admin-section .rg-form{max-width:760px}
+.rg-admin-section .rg-form input,.rg-admin-section .rg-form textarea{width:100%;box-sizing:border-box;border:1px solid #31513c;border-radius:10px;background:#07100a;color:#f1fff4;padding:11px 12px;font:inherit}
+.rg-admin-section .rg-form textarea{min-height:105px;resize:vertical}
+.rg-admin-section .rg-form label{display:block;color:#cde6d3;font-size:.78rem;font-weight:800;margin-bottom:6px}
+.rg-admin-section .rg-form .rg-field{margin:12px 0}
+.rangers-site-notice{max-width:1120px;margin:16px auto 0;padding:13px 18px;border:1px solid #b5d8bf;border-radius:12px;background:#eaf6ed;color:#16452a;text-align:center;font-weight:800;font-size:.9rem;box-shadow:0 8px 24px #103d2b12}
+@media(max-width:650px){.rangers-site-notice{margin:12px 16px 0;font-size:.82rem}}
