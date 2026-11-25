@@ -15,6 +15,12 @@ create table if not exists public.profiles (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.team_members (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  membership_status text not null default 'pending' check (membership_status in ('pending','active','suspended')),
+  joined_at timestamptz not null default now()
+);
+
 create table if not exists public.user_progress (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
@@ -130,6 +136,13 @@ as $$
   select coalesce((select role from public.profiles where id = auth.uid()), 'student');
 $$;
 
+create or replace function public.is_team_member()
+returns boolean language sql stable security definer set search_path = public
+as $
+  select public.current_user_role() in ('admin','co_owner','owner')
+    or exists (select 1 from public.team_members where user_id = auth.uid() and membership_status = 'active');
+$;
+
 create or replace function public.is_team_admin()
 returns boolean language sql stable security definer set search_path = public
 as $$
@@ -154,6 +167,11 @@ begin
     case when lower(new.email) = 'humzanagaria@gmail.com' then 'owner' else 'student' end
   )
   on conflict (id) do nothing;
+
+  if lower(new.email) = 'humzanagaria@gmail.com' then
+    insert into public.team_members(user_id, membership_status) values (new.id, 'active')
+    on conflict (user_id) do update set membership_status = 'active';
+  end if;
 
   insert into public.user_xp(user_id, xp, level)
   values (new.id, 0, 1)
@@ -249,6 +267,7 @@ end;
 $$;
 
 alter table public.profiles enable row level security;
+alter table public.team_members enable row level security;
 alter table public.user_progress enable row level security;
 alter table public.user_xp enable row level security;
 alter table public.achievements enable row level security;
@@ -274,20 +293,22 @@ create policy "Users manage own saved code" on public.saved_code for all to auth
 create policy "Users submit own applications" on public.admin_applications for insert to authenticated with check (applicant_id = auth.uid() and lower(applicant_email) = lower(auth.jwt()->>'email'));
 create policy "Applicants and team leads read applications" on public.admin_applications for select to authenticated using (applicant_id = auth.uid() or public.is_team_lead());
 
-create policy "Team members read scouting" on public.scouting_records for select to authenticated using (true);
+create policy "Members read team membership" on public.team_members for select to authenticated using (user_id = auth.uid() or public.is_team_admin());
+create policy "Leads manage team membership" on public.team_members for all to authenticated using (public.is_team_lead()) with check (public.is_team_lead());
+create policy "Team members read scouting" on public.scouting_records for select to authenticated using (public.is_team_member());
 create policy "Admins manage scouting" on public.scouting_records for all to authenticated using (public.is_team_admin()) with check (public.is_team_admin());
-create policy "Team members read maintenance" on public.maintenance_logs for select to authenticated using (true);
-create policy "Admins manage maintenance" on public.maintenance_logs for all to authenticated using (public.is_team_admin()) with check (public.is_team_admin());
-create policy "Team members read parts lists" on public.parts_lists for select to authenticated using (true);
-create policy "Admins manage parts lists" on public.parts_lists for all to authenticated using (public.is_team_admin()) with check (public.is_team_admin());
-create policy "Team members read notebook" on public.notebook_entries for select to authenticated using (true);
-create policy "Admins manage notebook" on public.notebook_entries for all to authenticated using (public.is_team_admin()) with check (public.is_team_admin());
-create policy "Published announcements readable" on public.announcements for select to authenticated using (published = true or public.is_team_admin());
+create policy "Team members read maintenance" on public.maintenance_logs for select to authenticated using (public.is_team_member());
+create policy "Admins manage maintenance" on public.maintenance_logs for all to authenticated using (public.is_team_admin() and public.is_team_member()) with check (public.is_team_admin() and public.is_team_member());
+create policy "Team members read parts lists" on public.parts_lists for select to authenticated using (public.is_team_member());
+create policy "Admins manage parts lists" on public.parts_lists for all to authenticated using (public.is_team_admin() and public.is_team_member()) with check (public.is_team_admin() and public.is_team_member());
+create policy "Team members read notebook" on public.notebook_entries for select to authenticated using (public.is_team_member());
+create policy "Admins manage notebook" on public.notebook_entries for all to authenticated using (public.is_team_admin() and public.is_team_member()) with check (public.is_team_admin() and public.is_team_member());
+create policy "Published announcements readable" on public.announcements for select to authenticated using (public.is_team_member() and (published = true or public.is_team_admin()));
 create policy "Admins manage announcements" on public.announcements for all to authenticated using (public.is_team_admin()) with check (public.is_team_admin());
 
 grant execute on function public.review_admin_application(uuid,text,text) to authenticated;
 grant execute on function public.set_member_role(uuid,text) to authenticated;
-grant execute on function public.current_user_role() to authenticated;
+grant execute on function public.current_user_role() to authenticated;\ngrant execute on function public.is_team_member() to authenticated;
 grant execute on function public.is_team_admin() to authenticated;
 grant execute on function public.is_team_lead() to authenticated;
 
