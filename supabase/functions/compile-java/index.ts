@@ -69,7 +69,7 @@ Deno.serve(async (req) => {
 
   // Keep Piston-shaped responses intact; normalize compatible providers to the same shape.
   if (result.compile || result.run) return json(result);
-  const exitCode = Number.isInteger(result.exit_code) ? Number(result.exit_code) : (result.status === "success" ? 0 : (result.error ? 1 : 0));
+  const exitCode = typeof result.exit_code === "number" && Number.isInteger(result.exit_code) ? result.exit_code : (result.status === "success" ? 0 : (result.error ? 1 : 0));
   const output = [result.output, result.error].filter(value => typeof value === "string" && value.length).join("\n");
   return json({ compile: { code: 0, output: "" }, run: { code: exitCode, output } });
 });
