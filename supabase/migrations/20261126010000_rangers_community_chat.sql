@@ -90,7 +90,7 @@ returns boolean language sql stable security definer set search_path=public as $
     select 1 from public.profiles p
     where p.id=b and p.role in ('owner','co_owner')
   ));
-$;
+$$;
 
 drop policy if exists "Signed in users can read global chat" on public.rangers_chat_messages;
 create policy "Signed in users can read global chat" on public.rangers_chat_messages
