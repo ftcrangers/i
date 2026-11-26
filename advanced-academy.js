@@ -255,7 +255,7 @@ function start(){
    if(client){const auth=await client.auth.getUser();if(auth.data?.user?.id)nextScope=auth.data.user.id;}
    const scopeChanged=accountScope!==nextScope;
    accountScope=nextScope;
-   if(scopeChanged){render(cadHost,cad,"CAD");render(progHost,prog,"Programming");}
+   if(scopeChanged){render(cadHost,cad,"CAD");render(progHost,prog,"Programming");if(modal.classList.contains("open")){notesText.value="";loadLessonNote();}}
    if(accountScope==="guest"||typeof window.rangersLoadCloudProgress!=="function")return;
    const remote=await window.rangersLoadCloudProgress();
    if(remote.error)throw remote.error;
