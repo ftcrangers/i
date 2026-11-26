@@ -5,3 +5,6 @@ verify_jwt = true
 
 [functions.compile-java]
 verify_jwt = true
+
+[functions.rangers-ai]
+verify_jwt = true
