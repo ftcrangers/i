@@ -38,51 +38,7 @@ begin
 
   if p_academy is null or p_lesson_id is null or p_award_key is null
      or p_academy not in ('cad','programming')
-     or p_lesson_id !~ '^(CAD|Programming)-[0-9]+
-     or p_award_key <> 'advanced-v2-' || p_lesson_id
-     or (p_academy = 'cad' and p_lesson_id not like 'CAD-%')
-     or (p_academy = 'programming' and p_lesson_id not like 'Programming-%') then
-    raise exception 'Invalid Skills XP award';
-  end if;
-
-  if not exists (
-    select 1 from public.user_progress
-    where user_id = v_user_id
-      and academy = p_academy
-      and lesson_id = p_lesson_id
-      and completed is true
-  ) then
-    raise exception 'Complete and sync this Skills lesson before earning XP';
-  end if;
-
-  insert into public.user_xp_awards(user_id, award_key, xp_amount)
-  values (v_user_id, p_award_key, 60)
-  on conflict (user_id, award_key) do nothing;
-
-  if not found then
-    select xp, level into v_xp, v_level
-    from public.user_xp where user_id = v_user_id;
-    return jsonb_build_object('xp', coalesce(v_xp,0), 'level', coalesce(v_level,1), 'awarded', false);
-  end if;
-
-  insert into public.user_xp(user_id, xp, level)
-  values (v_user_id, 0, 1)
-  on conflict (user_id) do nothing;
-
-  update public.user_xp
-  set xp = xp + 60,
-      level = floor((xp + 60)::numeric / 250)::integer + 1,
-      updated_at = now()
-  where user_id = v_user_id
-  returning xp, level into v_xp, v_level;
-
-  return jsonb_build_object('xp', v_xp, 'level', v_level, 'awarded', true);
-end;
-$$;
-
-revoke all on function public.rangers_award_skills_xp(text,text,text) from public, anon;
-grant execute on function public.rangers_award_skills_xp(text,text,text) to authenticated;
-
+     or p_lesson_id !~ '^(CAD|Programming)-[0-9]+$'
      or p_award_key <> 'advanced-v2-' || p_lesson_id
      or (p_academy = 'cad' and p_lesson_id not like 'CAD-%')
      or (p_academy = 'programming' and p_lesson_id not like 'Programming-%') then
