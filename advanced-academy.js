@@ -278,7 +278,7 @@ function start(){
   }catch(error){console.warn("Academy cloud progress could not be loaded:",error.message||error);}
  }
  function render(host,list,track){
-  host.innerHTML='<div class="adv-academy-grid">'+list.map((l,i)=>{const s=load()[track+"-"+i]||{};return '<article class="adv-academy-card"><div class="academy-lesson-meta"><span>'+(track==="CAD"?"CAD":"PROGRAMMING")+'</span><span>'+(s.passed?"✓ PASSED":"4 PAGES")+'</span></div><h3>'+String(i+1).padStart(2,"0")+' · '+esc(l.title)+'</h3><p>'+esc(l.body)+'</p><button class="btn btn-primary btn-small" data-adv-open="'+track+':'+i+'">'+(s.passed?"Review lesson":"Open lesson")+'</button></article>'}).join("")+'</div>';
+  host.innerHTML='<div class="adv-academy-grid">'+list.map((l,i)=>{const s=load()[track+"-"+i]||{};return '<article class="adv-academy-card"><div class="academy-lesson-meta"><span>'+(track==="CAD"?"CAD":"PROGRAMMING")+'</span><span>'+(s.passed?"✓ PASSED":(track==="CAD"?"4 PAGES":"3 PAGES"))+'</span></div><h3>'+String(i+1).padStart(2,"0")+' · '+esc(l.title)+'</h3><p>'+esc(l.body)+'</p><button class="btn btn-primary btn-small" data-adv-open="'+track+':'+i+'">'+(s.passed?"Review lesson":"Open lesson")+'</button></article>'}).join("")+'</div>';
   host.querySelectorAll("[data-adv-open]").forEach(b=>b.addEventListener("click",()=>{const a=b.dataset.advOpen.split(":");current={track:a[0],index:Number(a[1]),page:0};reviewStartedAt=0;if(reviewTimer){clearInterval(reviewTimer);reviewTimer=null;}notesPanel.hidden=true;notesToggle.setAttribute("aria-expanded","false");modal.classList.add("open");notesDock.hidden=false;draw()}));
  }
  async function submit(){
