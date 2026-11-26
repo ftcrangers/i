@@ -67,9 +67,26 @@ modal.querySelector("#rgClose").addEventListener("click", close);
 modal.addEventListener("click", e => {if(e.target===modal)close();});
 document.addEventListener("keydown", e => {if(e.key==="Escape")close();});
 const esc = v => String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function loadSharedLeaderboard(){
+  const host=document.getElementById("sharedLeaderboard");
+  if(!host)return;
+  host.innerHTML='<div class="leaderboard-state">Loading shared Skills XP rankings…</div>';
+  const result=await supabase.from("public_leaderboard").select("display_name,xp,level").order("xp",{ascending:false}).limit(100);
+  if(result.error){
+    host.innerHTML='<div class="leaderboard-state">The shared leaderboard could not load. Check that the Skills XP migration has been applied in Supabase.</div>';
+    console.error("Shared leaderboard:",result.error);
+    return;
+  }
+  if(!result.data?.length){
+    host.innerHTML='<div class="leaderboard-state">No members have opted in yet. Sign in, open Account → Profile & privacy, and enable the shared leaderboard to appear here after passing a Skills lesson.</div>';
+    return;
+  }
+  host.innerHTML=result.data.map((member,index)=>'<article class="leaderboard-entry"><span class="leaderboard-place">#'+(index+1)+'</span><div><div class="leaderboard-member">'+esc(member.display_name||"Rangers member")+'</div><div class="leaderboard-level">Level '+Math.max(1,Number(member.level)||1)+'</div></div><div class="leaderboard-score">'+Number(member.xp||0).toLocaleString()+' XP</div></article>').join("");
+}
 const field = (label,id,type,placeholder) => '<div class="rg-field"><label for="'+id+'">'+label+'</label><input id="'+id+'" type="'+type+'" placeholder="'+placeholder+'" required></div>';
 const status = (message,error=false) => {const el=content.querySelector("#rgStatus");if(el){el.hidden=false;el.textContent=message;el.className="rg-status"+(error?" rg-error":"");}};
 const getUser = async()=>{const r=await supabase.auth.getUser();return r.data.user;};
+loadSharedLeaderboard();
 
 window.rangersCompileJava = async (payload) => {
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
@@ -185,9 +202,9 @@ async function dashboard(user,profile){
       panel.querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",async()=>{if(!confirm("Delete this project?"))return;const r=await supabase.from("saved_code").delete().eq("id",b.dataset.delete).eq("user_id",user.id);if(r.error)status(r.error.message,true);else show("code");}));
     }
     if(name==="profile"){
-      panel.innerHTML='<h2 class="rg-title" style="font-size:1.5rem">Profile & privacy</h2><form id="rgProfileForm" class="rg-form">'+field("Display name","rgDisplayName","text","Your display name") + field("Username (optional)","rgUsername","text","Leave blank to keep your current username")+'<p class="rg-muted">You can change your username whenever you want. Leave it blank to keep your current one. Usernames are visible to signed-in Rangers members.</p><div class="rg-field"><label><input id="rgPublic" type="checkbox" style="width:auto"> Public student profile</label></div><p class="rg-muted">The XP leaderboard includes every account automatically. You cannot opt out.</p><button class="rg-btn">Save profile settings</button></form><p class="rg-muted">Email and private learning records are never shown publicly.</p>';
-      panel.querySelector("#rgDisplayName").value=profile.display_name||"";panel.querySelector("#rgUsername").value=profile.username||"";panel.querySelector("#rgUsername").required=false;panel.querySelector("#rgPublic").checked=!!profile.profile_public;
-      panel.querySelector("form").addEventListener("submit",async e=>{e.preventDefault();const username=panel.querySelector("#rgUsername").value.trim().toLowerCase();if(username&&!/^[a-z0-9_]{3,24}$/.test(username)){status("Username must be 3–24 characters using letters, numbers, or underscores.",true);return;}const changes={display_name:panel.querySelector("#rgDisplayName").value.trim(),profile_public:panel.querySelector("#rgPublic").checked};if(username)changes.username=username;const r=await supabase.from("profiles").update(changes).eq("id",user.id);if(r.error)status(r.error.code==="23505"?"That username is already taken. Try another.":r.error.message,true);else{profile.display_name=panel.querySelector("#rgDisplayName").value.trim();if(username)profile.username=username;profile.profile_public=panel.querySelector("#rgPublic").checked;status("Profile saved.");}});
+      panel.innerHTML='<h2 class="rg-title" style="font-size:1.5rem">Profile & privacy</h2><form id="rgProfileForm" class="rg-form">'+field("Display name","rgDisplayName","text","Your display name") + field("Username (optional)","rgUsername","text","Leave blank to keep your current username")+'<p class="rg-muted">You can change your username whenever you want. Leave it blank to keep your current one. Usernames are visible to signed-in Rangers members.</p><div class="rg-field"><label><input id="rgPublic" type="checkbox" style="width:auto"> Public student profile</label></div><div class="rg-field"><label><input id="rgLeaderboardOptIn" type="checkbox" style="width:auto"> Show my name and Skills XP on the shared leaderboard</label></div><p class="rg-muted">Only your display name, XP total, and level are shown. Email and individual lesson records stay private. You can opt out at any time.</p><button class="rg-btn">Save profile settings</button></form><p class="rg-muted">Your learning records remain private to your account.</p>';
+      panel.querySelector("#rgDisplayName").value=profile.display_name||"";panel.querySelector("#rgUsername").value=profile.username||"";panel.querySelector("#rgUsername").required=false;panel.querySelector("#rgPublic").checked=!!profile.profile_public;panel.querySelector("#rgLeaderboardOptIn").checked=!!profile.leaderboard_opt_in;
+      panel.querySelector("form").addEventListener("submit",async e=>{e.preventDefault();const username=panel.querySelector("#rgUsername").value.trim().toLowerCase();if(username&&!/^[a-z0-9_]{3,24}$/.test(username)){status("Username must be 3–24 characters using letters, numbers, or underscores.",true);return;}const leaderboardOptIn=panel.querySelector("#rgLeaderboardOptIn").checked;const changes={display_name:panel.querySelector("#rgDisplayName").value.trim(),profile_public:panel.querySelector("#rgPublic").checked||leaderboardOptIn,leaderboard_opt_in:leaderboardOptIn};if(username)changes.username=username;const r=await supabase.from("profiles").update(changes).eq("id",user.id);if(r.error)status(r.error.code==="23505"?"That username is already taken. Try another.":r.error.message,true);else{profile.display_name=panel.querySelector("#rgDisplayName").value.trim();if(username)profile.username=username;profile.profile_public=panel.querySelector("#rgPublic").checked||leaderboardOptIn;profile.leaderboard_opt_in=leaderboardOptIn;panel.querySelector("#rgPublic").checked=!!profile.profile_public;status("Profile saved.");loadSharedLeaderboard();}});
     }
     if(name==="settings"){
       panel.innerHTML='<div class="rg-settings-callout"><div><span class="rg-kicker">PERSONALIZE YOUR EXPERIENCE</span><h2 class="rg-title" style="font-size:1.45rem">Website settings</h2><p class="rg-sub">Your preferences are saved on this device and synced to your Rangers account while signed in.</p></div><button class="rg-btn" id="rgOpenSiteSettings" type="button">Open all 50 settings ↗</button></div>';
@@ -309,6 +326,7 @@ supabase.auth.onAuthStateChange((_event,session)=>{
   window.rangersAccountId=session?.user?.id||"guest";
   window.dispatchEvent(new Event("rangers-auth-state"));
   syncAccountButton(session);
+  loadSharedLeaderboard();
   if(session)hydrateAccountSettings(session);
   if(modal.classList.contains("open"))setTimeout(()=>session?render():authView(),0);
 });
