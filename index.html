@@ -66,6 +66,18 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
 .media-item img,.media-item video{width:100%;height:160px;object-fit:cover;border-radius:8px;background:#102b20}
 .media-item p{font-size:.75rem;color:var(--muted);margin-top:7px;overflow-wrap:anywhere}
 .leaderboard-note{background:#fff6df;border:1px solid #f0dfb2;color:#6c541d;border-radius:12px;padding:14px;font-size:.86rem}
+.shared-leaderboard-panel{padding:clamp(16px,3vw,26px);margin-top:8px}
+.shared-leaderboard-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-bottom:15px;border-bottom:1px solid var(--line)}
+.shared-leaderboard-toolbar h3{font-size:1.08rem;margin:0}
+.shared-leaderboard-toolbar p{font-size:.78rem;color:var(--muted);margin-top:3px}
+.shared-leaderboard-rows{display:grid}
+.shared-leaderboard-row{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:13px;padding:14px 5px;border-bottom:1px solid var(--line)}
+.shared-leaderboard-row:last-child{border-bottom:0}
+.shared-leaderboard-rank{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--mint);color:var(--green);font-weight:900}
+.shared-leaderboard-name{font-weight:800;overflow-wrap:anywhere}
+.shared-leaderboard-level{font-size:.76rem;color:var(--muted)}
+.shared-leaderboard-xp{font:800 1rem Manrope;color:var(--green);white-space:nowrap}
+@media(max-width:520px){.shared-leaderboard-row{grid-template-columns:40px minmax(0,1fr);gap:9px}.shared-leaderboard-xp{grid-column:2}.shared-leaderboard-rank{width:34px;height:34px}}
 @media(max-width:800px){.hub-grid{grid-template-columns:1fr 1fr}.builder-layout{grid-template-columns:1fr}.media-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.hub-grid,.media-grid{grid-template-columns:1fr}.robot-stage{min-height:300px}}
 
@@ -516,9 +528,12 @@ body[data-theme="dark"] .adv-academy-foot { color:var(--ink); }
 </div></section></div>
 
 <div class="site-page" id="page-leaderboard"><section class="section"><div class="container">
-<div class="section-head"><span class="eyebrow">Team leaderboard</span><h2>Rangers <span class="accent">progress board.</span></h2><p>Team rankings need shared member data so everyone's progress is measured consistently.</p></div>
-<div class="leaderboard-note"><b>Shared leaderboard not connected yet.</b><br/>Academy XP is currently stored in each visitor's browser. Without a secure shared data service and a team-approved roster, the site cannot display real member rankings. This page will stay unranked rather than showing made-up scores.</div>
-<div class="hub-grid" style="margin-top:15px"><article class="hub-card"><h3>Team milestone</h3><div class="hub-stat">3×</div><p>Itkan Internal Scrimmage champions, based on the team's latest update.</p></article><article class="hub-card"><h3>Learning paths</h3><div class="hub-stat">5</div><p>Structured FTC courses in the Academy.</p></article><article class="hub-card"><h3>Season archives</h3><div class="hub-stat">3</div><p>DECODE, BIOBUZZ, and INTO THE DEEP.</p></article></div>
+<div class="section-head"><span class="eyebrow">Skills · Shared XP</span><h2>Rangers <span class="accent">XP leaderboard.</span></h2><p>Live rankings from Skills lesson XP saved to Supabase. Earn XP by completing lessons while signed in.</p></div>
+<section class="hub-card shared-leaderboard-panel" aria-label="Shared Skills XP leaderboard">
+  <div class="shared-leaderboard-toolbar"><div><h3>Top 100 Rangers learners</h3><p id="sharedLeaderboardUpdated" aria-live="polite">Connecting to Supabase…</p></div><button class="btn btn-primary btn-small" id="sharedLeaderboardRefresh" type="button">Refresh</button></div>
+  <div id="sharedLeaderboardRows" class="shared-leaderboard-rows" aria-live="polite"><div class="empty">Loading shared XP rankings…</div></div>
+</section>
+<p class="source-note">XP is awarded once per completed Skills lesson and stored against each member's Rangers account.</p>
 </div></section></div>
 
 
@@ -2222,5 +2237,45 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
 <script src="./cad-curriculum.js?v=20261125-academy2"></script>
 <script src="./programming-curriculum.js?v=20261125-academy2"></script>
 <script src="./java-code-lab.js?v=20261126-save1"></script>
-<script src="./advanced-academy.js?v=20261126-account1"></script></body>
+<script src="./advanced-academy.js?v=20261126-skillsxp2"></script>
+<script>
+(()=> {
+ const host=document.getElementById("sharedLeaderboardRows");
+ const updated=document.getElementById("sharedLeaderboardUpdated");
+ const refresh=document.getElementById("sharedLeaderboardRefresh");
+ if(!host||!updated)return;
+ const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ let loading=false;
+ async function loadSharedLeaderboard(){
+  if(loading)return;
+  const db=window.rangersSupabase;
+  if(!db){host.innerHTML='<div class="empty">Supabase is still connecting. Try refreshing in a moment.</div>';return;}
+  loading=true;
+  if(refresh)refresh.disabled=true;
+  updated.textContent="Refreshing live rankings…";
+  const result=await db.from("public_leaderboard").select("display_name,xp,level").order("xp",{ascending:false}).order("display_name",{ascending:true}).limit(100);
+  loading=false;
+  if(refresh)refresh.disabled=false;
+  if(result.error){
+   host.innerHTML='<div class="empty">The shared leaderboard could not load. Check that the Supabase leaderboard migrations have been applied.</div>';
+   updated.textContent="Supabase connection error";
+   console.error("Shared Skills leaderboard:",result.error);
+   return;
+  }
+  const rows=result.data||[];
+  if(!rows.length){host.innerHTML='<div class="empty">No member XP yet. Sign in and complete a Skills lesson to get started.</div>';updated.textContent="No XP records yet";return;}
+  host.innerHTML=rows.map((member,index)=>'<article class="shared-leaderboard-row"><span class="shared-leaderboard-rank">#'+(index+1)+'</span><div><div class="shared-leaderboard-name">'+esc(member.display_name||"Rangers member")+'</div><div class="shared-leaderboard-level">Level '+Math.max(1,Number(member.level)||1)+'</div></div><div class="shared-leaderboard-xp">'+Math.max(0,Number(member.xp)||0).toLocaleString()+' XP</div></article>').join("");
+  updated.textContent="Live from Supabase · Updated "+new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
+ }
+ window.rangersRefreshSharedLeaderboard=loadSharedLeaderboard;
+ refresh?.addEventListener("click",loadSharedLeaderboard);
+ document.addEventListener("DOMContentLoaded",()=>{
+  if(location.hash==="#leaderboard")loadSharedLeaderboard();
+  window.addEventListener("hashchange",()=>{if(location.hash==="#leaderboard")loadSharedLeaderboard();});
+  window.addEventListener("rangers-auth-state",()=>{if(location.hash==="#leaderboard")loadSharedLeaderboard();});
+  document.querySelectorAll('[data-page-link="leaderboard"]').forEach(link=>link.addEventListener("click",()=>setTimeout(loadSharedLeaderboard,0)));
+  if(document.getElementById("page-leaderboard")?.classList.contains("active"))loadSharedLeaderboard();
+ });
+})();
+</script></body>
 </html>
