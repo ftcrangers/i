@@ -65,7 +65,7 @@ footer{background:#0b2c20;color:white;padding:55px 0 22px}.footer-top{display:fl
 .media-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;overflow:hidden}
 .media-item img,.media-item video{width:100%;height:160px;object-fit:cover;border-radius:8px;background:#102b20}
 .media-item p{font-size:.75rem;color:var(--muted);margin-top:7px;overflow-wrap:anywhere}
-.leaderboard-note{background:#fff6df;border:1px solid #f0dfb2;color:#6c541d;border-radius:12px;padding:14px;font-size:.86rem}
+.leaderboard-note{background:#fff6df;border:1px solid #f0dfb2;color:#6c541d;border-radius:12px;padding:14px;font-size:.86rem}.leaderboard-board{margin-top:22px;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.leaderboard-state{padding:24px;text-align:center;color:var(--muted)}.leaderboard-entry{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 8px;border-bottom:1px solid var(--line)}.leaderboard-entry:last-child{border-bottom:0}.leaderboard-place{width:38px;height:38px;border-radius:12px;background:var(--mint);color:var(--green-dark);display:grid;place-items:center;font-weight:900}.leaderboard-member{font-weight:900}.leaderboard-level{font-size:.78rem;color:var(--muted)}.leaderboard-score{font:800 1rem Manrope;color:var(--green);white-space:nowrap}@media(max-width:520px){.leaderboard-entry{grid-template-columns:40px minmax(0,1fr);gap:10px}.leaderboard-score{grid-column:2}}
 @media(max-width:800px){.hub-grid{grid-template-columns:1fr 1fr}.builder-layout{grid-template-columns:1fr}.media-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.hub-grid,.media-grid{grid-template-columns:1fr}.robot-stage{min-height:300px}}
 
@@ -516,8 +516,8 @@ body[data-theme="dark"] .adv-academy-foot { color:var(--ink); }
 </div></section></div>
 
 <div class="site-page" id="page-leaderboard"><section class="section"><div class="container">
-<div class="section-head"><span class="eyebrow">Team leaderboard</span><h2>Rangers <span class="accent">progress board.</span></h2><p>Team rankings need shared member data so everyone's progress is measured consistently.</p></div>
-<div class="leaderboard-note"><b>Shared leaderboard not connected yet.</b><br/>Academy XP is currently stored in each visitor's browser. Without a secure shared data service and a team-approved roster, the site cannot display real member rankings. This page will stay unranked rather than showing made-up scores.</div>
+<div class="section-head"><span class="eyebrow">Team leaderboard</span><h2>Rangers <span class="accent">progress board.</span></h2><p>See the team rankings from completed CAD and Programming Academy Skills lessons. XP is shared through Supabase and updates as lesson reviews are passed.</p></div>
+<div id="sharedLeaderboard" class="leaderboard-board" aria-live="polite"><div class="leaderboard-state">Loading shared Skills XP rankings…</div></div><p class="source-note" style="margin-top:12px">XP is earned by passing CAD and Programming Academy lesson reviews. Only members who opt in appear here; email addresses and lesson details stay private.</p>
 <div class="hub-grid" style="margin-top:15px"><article class="hub-card"><h3>Team milestone</h3><div class="hub-stat">3×</div><p>Itkan Internal Scrimmage champions, based on the team's latest update.</p></article><article class="hub-card"><h3>Learning paths</h3><div class="hub-stat">5</div><p>Structured FTC courses in the Academy.</p></article><article class="hub-card"><h3>Season archives</h3><div class="hub-stat">3</div><p>DECODE, BIOBUZZ, and INTO THE DEEP.</p></article></div>
 </div></section></div>
 
