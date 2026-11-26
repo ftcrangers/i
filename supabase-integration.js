@@ -76,8 +76,22 @@ window.rangersCompileJava = async (payload) => {
   if (sessionError || !session) {
     return { error: { message: "Sign in to your Rangers account to use the Java compiler." } };
   }
-  const { data, error } = await supabase.functions.invoke("compile-java", { body: payload });
-  return { data, error };
+  try {
+    const response = await fetch(SUPABASE_URL + "/functions/v1/compile-java", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: "Bearer " + session.access_token
+      },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) return { error: { message: result.error || "Compiler request failed (HTTP " + response.status + ")." } };
+    return { data: result };
+  } catch (error) {
+    return { error: { message: error?.message || "Could not contact the Rangers compiler service." } };
+  }
 };
 
 
