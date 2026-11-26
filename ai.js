@@ -49,8 +49,25 @@ function persistCurrent(){
 function renderHistory(){
   const list=$("historyList");
   if(!state.history.length){list.innerHTML='<div class="empty-history">Your conversations will appear here.</div>';return}
-  list.innerHTML=state.history.map(h=>'<button type="button" data-chat="'+esc(h.id)+'" class="'+(h.id===state.activeChatId?'active':'')+'" title="'+esc(h.title)+'">'+esc(h.title||"New chat")+'</button>').join("");
+  list.innerHTML=state.history.map(h=>'<div class="history-item"><button type="button" class="history-open '+(h.id===state.activeChatId?'active':'')+'" data-chat="'+esc(h.id)+'" title="'+esc(h.title)+'">'+esc(h.title||"New chat")+'</button><button type="button" class="history-delete" data-delete-chat="'+esc(h.id)+'" aria-label="Delete chat: '+esc(h.title||"New chat")+'" title="Delete chat">×</button></div>').join("");
   list.querySelectorAll("[data-chat]").forEach(b=>b.addEventListener("click",()=>openChat(b.dataset.chat)));
+  list.querySelectorAll("[data-delete-chat]").forEach(b=>b.addEventListener("click",()=>deleteChat(b.dataset.deleteChat)));
+}
+function deleteChat(id){
+  const chat=state.history.find(item=>item.id===id);
+  if(!chat)return;
+  if(!window.confirm('Delete "'+(chat.title||"New chat")+'" from your chat history? This cannot be undone.'))return;
+  state.history=state.history.filter(item=>item.id!==id);
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state.history))}catch{}
+  if(state.activeChatId===id){
+    state.activeChatId=null;
+    state.messages=[];
+    state.busy=false;
+    showStatus("");
+    renderWelcome();
+    renderMessages();
+  }
+  renderHistory();
 }
 function openChat(id){
   const h=state.history.find(item=>item.id===id);if(!h)return;
