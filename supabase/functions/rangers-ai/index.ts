@@ -60,12 +60,14 @@ Deno.serve(async (req) => {
   const persona = personas[modelId];
   if (!persona) return json({ error: "Choose one of the available Rangers AI models." }, 400);
   if (!Array.isArray(body.messages) || body.messages.length < 1 || body.messages.length > 16) return json({ error: "Send between 1 and 16 recent messages." }, 400);
-  const messages = body.messages.map(m => {
-    if (!m || !["user", "assistant"].includes(m.role) || typeof m.content !== "string") return null;
-    if (m.content.length > 6000) return null;
-    return { role: m.role, content: m.content };
-  });
-  if (messages.some(m => !m)) return json({ error: "A message is invalid or too long." }, 400);
+  const validMessages = body.messages.every(m =>
+    !!m &&
+    (m.role === "user" || m.role === "assistant") &&
+    typeof m.content === "string" &&
+    m.content.length <= 6000
+  );
+  if (!validMessages) return json({ error: "A message is invalid or too long." }, 400);
+  const messages = body.messages as Array<{ role: "user" | "assistant"; content: string }>;
   if (messages[messages.length - 1]?.role !== "user") return json({ error: "The latest message must be from you." }, 400);
 
   const service = createClient(url, serviceRole, { auth: { persistSession: false, autoRefreshToken: false } });
@@ -114,7 +116,7 @@ Deno.serve(async (req) => {
       const key = Deno.env.get("CLOUDFLARE_AI_TOKEN");
       if (!account || !key) return json({ error: "NAYAH is not configured yet. Add CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_AI_TOKEN to Supabase Function Secrets." }, 503);
       const model = Deno.env.get("CLOUDFLARE_AI_MODEL") || "@cf/zai-org/glm-4.7-flash";
-      const response = await fetch("https://api.cloudflare.com/client/v4/accounts/" + account + "/ai/run/" + encodeURIComponent(model), {
+      const response = await fetch("https://api.cloudflare.com/client/v4/accounts/" + account + "/ai/run/" + model, {
         method: "POST",
         headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
         body: JSON.stringify({ messages: providerMessages, max_tokens: 1400 }),
