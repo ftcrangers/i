@@ -335,7 +335,7 @@ function start(){
     cloudSyncMessage=synced?.error?" Cloud sync failed: "+synced.error.message:" Progress synced to your Rangers account.";
    }
   const result=document.getElementById("advResult");
-  if(passed)result.textContent="✓ Passed! Your evidence includes relevant topic keywords and all review checks. Progress is saved on this device."+cloudSyncMessage;
+  if(passed)result.textContent="✓ Passed! Your evidence includes relevant topic keywords and all review checks. Progress is saved on this device."+cloudSyncMessage+cloudXpMessage;
   else{
    const issues=[];
    if(!waited)issues.push("complete the review check");
@@ -346,7 +346,21 @@ function start(){
   }
   submitButton.textContent=originalLabel;submitButton.disabled=false;
   if(timer)timer.textContent="✓ Review complete. "+(passed?"Your work passed the review.":"Review finished — see the feedback above.");
-  if(passed){const xp=JSON.parse(localStorage.getItem(xpKey())||"{}");const award="advanced-v2-"+id;if(!xp[award]){xp[award]=60;localStorage.setItem(xpKey(),JSON.stringify(xp));}}
+  let cloudXpMessage="";
+  if(passed){
+   const xp=JSON.parse(localStorage.getItem(xpKey())||"{}");
+   const award="advanced-v2-"+id;
+   if(!xp[award]){xp[award]=60;localStorage.setItem(xpKey(),JSON.stringify(xp));}
+   const client=window.rangersSupabase;
+   if(client){
+    const auth=await client.auth.getUser();
+    if(auth.data?.user){
+     const synced=await client.rpc("rangers_award_skills_xp",{p_award_key:award,p_academy:current.track.toLowerCase(),p_lesson_id:id});
+     if(synced.error){cloudXpMessage=" Shared XP could not sync: "+synced.error.message;}
+     else{cloudXpMessage=" Your Skills XP is synced to the shared leaderboard.";}
+    }else{cloudXpMessage=" Sign in to add this XP to the shared leaderboard.";}
+   }else{cloudXpMessage=" Supabase is unavailable, so shared XP was not updated.";}
+  }
   render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
  }
  document.getElementById("advClose").addEventListener("click",()=>{modal.classList.remove("open");notesDock.hidden=true;notesPanel.hidden=true;notesToggle.setAttribute("aria-expanded","false")});modal.addEventListener("click",e=>{if(e.target===modal){modal.classList.remove("open");notesDock.hidden=true;notesPanel.hidden=true;notesToggle.setAttribute("aria-expanded","false")}});
