@@ -11,9 +11,9 @@ drop view if exists public.public_leaderboard;
 create view public.public_leaderboard
 with (security_barrier = true)
 as
-select p.display_name, ux.xp, ux.level
+select p.display_name, coalesce(ux.xp,0) as xp, coalesce(ux.level,1) as level
 from public.profiles p
-join public.user_xp ux on ux.user_id = p.id;
+left join public.user_xp ux on ux.user_id = p.id;
 
 revoke all on public.public_leaderboard from public;
 grant select on public.public_leaderboard to anon, authenticated;
