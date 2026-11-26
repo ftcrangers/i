@@ -119,6 +119,9 @@ drop trigger if exists rangers_chat_message_stamp on public.rangers_chat_message
 create trigger rangers_chat_message_stamp before insert on public.rangers_chat_messages
 for each row execute function public.rangers_stamp_chat_message();
 
+grant select, insert, update on public.rangers_friendships to authenticated;
+grant select, insert on public.rangers_chat_messages to authenticated;
+
 create or replace function public.rangers_my_chat_profile()
 returns table(id uuid, username text, display_name text, role text)
 language sql stable security definer set search_path=public as $$
