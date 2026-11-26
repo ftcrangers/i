@@ -54,13 +54,13 @@ create policy "Recipients can accept friend requests" on public.rangers_friendsh
 for update to authenticated using (auth.uid() = addressee_id) with check (auth.uid() = addressee_id and status = 'accepted');
 
 create or replace function public.rangers_protect_friendship_update()
-returns trigger language plpgsql set search_path=public as $
+returns trigger language plpgsql set search_path=public as $$
 begin
   if new.requester_id <> old.requester_id or new.addressee_id <> old.addressee_id or old.status <> 'pending' or new.status <> 'accepted' then
     raise exception 'Friend requests can only be accepted by their recipient';
   end if;
   return new;
-end $;
+end $$;
 drop trigger if exists rangers_friendship_update_guard on public.rangers_friendships;
 create trigger rangers_friendship_update_guard before update on public.rangers_friendships
 for each row execute function public.rangers_protect_friendship_update();
