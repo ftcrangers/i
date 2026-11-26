@@ -332,20 +332,9 @@ function start(){
    let cloudSyncMessage="";
    if(passed&&typeof window.rangersCloudSyncProgress==="function"){
     const synced=await window.rangersCloudSyncProgress(current.track.toLowerCase(),id,true);
-    cloudSyncMessage=synced?.error?" Cloud sync failed: "+synced.error.message:" Progress synced to your Rangers account.";
+    cloudSyncMessage=synced?.error?" Cloud sync failed: "+(synced.error.message||synced.error):" Progress synced to your Rangers account.";
    }
   const result=document.getElementById("advResult");
-  if(passed)result.textContent="✓ Passed! Your evidence includes relevant topic keywords and all review checks. Progress is saved on this device."+cloudSyncMessage+cloudXpMessage;
-  else{
-   const issues=[];
-   if(!waited)issues.push("complete the review check");
-   if(!enoughText)issues.push("write at least 40 characters about your actual work");
-   if(!hasKeywords)issues.push("include at least "+required+" topic keywords (matched: "+(matched.join(", ")||"none")+")");
-   if(!allChecks)issues.push("check all "+d.checks.length+" review criteria");
-   result.textContent="Not passed yet: "+issues.join("; ")+".";
-  }
-  submitButton.textContent=originalLabel;submitButton.disabled=false;
-  if(timer)timer.textContent="✓ Review complete. "+(passed?"Your work passed the review.":"Review finished — see the feedback above.");
   let cloudXpMessage="";
   if(passed){
    const xp=JSON.parse(localStorage.getItem(xpKey())||"{}");
@@ -361,6 +350,17 @@ function start(){
     }else{cloudXpMessage=" Sign in to add this XP to the shared leaderboard.";}
    }else{cloudXpMessage=" Supabase is unavailable, so shared XP was not updated.";}
   }
+  if(passed)result.textContent="✓ Passed! Your evidence includes relevant topic keywords and all review checks. Progress is saved on this device."+cloudSyncMessage+cloudXpMessage;
+  else{
+   const issues=[];
+   if(!waited)issues.push("complete the review check");
+   if(!enoughText)issues.push("write at least 40 characters about your actual work");
+   if(!hasKeywords)issues.push("include at least "+required+" topic keywords (matched: "+(matched.join(", ")||"none")+")");
+   if(!allChecks)issues.push("check all "+d.checks.length+" review criteria");
+   result.textContent="Not passed yet: "+issues.join("; ")+".";
+  }
+  submitButton.textContent=originalLabel;submitButton.disabled=false;
+  if(timer)timer.textContent="✓ Review complete. "+(passed?"Your work passed the review.":"Review finished — see the feedback above.");
   render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
  }
  document.getElementById("advClose").addEventListener("click",()=>{modal.classList.remove("open");notesDock.hidden=true;notesPanel.hidden=true;notesToggle.setAttribute("aria-expanded","false")});modal.addEventListener("click",e=>{if(e.target===modal){modal.classList.remove("open");notesDock.hidden=true;notesPanel.hidden=true;notesToggle.setAttribute("aria-expanded","false")}});
