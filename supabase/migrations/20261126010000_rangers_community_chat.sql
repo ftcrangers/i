@@ -40,6 +40,8 @@ create table if not exists public.rangers_friendships (
   unique(requester_id, addressee_id)
 );
 alter table public.rangers_friendships enable row level security;
+create index if not exists rangers_friendships_requester_idx on public.rangers_friendships(requester_id,status);
+create index if not exists rangers_friendships_addressee_idx on public.rangers_friendships(addressee_id,status);
 
 drop policy if exists "Users can view their friend links" on public.rangers_friendships;
 create policy "Users can view their friend links" on public.rangers_friendships
@@ -75,18 +77,20 @@ create table if not exists public.rangers_chat_messages (
   created_at timestamptz not null default now()
 );
 alter table public.rangers_chat_messages enable row level security;
+create index if not exists rangers_chat_messages_global_idx on public.rangers_chat_messages(created_at desc) where recipient_id is null;
+create index if not exists rangers_chat_messages_dm_idx on public.rangers_chat_messages(sender_id,recipient_id,created_at desc);
 
 create or replace function public.rangers_chat_can_dm(a uuid, b uuid)
 returns boolean language sql stable security definer set search_path=public as $$
-  select exists (
+  select a = auth.uid() and (exists (
     select 1 from public.rangers_friendships f
     where f.status='accepted'
       and ((f.requester_id=a and f.addressee_id=b) or (f.requester_id=b and f.addressee_id=a))
   ) or exists (
     select 1 from public.profiles p
     where p.id=b and p.role in ('owner','co_owner')
-  );
-$$;
+  ));
+$;
 
 drop policy if exists "Signed in users can read global chat" on public.rangers_chat_messages;
 create policy "Signed in users can read global chat" on public.rangers_chat_messages
@@ -119,6 +123,8 @@ drop trigger if exists rangers_chat_message_stamp on public.rangers_chat_message
 create trigger rangers_chat_message_stamp before insert on public.rangers_chat_messages
 for each row execute function public.rangers_stamp_chat_message();
 
+revoke all on public.rangers_friendships from anon;
+revoke all on public.rangers_chat_messages from anon;
 grant select, insert, update on public.rangers_friendships to authenticated;
 grant select, insert on public.rangers_chat_messages to authenticated;
 
