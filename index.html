@@ -2164,6 +2164,59 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
     renderPartsList();
 
 </script>
+
+<script>
+(()=>{
+ const panel=document.getElementById("siteGuidePanel"),launch=document.getElementById("siteGuideLaunch"),close=document.getElementById("siteGuideClose"),messages=document.getElementById("siteGuideMessages"),form=document.getElementById("siteGuideForm"),input=document.getElementById("siteGuideInput");
+ if(!panel||!launch||!messages||!form||!input)return;
+ const routes=[
+  {id:"home",name:"Home page",keys:["home","main page","homepage","team"] ,desc:"The main page has team highlights, mission, and key information."},
+  {id:"academy",name:"Academy",keys:["academy","lesson","lessons","learn","learning","programming lesson","cad lesson"],desc:"The Academy contains CAD and programming learning tracks."},
+  {id:"codes",name:"FTC Code Library",keys:["code","codes","java","programming examples","code library"],desc:"The FTC Code Library has reusable FTC programming examples."},
+  {id:"tutor",name:"Robotics Tutor",keys:["tutor","explain","teach me"],desc:"The Robotics Tutor gives guided help with FTC topics."},
+  {id:"courses",name:"Courses",keys:["course","courses","learning path"],desc:"Courses contains the structured learning paths."},
+  {id:"parts-hub",name:"Parts Hub",keys:["parts","parts hub","buy parts","components","shop"],desc:"The Parts Hub lists FTC components and links to the SWYFT store."},
+  {id:"leaderboard",name:"XP Leaderboard",keys:["leaderboard","rank","ranking","xp","points"],desc:"The leaderboard shows team XP and progress."},
+  {id:"decode",name:"DECODE season",keys:["decode","current season","season"],desc:"Open the DECODE season archive and competition information."},
+  {id:"biobuzz",name:"BIOBUZZ season",keys:["biobuzz","bio buzz"],desc:"Open the BIOBUZZ season page and its event information."},
+  {id:"into-the-deep",name:"INTO THE DEEP archive",keys:["into the deep","deep season"],desc:"Open the INTO THE DEEP season archive."},
+  {id:"games",name:"Games",keys:["game","games","play"],desc:"Open the Rangers robotics games."},
+  {id:"dashboard",name:"Dashboard",keys:["dashboard","progress","completed lessons"],desc:"The dashboard summarizes XP and learning progress."},
+  {id:"engineering-notebook",name:"Engineering Notebook",keys:["notebook","engineering notebook","design log"],desc:"Use the notebook to record designs, tests, and results."},
+  {id:"autonomous-planner",name:"Autonomous Planner",keys:["autonomous","auto planner","route","path planner"],desc:"The Autonomous Planner helps outline a field route."},
+  {id:"scouting",name:"Competition Scouting",keys:["scouting","scout","match data"],desc:"Competition Scouting is for recording match observations."},
+  {id:"maintenance",name:"Maintenance",keys:["maintenance","inspection","robot check"],desc:"The Maintenance page is for robot inspection logs."},
+  {id:"settings",name:"Settings",keys:["settings","dark mode","theme","text size","preferences"],desc:"Settings lets you adjust the website experience."},
+  {id:"more",name:"More tools",keys:["more tools","toolbox","tools","calculator","tool"],desc:"More tools opens the searchable Rangers toolbox."}
+ ];
+ function addMessage(text,who="bot",actions=[]){
+  const bubble=document.createElement("div");bubble.className="site-guide-msg "+who;bubble.textContent=text;messages.append(bubble);
+  if(actions.length){const row=document.createElement("div");row.className="site-guide-actions";actions.forEach(route=>{const b=document.createElement("button");b.type="button";b.textContent="Open "+route.name;b.addEventListener("click",()=>{if(typeof window.showPage==="function")window.showPage(route.id);else location.hash=route.id;addMessage("Opening "+route.name+".","bot");});row.append(b)});messages.append(row)}
+  messages.scrollTop=messages.scrollHeight;
+ }
+ function open(){panel.classList.add("open");panel.setAttribute("aria-hidden","false");launch.setAttribute("aria-expanded","true");input.focus()}
+ function shut(){panel.classList.remove("open");panel.setAttribute("aria-hidden","true");launch.setAttribute("aria-expanded","false")}
+ function answer(raw){
+  const q=raw.trim().toLowerCase();if(!q)return;
+  addMessage(raw,"user");
+  const matches=routes.filter(r=>r.keys.some(k=>q.includes(k)));
+  if(matches.length){
+   const exact=matches.slice(0,2);
+   addMessage(exact.length===1?exact[0].desc+" I can open it for you.": "I found a couple of places that may match. Choose the one you want to open.", "bot",exact);
+  }else if(/where|find|navigate|go to|open|take me/.test(q)){
+   addMessage("I can guide you to the Academy, Code Library, Tutor, Courses, Parts Hub, XP Leaderboard, season archives, Games, Dashboard, Notebook, Scouting, Maintenance, Settings, or More tools. What are you looking for?", "bot",routes.filter(r=>["academy","codes","parts-hub","leaderboard","more"].includes(r.id)));
+  }else{
+   addMessage("I'm the site navigation helper, so I can explain where things are and open Rangers pages. Try asking “Where are the programming lessons?” or “Open the leaderboard.”", "bot");
+  }
+ }
+ launch.addEventListener("click",()=>panel.classList.contains("open")?shut():open());
+ close.addEventListener("click",shut);
+ form.addEventListener("submit",e=>{e.preventDefault();answer(input.value);input.value="";});
+ messages.querySelectorAll("[data-guide-query]").forEach(b=>b.addEventListener("click",()=>answer(b.dataset.guideQuery)));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")shut()});
+})();
+</script>
+
 <script type="module" src="./supabase-integration.js?v=20261126-team2"></script>
 <script type="module" src="./rangers-chat.js?v=20261126-chat1"></script>
 <script src="./cad-curriculum.js?v=20261125-academy2"></script>
