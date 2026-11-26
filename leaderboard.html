@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123d2b">
+<title>XP Leaderboard | Itkan Rangers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#176b43;--deep:#103d2b;--mint:#e9f4ed;--paper:#f7faf7;--ink:#17231c;--muted:#647269;--line:#dce7de}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px "DM Sans",sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}.top{background:#fff;border-bottom:1px solid var(--line);padding:16px max(22px,calc((100% - 1040px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.brand{font:800 1rem Manrope;color:var(--deep)}.brand small{display:block;font:800 .65rem "DM Sans";letter-spacing:.14em;color:var(--muted)}
+.nav{display:flex;gap:10px;flex-wrap:wrap}.nav a,.refresh{padding:9px 13px;border-radius:10px;background:var(--mint);color:var(--deep);font-weight:800;border:0}
+main{width:min(920px,calc(100% - 36px));margin:55px auto}.eyebrow{font-size:.72rem;letter-spacing:.15em;color:var(--green);font-weight:900}h1{font:800 clamp(2rem,5vw,3.5rem)/1.1 Manrope;letter-spacing:-.05em;margin:8px 0}p{color:var(--muted)}
+.panel{margin-top:25px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 35px #123d2b0b}
+.row{display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:14px;padding:14px 8px;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.rank{width:38px;height:38px;display:grid;place-items:center;background:var(--mint);color:var(--deep);border-radius:12px;font-weight:900}
+.name{font-weight:900}.level{font-size:.76rem;color:var(--muted)}.xp{font:800 1rem Manrope;color:var(--green);white-space:nowrap}
+.state{padding:20px;text-align:center;color:var(--muted)}.refresh{cursor:pointer;background:var(--green);color:white}
+@media(max-width:520px){main{margin:35px auto}.row{grid-template-columns:42px 1fr;gap:10px}.xp{grid-column:2}.rank{width:34px;height:34px}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="./index.html">ITKAN RANGERS<small>FTC TEAM #28922</small></a><nav class="nav"><a href="./index.html">Home</a><a href="./index.html#academy">Academy</a><a href="./team-portal.html">Team Portal</a></nav></header>
+<main><span class="eyebrow">RANGERS COMMUNITY</span><h1>XP Leaderboard</h1><p>Every Rangers account is included automatically. Keep learning, complete lessons, and earn XP.</p><section class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><strong>Top 100 accounts</strong><button class="refresh" id="refresh">Refresh</button></div><div id="rankings" class="state">Loading leaderboard…</div></section></main>
+<script type="module">
+import{createClient}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const db=createClient("https://hnhbavlgqbkxbvqdrlgh.supabase.co","sb_publishable_Lb2iv7AJ1bABxADToJ9g4Q_S6CczSYN");
+const host=document.getElementById("rankings"),esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function load(){host.className="state";host.textContent="Loading leaderboard…";const r=await db.from("public_leaderboard").select("display_name,xp,level").order("xp",{ascending:false}).limit(100);if(r.error){host.textContent="Leaderboard unavailable. The leaderboard database migration may need to be applied.";return}if(!r.data?.length){host.textContent="No XP rankings yet. Complete an Academy lesson to get started.";return}host.className="";host.innerHTML=r.data.map((x,i)=>'<article class="row"><span class="rank">#'+(i+1)+'</span><div><div class="name">'+esc(x.display_name||"Rangers member")+'</div><div class="level">Level '+Number(x.level||1)+'</div></div><div class="xp">'+Number(x.xp||0).toLocaleString()+' XP</div></article>').join("")}
+document.getElementById("refresh").addEventListener("click",load);load();
+</script>
+</body>
+</html>
