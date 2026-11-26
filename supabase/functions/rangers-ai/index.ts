@@ -13,7 +13,7 @@ const personas: Record<string, { name: string; provider: string; system: string 
   moiz: { name: "MOIZ", provider: "Google AI Studio", system: "You are MOIZ, the general-purpose AI assistant for Itkan Rangers FTC robotics team. Help with broad questions, learning, writing, planning, and robotics. Be accurate, friendly, structured, and honest about uncertainty. For FTC rules, hardware limits, and season-specific facts, distinguish confirmed facts from assumptions and encourage checking official game manuals when needed." },
   zum: { name: "ZUM", provider: "Groq", system: "You are ZUM, the FTC programming specialist for Itkan Rangers. Focus on Java, the FTC SDK, Android Studio, OpModes, Road Runner concepts, debugging, architecture, and testing. Explain code line by line when useful. Provide complete, compile-conscious examples, state SDK/version assumptions, avoid inventing APIs, and point out hardware safety checks before suggesting robot motion." },
   nayah: { name: "NAYAH", provider: "Cloudflare Workers AI", system: "You are NAYAH, the creative robotics and mechanism ideation partner for Itkan Rangers. Generate multiple distinct mechanism concepts, compare tradeoffs, discuss packaging, reliability, weight, serviceability, and manufacturability. Be creative but realistic; label speculative ideas and ask for missing robot constraints when they materially affect a design." },
-  fasheer: { name: "FASHEER", provider: "Mistral Studio", system: "You are FASHEER, the strategy and planning specialist for Itkan Rangers. Help with FTC match strategy, scouting, alliance selection preparation, testing priorities, schedules, checklists, and decision frameworks. Do not invent competition data or rules. Clearly state assumptions and make plans actionable." },
+  fasheer: { name: "FASHEER", provider: "Cohere", system: "You are FASHEER, the strategy and planning specialist for Itkan Rangers. Help with FTC match strategy, scouting, alliance selection preparation, testing priorities, schedules, checklists, and decision frameworks. Do not invent competition data or rules. Clearly state assumptions and make plans actionable." },
   ranger: { name: "RANGER", provider: "OpenRouter", system: "You are RANGER, the CAD and mechanical design specialist for Itkan Rangers. Help with Onshape, CAD workflows, assemblies, mates, tolerances, gear ratios, mechanism packaging, design reviews, and manufacturability. Explain steps clearly, flag assumptions, and avoid pretending to inspect CAD files that were not supplied." }
 };
 
@@ -129,9 +129,20 @@ Deno.serve(async (req) => {
       }
       reply = data?.result?.response || data?.result?.choices?.[0]?.message?.content || "";
     } else if (modelId === "fasheer") {
-      const key = Deno.env.get("MISTRAL_API_KEY");
-      if (!key) return json({ error: "FASHEER is not configured yet. Add MISTRAL_API_KEY to Supabase Function Secrets." }, 503);
-      reply = await callOpenAICompatible("https://api.mistral.ai/v1/chat/completions", key, Deno.env.get("MISTRAL_MODEL") || "mistral-small-latest", providerMessages);
+      const key = Deno.env.get("COHERE_API_KEY");
+      if (!key) return json({ error: "FASHEER is not configured yet. Add COHERE_API_KEY to Supabase Function Secrets." }, 503);
+      const response = await fetch("https://api.cohere.com/v2/chat", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+        body: JSON.stringify({ model: Deno.env.get("COHERE_MODEL") || "command-a-plus-05-2026", messages: providerMessages, max_tokens: 1400, temperature: 0.65 }),
+        signal: AbortSignal.timeout(45000)
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        console.error("Cohere provider error", response.status, data);
+        throw new Error(response.status === 429 ? "FASHEER has reached its free usage limit. Try another model or wait for the quota to reset." : "Cohere returned an error (" + response.status + "). Check the API key and model.");
+      }
+      reply = (data?.message?.content || []).map((part: any) => part.text || "").join("");
     } else {
       const key = Deno.env.get("OPENROUTER_API_KEY");
       if (!key) return json({ error: "RANGER is not configured yet. Add OPENROUTER_API_KEY to Supabase Function Secrets." }, 503);
