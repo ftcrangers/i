@@ -126,6 +126,8 @@
       if(result.error)alert("Could not save code: "+result.error.message);else{save.textContent="✓ Saved to Code Library";save.disabled=true;}
     });
   });
+  document.addEventListener("click",e=>{if(e.target.closest('[data-page-link="chat"]'))setTimeout(loadProfile,0);});
+  window.addEventListener("hashchange",()=>{if(location.hash==="#chat")loadProfile();});
   window.addEventListener("rangers-auth-state",()=>{if(location.hash==="#chat"||page.classList.contains("active"))loadProfile();else{client.auth.getSession().then(({data})=>navLinks.forEach(a=>a.hidden=!data.session));}});
   if(location.hash==="#chat")loadProfile();else client.auth.getSession().then(({data})=>navLinks.forEach(a=>a.hidden=!data.session));
 })();
