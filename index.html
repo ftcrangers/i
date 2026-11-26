@@ -877,10 +877,12 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       ["Autonomous planning and testing","Advanced","Plan, measure, and improve a full autonomous routine.","Break an autonomous into repeatable segments. Measure outcomes, log errors, and change one variable at a time.","Record target and actual movement for each segment.","Plan a short routine with a start pose, two actions, and a safe finish."]
     ];
 
-    const progressKey = "rangersAcademyProgressV1";
-    const challengeKey = "rangersAcademyChallengesV1";
-    let completedLessons = new Set(JSON.parse(localStorage.getItem(progressKey) || "[]"));
-    let completedChallenges = new Set(JSON.parse(localStorage.getItem(challengeKey) || "[]"));
+    const scopedStorageKey = key => "rangersAccount:"+(window.rangersAccountId||"guest")+":"+key;
+    const progressKey = () => scopedStorageKey("rangersAcademyProgressV1");
+    const challengeKey = () => scopedStorageKey("rangersAcademyChallengesV1");
+    const xpStorageKey = () => scopedStorageKey("rangersPlatformXpV2");
+    let completedLessons = new Set(JSON.parse(localStorage.getItem(progressKey()) || "[]"));
+    let completedChallenges = new Set(JSON.parse(localStorage.getItem(challengeKey()) || "[]"));
 
     const challenges = [
       ["Mecanum wheel math","Write the four wheel power equations using forward, strafe, and turn values.","The standard mix is FL = y + x + turn, BL = y - x + turn, FR = y - x - turn, and BR = y + x - turn. Divide each by the largest combined magnitude or 1, whichever is larger.","double y = -gamepad1.left_stick_y;\ndouble x = gamepad1.left_stick_x;\ndouble turn = gamepad1.right_stick_x;\ndouble d = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1.0);\nfrontLeft.setPower((y + x + turn) / d);\nbackLeft.setPower((y - x + turn) / d);\nfrontRight.setPower((y - x - turn) / d);\nbackRight.setPower((y + x - turn) / d);"],
@@ -909,7 +911,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       grid.querySelectorAll("[data-lesson]").forEach(input => input.addEventListener("change", () => {
         const index = Number(input.dataset.lesson);
         if (input.checked) completedLessons.add(index); else completedLessons.delete(index);
-        localStorage.setItem(progressKey, JSON.stringify([...completedLessons]));
+        localStorage.setItem(progressKey(), JSON.stringify([...completedLessons]));
         updateProgress();
       }));
       updateProgress();
@@ -924,7 +926,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       grid.querySelectorAll("[data-complete]").forEach(button => button.addEventListener("click", () => {
         const index = Number(button.dataset.complete);
         completedChallenges.add(index);
-        localStorage.setItem(challengeKey, JSON.stringify([...completedChallenges]));
+        localStorage.setItem(challengeKey(), JSON.stringify([...completedChallenges]));
         renderChallenges();
         updateProgress();
       }));
@@ -936,7 +938,7 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       document.getElementById("progressText").textContent = `${count} of ${lessons.length} lessons completed`;
       document.getElementById("progressPercent").textContent = `${percent}%`;
       document.getElementById("progressBar").style.width = `${percent}%`;
-      const platformAwards = JSON.parse(localStorage.getItem("rangersPlatformXpV2") || "{}");
+      const platformAwards = JSON.parse(localStorage.getItem(xpStorageKey()) || "{}");
       const platformXp = Object.values(platformAwards).reduce((sum, value) => sum + value, 0);
       const xp = count * 50 + completedChallenges.size * 30 + platformXp;
       const level = Math.floor(xp / 250) + 1;
@@ -948,6 +950,13 @@ public class IntoTheDeepRobotTeleOp extends LinearOpMode {
       document.getElementById("xpBar").style.width = `${(xp % 250) / 250 * 100}%`;
     }
 
+    function reloadAccountLearningState(){
+      completedLessons = new Set(JSON.parse(localStorage.getItem(progressKey()) || "[]"));
+      completedChallenges = new Set(JSON.parse(localStorage.getItem(challengeKey()) || "[]"));
+      renderLessons();renderChallenges();updateProgress();
+      if(typeof refreshHubDashboard==="function")refreshHubDashboard();
+    }
+    window.addEventListener("rangers-auth-state",reloadAccountLearningState);
     renderLessons();
     renderChallenges();
 
@@ -1904,7 +1913,7 @@ public class BioBuzzTeleOp extends LinearOpMode {
 ];
 
 function xpAward(id, amount=40) {
-    const key = "rangersPlatformXpV2";
+    const key = xpStorageKey();
     const earned = JSON.parse(localStorage.getItem(key) || "{}");
     if (earned[id]) return false;
     earned[id] = amount;
@@ -1983,9 +1992,9 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
 
 
     function refreshHubDashboard(){
-      const awards=JSON.parse(localStorage.getItem("rangersPlatformXpV2")||"{}");
-      const lessons=JSON.parse(localStorage.getItem("rangersAcademyProgressV1")||"[]");
-      const challenges=JSON.parse(localStorage.getItem("rangersAcademyChallengesV1")||"[]");
+      const awards=JSON.parse(localStorage.getItem(xpStorageKey())||"{}");
+      const lessons=JSON.parse(localStorage.getItem(progressKey())||"[]");
+      const challenges=JSON.parse(localStorage.getItem(challengeKey())||"[]");
       const xp=Object.values(awards).reduce((a,b)=>a+Number(b||0),0)+lessons.length*50+challenges.length*30;
       const set=(id,val)=>{const e=document.getElementById(id);if(e)e.textContent=String(val);};
       set("hubXp",xp);set("hubLessons",lessons.length);set("hubChallenges",challenges.length);
@@ -1993,10 +2002,10 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
     refreshHubDashboard();
     const daily=document.getElementById("hubDailyTask");
     if(daily)daily.addEventListener("click",()=>{
-      const key="rangersHubDailyTaskV1",today=new Date().toLocaleDateString("en-CA");
+      const key=scopedStorageKey("rangersHubDailyTaskV1"),today=new Date().toLocaleDateString("en-CA");
       if(localStorage.getItem(key)===today){document.getElementById("hubStatus").textContent="Today's practice task is already complete.";return;}
-      const awards=JSON.parse(localStorage.getItem("rangersPlatformXpV2")||"{}");
-      awards["daily-"+today]=15;localStorage.setItem("rangersPlatformXpV2",JSON.stringify(awards));localStorage.setItem(key,today);
+      const awards=JSON.parse(localStorage.getItem(xpStorageKey())||"{}");
+      awards["daily-"+today]=15;localStorage.setItem(xpStorageKey(),JSON.stringify(awards));localStorage.setItem(key,today);
       document.getElementById("hubStatus").textContent="Practice task completed. +15 XP added.";refreshHubDashboard();
     });
     const saveTest=document.getElementById("hubSaveTest");
@@ -2127,10 +2136,10 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
     renderPartsList();
 
 </script>
-<script type="module" src="./supabase-integration.js?v=20261126-chat1"></script>
+<script type="module" src="./supabase-integration.js?v=20261126-account1"></script>
 <script type="module" src="./rangers-chat.js?v=20261126-chat1"></script>
 <script src="./cad-curriculum.js?v=20261125-academy2"></script>
 <script src="./programming-curriculum.js?v=20261125-academy2"></script>
 <script src="./java-code-lab.js?v=20261126-save1"></script>
-<script src="./advanced-academy.js?v=20261126-save1"></script></body>
+<script src="./advanced-academy.js?v=20261126-account1"></script></body>
 </html>

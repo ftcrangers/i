@@ -15,9 +15,11 @@ const extra=[...(window.rangersExtraCadLessons||[]),
 ["Robot-level design review and iteration","Review the full robot envelope, mechanism motion, weight, wiring, maintenance, manufacturing, and rules. CAD is not proof of physical performance: record assumptions, risks, test evidence, and revision decisions.","Review a full robot concept. Record three risks, three dimensions to verify, one manufacturing concern, and a next prototype."]
 ];
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const key="rangersAdvancedLessonPagesV2";
-const load=()=>{try{return JSON.parse(localStorage.getItem(key)||"{}")}catch{return{}}};
-const save=x=>localStorage.setItem(key,JSON.stringify(x));
+let accountScope="guest";
+const key=()=>"rangersAdvancedLessonPagesV3:"+accountScope;
+const xpKey=()=>"rangersPlatformXpV2:"+accountScope;
+const load=()=>{try{return JSON.parse(localStorage.getItem(key())||"{}")}catch{return{}}};
+const save=x=>localStorage.setItem(key(),JSON.stringify(x));
 function start(){
  const cadHost=document.getElementById("cadLessons"),progHost=document.getElementById("programLessons");
  if(!cadHost||!progHost)return;
@@ -38,9 +40,9 @@ function start(){
  const modal=document.createElement("div");modal.className="adv-academy-view";modal.id="advAcademyView";modal.setAttribute("role","dialog");modal.setAttribute("aria-modal","true");
  modal.innerHTML='<div class="adv-academy-panel"><div class="adv-academy-head"><div><div class="eyebrow" id="advTrack">ADVANCED ACADEMY</div><b id="advTitle">Lesson</b></div><button class="btn btn-soft btn-small" id="advClose">Close ✕</button></div><div class="adv-academy-dots" id="advDots"></div><div class="adv-academy-content" id="advContent"></div><div class="adv-academy-foot"><button class="btn btn-soft" id="advBack">← Previous</button><button class="btn btn-primary" id="advNext">Next page →</button></div></div>';
  document.body.appendChild(modal);
- const notesKey="rangersAcademyNotesV1";
- const readNotes=()=>{try{return JSON.parse(localStorage.getItem(notesKey)||"{}")}catch{return{}}};
- const writeNotes=value=>localStorage.setItem(notesKey,JSON.stringify(value));
+ const notesKey=()=>"rangersAcademyNotesV2:"+accountScope;
+ const readNotes=()=>{try{return JSON.parse(localStorage.getItem(notesKey())||"{}")}catch{return{}}};
+ const writeNotes=value=>localStorage.setItem(notesKey(),JSON.stringify(value));
  const notesDock=document.createElement("div");
  notesDock.id="advNotesDock";
  notesDock.innerHTML='<button type="button" id="advNotesToggle" aria-expanded="false">✎ Lesson notes</button><section id="advNotesPanel" hidden><header><strong>My lesson notes</strong><button type="button" id="advNotesClose" aria-label="Close notes">×</button></header><p id="advNotesContext"></p><textarea id="advNotesText" placeholder="Write your own notes, reminders, questions, or code ideas…"></textarea><div id="advNotesStatus" role="status">Saved on this device</div></section>';
@@ -247,8 +249,14 @@ function start(){
   const all=load();all[id]={...all[id],lastPage:Math.max(all[id]?.lastPage||0,current.page)};save(all);
  }
  async function hydrateCloudProgress(){
-  if(typeof window.rangersLoadCloudProgress!=="function")return;
   try{
+   const client=window.rangersSupabase;
+   let nextScope="guest";
+   if(client){const auth=await client.auth.getUser();if(auth.data?.user?.id)nextScope=auth.data.user.id;}
+   const scopeChanged=accountScope!==nextScope;
+   accountScope=nextScope;
+   if(scopeChanged){render(cadHost,cad,"CAD");render(progHost,prog,"Programming");if(modal.classList.contains("open")){notesText.value="";loadLessonNote();}}
+   if(accountScope==="guest"||typeof window.rangersLoadCloudProgress!=="function")return;
    const remote=await window.rangersLoadCloudProgress();
    if(remote.error)throw remote.error;
    const all=load(),remoteKeys=new Set();
@@ -315,15 +323,15 @@ function start(){
   }
   submitButton.textContent=originalLabel;submitButton.disabled=false;
   if(timer)timer.textContent="✓ Review complete. "+(passed?"Your work passed the review.":"Review finished — see the feedback above.");
-  if(passed){const xp=JSON.parse(localStorage.getItem("rangersPlatformXpV2")||"{}");const award="advanced-v2-"+id;if(!xp[award]){xp[award]=60;localStorage.setItem("rangersPlatformXpV2",JSON.stringify(xp));}}
+  if(passed){const xp=JSON.parse(localStorage.getItem(xpKey())||"{}");const award="advanced-v2-"+id;if(!xp[award]){xp[award]=60;localStorage.setItem(xpKey(),JSON.stringify(xp));}}
   render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
  }
  document.getElementById("advClose").addEventListener("click",()=>{modal.classList.remove("open");notesDock.hidden=true;notesPanel.hidden=true;notesToggle.setAttribute("aria-expanded","false")});modal.addEventListener("click",e=>{if(e.target===modal){modal.classList.remove("open");notesDock.hidden=true;notesPanel.hidden=true;notesToggle.setAttribute("aria-expanded","false")}});
  document.getElementById("advBack").addEventListener("click",()=>{if(current.page>0){current.page--;draw()}});
- document.getElementById("advNext").addEventListener("click",async()=>{if(current.track==="Programming"&&current.page===2){const id=current.track+"-"+current.index,all=load();all[id]={...(all[id]||{}),lastPage:2,passed:true,completedAt:new Date().toISOString()};save(all);if(typeof window.rangersCloudSyncProgress==="function")await window.rangersCloudSyncProgress("programming",id,true);const xp=JSON.parse(localStorage.getItem("rangersPlatformXpV2")||"{}");const award="advanced-v2-"+id;if(!xp[award]){xp[award]=60;localStorage.setItem("rangersPlatformXpV2",JSON.stringify(xp));}document.getElementById("advContent").insertAdjacentHTML("beforeend",'<div class="adv-academy-result">✓ Lesson completed and saved.</div>');document.getElementById("advNext").textContent="Completed";document.getElementById("advNext").disabled=true;render(cadHost,cad,"CAD");render(progHost,prog,"Programming");return;}if(current.page<(current.track==="Programming"?2:3)){current.page++;if(current.page===3)reviewStartedAt=Date.now();draw()}else submit()});
+ document.getElementById("advNext").addEventListener("click",async()=>{if(current.track==="Programming"&&current.page===2){const id=current.track+"-"+current.index,all=load();all[id]={...(all[id]||{}),lastPage:2,passed:true,completedAt:new Date().toISOString()};save(all);if(typeof window.rangersCloudSyncProgress==="function")await window.rangersCloudSyncProgress("programming",id,true);const xp=JSON.parse(localStorage.getItem(xpKey())||"{}");const award="advanced-v2-"+id;if(!xp[award]){xp[award]=60;localStorage.setItem(xpKey(),JSON.stringify(xp));}document.getElementById("advContent").insertAdjacentHTML("beforeend",'<div class="adv-academy-result">✓ Lesson completed and saved.</div>');document.getElementById("advNext").textContent="Completed";document.getElementById("advNext").disabled=true;render(cadHost,cad,"CAD");render(progHost,prog,"Programming");return;}if(current.page<(current.track==="Programming"?2:3)){current.page++;if(current.page===3)reviewStartedAt=Date.now();draw()}else submit()});
  render(cadHost,cad,"CAD");render(progHost,prog,"Programming");
   hydrateCloudProgress();
-  window.addEventListener("rangers-auth-state",hydrateCloudProgress);
+  window.addEventListener("rangers-auth-state",()=>{hydrateCloudProgress();});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();

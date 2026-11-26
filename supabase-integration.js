@@ -58,9 +58,10 @@ async function hydrateAccountSettings(session){
   await syncProfileSettings(session.user,data);
 }
 supabase.auth.getSession().then(({data})=>{
-  window.dispatchEvent(new Event("rangers-auth-state"));
+  window.rangersAccountId=data.session?.user?.id||"guest";
   syncAccountButton(data.session);
   hydrateAccountSettings(data.session);
+  window.dispatchEvent(new Event("rangers-auth-state"));
 });
 modal.querySelector("#rgClose").addEventListener("click", close);
 modal.addEventListener("click", e => {if(e.target===modal)close();});
@@ -304,6 +305,7 @@ window.rangersCloudSyncProgress=async(academy,lessonId,completed=true)=>{
   return supabase.from("user_progress").upsert({user_id:user.id,academy,lesson_id:String(lessonId),completed,completed_at:completed?new Date().toISOString():null,updated_at:new Date().toISOString()},{onConflict:"user_id,academy,lesson_id"});
 };
 supabase.auth.onAuthStateChange((_event,session)=>{
+  window.rangersAccountId=session?.user?.id||"guest";
   window.dispatchEvent(new Event("rangers-auth-state"));
   syncAccountButton(session);
   if(session)hydrateAccountSettings(session);
