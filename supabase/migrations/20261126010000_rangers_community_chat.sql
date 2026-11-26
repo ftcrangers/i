@@ -26,7 +26,7 @@ end $$;
 
 drop trigger if exists rangers_profile_username_default on public.profiles;
 create trigger rangers_profile_username_default
-before insert or update of display_name on public.profiles
+before insert or update on public.profiles
 for each row execute function public.rangers_make_username();
 
 create table if not exists public.rangers_friendships (
@@ -125,13 +125,13 @@ grant select, insert on public.rangers_chat_messages to authenticated;
 create or replace function public.rangers_my_chat_profile()
 returns table(id uuid, username text, display_name text, role text)
 language sql stable security definer set search_path=public as $$
-  select p.id,p.username,p.display_name,p.role from public.profiles p where p.id=auth.uid();
+  select p.id,p.username,p.display_name,p.role::text from public.profiles p where p.id=auth.uid();
 $$;
 
 create or replace function public.rangers_find_chat_users(p_username text)
 returns table(id uuid, username text, display_name text, role text)
 language sql stable security definer set search_path=public as $$
-  select p.id,p.username,p.display_name,p.role
+  select p.id,p.username,p.display_name,p.role::text
   from public.profiles p
   where auth.uid() is not null
     and p.id <> auth.uid()
@@ -142,14 +142,14 @@ $$;
 create or replace function public.rangers_chat_people()
 returns table(id uuid, username text, display_name text, role text, relationship_status text, request_direction text)
 language sql stable security definer set search_path=public as $$
-  select distinct p.id,p.username,p.display_name,p.role,
+  select distinct p.id,p.username,p.display_name,p.role::text,
     f.status,
     case when f.requester_id=auth.uid() then 'outgoing' else 'incoming' end
   from public.rangers_friendships f
   join public.profiles p on p.id = case when f.requester_id=auth.uid() then f.addressee_id else f.requester_id end
   where auth.uid() in (f.requester_id,f.addressee_id)
   union
-  select p.id,p.username,p.display_name,p.role,'accepted'::text,'team'::text
+  select p.id,p.username,p.display_name,p.role::text,'accepted'::text,'team'::text
   from public.profiles p
   where p.role in ('owner','co_owner') and p.id <> auth.uid();
 $$;
