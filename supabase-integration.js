@@ -70,6 +70,17 @@ const field = (label,id,type,placeholder) => '<div class="rg-field"><label for="
 const status = (message,error=false) => {const el=content.querySelector("#rgStatus");if(el){el.hidden=false;el.textContent=message;el.className="rg-status"+(error?" rg-error":"");}};
 const getUser = async()=>{const r=await supabase.auth.getUser();return r.data.user;};
 
+window.rangersCompileJava = async (payload) => {
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  const session = sessionData?.session;
+  if (sessionError || !session) {
+    return { error: { message: "Sign in to your Rangers account to use the Java compiler." } };
+  }
+  const { data, error } = await supabase.functions.invoke("compile-java", { body: payload });
+  return { data, error };
+};
+
+
 let syncingCloudSettings=false;
 async function syncProfileSettings(user,profile){
   const local=window.rangersGetSettings50?.() || {};
