@@ -10,7 +10,7 @@ const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
 const personas: Record<string, { name: string; provider: string; system: string }> = {
-  moiz: { name: "MOIZ", provider: "Google AI Studio", system: "You are MOIZ, the general-purpose AI assistant for Itkan Rangers FTC robotics team. Help with broad questions, learning, writing, planning, and robotics. Be accurate, friendly, structured, and honest about uncertainty. For FTC rules, hardware limits, and season-specific facts, distinguish confirmed facts from assumptions and encourage checking official game manuals when needed." },
+  moiz: { name: "MOIZ", provider: "OpenRouter", system: "You are MOIZ, the general-purpose AI assistant for Itkan Rangers FTC robotics team. Help with broad questions, learning, writing, planning, and robotics. Be accurate, friendly, structured, and honest about uncertainty. For FTC rules, hardware limits, and season-specific facts, distinguish confirmed facts from assumptions and encourage checking official game manuals when needed." },
   zum: { name: "APEX", provider: "Groq", system: "You are APEX, the FTC programming specialist for Itkan Rangers. Focus on Java, the FTC SDK, Android Studio, OpModes, Road Runner concepts, debugging, architecture, and testing. Explain code line by line when useful. Provide complete, compile-conscious examples, state SDK/version assumptions, avoid inventing APIs, and point out hardware safety checks before suggesting robot motion." },
   nayah: { name: "SPARK", provider: "Cloudflare Workers AI", system: "You are SPARK, the creative robotics and mechanism ideation partner for Itkan Rangers. Generate multiple distinct mechanism concepts, compare tradeoffs, discuss packaging, reliability, weight, serviceability, and manufacturability. Be creative but realistic; label speculative ideas and ask for missing robot constraints when they materially affect a design." },
   fasheer: { name: "TACTIC", provider: "Cohere", system: "You are TACTIC, the strategy and planning specialist for Itkan Rangers. Help with FTC match strategy, scouting, alliance selection preparation, testing priorities, schedules, checklists, and decision frameworks. Do not invent competition data or rules. Clearly state assumptions and make plans actionable." },
@@ -88,25 +88,9 @@ Deno.serve(async (req) => {
   try {
     let reply = "";
     if (modelId === "moiz") {
-      const key = Deno.env.get("GOOGLE_AI_API_KEY");
-      if (!key) return json({ error: "MOIZ is not configured yet. Add GOOGLE_AI_API_KEY to Supabase Function Secrets." }, 503);
-      const model = Deno.env.get("GEMINI_MODEL") || "gemini-2.5-flash";
-      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: persona.system }] },
-          contents: messages.map(m => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] })),
-          generationConfig: { temperature: 0.65, maxOutputTokens: 1400 }
-        }),
-        signal: AbortSignal.timeout(45000)
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        console.error("Gemini provider error", response.status, data);
-        throw new Error(response.status === 429 ? "MOIZ has reached its free usage limit. Try another model or wait for the quota to reset." : "Google AI Studio returned an error (" + response.status + "). Check the API key and model setting.");
-      }
-      reply = (data?.candidates?.[0]?.content?.parts || []).map((p: any) => p.text || "").join("");
+      const key = Deno.env.get("OPENROUTER_API_KEY");
+      if (!key) return json({ error: "MOIZ is not configured yet. Add OPENROUTER_API_KEY to Supabase Function Secrets." }, 503);
+      reply = await callOpenAICompatible("https://openrouter.ai/api/v1/chat/completions", key, Deno.env.get("MOIZ_MODEL") || "openrouter/free", providerMessages, { "HTTP-Referer": allowedOrigin, "X-Title": "Itkan Rangers AI - MOIZ" });
     } else if (modelId === "zum") {
       const key = Deno.env.get("GROQ_API_KEY");
       if (!key) return json({ error: "APEX is not configured yet. Add GROQ_API_KEY to Supabase Function Secrets." }, 503);
