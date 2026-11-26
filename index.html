@@ -253,6 +253,60 @@ body[data-theme="dark"] .ftc-line-teaching code{color:#a9e6bc}
 body[data-theme="dark"] .adv-academy-dots span{background:#304438}
 body[data-theme="dark"] .adv-academy-dots .on{background:#8fd5a6}
 
+
+/* Complete dark-theme coverage for the learning workspace and remaining light cards */
+body[data-theme="dark"] .java-lab-shell,
+body[data-theme="dark"] .java-lab-work,
+body[data-theme="dark"] .java-lab-list button,
+body[data-theme="dark"] .java-explain-item,
+body[data-theme="dark"] .tutor-answer,
+body[data-theme="dark"] .auth-card,
+body[data-theme="dark"] .resource-card,
+body[data-theme="dark"] .track-link,
+body[data-theme="dark"] .academy-track-note,
+body[data-theme="dark"] .challenge-card,
+body[data-theme="dark"] .highlight,
+body[data-theme="dark"] .info-card,
+body[data-theme="dark"] .part-card,
+body[data-theme="dark"] .game-choice,
+body[data-theme="dark"] .media-item {
+  background:var(--white);
+  color:var(--ink);
+  border-color:var(--line);
+}
+body[data-theme="dark"] .java-lab-list button.active {
+  background:var(--green-dark);
+  color:#fff;
+  border-color:var(--green-dark);
+}
+body[data-theme="dark"] .java-lab-list button.active span { color:#d8f1df; }
+body[data-theme="dark"] .java-lab-intro p,
+body[data-theme="dark"] .java-lab-lesson-head p,
+body[data-theme="dark"] .java-explain-item p,
+body[data-theme="dark"] .java-lab-privacy,
+body[data-theme="dark"] .tutor-answer p,
+body[data-theme="dark"] .resource-card span,
+body[data-theme="dark"] .track-link span,
+body[data-theme="dark"] .academy-track-note,
+body[data-theme="dark"] .challenge-card p { color:var(--muted); }
+body[data-theme="dark"] .java-lab-note,
+body[data-theme="dark"] .java-lab-task,
+body[data-theme="dark"] .challenge-answer {
+  background:var(--mint);
+  color:var(--ink);
+  border-color:var(--line);
+}
+body[data-theme="dark"] .java-lab-shell h2,
+body[data-theme="dark"] .java-lab-work h3,
+body[data-theme="dark"] .java-lab-work b,
+body[data-theme="dark"] .resource-card b,
+body[data-theme="dark"] .track-link b { color:var(--ink); }
+body[data-theme="dark"] .challenge-answer pre,
+body[data-theme="dark"] .tutor-answer pre { background:#101a14;color:#e2f1e6; }
+body[data-theme="dark"] .adv-academy-card h3,
+body[data-theme="dark"] .adv-academy-head,
+body[data-theme="dark"] .adv-academy-foot { color:var(--ink); }
+
 </style>
 </head>
 <body>
@@ -2074,8 +2128,8 @@ const corner=document.getElementById('cornerMenu'),backdrop=document.getElementB
 
 </script>
 <script type="module" src="./supabase-integration.js"></script>
-<script src="./cad-curriculum.js"></script>
-<script src="./programming-curriculum.js"></script>
-<script src="./java-code-lab.js"></script>
-<script src="./advanced-academy.js"></script></body>
+<script src="./cad-curriculum.js?v=20261125-academy2"></script>
+<script src="./programming-curriculum.js?v=20261125-academy2"></script>
+<script src="./java-code-lab.js?v=20261125-compiler2"></script>
+<script src="./advanced-academy.js?v=20261125-academy2"></script></body>
 </html>

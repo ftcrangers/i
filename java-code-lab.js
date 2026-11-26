@@ -19,6 +19,22 @@ list.innerHTML=lessons.map((l,i)=>'<button type="button" data-java-lesson="'+i+'
 function selectLesson(i){active=i;const l=lessons[i];list.querySelectorAll("button").forEach((b,n)=>b.classList.toggle("active",n===i));root.querySelector("#javaLessonNumber").textContent="LESSON "+(i+1)+" OF "+lessons.length;root.querySelector("#javaLessonTitle").textContent=l.title;root.querySelector("#javaLessonGoal").textContent=l.goal;editor.value=l.code;root.querySelector("#javaExplanation").innerHTML=l.explain.map((x,n)=>'<article class="java-explain-item"><b>'+(n+1)+'. <code>'+esc(x[0])+'</code></b><p>'+esc(x[1])+'</p></article>').join("");root.querySelector("#javaTask").innerHTML="<b>Your turn</b><p>"+esc(l.task)+"</p>";output.textContent="Ready. Compile this example or edit it first.";status.textContent="Ready";}
 list.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>selectLesson(Number(b.dataset.javaLesson))));
 root.querySelector("#javaReset").addEventListener("click",()=>{editor.value=lessons[active].code;output.textContent="Starter code restored.";status.textContent="Ready";});
-run.addEventListener("click",async()=>{const code=editor.value.trim();if(!code){output.textContent="Add Java code before compiling.";return;}run.disabled=true;status.textContent="Compiling…";output.textContent="Sending source to compiler…";try{const response=await fetch("https://emkc.org/api/v2/piston/execute",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({language:"java",version:"15.0.2",files:[{name:"Main.java",content:code}],stdin:root.querySelector("#javaStdin").value,args:[],compile_timeout:10000,run_timeout:5000})});if(!response.ok)throw new Error("Compiler service returned HTTP "+response.status);const result=await response.json(),compile=result.compile||{},runResult=result.run||{},parts=[];if(compile.output)parts.push("COMPILE\n"+compile.output);if(runResult.output)parts.push("PROGRAM OUTPUT\n"+runResult.output);if(compile.code!==0&&compile.code!==undefined){status.textContent="Compile error";output.textContent=parts.join("\n\n")||"Compilation failed.";}else if(runResult.code!==0&&runResult.code!==undefined){status.textContent="Runtime error";output.textContent=(parts.join("\n\n")||"Program stopped with an error.")+"\n\nExit code: "+runResult.code;}else{status.textContent="Compiled and ran";output.textContent=parts.join("\n\n")||"Compilation and execution completed with no output.";}}catch(error){status.textContent="Could not compile";output.textContent="The online compiler could not be reached.\n"+error.message+"\n\nTry again later. You can also compile standard Java in an Android Studio Java project.";}finally{run.disabled=false;}});
+run.addEventListener("click",async()=>{
+  const code=editor.value.trim();
+  if(!code){output.textContent="Add Java code before compiling.";return;}
+  run.disabled=true;status.textContent="Compiling…";output.textContent="Sending source to the secure compiler…";
+  try{
+    if(typeof window.rangersCompileJava!=="function")throw new Error("Compiler connection is not ready. Refresh the page and sign in.");
+    const response=await window.rangersCompileJava({code,stdin:root.querySelector("#javaStdin").value});
+    if(response.error)throw new Error(response.error.message||"Compiler request failed.");
+    const result=response.data||{},compile=result.compile||{},runResult=result.run||{},parts=[];
+    if(compile.output)parts.push("COMPILE\n"+compile.output);
+    if(runResult.output)parts.push("PROGRAM OUTPUT\n"+runResult.output);
+    if(compile.code!==0&&compile.code!==undefined){status.textContent="Compile error";output.textContent=parts.join("\n\n")||"Compilation failed.";}
+    else if(runResult.code!==0&&runResult.code!==undefined){status.textContent="Runtime error";output.textContent=(parts.join("\n\n")||"Program stopped with an error.")+"\n\nExit code: "+runResult.code;}
+    else{status.textContent="Compiled and ran";output.textContent=parts.join("\n\n")||"Compilation and execution completed with no output.";}
+  }catch(error){status.textContent="Compiler unavailable";output.textContent=error.message||"The compiler could not complete this request.";}
+  finally{run.disabled=false;}
+});
 selectLesson(0);
 })();
